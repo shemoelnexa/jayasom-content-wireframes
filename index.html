@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Jayasom Wireframes · V3</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-card { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; letter-spacing: 0.02em; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+/* === LAYOUT === */
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header .meta { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 32px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 12px; color: hsl(var(--muted-foreground)); }
+
+/* === HERO === */
+.intro { padding: 96px 32px 64px; }
+.intro .shell { max-width: 720px; }
+.intro .body-copy { max-width: 560px; margin-top: 8px; }
+
+/* === PAGE LIST === */
+.page-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid hsl(var(--border)); }
+@media (max-width: 768px) { .page-grid { grid-template-columns: 1fr; } }
+
+.page-row {
+  display: block;
+  padding: 28px 0;
+  border-bottom: 1px solid hsl(var(--border));
+  position: relative;
+  transition: padding-left 160ms ease;
+}
+.page-row + .page-row { border-left: 1px solid hsl(var(--border)); padding-left: 32px; }
+@media (max-width: 768px) {
+  .page-row + .page-row { border-left: 0; padding-left: 0; }
+}
+
+.page-row .num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+.page-row .num::before { content: ""; width: 24px; height: 1px; background: hsl(var(--foreground)); display: inline-block; }
+.page-row .title { font-size: 22px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 8px; line-height: 1.25; }
+.page-row .desc { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.6; max-width: 440px; margin-bottom: 16px; }
+.page-row .view {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: hsl(var(--foreground));
+  border-bottom: 1px solid hsl(var(--foreground));
+  padding-bottom: 2px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.page-row:hover { background: hsl(var(--muted)); }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <span class="meta">Wireframes · V3</span>
+</header>
+
+<section class="intro">
+  <div class="shell">
+    <p class="eyebrow">Wireframe set · V3</p>
+    <h1 class="h-hero">Jayasom AMAALA — site wireframes</h1>
+    <p class="body-copy">A working set of low-fidelity layouts for the Jayasom AMAALA website. Each page is a self-contained HTML file using the locked Jayasom design system. Open any page below to review the structure and copy in context.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="shell">
+    <div class="page-grid">
+
+      <a class="page-row" href="wireframe-homepage-v3.html">
+        <p class="num">Page 01 · Homepage</p>
+        <h3 class="title">Homepage</h3>
+        <p class="desc">The brand entry point — hero, welcome, three pillars, AMAALA property context, retreat overview, and footer.</p>
+        <span class="view">View wireframe →</span>
+      </a>
+
+      <a class="page-row" href="wireframe-about-us-v3.html">
+        <p class="num">Page 02 · About</p>
+        <h3 class="title">About Us</h3>
+        <p class="desc">Origin story, philosophy, founders, and the three pillars that define how Jayasom approaches wellness.</p>
+        <span class="view">View wireframe →</span>
+      </a>
+
+      <a class="page-row" href="wireframe-as-a-woman-v3.html">
+        <p class="num">Page 03 · Audience</p>
+        <h3 class="title">As a Woman</h3>
+        <p class="desc">Retreat experience designed around women's health — programmes, practitioners, and the daily rhythm.</p>
+        <span class="view">View wireframe →</span>
+      </a>
+
+      <a class="page-row" href="wireframe-as-a-pair-v3.html">
+        <p class="num">Page 04 · Audience</p>
+        <h3 class="title">As a Pair</h3>
+        <p class="desc">Shared retreat journeys for couples — connection, parallel programmes, and time apart by design.</p>
+        <span class="view">View wireframe →</span>
+      </a>
+
+      <a class="page-row" href="wireframe-as-a-family-v3.html">
+        <p class="num">Page 05 · Audience</p>
+        <h3 class="title">As a Family</h3>
+        <p class="desc">Multigenerational stays — programmes for parents, children, and elders held inside one retreat.</p>
+        <span class="view">View wireframe →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>Jayasom AMAALA · Wireframes V3</span>
+  <span>Internal review only</span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>As a Woman v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout .callout-body { font-size: 13px; color: hsl(var(--foreground)); line-height: 1.7; }
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li {
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+  display: flex; gap: 12px; padding-left: 0;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.day-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 28px; display: grid; grid-template-columns: 120px 1fr; gap: 32px; }
+.day-card .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.day-card .day-title { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); }
+.day-card ul { display: flex; flex-direction: column; gap: 8px; padding-left: 0; list-style: none; }
+.day-card ul li { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.65; padding-left: 16px; position: relative; }
+.day-card ul li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 1px; background: hsl(var(--foreground)); }
+@media (max-width: 768px) { .day-card { grid-template-columns: 1fr; gap: 16px; } }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+
+.track-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; }
+.track-card .track-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.track-card h3 { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.3; }
+
+.tier-block { border: 1px solid hsl(var(--border)); padding: 24px; background: hsl(var(--background)); text-align: center; }
+.tier-block .tier-name { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.tier-block .tier-nights { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.tier-block .tier-label { font-size: 12px; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+.tier-block .tier-treatments { font-size: 13px; color: hsl(var(--foreground)); padding-top: 16px; border-top: 1px solid hsl(var(--border)); }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<main>
+
+<!-- M1. HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Women's wellness · Jayasom AMAALA</p>
+      <h1 class="h-hero">Return to Yourself, As a Woman</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">Wellness for women on Saudi Arabia's Red Sea coast.</p>
+      <p class="body-copy" style="margin:0 auto 16px;">As a Woman is a dedicated space to pause, restore, and arrive at a clearer sense of where you are. Personalised hormonal and wellness assessments shape practical tools for each life-stage transition. Restorative bodywork sits alongside nutrition and fitness guidance, with therapeutic and mindfulness practices threaded across the days.</p>
+      <p class="body-copy" style="margin:0 auto 32px;">The work is paced to where you are now. Your Wellness Advisor holds the programme from the pre-arrival conversation through to the closing day.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+        <a href="#" class="btn btn-solid">Speak to a Wellness Advisor</a>
+        <a href="#" class="btn">Plan Your Retreat</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M1b. CONTACT CTA STRIP -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">Reach a Wellness Advisor by phone or WhatsApp. The conversation is private, the questions are practical, and the brief begins from the first call.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn">Call us</a>
+      <a href="#" class="btn">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- M2. FEATURED TREATMENTS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Featured treatments</p>
+      <h2 class="h-section">Eight rituals for the work</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Eight named treatments anchor the As a Woman programme. Each is paced to where you are; each is ordered by your Wellness Advisor at the pre-arrival call and adjusted as the stay unfolds.</p>
+    </div>
+
+    <div class="grid-4" style="margin-top:48px;">
+
+      <!-- Card 1: HERO -->
+      <div class="treatment-card hero-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">The Balancing Ritual</span>
+        </div>
+        <h4 class="h-card">The Balancing Ritual</h4>
+        <p class="duration">Duration: 90 minutes</p>
+        <p class="caption">A whole-body approach to hormonal change. Aromatherapy foot baths, breathwork, Cold Stone Therapy, and Lymphatic Drainage work together to ease the physical signature of perimenopause and menopause and bring the body back into balance. The hero ritual at the centre of the work.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Shirodhara</span>
+        </div>
+        <h4 class="h-card">Shirodhara</h4>
+        <p class="duration">Duration: 90 minutes</p>
+        <p class="caption">The classic Ayurvedic Mind Calm. Warm medicated oil pours in a continuous stream over the third-eye point on the forehead, dissolving mental chatter and easing nervous-system load. Frequently chosen by women navigating sleep disruption and anxious thinking through hormonal shifts.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">NEW Mum, Blessing of Becoming</span>
+        </div>
+        <h4 class="h-card">NEW Mum, Blessing of Becoming</h4>
+        <p class="duration">Duration: 50 or 90 minutes</p>
+        <p class="caption">A restorative postnatal ritual that honours the transition into motherhood. Gentle realignment, soothing of tired muscles, and the emotional holding new mothers need.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">The Comforting Ritual (Pregnancy)</span>
+        </div>
+        <h4 class="h-card">The Comforting Ritual (Pregnancy)</h4>
+        <p class="duration">Duration: 50 or 90 minutes</p>
+        <p class="caption">Designed specifically for prenatal recovery. Hands-on therapy releases the physical strains of pregnancy while creating a calm, safe space for the mother-to-be to settle into the body's changes.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Marma Point Therapy</span>
+        </div>
+        <h4 class="h-card">Marma Point Therapy</h4>
+        <p class="duration">Duration: 50 minutes</p>
+        <p class="caption">The vitality booster. A focused energy treatment targeting one hundred and seven Marma points, the junctions where matter and consciousness meet in Ayurvedic teaching. Applied with gentle pressure and essential oils, it works the points connected to hormonal and energetic balance.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Sound Healing Therapy</span>
+        </div>
+        <h4 class="h-card">Sound Healing Therapy</h4>
+        <p class="duration">Duration: 60 minutes</p>
+        <p class="caption">Singing bowls, gongs, and chimes work together at the Sonorium. Vibrations move through the body, promoting deep relaxation and helping the nervous system settle. Frequently selected by women pairing the treatment with a Pranayama or Meditation slot in the same day.</p>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Detoxifying Balneotherapy</span>
+        </div>
+        <h4 class="h-card">Detoxifying Balneotherapy</h4>
+        <p class="duration">Duration: 30 minutes</p>
+        <p class="caption">Underwater jets paired with essential oils stimulate circulation, boost lymphatic flow, and support the body's detoxification pathways. The treatment draws on an ancient ritual of meeting the body with the power of the ocean.</p>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Watsu</span>
+        </div>
+        <h4 class="h-card">Watsu</h4>
+        <p class="duration">Duration: 60 minutes</p>
+        <p class="caption">Passive water therapy in a warm pool. The therapist gently stretches and mobilises the body to release tension, ease discomfort, and restore the breath. Particularly relevant for women carrying chronic muscular tension or recovering from a stressful season.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- M3. APPROACH -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">The methodology</span>
+      </div>
+      <div>
+        <p class="eyebrow">The approach</p>
+        <h2 class="h-section">A methodology anchored in regional heritage</h2>
+        <p class="body-copy mb-4 full">The work draws on the Wellness Wisdom® pillar of the Jayasom system. Beneath that sits the Ground Wellbeing practice, the named treatment system through which the work happens. Threaded through both is Traditional Arabic Medicine (TAIM, also known as Tibb), the regional heritage that anchors Jayasom's clinical approach in the Kingdom. The methodology recognises that a woman's body changes across the seasons it moves through; the same body needs different support at each.</p>
+        <p class="body-copy full">Hormonal and life-stage assessment opens every stay, run as a one-to-one consultation with the resident-clinician on day one and revisited at the closing conversation. Around that assessment, the daily rhythm of bodywork, movement, and rest is calibrated to where you are now and the energy you arrive with. Cultural fluency runs through the property: privacy and cultural respect operate as daily standards, with gender sensitivity built into how the timetable is shaped.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M4. HERO SIGNATURE RITUAL -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="eyebrow">Signature ritual</p>
+    <h2 class="h-section">The Balancing Ritual</h2>
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">The Balancing Ritual is the named hero treatment of this retreat. Duration 90 minutes. Aromatherapy foot baths, breathwork, Cold Stone Therapy, and Lymphatic Drainage work in sequence to address the physical signature of hormonal change. The ritual is rooted in Ground Wellbeing practice, with breath and touch leading the work back into the body.</p>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:680px;">Frequency across the stay is set by the Wellness Advisor during the pre-arrival call.</p>
+    <a href="#" class="btn btn-on-dark">Speak to a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- M5. SETTING -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">The setting</p>
+      <h2 class="h-section">A property sized for the practice</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;max-width:820px;margin:0 auto;">
+      <p style="margin-bottom:24px;">Jayasom AMAALA sits within the Triple Bay master plan on Saudi Arabia's Red Sea coast. The property holds sixty villas plus twenty-four private residences. Phase one is intentionally small by wellness destination scale; the daily rhythm is sized to the cohort, not to the building. Triple Bay is part of the AMAALA destination, a regional flagship for women's wellness in the Kingdom.</p>
+      <p>Yasmeen Night Garden runs in scent-only mode through the evening hours, designed for slow walking. Our Stonecrop Maze sits on the Wellness Plateau and is open through the late afternoon. The Phoenix Garden holds private daytime rest and Sound Healing Therapy runs at the Sonorium. Within the Jayana zone, the As a Woman programme operates with adult-side privacy and dedicated quiet hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Image strip -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Yasmeen Night Garden</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Stonecrop Maze · Wellness Plateau</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Phoenix Garden</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Sonorium</span>
+    </div>
+  </div>
+</section>
+
+<!-- M5b. CULTURAL FLUENCY -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Cultural fluency</p>
+      <h2 class="h-section">Privacy and respect, operationally</h2>
+    </div>
+    <div class="callout">
+      <p class="callout-label">Daily standards</p>
+      <p class="callout-body">Cultural fluency runs through the property. Staff training covers Saudi etiquette and respectful discretion, with gender sensitivity built in across the day. Photography is at the guest's discretion. Private entrances and protected schedules are available where requested. Communications stay private through the booking flow; credit-card statements use a discreet entity name; family-shared accounts can be replaced with a private channel for the booking. Women-only therapist preferences are honoured, and women-only timetable blocks for movement and bodywork are scheduled daily during As a Woman cohorts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M6. PROGRAMME BY LIFE STAGE -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Programme by life stage</p>
+      <h2 class="h-section">Three named tracks</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">The programme adjusts to the season you arrive in. Three named tracks hold the structure; your Wellness Advisor selects the right combination at the pre-arrival conversation.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+
+      <div class="track-card">
+        <p class="track-num">Track 01</p>
+        <h3>Perimenopause and menopause</h3>
+        <p class="caption">The Balancing Ritual sits at the centre. Shirodhara, Marma Point Therapy, and Therapeutic Lymphatic Drainage support the hormonal layer; Cooling protocols and the Detoxifying Balneotherapy address heat and water retention. Nutrition consultations anchor on the Women's Hormonal Health menu (maca root, avocado, pumpkin seed, flax seeds, green tea, and supporting whole foods designed to stabilise hormones, energy, and mood). Movement runs lighter: Mat Pilates, Hatha Yoga, Pranayama, and aqua sessions for low-impact strengthening.</p>
+      </div>
+
+      <div class="track-card">
+        <p class="track-num">Track 02</p>
+        <h3>Postnatal and prenatal</h3>
+        <p class="caption">NEW Mum, Blessing of Becoming and the Comforting Ritual (Pregnancy) anchor the bodywork. The track calibrates around the mother's recovery window; postnatal stays from six weeks onwards are supported with gentle realignment, while prenatal stays follow strict protocols cleared with the resident-clinician. Sleep Ritual sessions support broken-sleep patterns. The Wellness Advisor coordinates with your physician where required.</p>
+      </div>
+
+      <div class="track-card">
+        <p class="track-num">Track 03</p>
+        <h3>General wellness and reset</h3>
+        <p class="caption">For women not in a specific life-stage transition but seeking a deep reset: stress recovery, sleep recalibration, fitness reset, or aesthetic wellness. The Vagus Nerve Ritual anchors stress-system work; the Sleep Ritual addresses insomnia; HIFU, Cristal Fit, and the Hydrafacial Collection sit on the aesthetic side; Personal Training and Yoga structure the movement layer.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- M7. STAY STRUCTURE -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Stay structure</p>
+      <h2 class="h-section">Stay length shapes the depth of the work</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Four tier names hold the structure: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. The pacing matches your stay and nothing across your experience is added because of the calendar.</p>
+    </div>
+
+    <div class="grid-4" style="margin-top:48px;gap:16px;">
+      <div class="tier-block">
+        <p class="tier-name">Explore</p>
+        <p class="tier-nights">4</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">10 named treatments</p>
+      </div>
+      <div class="tier-block">
+        <p class="tier-name">Absorb</p>
+        <p class="tier-nights">7</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">18 named treatments</p>
+      </div>
+      <div class="tier-block">
+        <p class="tier-name">Immerse</p>
+        <p class="tier-nights">10</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">26 named treatments</p>
+      </div>
+      <div class="tier-block">
+        <p class="tier-name">Commit</p>
+        <p class="tier-nights">14</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">35 named treatments</p>
+      </div>
+    </div>
+
+    <div class="body-copy full" style="font-size:14px;line-height:1.7;max-width:820px;margin:48px auto 0;">
+      <p style="margin-bottom:16px;">What each tier holds, in plain terms. Explore at four nights resets the rhythm around a short stay or visit. By seven nights, Absorb sees a full habit-cycle take hold. Immerse adds the depth where retreat work begins to compound. The fourteen-night Commit tier is for women wanting the full arc, with practitioner relationships built across the stay.</p>
+      <p>Your Wellness Advisor will recommend a tier during the pre-arrival conversation.</p>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#" class="btn">Speak to a Wellness Advisor about the right programme for you</a>
+    </div>
+  </div>
+</section>
+
+<!-- M7b. PROGRAMME INCLUSIONS -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Programme inclusions</p>
+      <h2 class="h-section">What every retreat carries</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The Hydrothermal facilities are accessible through the day, including infrared sauna for heat activation, vitality pools at varying temperatures, steam, and the flotation pool. Daily fitness and movement classes run from morning to evening; women-led classes are available where requested.</p>
+      <p>The Wellness Mentoring Consultation Women runs once at four-night Explore tier and twice at fourteen-night Commit. The Nutrition &amp; Lifestyle Consultation runs once across every tier. Cooking classes at Nakeha Studio sit on the ten-night Immerse and fourteen-night Commit tiers, one per stay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY-BY-DAY ITINERARY -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Day by day</p>
+      <h2 class="h-section">A typical seven-night Absorb stay</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">What follows is a typical seven-night Absorb-tier stay on the perimenopause and menopause track. Universal anchors hold every day: the 11am Stretch Class, three meals from the adult-side kitchens, Hydrothermal facilities accessible through the day, women-only therapist preferences, and women-only timetable blocks. Tier ladder: 10 named treatments at four nights, 18 at seven, 26 at ten, 35 at fourteen.</p>
+    </div>
+
+    <div class="flex flex-col gap-4" style="margin-top:48px;">
+
+      <!-- Day 1 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 01</p>
+          <p class="day-title">Arriving in Yourself</p>
+        </div>
+        <ul>
+          <li>Jayana villa ready by 3pm; aroma, pillow, and Coco-mat™ preferences set up; privacy operational</li>
+          <li>Wellness Advisor at the consultation suite within the hour</li>
+          <li>Resident-clinician hormonal and wellness assessment same day</li>
+          <li>Diagnostics include blood-panel, food-intolerance, and Heart-Focused Breathing and Biofeedback</li>
+          <li>Three consultation pathways available: Traditional Arabic and Islamic Medicine, Naturopathic, and Ayurvedic</li>
+          <li>Dinner at Saratô</li>
+          <li>6pm Singing Bowl Meditation or Pranayama</li>
+          <li>8pm Candlelight Meditation, Better Sleep Class, or Star Gazing in the Yasmeen Night Garden</li>
+        </ul>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 02</p>
+          <p class="day-title">Settling the System</p>
+        </div>
+        <ul>
+          <li>7am morning class</li>
+          <li>11am Stretch Class</li>
+          <li>Saratô lunch with Hormonal Health menu</li>
+          <li>Marma Point Therapy 50 minutes as the first booked treatment of the stay</li>
+          <li>Pranayama at 6pm</li>
+          <li>Better Sleep Class at 8pm</li>
+          <li>Perimenopause and menopause track foods threading through the Saratô lunch; cross-venue Healing Menus rotation</li>
+        </ul>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 03</p>
+          <p class="day-title">The Balancing Ritual</p>
+        </div>
+        <ul>
+          <li>Hero day: The Balancing Ritual 90 minutes in the late morning</li>
+          <li>Phoenix Garden private daytime rest</li>
+          <li>Shirodhara 90 minutes in the afternoon</li>
+          <li>Pranayama at 6pm</li>
+          <li>Yasmeen evening walk</li>
+          <li>The Balancing Ritual seeds the perimenopause and menopause track; Shirodhara extends the work</li>
+          <li>TAIM regional heritage threads through resident-clinician calibration</li>
+        </ul>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 04</p>
+          <p class="day-title">Cooling and Clearing</p>
+        </div>
+        <ul>
+          <li>Detoxifying Balneotherapy 30 minutes</li>
+          <li>Therapeutic Lymphatic Drainage</li>
+          <li>Hydrothermal cooling sequence</li>
+          <li>Mid-week resident-clinician check-in</li>
+          <li>Cooling protocols and Detoxifying Balneotherapy address heat and water retention</li>
+          <li>Mid-week clinician revisits Day 1 biofeedback against morning pacing</li>
+          <li>Women-only therapist allocation explicit</li>
+        </ul>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 05</p>
+          <p class="day-title">Bodies in Motion</p>
+        </div>
+        <ul>
+          <li>7am gentler class</li>
+          <li>10am aqua session</li>
+          <li>11am Stretch Class</li>
+          <li>Watsu 60 minutes</li>
+          <li>Hatha Yoga</li>
+          <li>Personal Training</li>
+          <li>Wellness Advisor brief check-in</li>
+          <li>Light-load movement day for the perimenopause and menopause track; protected schedules available</li>
+          <li>High-intensity 4pm slot stays open for the general wellness and reset track</li>
+        </ul>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 06</p>
+          <p class="day-title">Sound and Stillness</p>
+        </div>
+        <ul>
+          <li>Sound Healing Therapy 60 minutes at the Sonorium</li>
+          <li>Flotation pool</li>
+          <li>Stonecrop Maze walk on the Wellness Plateau in the cooler late-afternoon</li>
+          <li>Yasmeen evening</li>
+          <li>Quiet day: Sound Healing pairs with a Pranayama or Meditation slot; flotation pool weightless quiet</li>
+        </ul>
+      </div>
+
+      <!-- Day 7 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 07</p>
+          <p class="day-title">Walking Out Renewed</p>
+        </div>
+        <ul>
+          <li>Optional 7am class or coastline walk</li>
+          <li>11am Stretch Class</li>
+          <li>Nutrition &amp; Lifestyle Consultation 60 minutes if not earlier in the stay</li>
+          <li>Closing assessment with the resident-clinician revisits the Day 1 baseline</li>
+          <li>Final Wellness Advisor session: continuity conversation</li>
+          <li>Lunch</li>
+          <li>12pm checkout</li>
+          <li>Transfer to Al Wajh, NEOM Bay, or Red Sea International airport</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Tier compression / expansion closing -->
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow text-center">Beyond the seven-night canonical tier</p>
+      <h3 class="h-sub text-center mb-6">How the rhythm flexes</h3>
+      <div class="body-copy full text-center" style="font-size:14px;line-height:1.7;">
+        <p>Compression to four-night Explore (10 named treatments) and expansion to ten-night Immerse (26) and fourteen-night Commit (35); track variation widens; the Wellness Mentoring Consultation Women and Cooking classes at Nakeha sit tier-gated.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M10. PRACTITIONERS IN RESIDENCE -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">In residence</p>
+        <h2 class="h-section">Practitioners in Residence</h2>
+        <p class="body-copy mb-4 full">Resident-clinicians hold the medical and clinical layer of the programme. Hormonal and wellness assessments are run by the resident-clinician on day one and revisited at the closing conversation. Diagnostics available to the assessment include blood-panel testing, food-intolerance testing, and Heart-Focused Breathing and Biofeedback (a heart-rate variability protocol that informs nervous-system pacing across the stay).</p>
+        <p class="body-copy mb-4 full">Three named consultation pathways sit alongside the standard assessment: Traditional Arabic and Islamic Medicine (TAIM, drawn from the regional heritage); Naturopathic; and Ayurvedic. Each pathway is matched to where you are and the questions you arrive carrying.</p>
+        <p class="body-copy full">The Wellness Advisor holds the programme across the consultation team, from pre-arrival through to closing. Visiting Practitioners rotate in season for specialist tracks: integrative therapists, somatic practitioners, embodied-practice teachers. The roster shifts; check the current rotation at the pre-arrival call. Women-only therapist preferences are honoured.</p>
+      </div>
+      <div class="wire-image" style="height:560px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Resident-clinician spotlight</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M10b. WELLNESS RESIDENCES PATHWAY -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:380px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Wellness Residences</span>
+      </div>
+      <div>
+        <p class="eyebrow">Residences pathway</p>
+        <h2 class="h-section">For longer cycles, deeper privacy</h2>
+        <p class="body-copy mb-4 full">For women wanting their own kitchen, additional bedrooms, or longer cycles than the wellness destination tiers hold, the Residences offering is available. Twenty-four private residences sit alongside the main property, in two-, three-, and four-bedroom configurations. The wellness rhythm is the same; the privacy depth is greater.</p>
+        <p class="body-copy mb-6 full">Residences pathway suits multigenerational stays where a daughter brings her mother, sisters travel together, or a friend group books across rooms. The Wellness Advisor coordinates the programme across the group.</p>
+        <a href="#" class="btn">Explore the Wellness Residences</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M11. FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What's the best women's wellness retreat in Saudi Arabia?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Jayasom AMAALA's As a Woman retreat sits on the Red Sea coast within the Triple Bay master plan, integrating Traditional Arabic Medicine with contemporary clinical science. It runs four to fourteen nights and is shaped at arrival by your Wellness Advisor. Three programme tracks anchor the work: perimenopause and menopause; postnatal and prenatal recovery; including a general wellness reset.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How long should I stay for a women's wellness retreat?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Stays run from four to fourteen nights, adaptable to your schedule and intent. The methodology names four tiers: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. Your Wellness Advisor will recommend a duration during the pre-arrival conversation, calibrated to the life-stage track you choose.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Can I travel alone, or do I need to bring a companion?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Solo women travellers are common at As a Woman; the property is calibrated for solo, paired, and small-group bookings. Privacy and cultural sensitivity run through the design; discretion is operational. Some women travel with a sister or close friend; others choose the Residences with a small group.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What's the cultural environment like for women guests from the GCC and Saudi Arabia?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Privacy and respectful discretion are operational standards; gender sensitivity is built into the daily timetable. Photography is at the guest's discretion. Private entrances and protected schedules are available where requested; women-only therapist preferences are honoured. The Traditional Arabic and Islamic Medicine consultation runs as a standard pathway for women who want a heritage-rooted lens on their care.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Can I bring my mother or daughter on the retreat as well?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Yes. As a Woman accommodates multigenerational women's retreats well; bookings can be coordinated through the Wellness Residences pathway with your Wellness Advisor holding the programme across the group. For families with children present, the As a Family retreat is the cohort-fit option.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING BLOCK -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Walking out</p>
+    <p class="h-sub" style="font-style:italic;line-height:1.5;font-size:20px;">You leave with a clearer brief, a tier match for next time, and the Wellness Advisor reachable for follow-up questions. The take-home routines (nutrition guidance, breathwork, sleep tools) are written down before checkout. The relationship continues.</p>
+  </div>
+</section>
+
+<!-- CROSS-LINK -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Other directions</p>
+      <h2 class="h-section">Other ways to retreat at Jayasom</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Five other retreat shapes hold space at Jayasom alongside As a Woman. Each retreat runs four to fourteen nights.</p>
+    </div>
+    <div class="grid-5" style="margin-top:48px;">
+      <a href="#" class="cross-card">
+        <p class="name">As a Pair</p>
+        <p class="tag">Profound connection, relaxing together, renewal.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Family</p>
+        <p class="tag">Communication, joy, united trust.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Leader</p>
+        <p class="tag">Optimised performance, focus, resilience.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Flow</p>
+        <p class="tag">Agility, focused energy, being in control.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Feather</p>
+        <p class="tag">Physical vitality, detox, optimal weight.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN YOUR STAY -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan your stay</p>
+    <h2 class="h-section">Speak to a Wellness Advisor about the right tier for your stage of life</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:600px;">For perimenopause and menopause questions, postnatal and prenatal recovery, or a general reset, the conversation begins privately and the brief is shaped before arrival.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Speak to a Wellness Advisor</a>
+      <a href="#" class="btn btn-on-dark">Explore the Residences pathway</a>
+      <a href="#" class="btn btn-on-dark">Request a private call</a>
+    </div>
+    <p class="caption mt-4" style="color:hsla(var(--primary-foreground),0.7);font-style:italic;">Response within 48 hours.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;">Jayasom</p>
+        <p class="caption">Healing rooted in wisdom, guided by heart.</p>
+      </div>
+      <div>
+        <p class="col-title">Quick Links</p>
+        <ul>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Rooms &amp; Villas</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Retreat Finder</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Journals &amp; Stories</a></li>
+          <li><a href="#">Residences</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li>Our Philosophy</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Media</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Families &amp; Wellbeing</a></li>
+          <li><a href="#">Our Experts</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Residences</p>
+        <ul>
+          <li><a href="#">Amaala Residences</a></li>
+          <li><a href="#">Why Jayasom Residences</a></li>
+          <li><a href="#">Residential Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved.</p>
+      <div class="links">
+        <span>Cookies Policy</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

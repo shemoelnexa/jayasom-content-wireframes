@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>As a Flow v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout ul { display: flex; flex-direction: column; gap: 10px; padding-left: 0; list-style: none; }
+.callout ul li { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); font-style: italic; line-height: 1.5; padding-left: 20px; position: relative; }
+.callout ul li::before { content: ""; position: absolute; left: 0; top: 12px; width: 10px; height: 1px; background: hsl(var(--foreground)); }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 14px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+.wire-table tfoot td { font-weight: 700; background: hsla(var(--foreground),0.04); }
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li {
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+  display: flex; gap: 12px; padding-left: 0;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.day-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; display: grid; grid-template-columns: 120px 1fr; gap: 32px; }
+.day-card .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.day-card .day-title { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); }
+.day-card .day-body p { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-bottom: 14px; }
+.day-card .day-body p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .day-card { grid-template-columns: 1fr; gap: 16px; } }
+
+.day-strip { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 20px 28px; display: flex; align-items: baseline; gap: 32px; }
+.day-strip .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); flex-shrink: 0; min-width: 80px; }
+.day-strip .day-title { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.filter-chip { display: inline-block; border: 1px solid hsl(var(--border)); padding: 6px 14px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--muted-foreground)); background: hsl(var(--background)); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+.nutrition-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 28px; }
+.nutrition-card .menu-name { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); margin-bottom: 14px; text-transform: uppercase; }
+.nutrition-card .menu-key { font-size: 11px; letter-spacing: 0.1em; color: hsl(var(--muted-foreground)); margin-top: 14px; padding-top: 14px; border-top: 1px solid hsl(var(--border)); font-style: italic; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<main>
+
+<!-- M1. HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Athletic wellness · Jayasom AMAALA</p>
+      <h1 class="h-hero">As a Flow</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">Agility, focused energy, being in control.</p>
+      <p class="body-copy" style="margin:0 auto 16px;">For athletes and active guests, As a Flow integrates sport science with Traditional Arabic Medicine and contemporary clinical care on Saudi Arabia's Red Sea coast at AMAALA. Increase physical activity, improve fitness performance, flexibility, strength, and endurance along with recovery and relaxation. Group classes and guided one-to-one coaching run through every day. Super stretch and deep tissue work sit alongside, easing the muscles between training blocks. Your Wellness Advisor takes the brief on arrival, reading what the body brought through the door. Mid-season athletic, returning from injury, rebuilding after a long sedentary stretch. The programme moves from there.</p>
+      <p class="caption" style="margin:0 auto 32px;font-style:italic;">Four to fourteen nights.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+        <a href="#" class="btn btn-solid">Plan Your Retreat</a>
+        <a href="#" class="btn">Request a private call with your Wellness Advisor</a>
+      </div>
+      <p class="caption mt-4" style="font-style:italic;">Response within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M2. CONTACT CTA STRIP -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">A Wellness Advisor walks the brief through with you before you arrive.</p>
+    <a href="#" class="btn">Speak to a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- M3. FEATURED TREATMENTS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Athletic Wellness Retreat at Jayasom AMAALA</p>
+      <h2 class="h-section">Featured Treatments</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Six experiences anchor the As a Flow retreat across active recovery, mobility, and rebuilding. Your Wellness Advisor places each against the load the body is carrying and the goals you arrived with.</p>
+    </div>
+
+    <div class="body-copy full" style="font-size:14px;line-height:1.75;max-width:820px;margin:32px auto 0;text-align:center;">
+      <p>Most guests arrive carrying a load. The week takes that as the starting point. Days build around the body's recovery curve, not a fixed grid. Some sessions move with you, some are placed where the practitioner thinks they'll matter most. What doesn't move: Stretch Class at eleven, the conditioning slot at four, the hydrothermal circuit whenever you want it. Treatment counts depend on how long you stay. Eleven at four nights. Eighteen at seven. Twenty-six at ten. Thirty-five at fourteen, and the rehabilitation work going deeper across the fortnight.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+
+      <!-- Card 1 HERO -->
+      <div class="treatment-card hero-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Muscle Recovery Ritual</span>
+        </div>
+        <h4 class="h-card">Muscle Recovery Ritual</h4>
+        <p class="duration">Duration: 90 or 120 minutes</p>
+        <p class="caption">The hero ritual of As a Flow. Targeted release of deep-seated tension and metabolic waste from the muscles. Built for athletes and guests carrying high-intensity training loads.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Therapeutic Lymphatic Drainage</span>
+        </div>
+        <h4 class="h-card">Therapeutic Lymphatic Drainage</h4>
+        <p class="caption">Gentle hands-on work that clears blockages through rhythmic movements, activating lymph glands and pumping fluid through the channels. Recovery-arc territory; supports post-load fluid clearance and reduced inflammation. Sits in longer stays.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Neurac® Method</span>
+        </div>
+        <h4 class="h-card">Neurac® Method (Neuromuscular Activation)</h4>
+        <p class="duration">Duration: 50 minutes</p>
+        <p class="caption">A sling-based system. Three-dimensional suspension therapy that re-educates pain-free movement patterns for acute or chronic conditions, restoring muscle function through specialised physiotherapy techniques. Where chronic pain or post-injury rebuilds need depth, this is the work.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Gyrotonic®</span>
+        </div>
+        <h4 class="h-card">Gyrotonic®</h4>
+        <p class="duration">Duration: 50 minutes</p>
+        <p class="caption">Pulley-based three-hundred-and-sixty-degree movement. The spine and limbs stretch and strengthen at once; flexibility and mobility build alongside. Length, range, recovery, woven into a strength-led week.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Watsu</span>
+        </div>
+        <h4 class="h-card">Watsu</h4>
+        <p class="caption">Active recovery without active effort. Passive water therapy in a warm pool, drawn from Zen Shiatsu; the therapist stretches and mobilises the body, releasing tension and easing the breath back.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Cryotherapy</span>
+        </div>
+        <h4 class="h-card">Cryotherapy</h4>
+        <p class="caption">Whole-body exposure to extremely low temperatures, brief and bracing. Inflammation drops, post-training recovery accelerates, metabolism gets a useful nudge.</p>
+      </div>
+
+    </div>
+
+    <!-- Filter chips -->
+    <div style="margin-top:48px;max-width:900px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow-mini text-center mb-4">Filter by intent</p>
+      <div class="chip-row">
+        <span class="filter-chip">Recovery</span>
+        <span class="filter-chip">Physical Fitness</span>
+        <span class="filter-chip">Pain Management</span>
+        <span class="filter-chip">Mobility</span>
+        <span class="filter-chip">Detox</span>
+        <span class="filter-chip">Stress Management</span>
+        <span class="filter-chip">Mindfulness</span>
+        <span class="filter-chip">Emotional Balance</span>
+        <span class="filter-chip">General Health</span>
+      </div>
+    </div>
+
+    <div class="text-center mt-8" style="max-width:900px;margin:48px auto 0;">
+      <p class="caption" style="font-style:italic;">Available across the stay: Pranayama (Ayurvedic breathwork), Personal Training, Postural Corrective Therapy, Super Stretch, Aqua classes, Boxing, plus the daily 60-minute treatment from the seven-treatment menu (Jayasom Signature, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga). The Wellness Advisor places each across the days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M4. OVERVIEW — AN ACTIVE WAY TO RECOVER -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">Overview</p>
+    <h2 class="h-section text-center" style="margin-bottom:48px;">An Active Way to Recover</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The As a Flow retreat is set around what the body needs to do across the stay. The retreat is for athletes and fitness enthusiasts. Guests carrying chronic pain or injuries who need guidance on posture, soft-tissue mobilisation, or rehabilitation. People rebuilding from a long stretch of sedentary work.</p>
+      <p style="margin-bottom:32px;">The methodology your Wellness Advisor draws on names three goals for the work:</p>
+    </div>
+
+    <div class="callout" style="margin-bottom:32px;">
+      <p class="callout-label">Three goals</p>
+      <ul>
+        <li>Improve fitness or sporting performance.</li>
+        <li>Promote rehab from prior injury.</li>
+        <li>Explore new activities for the first time that may turn out to be your new favourite.</li>
+      </ul>
+    </div>
+
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Your Advisor weighs all three against what arrives on the day, and the programme settles around the one that matters most. The methodology rests on the Wellness Wisdom® pillar that runs through every Jayasom programme: traditional wisdom met by contemporary practice, with Traditional Arabic Medicine integrated alongside sport science, physiotherapy, and the daily clinical work of the Health and Wellness Centre. The work is precise, measurable, and answerable to the body in front of us.</p>
+      <p>The eleven o'clock Stretch Class anchors the morning, the four o'clock high-intensity block defines the afternoon, and recovery work threads between.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M5a. YOUR DAYS AT AS A FLOW — MORNINGS AND AFTERNOONS -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Morning at the studio</span>
+      </div>
+      <div>
+        <p class="eyebrow">Daily rhythm</p>
+        <h2 class="h-section">Your Days at As a Flow</h2>
+        <p class="body-copy mb-4 full">A day takes shape the morning you arrive. Your Advisor sits down with you, reads the questionnaire you sent in the weeks before, and asks where the body is today. Current training load, recent injury or surgery, the goals you arrived carrying. The questions reach further than a standard arrival intake; what you say on the day sets the week.</p>
+        <p class="body-copy mb-4 full">Seven in the morning, the studio opens. Mat Pilates, Morning Yoga Flow, Yin Yoga, and Tai Chi rotate by day, paired to where the body is. By eleven, everyone is on the mat for the Stretch Class; it runs every day of the week and most guests come to think of it as the spine of the morning. Breakfast at Saratô follows. Mint and perilla anchor the kitchen, hyperlocal and hyperfresh; all dishes gluten-free; the appetite turns up after the studio.</p>
+        <p class="body-copy full">The afternoon belongs to the four o'clock conditioning slot. HIIT, TRX, Tabata Training, Circuit Training, Zumba, Step Aerobics, and Boot Camp rotate Sunday to Saturday; high-intensity, bounded. Seven-night stays add Personal Training, with one-to-one coaching shaping load against the goals from arrival. Between blocks, Chia Bite near the Health and Wellness Centre handles the refuel: power juice, nutrient-dense bites, the tea programme. Five minutes is enough.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M5b. YOUR DAYS AT AS A FLOW — AQUA, EVENINGS, AND THE ROOM -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="body-copy mb-4 full">Aqua classes run in the cool of the mineral pool at ten o'clock daily. Pool Noodle, Hand Buoy, and Boxing variants rotate so the body works without the joint load of the studio floor.</p>
+        <p class="body-copy mb-4 full">By six the body wants stillness. The six o'clock reflective slot offers Pranayama, Singing Bowl Meditation, Floating Meditation, or Aerial Yoga. The hydrothermal circuit runs alongside through the evening: infrared sauna, waterfall bathing, Kneipp walking, vitality pools at varying temperatures, steam, Rasul ritual, flotation pool. Use any sequence the body wants. Dinner runs at Saratô or at Jiraka (beef-free, the spice-route specialty kitchen); the kitchen minimises gluten, refined sugars, salt, and coffee, and reaches first for what the Farm Belt grows. The eight o'clock evening slot holds Better Sleep Class, Star Gazing, or Candlelight Meditation.</p>
+        <p class="body-copy full">Three meals each day from the kitchen, beginning with dinner on arrival. The room is set up around your stated preferences: aroma options of Calming Lavender or Spirited Rosemary, a chosen pillow from the seven on the menu, a Coco-mat™ natural mattress.</p>
+      </div>
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Evening rhythm · hydrothermal circuit</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M6. THE SETTING AT AMAALA -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">The setting</p>
+      <h2 class="h-section">The Setting at AMAALA</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;max-width:820px;margin:0 auto;">
+      <p style="margin-bottom:24px;">Jayasom AMAALA sits on Saudi Arabia's Red Sea coast, within the Triple Bay master plan being developed by Red Sea Global. The coast holds a year-round outdoor training climate. Saudi Arabia's eVisa programme opens guest entry across a wide range of markets. Buildings recede in the right places and sit low against the coastline; sea breeze moves before mechanical cooling; materials are local where the climate allows them.</p>
+      <p style="margin-bottom:24px;">For As a Flow guests, the relevant zone is Jayana, the adults retreat area at the southern end of Triple Bay. Movement studios sit within the adult-side wellness building. Mineral and vitality pools support aqua classes and active recovery. The hydrothermal circuit threads infrared sauna, waterfall bathing, Kneipp walking, vitality pools at varying temperatures and mineral compositions, steam, Rasul rituals, and a flotation pool through one progressive sequence.</p>
+      <p style="margin-bottom:24px;">Outdoor work runs from the Beach Hut on the cove: kayaking, paddleboarding, swim conditioning, and water-borne mobility work between training blocks. The Corallium and the Red Sea reefs sit beyond the Beach Hut for guests adding marine activity. The Prince Mohammed bin Salman Royal Reserve carries hiking and trail running for guests adding distance.</p>
+      <p style="margin-bottom:24px;">The Jayana adult-side gardens thread through the property and earn their place in the recovery arc. Yasmeen Night Garden, named for the jasmine that opens after dark, sits at the foot of the Wellness Plateau and reads as a wind-down room after the four o'clock conditioning slot. The Wellness Plateau itself is reached by a winding path; the climb tightens the calves and opens the chest, which most athletic guests find a useful evening rebound from a heavy training day. The Stonecrop Maze sits at the plateau's centre, with slow-walking discipline that holds for active recovery work between studio sessions. Phoenix Garden, near Saratô, is an open-air Phoenix dactylifera plantation reservable for evening meals.</p>
+      <p style="margin-bottom:24px;">The standard accommodation is the One-Bedroom Beachfront Pool Villa: sixty-two square metres indoor and forty-eight square metres outdoor, balcony, lounge chairs, plunge pool, Coco-mat™ natural mattress, Oud-custom amenities. Two-bedroom and three-bedroom pool villas are available; over-water villas face the bay for guests on longer stays. Each room is set up around stated preferences: aroma options (Calming Lavender or Spirited Rosemary), pillow choice from the seven on the menu, and the room held to the property's temperature standard.</p>
+      <p>Sixty villas plus twenty-four private residences hold the property. Phase one is a small property by destination-resort scale, and the design is for it to stay that way; the daily wellness rhythm is sized to the cohort.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Image strip -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Movement studios</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Hydrothermal circuit</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Beach Hut · Red Sea reefs</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Wellness Plateau · Stonecrop Maze</span>
+    </div>
+  </div>
+</section>
+
+<!-- M7. PROGRAMME INCLUSIONS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Programme inclusions</p>
+      <h2 class="h-section">What's Included</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Stay length shapes the depth of the work. Four tier names hold the structure: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. Pacing matches the tier; nothing across the stay is added because of the calendar.</p>
+    </div>
+
+    <div class="grid-aside" style="margin-top:48px;">
+      <div>
+        <p class="eyebrow-mini">Every As a Flow stay includes</p>
+        <ul class="bullet-list" style="margin-top:16px;">
+          <li>Accommodation in your chosen room category, with daily housekeeping</li>
+          <li>Three wellness cuisine meals per night, beginning with dinner on the day of arrival</li>
+          <li>Wellness minibar in your room, stocked according to the Specialist Consultation</li>
+          <li>Individual health and wellness consultation with your Wellness Advisor on arrival, revisited at the closing conversation</li>
+          <li>Specialist Consultation (50 min, all tiers)</li>
+          <li>Physical and Postural Assessment plus VISIA Facial Imaging, complimentary on request</li>
+          <li>Daily fitness and leisure activities across the property's twenty-two-class adult roster</li>
+          <li>Unlimited use of all wellness destination facilities (steam, sauna, mineral and vitality pools, salt inhalation rooms, infrared rooms, mixed gym, hydrothermal circuit)</li>
+          <li>One Daily Treatment per night of stay from the seven-treatment menu (Jayasom Signature, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga)</li>
+          <li>The Jayasom Collection (welcome amenity)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout" style="background:hsl(var(--background));border-width:1px;">
+          <p class="callout-label">Personalisation note</p>
+          <p class="caption" style="color:hsl(var(--foreground));font-size:13px;line-height:1.6;">Programme inclusions are indicative; alternatives are available; your Wellness Advisor finalises the programme shortly after arrival, around your individual needs and stated objectives.</p>
+        </div>
+        <p class="caption mt-4" style="font-style:italic;">Services and facilities are subject to government health regulations.</p>
+      </div>
+    </div>
+
+    <!-- Per-tier table -->
+    <div style="margin-top:64px;">
+      <p class="eyebrow-mini text-center mb-4">Per-tier inclusions</p>
+      <h3 class="h-sub text-center mb-8">Stay length and depth</h3>
+      <div style="overflow-x:auto;">
+        <table class="wire-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th class="center">Per session</th>
+              <th class="center">4 nights</th>
+              <th class="center">7 nights</th>
+              <th class="center">10 nights</th>
+              <th class="center">14 nights</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Health Consultation</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Specialist Consultation</td><td class="center">50 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Daily Treatment (from menu)</td><td class="center">60 min</td><td class="center">4</td><td class="center">7</td><td class="center">10</td><td class="center">14</td></tr>
+            <tr><td>Restorative Treatment (Muscle Recovery Ritual)</td><td class="center">90 to 120 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">2</td></tr>
+            <tr><td>Therapeutic Lymphatic Drainage</td><td class="center">—</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Neurac® Method</td><td class="center">50 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Gyrotonic®</td><td class="center">50 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Watsu</td><td class="center">—</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Cryotherapy</td><td class="center">—</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">2</td></tr>
+            <tr><td>Personal Training</td><td class="center">60 min</td><td class="center">1</td><td class="center">2</td><td class="center">3</td><td class="center">4</td></tr>
+            <tr><td>Pilates (Reformer or Mat)</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Yoga</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Postural Corrective Therapy</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Super Stretch</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Boxing</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Aqua classes (Pool Noodle / Hand Buoy / Boxing)</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Pranayama</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Cooking class (Nakeha Studio)</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Total named treatments</td><td class="center"></td><td class="center">11</td><td class="center">18</td><td class="center">26</td><td class="center">35</td></tr>
+            <tr><td>Average per day</td><td class="center"></td><td class="center">2.75</td><td class="center">2.57</td><td class="center">2.6</td><td class="center">2.5</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M8. SESSIONS AND RITUALS FOR ACTIVE RECOVERY -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">For active guests</p>
+    <h2 class="h-section text-center" style="margin-bottom:32px;">Sessions and Rituals for Active Recovery</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Across the As a Flow retreat, several treatments and sessions are reserved for athletes, active guests, and those rebuilding after injury. The body that arrives, the goals from the arrival conversation, and the tier you choose all shape which surface across the stay.</p>
+      <p style="margin-bottom:24px;">Boot Camp, Pilates, and Yoga thread through every tier. Postural Corrective Therapy and the daily Daily Treatment hold across every tier.</p>
+      <p style="margin-bottom:24px;">Seven-night Absorb stays add Personal Training, Aqua classes, Super Stretch, and Boxing. The Wellness Advisor weighs each against the load the week is carrying. A Cooking class with the Nakeha Studio chef threads through; the kitchen's research on which foods support which conditions runs continuously, and the class is the way that work meets the guest.</p>
+      <p style="margin-bottom:24px;">Ten-night Immerse stays bring Therapeutic Lymphatic Drainage and Cryotherapy into the recovery arc. Pranayama adds to the breath-led work, and one Restorative Treatment (the Muscle Recovery Ritual) threads through.</p>
+      <p style="margin-bottom:24px;">Fourteen-night Commit stays open the rehabilitation depth: Watsu, Gyrotonic®, Neurac® Method, and physiotherapy. Two Restorative Treatments thread through. Practitioner relationships build across the stay; the closing conversation reads the work back across the fortnight.</p>
+      <p>The eleven o'clock Stretch Class holds the property's morning anchor across every tier and every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M8b. WELLNESS THROUGH NUTRITION -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Sports nutrition</p>
+      <h2 class="h-section">Wellness Through Nutrition</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Sports nutrition sits at the centre of the work. The Bespoke Sports Nutrition Specialist Consultation (50 min, all tiers) opens the relationship; from there, the Health and Wellness Advisors guide menu selection across three healing-menu programmes that support the athletic recovery cycle.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+      <div class="nutrition-card">
+        <p class="menu-name">Neuro Nourish</p>
+        <p class="caption">Supports cognitive performance during heavy training cycles. Nutrition that affects focus, memory, and mood; omega-3s, antioxidants, and adaptogens supporting mental clarity alongside physical recovery.</p>
+        <p class="menu-key">Key ingredients: blueberry, walnuts, matcha, cacao.</p>
+      </div>
+      <div class="nutrition-card">
+        <p class="menu-name">Gut Healing and Cleansing</p>
+        <p class="caption">Supports guests rebuilding after injury or sustained training load. Probiotics, fibre, and anti-inflammatory foods restore balance.</p>
+        <p class="menu-key">Key ingredients: kefir, chia seeds, fermented vegetables, turmeric, flax seeds.</p>
+      </div>
+      <div class="nutrition-card">
+        <p class="menu-name">Women's Hormonal Health</p>
+        <p class="caption">Available across the kitchen for guests where hormonal balance enters the picture; menus rich in healthy fats, proteins, and key micronutrients support overall vitality.</p>
+        <p class="menu-key">Key ingredients: maca root, avocado, pumpkin seed, flax seeds, green tea.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-8" style="max-width:820px;margin:48px auto 0;">
+      <p class="caption" style="font-style:italic;">The culinary team crafts three-day healing menus across the stay, blending nutritional science with culinary work. Your Wellness Advisor surfaces the programme that matches what the body needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M9. PRACTITIONERS IN RESIDENCE -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">In residence</p>
+        <h2 class="h-section">Practitioners in Residence</h2>
+        <p class="body-copy mb-4 full">Wellness Advisors hold the As a Flow programme. Each Advisor combines a clinical background with a sports or movement specialism, and a small caseload at any one time so the programme is set, not delivered. The Advisor meets you on arrival, walks the brief through the days that follow, revisits the work at the closing conversation, and remains reachable after you leave.</p>
+        <p class="body-copy mb-4 full">Visiting Practitioners arrive at Jayasom in residence, for weeks at a time, drawn from a roster of clinical and movement specialists. Each is chosen for the depth of practice they carry. The teaching that arrives with a Visiting Practitioner stays with the resident team once they have left.</p>
+        <p class="body-copy full">The resident team holds the daily work alongside. Mohammad Almslmany leads the rehabilitation programme as Physiotherapist; his practice integrates evidence-based physiotherapy with fitness and mobility training, anchored in Orthopaedic Manual Therapy, Myofascial Needling Therapy, and ISSA Personal Training certifications, and a belief that recovery is strengthened by trust and conversation alongside the physical work. Fitness specialists run the group-class roster and the one-to-one Personal Training. Recovery technicians manage the hydrothermal circuit, the cryotherapy chamber, and the active-recovery infrastructure.</p>
+      </div>
+      <div class="wire-image" style="height:560px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Mohammad Almslmany · Physiotherapist</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M10. BEYOND THE STAY + WELLNESS RESIDENCES -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">After departure</p>
+    <h2 class="h-section text-center" style="margin-bottom:32px;">Beyond the Stay</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The work asked at Jayasom does not finish at checkout. Through any As a Flow stay, the take-home routines (training brief, mobility programme, nutrition guidance, recovery protocols) are written down before checkout. Your Wellness Advisor holds the relationship as the cycle resumes at home, and Visiting Practitioners can be referenced where specialist follow-up helps.</p>
+      <p>A Wellness Residences pathway runs alongside, for active guests building athletic recovery into a longer cycle than the four-to-fourteen-night retreat tiers hold. Twenty-four villas across three layouts (ten 2-bedroom at 350.2 square metres, twelve 3-bedroom at 423.9 square metres, two 4-bedroom at 525.3 square metres) sit adjacent to Jayasom AMAALA within Triple Bay. The Jayasom Longevity Assessment Programme runs across seven components annually for residence owners, supported by the same Wellness Advisor who shapes the retreat stay; for athletes building training-cycle continuity, the assessment cadence reads as longitudinal performance work.</p>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#" class="btn">Visit the Wellness Residences</a>
+    </div>
+  </div>
+</section>
+
+<!-- DAY-BY-DAY ITINERARY -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Day by day</p>
+      <h2 class="h-section">A typical seven-night stay</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">Most guests arrive carrying a load. The week takes that as the starting point. Days build around the body's recovery curve, not a fixed grid. Some sessions move with you, some are placed where the practitioner thinks they'll matter most. What doesn't move: Stretch Class at eleven, the conditioning slot at four, the hydrothermal circuit whenever you want it. Treatment counts depend on how long you stay. Eleven at four nights. Eighteen at seven. Twenty-six at ten. Thirty-five at fourteen, and the rehabilitation work going deeper across the fortnight.</p>
+    </div>
+
+    <div class="flex flex-col gap-4" style="margin-top:48px;">
+      <div class="day-strip"><span class="day-num">Day 01</span><span class="day-title">Arrival and the Brief</span></div>
+      <div class="day-strip"><span class="day-num">Day 02</span><span class="day-title">Finding the Day's Rhythm</span></div>
+      <div class="day-strip"><span class="day-num">Day 03</span><span class="day-title">First Push</span></div>
+      <div class="day-strip"><span class="day-num">Day 04</span><span class="day-title">Active Recovery</span></div>
+      <div class="day-strip"><span class="day-num">Day 05</span><span class="day-title">Loading the Week</span></div>
+      <div class="day-strip"><span class="day-num">Day 06</span><span class="day-title">Restoration</span></div>
+      <div class="day-strip"><span class="day-num">Day 07</span><span class="day-title">Walking Out</span></div>
+    </div>
+
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;text-align:center;">
+      <p class="eyebrow">Tier compression / expansion closer</p>
+      <h3 class="h-sub mt-2">Beyond the seven-night canonical tier</h3>
+    </div>
+  </div>
+</section>
+
+<!-- M11. CROSS-SELL -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Other directions</p>
+      <h2 class="h-section">Other Ways to Retreat at Jayasom</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Each retreat runs four to fourteen nights.</p>
+    </div>
+    <div class="grid-5" style="margin-top:48px;">
+      <a href="#" class="cross-card">
+        <p class="name">As a Pair</p>
+        <p class="tag">Profound connection, relaxing together, renewal.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Woman</p>
+        <p class="tag">Sisterhood, strength, balance, and confidence.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Family</p>
+        <p class="tag">Communication, joy, and united trust.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Leader</p>
+        <p class="tag">Optimised performance, focus, and resilience.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Feather</p>
+        <p class="tag">Physical vitality, detox, and optimal weight.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- M12. FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan your stay</p>
+    <h2 class="h-section">Plan Your Stay</h2>
+    <p class="body-copy" style="margin:0 auto 16px;max-width:560px;font-style:italic;">The answer is not of transformation. It is about bringing you back.</p>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">Speak to a Wellness Advisor and let the brief begin.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Plan Your Retreat</a>
+      <a href="#" class="btn btn-on-dark">Request a private call with your Wellness Advisor</a>
+    </div>
+    <p class="caption mt-4" style="color:hsla(var(--primary-foreground),0.7);font-style:italic;">Response within 48 hours.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;">Jayasom</p>
+        <p class="caption">Healing rooted in wisdom, guided by heart.</p>
+      </div>
+      <div>
+        <p class="col-title">Quick Links</p>
+        <ul>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Rooms &amp; Villas</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Retreat Finder</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Journals &amp; Stories</a></li>
+          <li><a href="#">Residences</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li>Our Philosophy</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Media</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Families &amp; Wellbeing</a></li>
+          <li><a href="#">Our Experts</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Residences</p>
+        <ul>
+          <li><a href="#">Amaala Residences</a></li>
+          <li><a href="#">Why Jayasom Residences</a></li>
+          <li><a href="#">Residential Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved.</p>
+      <div class="links">
+        <span>Cookies Policy</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

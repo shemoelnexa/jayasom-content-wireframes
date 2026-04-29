@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>As a Family v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout .callout-body { font-size: 13px; color: hsl(var(--foreground)); line-height: 1.7; }
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li {
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+  display: flex; gap: 12px; padding-left: 0;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+
+.studio-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; }
+.studio-card .studio-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.studio-card .studio-name { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 4px; }
+.studio-card .age-band { font-size: 12px; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+.studio-card .studio-philosophy { font-size: 13px; font-style: italic; color: hsl(var(--foreground)); line-height: 1.5; padding: 12px 0; border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); margin-bottom: 16px; }
+
+.tier-block { border: 1px solid hsl(var(--border)); padding: 24px; background: hsl(var(--background)); text-align: center; }
+.tier-block .tier-name { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.tier-block .tier-nights { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.tier-block .tier-label { font-size: 12px; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+.tier-block .tier-treatments { font-size: 13px; color: hsl(var(--foreground)); padding-top: 16px; border-top: 1px solid hsl(var(--border)); }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 16px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+
+.duality-row { display: grid; grid-template-columns: 1fr 80px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid hsl(var(--border)); align-items: center; }
+.duality-row:last-child { border-bottom: 0; }
+.duality-row .duality-track { font-size: 13px; color: hsl(var(--foreground)); }
+.duality-row .duality-track .label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 4px; display: block; }
+.duality-row .duality-divider { text-align: center; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+@media (max-width: 768px) {
+  .duality-row { grid-template-columns: 1fr; gap: 8px; }
+}
+
+.slot-row { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid hsl(var(--border)); }
+.slot-row:last-child { border-bottom: 0; }
+.slot-row .slot-time { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); letter-spacing: 0.05em; }
+.slot-row .slot-body { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.65; }
+.slot-row .slot-name { font-size: 14px; color: hsl(var(--foreground)); margin-bottom: 4px; }
+@media (max-width: 768px) { .slot-row { grid-template-columns: 1fr; gap: 8px; } }
+
+.dining-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.dining-card h4 { font-size: 16px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 8px; line-height: 1.3; }
+
+.addon-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 20px; display: flex; flex-direction: column; }
+.addon-card .addon-tag { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.addon-card h4 { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; line-height: 1.3; }
+
+.practitioner-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.practitioner-card h4 { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+
+.bundle-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; }
+.bundle-card h3 { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.bundle-card .duration-tag { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+
+.day-strip { border: 1px solid hsl(var(--border)); padding: 20px 24px; background: hsl(var(--background)); display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: center; }
+.day-strip .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.day-strip .day-title { font-size: 16px; font-weight: 300; color: hsl(var(--foreground)); }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<main>
+
+<!-- M1. HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Family retreat · Jayasom AMAALA</p>
+      <h1 class="h-hero">As a Family</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">Nurture the Relationships That Matter Most</p>
+      <p class="body-copy" style="margin:0 auto 32px;">A family-attachment retreat with concurrent programmes for parents and young people. Time held to strengthen family bonds and restore joyful connections, paced over three to fourteen nights.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+        <a href="#" class="btn btn-solid">Plan Your Retreat</a>
+        <a href="#" class="btn">Request a private call with your Wellness Advisor</a>
+      </div>
+      <p class="caption mt-4" style="font-style:italic;">Response within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M1b. CONTACT CTA STRIP -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">Family stays are shaped before arrival, not at the door. A Wellness Advisor calls before the stay to walk through the brief with you: the age bands of the children travelling, any developmental contexts that should inform the work, the rhythms of the elders in the group.</p>
+    <a href="#" class="btn">Speak to a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- M2. FEATURED FAMILY EXPERIENCES -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Family Wellness Retreat at Jayasom AMAALA</p>
+      <h2 class="h-section">Featured Family Experiences</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Eight experiences, drawn from the Treatment Directory and the family operations roster, anchor the page.</p>
+    </div>
+
+    <div class="grid-4" style="margin-top:48px;">
+
+      <!-- Card 1: HERO Ūlfa -->
+      <div class="treatment-card hero-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Ūlfa Ritual</span>
+        </div>
+        <h4 class="h-card">Ūlfa Ritual</h4>
+        <p class="duration">50 or 90 minutes</p>
+        <p class="caption" style="font-style:italic;margin-bottom:8px;">Treatment Directory canonical:</p>
+        <p class="caption">"Rooted in generosity and gratitude, this experience invites parents and children to connect through approachable sensory experiences. Using breath, touch, and movement, it mirrors the grounding rhythms of nature to foster deep familial bonds."</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Sacred Bond Infant Massage</span>
+        </div>
+        <h4 class="h-card">Sacred Bond Infant Massage</h4>
+        <p class="duration">30 minutes · age 1 to 3</p>
+        <p class="caption">A 30-minute infant massage practice for children aged one to three, conducted by a parent under therapist guidance. Warm organic oil; gentle work that supports digestion and sleep regulation while the nervous system settles.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Family Wellness Counselling</span>
+        </div>
+        <h4 class="h-card">Family Wellness Counselling</h4>
+        <p class="duration">50 minutes · up to 8 participants</p>
+        <p class="caption">A 50-minute family session for up to eight participants, including parents, children, adolescents, and grandparents. The methodology draws on Cognitive Behavioural Therapy alongside Neuro-Linguistic Programming and HeartMath, applied conversationally.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Children's Hands-On Therapy + Sensory Play</span>
+        </div>
+        <h4 class="h-card">Children's Hands-On Therapy + Sensory Play</h4>
+        <p class="duration">50 minutes</p>
+        <p class="caption">A 50-minute session combining hands-on therapy with sensory play to support emotional regulation and focus. The work moves through structured play.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Family Hydrothermal Experience</span>
+        </div>
+        <h4 class="h-card">Family Hydrothermal Experience</h4>
+        <p class="caption">A circuit through seven stages designed for parents and children to take together at the family's pace: infrared sauna for heat activation, waterfall bathing, Kneipp walking, vitality pools at varying temperatures and mineral compositions, steam, Rasul rituals, and a flotation pool. The Family Hydrothermal sits in a separate space from the adult Hydrothermal at Jayana. A Family Wellness Private Scrub Room runs alongside, with parent-child scrubs prepared from sustainable, locally inspired ingredients.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Family Watsu</span>
+        </div>
+        <h4 class="h-card">Family Watsu</h4>
+        <p class="caption">Warm-water aquatic bodywork in a dedicated Family Watsu pool. Sessions are age-tailored: gentler work for very young children, deeper bodywork for older children and adults.</p>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Cooking with Children at Nakeha Studio</span>
+        </div>
+        <h4 class="h-card">Cooking with Children at Nakeha Studio</h4>
+        <p class="caption">Hands-on cooking sessions at Nakeha Studio for up to eight family members. Children cook alongside parents under chef guidance; the menu draws on Farm Belt produce hand-picked the same morning. Each session includes a personalised recipe card and a chef-signed certificate to take home. Stays of seven nights and longer carry one Nakeha class as part of the package.</p>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Children's Spa Menu</span>
+        </div>
+        <h4 class="h-card">Children's Spa Menu</h4>
+        <p class="caption" style="margin-bottom:8px;">Six treatments calibrated for younger guests.</p>
+        <p class="caption" style="margin-bottom:4px;">The Dream Massage, 30 min, age 7+</p>
+        <p class="caption" style="margin-bottom:4px;">The Tropical Flower Facial, 30 min, age 7+</p>
+        <p class="caption" style="margin-bottom:4px;">Sweet Surrender to Chocolate, 45 min, age 7+ (cocoa seed of life)</p>
+        <p class="caption" style="margin-bottom:4px;">Little Princess Manicure, 30 min, age 4+</p>
+        <p class="caption" style="margin-bottom:4px;">Happy Feet Pedicure, 30 min, age 4+</p>
+        <p class="caption">Sacred Bond Infant Massage, 30 min, age 1 to 3, parent-conducted</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- M3. APPROACH -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">The approach</p>
+      <h2 class="h-section">How the family programme works</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">A family-attachment retreat with concurrent programmes for parents and young people, designed to nurture the relationships that matter most. Time held to fortify further as a family, in love, trust, and mutual respect. Each member is guided to recognise unique strengths, fostering improved communication, teamwork, and accountability.</p>
+      <p style="margin-bottom:24px;">The work moves through enriching group and individual experiences in a fun and relaxed environment. The programme blends Family Wellness mentoring with mind-body practices, fitness training, and physiotherapy, alongside shared activities including nature experiences, cooking classes, Spa and holistic rituals, and play-based fitness for children.</p>
+      <p style="margin-bottom:24px;">A Wellness Advisor holds the day-to-day for the family across ages: shaping the parents' track, guiding the children's daily activities by age band, and threading shared family time through each day at the universal late-afternoon slot. Multi-generational programming is one of the property's core categories rather than a side option, with wellness journeys tailored to move with the family across generations and cultures.</p>
+      <p style="margin-bottom:24px;">The methodology integrates Traditional Arabic medicine with contemporary clinical science. Children's programmes are wellness-based, educational, and recreational; some sessions incorporate psychology-informed approaches (Cognitive Behavioural Therapy, Neuro-Linguistic Programming, HeartMath) to support emotional, social, and personal skill development. The work does not constitute medical, psychological, psychiatric, or therapeutic treatment, and is not intended to diagnose, treat, or cure any condition. Tech-Integrated Wellness sits within the children's programme as a conscious tool: virtual reality treadmills in the teen lounge, ICAROS interactive fitness, MultiBall projected sport, and structured digital experiences run alongside hands-on play.</p>
+      <p>The retreat is calibrated for families seeking calm, considered family time. The programme is purposeful rather than loud, designed to hold space for elders, parents, and children of every age band without overstimulation or generic family-resort patterns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M4. HERO SIGNATURE RITUAL: ŪLFA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="eyebrow">Signature ritual</p>
+    <h2 class="h-section">Ūlfa Ritual</h2>
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">Ūlfa Ritual is the hero family bonding ritual at Jayasom AMAALA, offered in 50-minute and 90-minute formats. It sits within the Spa under the Ground Wellbeing collection, designed to empower the family to function as a cohesive, thriving unit that recognises each other's strengths and differences.</p>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:680px;font-style:italic;">Treatment Directory canonical: "Rooted in generosity and gratitude, this experience invites parents and children to connect through approachable sensory experiences. Using breath, touch, and movement, it mirrors the grounding rhythms of nature to foster deep familial bonds."</p>
+    <a href="#" class="btn btn-on-dark">Speak to a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- M5. SETTING -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">The setting</p>
+      <h2 class="h-section">Jayela, the family side of the property</h2>
+    </div>
+
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;max-width:820px;margin:0 auto;">
+      <p style="margin-bottom:24px;">Jayasom AMAALA stands on Saudi Arabia's Red Sea coast, part of the Triple Bay master plan developed by Red Sea Global. The property is set low against the coastline, with cross-ventilation as the first cooling layer and locally sourced materials throughout.</p>
+      <p>For As a Family guests, the relevant zone is Jayela, the family side of the property, with shared programmes and family Mediterranean dining. Several venues thread the family experience together, with cross-zone access extending the experience into the gardens and the wellness plateau beyond Jayela alone.</p>
+    </div>
+
+    <!-- Buttercup venues -->
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow-mini">Three Buttercup play spaces</p>
+      <h3 class="h-sub mb-4" style="font-size:20px;">Buttercup Playground · Pool Play · Sand Play</h3>
+      <p class="body-copy full" style="font-size:14px;line-height:1.7;">Three play spaces carry the Buttercup name. Buttercup Playground sits near the retail village, partially shaded, with wood materials and a sandy floor; climbing features and slides run for the middle ages, balance hammocks reach the older children. Buttercup Pool Play is next to the children's pool, in the shade of the Jayela Terraces; the walls carry bouldering grips and the rubberised floor features partial domes for running and rolling. Buttercup Sand Play sits towards the cove coastline, with shaded climbing structures, a slide, tunnels, and a pathway to the beach front for strollers and mobility equipment.</p>
+    </div>
+
+    <!-- Family Pools + Beach Hut + Outdoor -->
+    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow-mini">Family Pools, Beach Hut, and outdoor</p>
+      <h3 class="h-sub mb-4" style="font-size:20px;">From the pool deck to the cove</h3>
+      <div class="body-copy full" style="font-size:14px;line-height:1.7;">
+        <p style="margin-bottom:18px;">The Jayela Family Pools sit on the ground floor of the Jayela Terraces. Two pools, one deeper and one shallow at zero to forty centimetres for young children. Sofa seating and changing rooms are at hand, with toilets under the shade of the building.</p>
+        <p>The Beach Hut launches non-motorised watersports: stand-up paddleboards, snorkelling, swim lessons, and water-borne yoga. Rinsing showers are available. Beyond the Beach Hut, the Red Sea cove opens onto kayaking, scuba diving, kitesurfing, and boat excursions. The Corallium offers an immersive learning experience focused on the Red Sea's coral reefs and marine life. Day trips into the Prince Mohammed bin Salman Royal Reserve add geological history and cultural exploration; conservation and marine biological tours run alongside.</p>
+      </div>
+    </div>
+
+    <!-- Active Courts + Hydrothermal -->
+    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow-mini">Active Courts and Family Hydrothermal</p>
+      <h3 class="h-sub mb-4" style="font-size:20px;">The Jayela Health &amp; Wellness Centre</h3>
+      <div class="body-copy full" style="font-size:14px;line-height:1.7;">
+        <p style="margin-bottom:18px;">The Jayela Health &amp; Wellness Centre houses the Active Courts, lit at night for extended hours. Trampolines run at ground level for individual use; a bouldering wall sits on a rubberised landing surface; Fuwa Domes hold inflated structures for climbing and sliding; a covered Multi-use Games Court (MUGA) carries volleyball, badminton, and other family or community sports.</p>
+        <p>A Family Hydrothermal experience moves through seven stages at the family's pace: infrared sauna for heat activation, waterfall bathing, Kneipp walking, vitality pools at varying temperatures and mineral compositions, steam, Rasul rituals, and a flotation pool.</p>
+      </div>
+    </div>
+
+    <!-- Cross-zone gardens -->
+    <!-- Family Rooms -->
+    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow-mini">Family Rooms</p>
+      <h3 class="h-sub mb-4" style="font-size:20px;">Calibrated for size and cohesion</h3>
+      <p class="body-copy full" style="font-size:14px;line-height:1.7;">Family rooms are calibrated for size and cohesion. Single and multi-bedroom pool villas sit alongside the Terrace rooms, conveniently located near the family pools and offering stunning seaside views. The largest family accommodation, the 5-bedroom Jayela Residence, comes complete with its own private wellness studio. Selected accessible rooms within the Jayela Terraces remove steps and add electrically assisted beds, vibrating and lighted fire alarms, emergency call systems, easy-access shower and toilets, and grab rails.</p>
+    </div>
+
+    <!-- Botanical etymology closer -->
+    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <div class="callout">
+        <p class="callout-label">A botanical pattern</p>
+        <p class="callout-body">Botanical etymology pattern continues here. Buttercup, named for play and healing ingredients, takes its place alongside Poa, Phoenix, Stonecrop, and Yasmeen as part of a single botanical pattern across the property.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Image strip -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Buttercup Playground</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Jayela Family Pools</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Active Courts</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">5-bedroom Jayela Residence</span>
+    </div>
+  </div>
+</section>
+
+<!-- M6. CHILDREN'S PROGRAMME BY AGE -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Children's programme by age</p>
+      <h2 class="h-section">Four Growing Studios</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">The children's programme runs through four age-banded studios at the Jayela Health &amp; Wellness Centre, named after botanical stages. Each studio carries an indoor and outdoor element, with facilities calibrated to the developmental stage of the band.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:48px;gap:24px;">
+
+      <div class="studio-card">
+        <p class="studio-num">Studio 01</p>
+        <p class="studio-name">Seed Studio</p>
+        <p class="age-band">Ages 0 to 3</p>
+        <p class="studio-philosophy">"The most promising, all is new and all is yet to come, it is the time for planting."</p>
+        <p class="caption">The studio carries a nap room, a breastfeeding nook, diaper changing facilities, and a small-scale toilet, alongside a creative play table and chairs, a ball pool, and a pantry. Outdoors, a shaded zone holds a kinetic sand pit, with a small balancing bridge and tactile studs underfoot.</p>
+      </div>
+
+      <div class="studio-card">
+        <p class="studio-num">Studio 02</p>
+        <p class="studio-name">Sprout Studio</p>
+        <p class="age-band">Ages 4 to 8</p>
+        <p class="studio-philosophy">"Striving for independence and autonomy, but curious with a love for exploring."</p>
+        <p class="caption">A multi-height space with 'look-down' mezzanine ceilings, books and crafts, dress-ups, imagination play, and bean bags for chilling. Outdoors, bouncing structures within a shaded and secure compound.</p>
+      </div>
+
+      <div class="studio-card">
+        <p class="studio-num">Studio 03</p>
+        <p class="studio-name">Stem Lounge</p>
+        <p class="age-band">Ages 9 to 12</p>
+        <p class="studio-philosophy">"The years of sudden growth and the beginning of a transition into adolescence; a space for standing tall."</p>
+        <p class="caption">The lounge offers central spaces alongside pods for music, gaming, hiding out, and hanging out. Outdoors, hammocks.</p>
+      </div>
+
+      <div class="studio-card">
+        <p class="studio-num">Studio 04</p>
+        <p class="studio-name">Bloom Lounge</p>
+        <p class="age-band">Ages 13+</p>
+        <p class="studio-philosophy">"The transition to adulthood, hormonal changes and life transitions; it is the stage of flourishing."</p>
+        <p class="caption">The hero experience is virtual reality treadmills for self-directed multiplayer use, paired with a lounge and snack bar for non-players. Outdoors, shaded hammocks and seating.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- M7. STAY STRUCTURE -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Stay structure</p>
+      <h2 class="h-section">Family treatment counts scale with stay length</h2>
+    </div>
+
+    <!-- Tier blocks -->
+    <div class="grid-4" style="margin-top:48px;gap:16px;">
+      <div class="tier-block">
+        <p class="tier-name">Explore</p>
+        <p class="tier-nights">4</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">11 family treatments<br/><span style="font-size:11px;color:hsl(var(--muted-foreground));">2.75 daily average</span></p>
+      </div>
+      <div class="tier-block">
+        <p class="tier-name">Absorb</p>
+        <p class="tier-nights">7</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">18 family treatments<br/><span style="font-size:11px;color:hsl(var(--muted-foreground));">2.57 daily average</span></p>
+      </div>
+      <div class="tier-block">
+        <p class="tier-name">Immerse</p>
+        <p class="tier-nights">10</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">24 family treatments<br/><span style="font-size:11px;color:hsl(var(--muted-foreground));">2.4 daily average</span></p>
+      </div>
+      <div class="tier-block">
+        <p class="tier-name">Commit</p>
+        <p class="tier-nights">14</p>
+        <p class="tier-label">nights</p>
+        <p class="tier-treatments">34 family treatments<br/><span style="font-size:11px;color:hsl(var(--muted-foreground));">2.43 daily average</span></p>
+      </div>
+    </div>
+
+    <!-- Adult-child duality -->
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow-mini text-center">Adult-child duality</p>
+      <h3 class="h-sub text-center mb-6">Each tier carries adult and child duality on most sessions</h3>
+      <div>
+        <div class="duality-row">
+          <div class="duality-track adult"><span class="label">Adults</span>postural corrective therapy</div>
+          <div class="duality-divider">paired with</div>
+          <div class="duality-track"><span class="label">Children</span>animal walks</div>
+        </div>
+        <div class="duality-row">
+          <div class="duality-track adult"><span class="label">Adults</span>spinning class</div>
+          <div class="duality-divider">paired with</div>
+          <div class="duality-track"><span class="label">Children</span>jump rope or water aerobics</div>
+        </div>
+        <div class="duality-row">
+          <div class="duality-track adult"><span class="label">Adults</span>Gyrotonic</div>
+          <div class="duality-divider">paired with</div>
+          <div class="duality-track"><span class="label">Children</span>swimming or gymnastics</div>
+        </div>
+        <div class="duality-row">
+          <div class="duality-track adult"><span class="label">Adults</span>Pilates</div>
+          <div class="duality-divider">paired with</div>
+          <div class="duality-track"><span class="label">Children</span>martial arts or dance-based fitness</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">The Wellness Advisor will recommend a tier during the pre-arrival conversation. Each tier from Explore upwards includes a daily Choice of Spa: a 60-minute adult treatment paired with a 30-minute child treatment for guests under twelve.</p>
+      <a href="#" class="btn">Speak to a Wellness Advisor</a>
+    </div>
+  </div>
+</section>
+
+<!-- M7b. PROGRAMME INCLUSIONS -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Programme inclusions</p>
+      <h2 class="h-section">What every retreat carries</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Every retreat tier carries a baseline of inclusions across stays. Three healthy cuisine meals per night come through Loumi Rue and the family-side venues, with children's menus designed for the family-dining concept. The Family Hydrothermal sits within reach as a separate experience from the adult Jayana circuit, including the seven-stage circuit and the Family Wellness Private Scrub Room.</p>
+      <p style="margin-bottom:24px;">Daily programming runs concurrently for parents and children. The Adults rotation holds yoga, Mat Pilates, breath-led practice, and aqua sessions for adult-track guests on top of the family hour. The children's day moves through five 40-minute slots calibrated by the four Growing Studios. Both tracks meet at the universal family hour each afternoon, four to five, every day of the stay.</p>
+      <p style="margin-bottom:24px;">One cooking class at Nakeha Studio comes with every stay from the four-night Explore tier upwards. A daily Choice of Spa, also from the Explore tier, pairs a sixty-minute adult treatment with a thirty-minute child treatment for guests under twelve.</p>
+      <p>Per-tier Family treatment counts are set out above in the stay structure: eleven at Explore, eighteen at Absorb, twenty-four at Immerse, thirty-four at Commit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M8. ACTIVITIES BY DAY -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Activities by day</p>
+      <h2 class="h-section">A five-slot rhythm across a seven-day rotation</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">The children's day runs to a five-slot rhythm across a seven-day rotation. Each slot holds a single activity, calibrated to the age band, 40 minutes long.</p>
+    </div>
+
+    <div style="margin-top:48px;max-width:900px;margin-left:auto;margin-right:auto;">
+      <div class="slot-row">
+        <p class="slot-time">9:00 to 10:00</p>
+        <div class="slot-body">
+          <p class="slot-name">First morning slot</p>
+          <p>Mixed across age bands.</p>
+        </div>
+      </div>
+      <div class="slot-row">
+        <p class="slot-time">10:00 to 11:00</p>
+        <div class="slot-body">
+          <p class="slot-name">Second morning slot</p>
+          <p>Mixed across age bands.</p>
+        </div>
+      </div>
+      <div class="slot-row">
+        <p class="slot-time">15:00 to 16:00</p>
+        <div class="slot-body">
+          <p class="slot-name">Afternoon slot</p>
+          <p>Mixed across age bands.</p>
+        </div>
+      </div>
+      <div class="slot-row">
+        <p class="slot-time">16:00 to 17:00</p>
+        <div class="slot-body">
+          <p class="slot-name">The family hour, every day</p>
+          <p>Mindful Balance Relay, We Are Connected, Stories from Home, Circle of Trust, Family Rhythm Ritual, Guess Who, and Family Mini Olympics rotate across the seven days.</p>
+        </div>
+      </div>
+      <div class="slot-row">
+        <p class="slot-time">17:00 to 18:00</p>
+        <div class="slot-body">
+          <p class="slot-name">Evening slot</p>
+          <p>Holding the teen tier most days, with a Saturday infant Sensory Hand &amp; Arm Painting wind-down for the youngest band.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <div class="callout">
+        <p class="callout-label">Skill Development</p>
+        <p class="callout-body">Activities across the rotation are tagged across thirty Skill Development categories, including emotional development, sensory awareness, cognitive skills, fine and gross motor skills, language development, family connection, problem solving, and environmental awareness. Children rotate through the bands and through the categories across a seven-night stay, longer where the tier permits. Universal duration for every children's activity: 40 minutes. Five daily slots return roughly three hours and twenty minutes of structured time per child per day, with the family hour cross-counted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M9. FLAVOURS OF TOGETHERNESS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Family dining experiences</p>
+      <h2 class="h-section">Flavours of Togetherness</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">A curated culinary line where families come together to share, create, and connect over mindful dining.</p>
+    </div>
+
+    <div class="body-copy full" style="font-size:14px;line-height:1.7;max-width:820px;margin:0 auto 48px;">
+      <p>Loumi Rue, the Jayela three-meal restaurant, anchors family dining in Mediterranean flavours intertwined with Saudi and Lebanese culinary cultures. Chez Mitzuba opens for dinner-only as the alternative restaurant for family wellness, with a menu calibrated to be more simplistic and macronutrient-dense, and kids welcomed until seven in the evening.</p>
+    </div>
+
+    <p class="eyebrow-mini text-center">Three named family dining experiences</p>
+    <div class="grid-3" style="margin-top:24px;">
+      <div class="dining-card">
+        <h4>Starlit Soirée</h4>
+        <p class="caption">A wellness-inspired dining evening under the canopy of stars, where families share elevated flavours and create lasting memories together.</p>
+      </div>
+      <div class="dining-card">
+        <h4>Seaside Smoke &amp; Spice</h4>
+        <p class="caption">An artisanal gourmet BBQ experience by the beach, blending coastal serenity with bold, smoky flavours for a family feast.</p>
+      </div>
+      <div class="dining-card">
+        <h4>Savor the Moments</h4>
+        <p class="caption">A hands-on cooking journey where parents and kids bond through mindful creations, playful techniques, and shared culinary discoveries at Nakeha Studio.</p>
+      </div>
+    </div>
+
+    <p class="eyebrow-mini text-center mt-8" style="margin-top:48px;">Three children-specific F&amp;B experiences</p>
+    <div class="grid-3" style="margin-top:24px;">
+      <div class="dining-card">
+        <h4>Mindful Treats for Little Explorers</h4>
+        <p class="caption">Wellness-inspired snacks and drinks during recreational activities.</p>
+      </div>
+      <div class="dining-card">
+        <h4>Little Explorers' Snack Lab</h4>
+        <p class="caption">A hands-on activity where kids enjoy nutrient-rich snacks while supporting brain development.</p>
+      </div>
+      <div class="dining-card">
+        <h4>Junior Gourmet Lab</h4>
+        <p class="caption">An interactive session where young chefs experiment with flavours, plating, and wellness-inspired recipes.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="caption text-center" style="font-style:italic;">Cross-venue healing menus are available across the dining outlets for guests on adult-track programmes: Gut Healing and Cleansing, Neuro Nourish (Omega-3s, adaptogens, mental clarity), and Women's Hormonal Health.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M10. RECOMMENDED ADD-ONS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Recommended add-ons</p>
+      <h2 class="h-section">Programmes that layer in across longer stays</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Three add-on programmes are specifically recommended for As a Family stays. Two further add-ons are available across all retreats. Add-on duration matches the stay tier; the Wellness Advisor will discuss whether any add-on suits the family during the pre-arrival conversation.</p>
+    </div>
+
+    <div class="grid-5" style="margin-top:48px;gap:16px;">
+      <div class="addon-card">
+        <p class="addon-tag">Family-recommended</p>
+        <h4>Free We Learn</h4>
+        <p class="caption">Connection, fun, well-being, and personal growth for kids. A children-anchored extension of the family programme.</p>
+      </div>
+      <div class="addon-card">
+        <p class="addon-tag">Family-recommended</p>
+        <h4>Rehear The Heartbeats</h4>
+        <p class="caption">A shared journey with your child, designed to deepen presence and create memories to cherish for a lifetime.</p>
+      </div>
+      <div class="addon-card">
+        <p class="addon-tag">Family-recommended</p>
+        <h4>Restore &amp; Preserve</h4>
+        <p class="caption">Age gracefully and vibrantly, with physical health and mental clarity at the centre. A grandparent-anchored extension that fits multigenerational stays.</p>
+      </div>
+      <div class="addon-card">
+        <p class="addon-tag">Cross-retreat</p>
+        <h4>A Call To Dream</h4>
+        <p class="caption">Restore restful sleep through a focused supplementary programme.</p>
+      </div>
+      <div class="addon-card">
+        <p class="addon-tag">Cross-retreat</p>
+        <h4>Gut Health Reset</h4>
+        <p class="caption">Repair gut mucosa, improve food intolerances, optimise the microbiome.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M11. PRACTITIONERS IN RESIDENCE -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">In residence</p>
+      <h2 class="h-section">Practitioners in Residence</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">The family programme is anchored by Wellness Mentors and Child Development Facilitators, working alongside Visiting Practitioners who arrive in residence through the year.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:48px;gap:24px;max-width:760px;margin-left:auto;margin-right:auto;">
+      <div class="practitioner-card">
+        <p class="eyebrow-mini">Family-side guidance</p>
+        <h4>Wellness Mentors</h4>
+        <p class="caption">Hold the family-side guidance role. Backgrounds in Clinical Psychology paired with NLP and HeartMath certifications support emotional and social work alongside relational support across the family.</p>
+      </div>
+      <div class="practitioner-card">
+        <p class="eyebrow-mini">Children's programmes</p>
+        <h4>Child Development Facilitators</h4>
+        <p class="caption">Worldwide Kids certified. They lead structured group activities and developmental programmes; sessions include safeguarding training.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-8" style="max-width:760px;margin-left:auto;margin-right:auto;">
+      <p class="body-copy" style="margin:32px auto 0;">Fitness, holistic, culinary, and outdoor specialists hold their respective tracks across the property.</p>
+      <p class="caption" style="font-style:italic;margin-top:24px;">Visiting Practitioners arrive in residence through the year, in categories shaped to family contexts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M10b. WELLNESS RESIDENCES PATHWAY -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Residences pathway</p>
+        <h2 class="h-section">For longer stays and multi-suite bookings</h2>
+        <p class="body-copy mb-4 full">For families considering longer stays or multi-suite bookings, Jayasom Wellness Residences offer a residential extension of the retreat. The 24-villa community sits across ten two-bedroom, twelve three-bedroom, and two four-bedroom villas, alongside the 5-bedroom Jayela Residence with its private wellness studio for the largest family stays.</p>
+        <p class="body-copy mb-6 full">Residence owners receive the Longevity Assessment Programme annually across seven components, alongside private wellness programming that runs year-round. For multigenerational families and intergenerational bookings, the Residences pathway opens longer rhythms than a four-to-fourteen-night retreat allows.</p>
+        <a href="#" class="btn">Explore Wellness Residences</a>
+      </div>
+      <div class="wire-image" style="height:420px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Wellness Residences</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M12. FAMILY WELLNESS DAILY BUNDLES -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">For non-residents</p>
+      <h2 class="h-section">Family Wellness Daily Bundles</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">For families staying outside the resort, two daily bundles bring Jayasom programming on a single-day basis.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:48px;">
+      <div class="bundle-card">
+        <h3>Family Half-Day Bundle</h3>
+        <p class="duration-tag">Three hours</p>
+        <p class="caption">A family consultation, a spa session, a group activity, a Wellness Mentor bonding session, and a wellness meal.</p>
+      </div>
+      <div class="bundle-card">
+        <h3>Family Full-Day Bundle</h3>
+        <p class="duration-tag">Six hours</p>
+        <p class="caption">A family consultation, group activities, personal training, spa rituals, Wellness Mentoring, ICAROS or MultiBall sessions, the Hydrothermal circuit, and a wellness meal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY-BY-DAY ITINERARY (placeholder bodies) -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Day by day</p>
+      <h2 class="h-section">A typical seven-night family stay</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">Seven days of concurrent tracks for adults and children, threaded by the universal family hour each afternoon. Tier counts: 11 named treatments at four nights, 18 at seven, 24 at ten, 34 at fourteen.</p>
+    </div>
+
+    <div class="flex flex-col gap-2" style="margin-top:48px;">
+      <div class="day-strip">
+        <p class="day-num">Day 01</p>
+        <p class="day-title">Arriving Together</p>
+      </div>
+      <div class="day-strip">
+        <p class="day-num">Day 02</p>
+        <p class="day-title">Settling In</p>
+      </div>
+      <div class="day-strip">
+        <p class="day-num">Day 03</p>
+        <p class="day-title">Building Rhythms</p>
+      </div>
+      <div class="day-strip">
+        <p class="day-num">Day 04</p>
+        <p class="day-title">The Middle Days</p>
+      </div>
+      <div class="day-strip">
+        <p class="day-num">Day 05</p>
+        <p class="day-title">Quieter Hours</p>
+      </div>
+      <div class="day-strip">
+        <p class="day-num">Day 06</p>
+        <p class="day-title">Looking Back</p>
+      </div>
+      <div class="day-strip">
+        <p class="day-num">Day 07</p>
+        <p class="day-title">Walking Out Together</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-8" style="max-width:760px;margin-left:auto;margin-right:auto;">
+      <p class="caption" style="font-style:italic;margin-top:32px;">Day-by-day narrative coming soon. Speak to a Wellness Advisor for the day shape that fits your family.</p>
+    </div>
+
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow text-center">Beyond the seven-night canonical tier</p>
+      <h3 class="h-sub text-center mb-6">How the rhythm flexes</h3>
+      <p class="body-copy full text-center" style="font-size:14px;line-height:1.7;">Four-night Explore compresses the family rhythm; ten- and fourteen-night Immerse and Commit expand the calendar. The three Family-recommended add-ons (Free We Learn, Rehear The Heartbeats, Restore &amp; Preserve) layer in across longer stays. The Wellness Advisor walks the brief through with you in the pre-arrival call; the Wellness Residences pathway opens for families wanting longer cycles than the wellness destination tiers hold.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING META PARA -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="body-copy" style="margin:0 auto 32px;">Jayasom AMAALA's As a Family retreat sits within the Triple Bay master plan on Saudi Arabia's Red Sea coast. Three to fourteen nights, with concurrent tracks for adults and children across age-banded studios, shared family hours each afternoon, and family-tailored treatments, bodywork, and dining. The Wellness Advisor holds the programme from the pre-arrival conversation through to closing. Alone, as a two, as a five: As a Family is one of six retreat shapes for the work each guest comes to do.</p>
+    <p class="h-sub" style="font-style:italic;line-height:1.5;font-size:22px;">It feels like communication, joy and united trust.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;">Jayasom</p>
+        <p class="caption">Healing rooted in wisdom, guided by heart.</p>
+      </div>
+      <div>
+        <p class="col-title">Quick Links</p>
+        <ul>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Rooms &amp; Villas</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Retreat Finder</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Journals &amp; Stories</a></li>
+          <li><a href="#">Residences</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li>Our Philosophy</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Media</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Families &amp; Wellbeing</a></li>
+          <li><a href="#">Our Experts</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Residences</p>
+        <ul>
+          <li><a href="#">Amaala Residences</a></li>
+          <li><a href="#">Why Jayasom Residences</a></li>
+          <li><a href="#">Residential Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved.</p>
+      <div class="links">
+        <span>Cookies Policy</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

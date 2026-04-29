@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>As a Pair v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout ul { display: flex; flex-direction: column; gap: 10px; padding-left: 0; list-style: none; }
+.callout ul li { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); font-style: italic; line-height: 1.5; padding-left: 20px; position: relative; }
+.callout ul li::before { content: ""; position: absolute; left: 0; top: 12px; width: 10px; height: 1px; background: hsl(var(--foreground)); }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 14px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+.wire-table tfoot td { font-weight: 700; background: hsla(var(--foreground),0.04); }
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li {
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+  display: flex; gap: 12px; padding-left: 0;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.day-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; display: grid; grid-template-columns: 120px 1fr; gap: 32px; }
+.day-card .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.day-card .day-title { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); }
+.day-card .day-body p { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-bottom: 14px; }
+.day-card .day-body p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .day-card { grid-template-columns: 1fr; gap: 16px; } }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<main>
+
+<!-- M1. HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Couples retreat · Jayasom AMAALA</p>
+      <h1 class="h-hero">As a Pair</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">Profound connection, relaxing together, renewal.</p>
+      <p class="body-copy" style="margin:0 auto 32px;">For two people, deeply invested in their togetherness. As a Pair sits within Jayasom AMAALA on Saudi Arabia's Red Sea coast, where regional healing tradition meets contemporary clinical practice. A Wellness Advisor reads what each partner brings on arrival and shapes the days from there. Individual growth strengthens the bond. Workshops open communication patterns that hold beyond the stay.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+        <a href="#" class="btn btn-solid">Plan Your Retreat</a>
+        <a href="#" class="btn">Request a private call with your Wellness Advisor</a>
+      </div>
+      <p class="caption mt-4" style="font-style:italic;">Response within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M2. CONTACT CTA STRIP -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">Each retreat is shaped at arrival around what your body and mind need. A Wellness Advisor walks the brief through with you before you arrive.</p>
+    <a href="#" class="btn">Speak to a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- M3. FEATURED TREATMENTS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Couples Wellness Retreat at Jayasom AMAALA</p>
+      <h2 class="h-section">Featured Treatments</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Six couple-paired treatments anchor the As a Pair retreat. Two of them run as recurring conversations across the stay: the Couples Wellness Counselling, and the daily one-to-one with your Wellness Advisor. The other four are scheduled across the week; longer stays carry deeper additions.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+
+      <!-- Card 1 HERO -->
+      <div class="treatment-card hero-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">QALBAIN ritual</span>
+        </div>
+        <h4 class="h-card">QALBAIN (Two Hearts)</h4>
+        <p class="duration">Duration: 120 minutes</p>
+        <p class="caption mb-4">A two-hour ritual designed for couples. Begins with a Grounding Ritual that releases external pressure, followed by a BIOME Facial that restores skin health. The ritual closes with a shared pause where breath, attention, and presence align.</p>
+        <p class="caption" style="font-style:italic;">Available across all stay tiers.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Crystal Aroma Massage</span>
+        </div>
+        <h4 class="h-card">Crystal Aroma Massage</h4>
+        <p class="duration">Duration: 50 or 90 minutes</p>
+        <p class="caption mb-4">Crystal healing meets aromatherapy. Heated Jade crystals trace long, slow strokes across the muscles, paired with Arabic-inspired essential oils.</p>
+        <p class="caption" style="font-style:italic;">Available from seven nights upward.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Couples Wellness Counselling</span>
+        </div>
+        <h4 class="h-card">Couples Wellness Counselling</h4>
+        <p class="duration">Duration: 60 minutes</p>
+        <p class="caption">A structured session that integrates Cognitive Behavioural therapy, Neuro-Linguistic Programming, and HeartMath techniques. The work is on relational patterns, communication, emotional regulation, and the practical skills that sustain partnership. Returns through the longer-tier stays as a recurring conversation.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Chakra Balancing Therapy</span>
+        </div>
+        <h4 class="h-card">Chakra Balancing Therapy</h4>
+        <p class="duration">Duration: 90 minutes</p>
+        <p class="caption">Tibetan singing bowls bring the nervous system into stillness while warm herbal oils ease the muscles. Both partners book together; the room holds two therapists.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Sound Bath Meditation</span>
+        </div>
+        <h4 class="h-card">Sound Bath Meditation</h4>
+        <p class="duration">Duration: 50 minutes</p>
+        <p class="caption">Singing bowls, gongs, and chimes. The vibrations slow the heart rate and quiet the mind, letting both partners drop into the same rhythm together.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Floatation Therapy</span>
+        </div>
+        <h4 class="h-card">Floatation Therapy</h4>
+        <p class="duration">Duration: 50 minutes</p>
+        <p class="caption">Warm mineral-rich water supports the body and removes the load of gravity. Two flotation pools sit side by side; both partners take it together.</p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-8" style="max-width:900px;margin-left:auto;margin-right:auto;">
+      <p class="caption" style="font-style:italic;margin-top:32px;">Available across the stay: Pranayama (Ayurvedic breathwork), Watsu (warm-water aquatic bodywork), Himalayan Salt Stone Massage, and the daily 60-minute treatment from the seven-treatment menu (Jayasom Signature, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga) all run through the property and are placed by the Wellness Advisor where they fit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M4. TWO PEOPLE, ONE INTENTION -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">Overview</p>
+    <h2 class="h-section text-center" style="margin-bottom:48px;">Two People, One Intention</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The As a Pair retreat is shaped around the intention each pair brings. For some couples, that intention is celebrating a long-held bond. For others, it is finding a way back into a connection the everyday has worn thin. Either register fits the As a Pair frame; the Wellness Advisor sets the programme around the pair's stated direction at the pre-arrival conversation.</p>
+      <p style="margin-bottom:32px;">From the methodology, six directions hold the work for couples:</p>
+    </div>
+
+    <div class="callout" style="margin-bottom:32px;">
+      <p class="callout-label">Six directions</p>
+      <ul>
+        <li>Relax and renew together.</li>
+        <li>Deepen your love and connection.</li>
+        <li>Relate to each other in new ways.</li>
+        <li>Build trust and commitment further, communicate better.</li>
+        <li>Explore healthier relationship dynamics.</li>
+        <li>Rejuvenate your intimate moments.</li>
+      </ul>
+    </div>
+
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">These directions surface across the stay through small decisions: a shared treatment one day, a paired sunrise class on another, slower meals through the week, the counselling conversation drawing on Cognitive Behavioural Therapy, Neuro-Linguistic Programming, and HeartMath techniques. Couples who come for one of the six often find another moves to the centre by mid-stay; the programme is light enough to follow them.</p>
+      <p>The Wellness Advisor holds the brief through the days. Visiting Practitioners arrive in residence at intervals through the year. Where one of them aligns with what the assessment surfaces for either partner, the relevant work moves to them for that stay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M5. YOUR DAYS TOGETHER -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">A typical As a Pair day</span>
+      </div>
+      <div>
+        <p class="eyebrow">Daily rhythm</p>
+        <h2 class="h-section">Your Days Together</h2>
+        <p class="body-copy mb-4 full">The shape of a day is set the morning you arrive. Your Wellness Advisor reads the pre-arrival questionnaire, listens to where each partner is on the day, and assembles the programme from there.</p>
+        <p class="body-copy mb-4 full">Mornings open at the studio: Mat Pilates, Morning Yoga Flow, Yin Yoga, or Tai Chi by mood. The eleven o'clock Stretch Class anchors every day. Lunch is unhurried at Saratô on the Jayana side or lighter at Chia Bite near the wellness centre. Afternoons hold the booked treatments. Evenings shift gentler. A Pranayama or Singing Bowl Meditation slot at six. A slow dinner at Saratô or Jiraka, the beef-free spice-route specialty kitchen. Night practices like Candlelight Meditation or Better Sleep Class stay open for those out longer.</p>
+        <p class="body-copy full">Three meals from the kitchen each day. The room is set up around your preferences: aroma, pillow choice from the seven on the menu, Coco-mat™ natural mattress. Pacing is part of the practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M6. THE SETTING AT AMAALA -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">The setting</p>
+      <h2 class="h-section">The Setting at AMAALA</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;max-width:820px;margin:0 auto;">
+      <p style="margin-bottom:24px;">Jayasom AMAALA sits on Saudi Arabia's Red Sea coast, within the Triple Bay master plan being developed by Red Sea Global. The architecture is drawn to recede in the right places. Buildings sit low against the coastline; sea breeze moves before mechanical cooling; materials are local where the climate allows them.</p>
+      <p style="margin-bottom:24px;">For As a Pair guests, the relevant zone is Jayana, the adults retreat area at the southern end of Triple Bay. Three couples-relevant points of the property thread through the stay.</p>
+      <p style="margin-bottom:24px;">The Yasmeen Night Garden takes its name from the jasmine that opens only after dark. The garden sits at the foot of the Wellness Plateau and is reached through a moon gate, where reclining loungers angle towards the night sky and the path of the moon. Lighting in the area is reduced for celestial observation; bushes planted nearby enrich the air with evening fragrance.</p>
+      <p>The standard accommodation is the Jayana Pavilion King: balcony, lounge chairs, plunge pool, Coco-mat™ natural mattress (latex, coconut fibre, horse hair, cactus fibre, seaweed, knitted cotton), Oud-custom amenities. A Superior Deluxe Suite is available with both indoor and outdoor shower and bathtub. Each room is set up around the partners' stated preferences. Sixty villas plus twenty-four private residences hold the property; phase one is a small property by destination-resort scale, and the daily wellness rhythm is sized to the cohort, not to the building.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Image strip -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Yasmeen Night Garden</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Wellness Plateau · Stonecrop Maze</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Phoenix Garden</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Jayana Pavilion King</span>
+    </div>
+  </div>
+</section>
+
+<!-- M7. PROGRAMME INCLUSIONS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Programme inclusions</p>
+      <h2 class="h-section">What's Included</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Stay length shapes the depth of the work. From the methodology, four tier names hold the structure: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. Pacing matches the tier; nothing across the stay is added because of the calendar.</p>
+    </div>
+
+    <div class="grid-aside" style="margin-top:48px;">
+      <div>
+        <p class="eyebrow-mini">Every As a Pair stay includes</p>
+        <ul class="bullet-list" style="margin-top:16px;">
+          <li>Accommodation in your chosen room category, with daily housekeeping</li>
+          <li>Three wellness cuisine meals per night, beginning with dinner on the day of arrival</li>
+          <li>Wellness minibar in your room</li>
+          <li>Individual health and wellness consultation with your Wellness Advisor</li>
+          <li>Physical analysis (optional)</li>
+          <li>Skin consultation (optional)</li>
+          <li>Daily fitness and leisure activities (up to six classes daily)</li>
+          <li>Unlimited use of all wellness destination facilities (steam, sauna, mineral and vitality pools, salt inhalation rooms, infrared rooms, mixed gym)</li>
+          <li>One daily treatment per night of stay, chosen from a seven-treatment menu (Jayasom Signature Massage, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga)</li>
+          <li>Physical and Postural Assessment plus VISIA Facial Imaging, complimentary on request</li>
+          <li>The Jayasom Collection (welcome amenity)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout" style="background:hsl(var(--background));border-width:1px;">
+          <p class="callout-label">Personalisation note</p>
+          <p class="caption" style="color:hsl(var(--foreground));font-size:13px;line-height:1.6;">Programme inclusions are indicative; alternatives are available; your Wellness Advisor finalises the programme shortly after arrival, around your individual needs and stated objectives.</p>
+        </div>
+        <p class="caption mt-4" style="font-style:italic;">Services and facilities are subject to government health regulations.</p>
+      </div>
+    </div>
+
+    <!-- Per-tier table -->
+    <div style="margin-top:64px;">
+      <p class="eyebrow-mini text-center mb-4">Per-tier inclusions</p>
+      <h3 class="h-sub text-center mb-8">Stay length and depth</h3>
+      <div style="overflow-x:auto;">
+        <table class="wire-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th class="center">Per session</th>
+              <th class="center">4 nights</th>
+              <th class="center">7 nights</th>
+              <th class="center">10 nights</th>
+              <th class="center">14 nights</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Nutrition &amp; Lifestyle Consultation</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Couples Wellness Counselling</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">2</td><td class="center">3</td></tr>
+            <tr><td>Express Hammam Ritual</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Couple's Connect Spa Ritual</td><td class="center">120 min</td><td class="center">1</td><td class="center">1</td><td class="center">2</td><td class="center">2</td></tr>
+            <tr><td>Crystal Aroma Massage</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Sound Healing Therapy</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Floatation Therapy</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Watsu</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Pranayama</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Meditation</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Detoxifying Balneotherapy</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Cooking class</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Personal Training</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Yoga</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Pilates (Reformer or Mat)</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Bootcamp</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Super Stretch</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Aquabiking</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Postural Corrective Therapy</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Gyrotonic®</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
+            <tr><td>Daily Treatment (60 min, from menu)</td><td class="center">60 min</td><td class="center">3</td><td class="center">6</td><td class="center">8</td><td class="center">12</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Total treatments</td><td class="center"></td><td class="center">11</td><td class="center">18</td><td class="center">25</td><td class="center">35</td></tr>
+            <tr><td>Average per day</td><td class="center"></td><td class="center">2.75</td><td class="center">2.57</td><td class="center">2.5</td><td class="center">2.5</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M8. SESSIONS & RITUALS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">For two</p>
+      <h2 class="h-section">Sessions and rituals shaped for two</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Across the As a Pair retreat, several treatments and sessions are designed for a couple to take together. The list below sits alongside the daily 60-minute treatment menu and the wellness classes; it adds depth at the moments where the practice asks for both of you in the same room.</p>
+    </div>
+
+    <div class="grid-2" style="gap:24px;margin-top:48px;">
+      <div class="treatment-card">
+        <p class="eyebrow-mini">All tiers</p>
+        <h4 class="h-card">Express Hammam Ritual</h4>
+        <p class="duration">60 minutes</p>
+        <p class="caption">A shorter version of the traditional Arabic hammam. Both partners take it in the same suite.</p>
+      </div>
+      <div class="treatment-card">
+        <p class="eyebrow-mini">All tiers, more on longer stays</p>
+        <h4 class="h-card">Couples Wellness Counselling</h4>
+        <p class="duration">60 minutes</p>
+        <p class="caption">Cognitive Behavioural, Neuro-Linguistic, and HeartMath techniques brought to relational work.</p>
+      </div>
+      <div class="treatment-card">
+        <p class="eyebrow-mini">7 nights and longer</p>
+        <h4 class="h-card">Cooking class with the Nakeha Studio chef</h4>
+        <p class="duration">60 minutes</p>
+        <p class="caption">Hands-on session at Nakeha Studio. The kitchen's research on which foods support which conditions runs continuously; the class is the way that work meets the guest.</p>
+      </div>
+      <div class="treatment-card">
+        <p class="eyebrow-mini">Across the stay</p>
+        <h4 class="h-card">Couples movement series</h4>
+        <p class="duration">Tier-progressive</p>
+        <p class="caption">Yoga, Pilates (Reformer or Mat), and Super Stretch sessions paced to take together. 4-night stays anchor on Yoga; 7+ adds Pilates; 10+ adds Super Stretch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M9. PRACTITIONERS IN RESIDENCE -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">In residence</p>
+        <h2 class="h-section">Practitioners in Residence</h2>
+        <p class="body-copy mb-4 full">Visiting Practitioners arrive at Jayasom in residence, for weeks at a time, through the year. Each is chosen for the depth of practice they carry. The teaching arrives with them and stays in the practice once they have left.</p>
+        <p class="body-copy mb-4 full">Through any As a Pair stay, the practitioners in residence are surfaced in the consultation. Where one of them aligns with what the assessment reveals for either partner, the relevant work moves to them for that stay. Couples often book treatment slots in parallel rather than alone.</p>
+        <p class="body-copy full">The Wellness Advisor flags fits at the consultation. Visiting Practitioner work layers into the daily rhythm of the property; it deepens the brief where the assessment indicates alignment.</p>
+      </div>
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Visiting Practitioner spotlight</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M10. BEYOND THE STAY -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">After departure</p>
+    <h2 class="h-section text-center" style="margin-bottom:32px;">Beyond the Stay</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The work asked at Jayasom does not finish at checkout. Through any As a Pair stay, a continuity plan is built with the Wellness Advisor for what carries into the months after. The plan is light. Its job is to keep one or two of the practices, paced for daily life, after the property's rhythm is no longer holding them.</p>
+      <p>A Wellness Residences pathway runs alongside, for couples whose practice asks for an annual or seasonal home at the property. Twenty-four branded villas hold the same brief as the wider property, brought into private ownership. The Residences sit privately spaced amid gardens, directly on the beach. The Jayasom Longevity Assessment Programme runs across seven components annually for residence owners, supported by the same Wellness Advisor who shapes the retreat stay. The pathway carries continuity that scales beyond any single visit.</p>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#" class="btn">Visit the Residences</a>
+    </div>
+  </div>
+</section>
+
+<!-- DAY-BY-DAY ITINERARY -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Day by day</p>
+      <h2 class="h-section">A typical seven-night stay</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">What follows shows a typical seven-night stay. The structure flexes around what the questionnaire and the Wellness Advisor shape in the days before; what holds across every retreat is the eleven o'clock Stretch Class, three meals from the kitchen, the hydrothermal facilities accessible throughout, and the rhythm of one daily treatment plus one or two booked sessions. Four-night stays compress the named treatments to eleven; ten and fourteen-night stays expand to twenty-five and thirty-five.</p>
+    </div>
+
+    <div class="flex flex-col gap-4" style="margin-top:48px;">
+
+      <!-- Day 1 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 01</p>
+          <p class="day-title">Arriving Together</p>
+        </div>
+        <div class="day-body">
+          <p>Arrival is timed for early afternoon; the Jayana Pavilion King is ready by three. Rooms are set up before you walk in, around your booking-form preferences: a chosen aroma (Calming Lavender or Spirited Rosemary), a chosen pillow from the seven on the menu, and the Coco-mat™ natural mattress. Welcome amenities sit on the table: fruit juice, tea, water, fruit, snacks.</p>
+          <p>Within the hour your Wellness Advisor sits down with both of you. The questionnaire you completed in the weeks before is already read. The conversation reviews where each partner is on the day and confirms goals from the six directions in the methodology. From there, your Wellness Advisor shapes the programme that begins at the first treatment slot tomorrow. The questions reach further than a standard arrival intake.</p>
+          <p>Dinner is the first meal of the stay. The kitchen serves it slowly at the table, paced through the evening. After dinner, the calendar offers a Singing Bowl Meditation around six. Late-evening practices follow at eight: Candlelight Meditation or a Star Gazing session in the Yasmeen Night Garden. Both stay open invitations on the day.</p>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 02</p>
+          <p class="day-title">Finding the Day's Rhythm</p>
+        </div>
+        <div class="day-body">
+          <p>The day begins at the studio. The seven o'clock class on Day 2 is whatever the calendar holds for that day of the week: Mat Pilates, Yin Yoga, Tai Chi, or Morning Yoga Flow. Both partners attend; the early hour is the quiet one of the day.</p>
+          <p>The Stretch Class at eleven is a property anchor and runs every day of the week. Lunch is unhurried at one; the kitchen leans toward what the Farm Belt holds and minimises gluten, refined sugars, salt, and coffee.</p>
+          <p>The first booked treatment lands in the afternoon. For most pairs this is the Postural Corrective Therapy session, sixty minutes, run by the physiotherapy team. The work covers physical analysis and corrective movement pacing. What the practitioner finds informs the Wellness Advisor's pacing for the rest of the week.</p>
+          <p>By late afternoon the property quietens. A Pranayama or Singing Bowl Meditation slot at six is open to anyone who wants it. Dinner runs slow again. A Better Sleep Class at eight is available; the daily rhythm builds toward recovery.</p>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 03</p>
+          <p class="day-title">Conversation in the Room</p>
+        </div>
+        <div class="day-body">
+          <p>By day three, the rhythm holds: morning class at seven, the eleven o'clock Stretch, slow lunch by one.</p>
+          <p>The afternoon belongs to the Couples Wellness Counselling. Sixty minutes, in a private consultation room. The methodology integrates Cognitive Behavioural Therapy, Neuro-Linguistic Programming, and HeartMath techniques. The work focuses on communication patterns and emotional regulation, plus the practical skills that sustain partnership through the years it asks for. What surfaces in that hour shapes the questions the Wellness Advisor brings to the next consultation.</p>
+          <p>The Express Hammam Ritual follows in the late afternoon. Sixty minutes, in the same suite for both partners. The body softens in time for the evening.</p>
+          <p>The evening Singing Bowl Meditation at six is open to those who want it. Some pairs walk the Stonecrop Maze on the Wellness Plateau afterwards. Walking is paced slowly, with attention on each step; the centre of the maze marks a pause for reflection.</p>
+          <p>Dinner runs late on day three.</p>
+        </div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 04</p>
+          <p class="day-title">Two Hearts in Practice</p>
+        </div>
+        <div class="day-body">
+          <p>Day four is the longest in the calendar. The Couple's Connect Spa Ritual fills two hours of the morning.</p>
+          <p>The ritual begins with a Grounding Ritual, designed to release the external pressure both partners arrived carrying. A BIOME Facial follows, working with the skin's microbiome layer. The closing twenty minutes are a shared pause without instruction. Both partners come out of the ritual into the same quiet.</p>
+          <p>Lunch is light, and the afternoon pacing draws back; only the daily 60-minute treatment from the menu runs at three. By late afternoon the body wants stillness. The flotation pools are open through the day for those who want them.</p>
+          <p>The evening turns active again. A Cooking class at Nakeha Studio runs from six. Both partners join; the chef leads the session through what the Farm Belt grew that morning. The studio's research on what foods support what conditions runs continuously, and the class sits inside that practice. Dinner is what you cooked.</p>
+          <p>The day closes with the Yasmeen Night Garden in its scent-only evening hours.</p>
+        </div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 05</p>
+          <p class="day-title">Bodies in Motion</p>
+        </div>
+        <div class="day-body">
+          <p>The day shifts toward movement. The morning class at seven is more active than mid-week: Tai Chi or a longer Pilates session, depending on the calendar. Both partners attend.</p>
+          <p>Breakfast follows. The ten o'clock aqua slot (Aqua Boxing, Aqua Hand Buoy, or Aqua with Pool Noodle depending on the day) runs in the pool for those who want a low-impact mid-morning. Stretch at eleven anchors the morning.</p>
+          <p>Personal Training fills late morning. Sixty minutes, paired session, the trainer working from the physical analysis on file. Couples can run this collaboratively; the practitioner adjusts the loading per partner.</p>
+          <p>After lunch, the day's treatment from the seven-treatment menu runs. Foot Reflexology suits the day's pacing, though Jayasom Signature Massage and Abhyanga both fit.</p>
+          <p>By mid-afternoon the body asks for slower pacing. A Pilates Reformer or Mat session at four runs light. The four o'clock high-intensity slot (HIIT, TRX, Tabata, Circuit Training, Zumba, Step Aerobics, or Boot Camp depending on the day) stays open on the calendar for partners wanting a longer fitness ribbon. Evening Pranayama at six follows.</p>
+          <p>Dinner sits longer than usual. Recovery work begins tomorrow.</p>
+        </div>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 06</p>
+          <p class="day-title">Stillness Together</p>
+        </div>
+        <div class="day-body">
+          <p>Day six runs quiet, with the morning class drawn from the softer end of the calendar: Yin Yoga, Tai Chi, or Morning Yoga Flow. Stretch at eleven.</p>
+          <p>Two treatments anchor the afternoon. Sound Healing Therapy at one o'clock, with singing bowls, gongs, and chimes, placed somewhere quiet on the property. Sixty minutes, eyes closed, body still on the mat. The vibrations bring the nervous system into stillness. Both partners take it in the same room.</p>
+          <p>Floatation Therapy follows. Two pools side by side. Sixty minutes of warm mineral-rich water removing the load of gravity. The body comes out lighter and slower than it went in.</p>
+          <p>Crystal Aroma Massage runs late in the afternoon for those who want it; sixty or ninety minutes, the heated Jade crystals working the muscles with Arabic-inspired oils.</p>
+          <p>The six o'clock evening slot on day six holds Aerial Yoga or Floating Meditation, depending on the day. Dinner is the slowest of the week. By eight, both partners are usually in the room. A Better Sleep Class is available for those still awake at the studio.</p>
+        </div>
+      </div>
+
+      <!-- Day 7 -->
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 07</p>
+          <p class="day-title">Walking Out Together</p>
+        </div>
+        <div class="day-body">
+          <p>The seventh day is paced for departure. The morning class at seven is optional; you can skip it and walk along the coastline instead.</p>
+          <p>Breakfast runs as usual. The Stretch Class at eleven holds, even on the departure day; some pairs choose to take it as the closing gesture of the week.</p>
+          <p>The Nutrition and Lifestyle Consultation runs late morning if it has not happened earlier in the stay. Sixty minutes; food, sleep, and routine are the conversation. Whatever the consultation surfaces carries forward into the continuity plan.</p>
+          <p>A final Wellness Advisor session runs from noon to one. Continuity is the conversation: which practices to keep at home and at what pace, plus any timing for a return stay. Together, the Advisor and both partners shape a plan that fits the calendar after departure. The plan is light. Its job is to keep one or two of the practices running at home.</p>
+          <p>Lunch is the closing meal. Twelve noon checkout follows. Transfer to Al Wajh, NEOM Bay, or Red Sea International airport is arranged from the form filled in on Day 1.</p>
+          <p>You leave the room as you found it, with a brief that is different from the one you arrived with.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tier compression / expansion closing block -->
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow text-center">Beyond the seven-night canonical tier</p>
+      <h3 class="h-sub text-center mb-6">How the rhythm flexes across stay lengths</h3>
+      <div class="body-copy full text-center" style="font-size:14px;line-height:1.7;">
+        <p style="margin-bottom:18px;">Four-night As a Pair stays compress this rhythm. The Couples Wellness Counselling and the Couple's Connect Spa Ritual remain anchors; Crystal Aroma Massage, Floatation Therapy, Pilates, and the Cooking class compress out, and the Daily Treatment count drops to three.</p>
+        <p style="margin-bottom:18px;">Ten-night and fourteen-night stays expand the calendar. The Couples Wellness Counselling returns through the longer stays as a recurring conversation, twice at ten nights and three times at fourteen. The Couple's Connect Spa Ritual runs twice in both longer tiers. Watsu, Bootcamp, and Super Stretch enter the calendar at ten nights. Pranayama, Meditation, Detoxifying Balneotherapy, Aquabiking, and Gyrotonic® come in at fourteen.</p>
+        <p>Across all four tiers, the pacing remains steady. Partners stay paired through the work, and the Wellness Advisor remains the constant point of contact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- M11. CROSS-SELL -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Other directions</p>
+      <h2 class="h-section">Other ways to retreat at Jayasom</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Each retreat is paced over four to fourteen nights and shaped at arrival by your Wellness Advisor.</p>
+    </div>
+    <div class="grid-5" style="margin-top:48px;">
+      <a href="#" class="cross-card">
+        <p class="name">As a Woman</p>
+        <p class="tag">Sisterhood, balance, confidence.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Family</p>
+        <p class="tag">Communication, joy, united trust.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Leader</p>
+        <p class="tag">Optimised performance, focus, resilience.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Flow</p>
+        <p class="tag">Agility, focused energy, being in control.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Feather</p>
+        <p class="tag">Physical vitality, detox, optimal weight.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- M12. FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan your stay</p>
+    <h2 class="h-section">Plan Your Stay</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">Speak to a Wellness Advisor and let the brief begin.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Plan Your Retreat</a>
+      <a href="#" class="btn btn-on-dark">Request a private call with your Wellness Advisor</a>
+    </div>
+    <p class="caption mt-4" style="color:hsla(var(--primary-foreground),0.7);font-style:italic;">Response within 48 hours.</p>
+  </div>
+</section>
+
+<!-- M13. FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How long should we stay for a couples wellness retreat?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Stays run from four to fourteen nights, adaptable to schedule and intent. The methodology names four tiers: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How long should we stay for a couples wellness retreat?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Stays run from four to fourteen nights, adaptable to schedule and intent. Four nights resets; seven nights settles the practice; ten nights deepens the work; fourteen nights anchors it. Your Wellness Advisor will recommend a duration during the pre-arrival conversation.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Can both partners book different retreats while staying together?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Yes. Each partner can follow a different retreat (As a Pair, As a Woman, As a Leader, As a Flow, or As a Feather) while sharing accommodation. Programmes synchronise around shared meals and joint activities.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What does As a Pair include that other Jayasom retreats don't?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">As a Pair carries couple-specific elements: the QALBAIN (Two Hearts) two-hour ritual, the Couples Wellness Counselling integrating CBT, NLP, and HeartMath, paired hammam and chakra balancing, side-by-side flotation and Watsu, and Cooking classes at Nakeha Studio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;">Jayasom</p>
+        <p class="caption">Healing rooted in wisdom, guided by heart.</p>
+      </div>
+      <div>
+        <p class="col-title">Quick Links</p>
+        <ul>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Rooms &amp; Villas</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Retreat Finder</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Journals &amp; Stories</a></li>
+          <li><a href="#">Residences</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li>Our Philosophy</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Media</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Families &amp; Wellbeing</a></li>
+          <li><a href="#">Our Experts</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Residences</p>
+        <ul>
+          <li><a href="#">Amaala Residences</a></li>
+          <li><a href="#">Why Jayasom Residences</a></li>
+          <li><a href="#">Residential Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved.</p>
+      <div class="links">
+        <span>Cookies Policy</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

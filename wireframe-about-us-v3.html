@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>A Place For The Heart v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+/* === LAYOUT PRIMITIVES === */
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.wire-card .pad-tight { padding: 14px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input,
+.form-field textarea,
+.form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-header nav a { color: inherit; }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-overlay-bottom-left { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 0 0 64px 32px; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 720px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+
+.timeline { display: flex; flex-direction: column; gap: 32px; }
+.timeline-row { display: grid; grid-template-columns: 24px 1fr; gap: 16px; }
+.timeline-marker { display: flex; flex-direction: column; align-items: center; }
+.timeline-dot { width: 12px; height: 12px; border: 2px solid hsl(var(--foreground)); border-radius: 50%; }
+.timeline-line { width: 1px; flex: 1; background: hsl(var(--border)); margin-top: 4px; min-height: 24px; }
+.section-dark .timeline-dot { border-color: hsl(var(--primary-foreground)); }
+.section-dark .timeline-line { background: hsla(var(--primary-foreground),0.3); }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 16px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+
+.pull-quote { border-left: 2px solid hsl(var(--foreground)); padding: 8px 24px; font-size: 18px; font-weight: 300; font-style: italic; color: hsl(var(--foreground)); margin: 24px 0; }
+.pull-quote .attribution { display: block; margin-top: 16px; font-size: 12px; font-style: normal; color: hsl(var(--muted-foreground)); }
+.section-dark .pull-quote { border-left-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .pull-quote .attribution { color: hsla(var(--primary-foreground), 0.7); }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; } .gap-12 { gap: 48px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-mini { padding: 32px 32px; }
+.section-tall { padding: 80px 32px; }
+
+.wire-card.muted { background: hsl(var(--muted)); }
+.wire-card.dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.wire-card.dark .h-card { color: hsl(var(--primary-foreground)); }
+.wire-card.dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+
+.icon-card-centered { text-align: center; padding: 24px; }
+.icon-card-centered .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 16px; color: hsl(var(--foreground));
+}
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+
+.icon-card-inline { padding: 24px; border: 1px solid hsl(var(--border)); }
+.icon-card-inline .head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.icon-card-inline .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex-shrink: 0;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  color: hsl(var(--foreground));
+}
+.icon-card-inline .icon-circle svg { width: 16px; height: 16px; stroke-width: 1.25; }
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.callout .callout-body { font-size: 12px; color: hsl(var(--foreground)); line-height: 1.6; }
+
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.hover-underline:hover .h-card { text-decoration: underline; }
+
+.divider-line { border-top: 1px solid hsl(var(--border)); margin: 32px 0; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.bullet-list { display: flex; flex-direction: column; gap: 8px; }
+.bullet-list li {
+  font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.6;
+  display: flex; gap: 12px;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
+.stat-block .stat-num { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.section-dark .stat-block { border-top-color: hsla(var(--primary-foreground),0.3); }
+.section-dark .stat-block .stat-num { color: hsl(var(--primary-foreground)); }
+.section-dark .stat-block .stat-label { color: hsla(var(--primary-foreground),0.7); }
+
+.pillar-num {
+  font-size: 48px; font-weight: 300; color: hsl(var(--foreground));
+  line-height: 1; opacity: 0.4; margin-bottom: 8px;
+}
+
+.brand-meaning {
+  display: grid; grid-template-columns: auto 1fr; gap: 24px;
+  border: 1px solid hsl(var(--border)); padding: 24px; align-items: center;
+  background: hsl(var(--background));
+}
+.brand-meaning .word { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); }
+.brand-meaning .meaning { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<main>
+
+<!-- 1. HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:560px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">About Jayasom</p>
+      <h1 class="h-hero">A place for the heart</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">A wellness destination, founded in 2014.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. WHO WE ARE -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Who we are</p>
+        <h2 class="h-section">Jayasom, a place for the heart</h2>
+        <div class="grid-2" style="gap:12px;margin:24px 0;">
+          <div class="brand-meaning">
+            <p class="word">Jay</p>
+            <p class="meaning">Heart.</p>
+          </div>
+          <div class="brand-meaning">
+            <p class="word">Asom</p>
+            <p class="meaning">Sanskrit for ashram, a peaceful learning place.</p>
+          </div>
+        </div>
+        <p class="body-copy mb-4 full">We founded Jayasom in 2014 to restore the traditional wisdom of wellness back into the life many of us live today. This wellness destination at AMAALA, on Saudi Arabia's Red Sea coast, is where that aspiration has its physical home.</p>
+        <p class="body-copy mb-6 full">Each guest is met by a Wellness Advisor who shapes the stay around what the body and mind need on arrival, rather than around a fixed catalogue. Treatments are built on functional assessment and evidence-based wellness science. Programmes are paced rather than packed. Ancient wisdom and contemporary science meet on the property without either being diminished.</p>
+        <a href="#" class="btn">Speak to a Wellness Advisor</a>
+      </div>
+      <div class="wire-image" style="height:560px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Who we are</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FOUNDING STORY -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">Origins</p>
+    <h2 class="h-section text-center" style="margin-bottom:48px;">How Jayasom began</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Jayasom began in 2014 with a single purpose. The brand exists to inspire and curate wellness in places designed so guests can live the practice rather than perform it. Western evidence-based methods sit alongside holistic remedies and local healing traditions; programmes are paced rather than prescribed. The property at AMAALA on Saudi Arabia's Red Sea coast, built in partnership with Red Sea Global, is where that purpose has its physical home.</p>
+      <p style="margin-bottom:24px;">Smaller decisions, the sort that go unnoticed in larger properties, are the ones that carry the experience here. The Yasmeen Night Garden takes its name from the Arabic word for jasmine, the flower that opens only after dark; the planting answers to that rhythm. Across parts of the property, flower beds are worked through chakra colour schemes from root to crown.</p>
+      <p style="margin-bottom:32px;">The Farm Belt grows bananas, pomegranates, herbs, broccoli, and salad leaves on the property; signs in the beds name what each row supports on the day's menu. Kitchens minimise gluten, refined sugars, salt, and coffee, on the principle that flavour comes from herbs and technique instead.</p>
+    </div>
+    <div class="callout" style="margin-bottom:32px;">
+      <p class="callout-label">Every choice earns its place</p>
+      <p class="callout-body">The dining studio's research on which foods support which conditions runs continuously; menus adjust as assessments and seasons move. Sourcing decisions are checked against measurements at the MOSO Hub. The morning's assessment shapes the day's programme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. WHAT WE STAND FOR -->
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow text-center">Three pillars</p>
+    <h2 class="h-section text-center" style="margin-bottom:64px;">What we stand for</h2>
+    <div style="display:flex;flex-direction:column;gap:80px;">
+
+      <!-- Pillar 1 -->
+      <div class="grid-2" style="gap:64px;align-items:center;">
+        <div class="wire-image" style="height:380px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Wellness Wisdom®</span>
+        </div>
+        <div>
+          <p class="pillar-num">01</p>
+          <p class="eyebrow">Pillar one</p>
+          <h3 class="h-section" style="font-size:24px;">Wellness Wisdom®</h3>
+          <p class="body-copy">Traditional wisdom, joined by contemporary practice. Functional assessment, physical activity, foods that heal, holistic experiences shaped around you, the person in front of us, here and now. Together, they breathe life.</p>
+        </div>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="grid-2" style="gap:64px;align-items:center;">
+        <div>
+          <p class="pillar-num">02</p>
+          <p class="eyebrow">Pillar two</p>
+          <h3 class="h-section" style="font-size:24px;">Sustainability Pledge</h3>
+          <p class="body-copy">Our world is under pressure. Personal and planetary health are connected. Renewable energy, water conservation, LEED-certified design, and our sustainability room, the MOSO Hub: small acts, measured and reported.</p>
+        </div>
+        <div class="wire-image" style="height:380px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Sustainability Pledge</span>
+        </div>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="grid-2" style="gap:64px;align-items:center;">
+        <div class="wire-image" style="height:380px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Power of Place</span>
+        </div>
+        <div>
+          <p class="pillar-num">03</p>
+          <p class="eyebrow">Pillar three</p>
+          <h3 class="h-section" style="font-size:24px;">Power of Place</h3>
+          <p class="body-copy">Celebrating the culture of local communities connects us to indigenous wellness traditions and honours the vibrancy of our world. This sensibility is at the core of our thinking at Jayasom.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. IMAGE-STRIP-GALLERY -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Coastline</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Salt air</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Wadi</span>
+    </div>
+    <div class="wire-image" style="height:240px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Red Sea horizon</span>
+    </div>
+  </div>
+</section>
+
+<!-- 6. WHERE WE ARE -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">Where we are</p>
+    <h2 class="h-section text-center" style="margin-bottom:48px;">AMAALA, on Saudi Arabia's Red Sea coast</h2>
+    <p class="body-copy mb-4 full">Jayasom sits within the Triple Bay master plan being developed by Red Sea Global, one of the most ambitious wellness-anchored regenerative tourism destinations under construction anywhere in the world.</p>
+    <p class="body-copy mb-4 full">The location matters to the work. Deep traditions of healing and hospitality run along the Red Sea coast, long pre-dating modern wellness. The light here, the salt air, the temperature swing between day and shore-evening, all play a part in how the body settles.</p>
+    <p class="caption" style="font-style:italic;">Jayasom sits one hour by car from Al Wajh airport. Red Sea International is two hours away, and NEOM Bay is also two hours.</p>
+  </div>
+</section>
+
+<!-- 7. FOUNDER QUOTE -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="eyebrow">Founder's philosophy</p>
+    <p class="h-section" style="font-style:italic;line-height:1.4;margin-bottom:32px;">"I hope that Jayasom offers us all an opportunity to pause, reflect and learn from the wisdom of generations past enriched with the evolving expertise of today, finding a renewed sense of purpose, a turning point, in the journey of life."</p>
+    <p class="caption" style="color:hsla(var(--primary-foreground),0.7);">Karen Campbell, Co-Founder, Jayasom</p>
+  </div>
+</section>
+
+<!-- 8. WORKING PARTNERSHIPS -->
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow text-center">Working partnerships</p>
+    <h2 class="h-section text-center" style="margin-bottom:8px;">Held together by the people behind the practice</h2>
+    <p class="body-copy text-center mb-8" style="margin:0 auto 48px;font-style:italic;">The Jayasom team is the practice. Three partnerships shape how it lands.</p>
+    <div class="grid-3">
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <p class="eyebrow-mini">Master developer</p>
+        <h4 class="h-card">Red Sea Global</h4>
+        <p class="caption">The master developer of AMAALA, whose vision for regenerative tourism gave the project its ground.</p>
+      </div>
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <p class="eyebrow-mini">Daily practice</p>
+        <h4 class="h-card">Wellness Advisors</h4>
+        <p class="caption">The team that holds the day-to-day practice for each guest, listening on arrival and shaping the programme around what the body needs.</p>
+      </div>
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.39 7.36H22l-6.18 4.49 2.36 7.27L12 16.77l-6.18 4.35 2.36-7.27L2 9.36h7.61z"/></svg>
+        </div>
+        <p class="eyebrow-mini">In residence</p>
+        <h4 class="h-card">Visiting Practitioners</h4>
+        <p class="caption">Specialists in residence through the year, with fields ranging from Traditional Arabic Medicine to recovery science. Each chosen for depth of practice, not the name attached.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. TEAM GRID -->
+<section class="section section-muted">
+  <div class="shell">
+    <p class="eyebrow text-center">Leadership</p>
+    <h2 class="h-section text-center" style="margin-bottom:8px;">The people behind Jayasom</h2>
+    <p class="body-copy text-center mb-8" style="margin:0 auto 48px;font-style:italic;">A team held together by people who have spent many years in their fields.</p>
+    <div class="grid-3">
+
+      <a href="#" class="wire-card hover-underline">
+        <div class="wire-image" style="height:280px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Karen Campbell</span>
+        </div>
+        <div class="pad" style="padding:24px;">
+          <p class="label-tiny">CEO &amp; Co-Founder</p>
+          <h4 class="h-card">Karen Campbell</h4>
+          <p class="caption">Born and raised in New Zealand, Karen co-founded Jayasom in 2014. Before turning to wellness, decades in global leadership across finance and trade as a senior executive at a leading Thai bank and as a diplomat with the New Zealand Embassy in Thailand. BSc Zoology, Canterbury. MBA, IMD Lausanne.</p>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline">
+        <div class="wire-image" style="height:280px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Basel Shammout</span>
+        </div>
+        <div class="pad" style="padding:24px;">
+          <p class="label-tiny">Chairman of the Board</p>
+          <h4 class="h-card">Basel Shammout</h4>
+          <p class="caption">More than three decades of international leadership in wellness and consumer industries. Career spans financial structuring, mergers, and large-scale strategic repositioning. Founded Pearl Hospitality Group in 2009 as CEO and Chairman, advising private owners, sovereign wealth funds, and institutional investors. Embry-Riddle, Central Florida, executive education at Harvard.</p>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline">
+        <div class="wire-image" style="height:280px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Sascha Hemmann</span>
+        </div>
+        <div class="pad" style="padding:24px;">
+          <p class="label-tiny">General Manager</p>
+          <h4 class="h-card">Sascha Hemmann</h4>
+          <p class="caption">Born in East Germany, Sascha began his career in service in London. Senior leadership roles followed across South East Asia, the Americas, the Middle East, and Europe with respected names in wellness and resort. Known for putting people before titles. After years at full speed, a personal shift turned wellness into commitment.</p>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline">
+        <div class="wire-image" style="height:280px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Elodie Lefebvre</span>
+        </div>
+        <div class="pad" style="padding:24px;">
+          <p class="label-tiny">Director of Health &amp; Wellness</p>
+          <h4 class="h-card">Elodie Lefebvre</h4>
+          <p class="caption">From France. More than fifteen years shaping award-winning wellness concepts at Kamalaya Wellness Sanctuary in Thailand and Song Saa Private Island in Cambodia, leading multidisciplinary teams of 120+ practitioners. Training spans yoga, meditation, Reiki, Craniosacral therapy, Chi Nei Tsang, equine therapy, plant-based nutrition, and wellness counselling.</p>
+        </div>
+      </a>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:280px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Carol El Hadi</span>
+        </div>
+        <div class="pad" style="padding:24px;">
+          <p class="label-tiny">Director of Marketing, PR &amp; Comms</p>
+          <h4 class="h-card">Carol El Hadi</h4>
+          <p class="caption" style="font-style:italic;">Bio coming soon.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:280px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Kannan Nettath</span>
+        </div>
+        <div class="pad" style="padding:24px;">
+          <p class="label-tiny">Role to be confirmed</p>
+          <h4 class="h-card">Kannan Nettath</h4>
+          <p class="caption" style="font-style:italic;">Bio coming soon.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 10. NEWSLETTER -->
+<section class="section section-dark">
+  <div class="shell">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div>
+        <p class="eyebrow">Stay close</p>
+        <h2 class="h-section">Stay close to Jayasom</h2>
+        <p class="body-copy" style="max-width:480px;">Sign up for occasional updates from the team. We send sparingly, never daily.</p>
+      </div>
+      <div>
+        <div class="form-field">
+          <label>Your email</label>
+          <input type="email"/>
+        </div>
+        <a href="#" class="btn btn-on-dark mt-2">Receive</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;">Jayasom</p>
+        <p class="caption">Healing rooted in wisdom, guided by heart.</p>
+      </div>
+      <div>
+        <p class="col-title">Quick Links</p>
+        <ul>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Rooms &amp; Villas</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Retreat Finder</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Journals &amp; Stories</a></li>
+          <li><a href="#">Residences</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li>Our Philosophy</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Media</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Families &amp; Wellbeing</a></li>
+          <li><a href="#">Our Experts</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Residences</p>
+        <ul>
+          <li><a href="#">Amaala Residences</a></li>
+          <li><a href="#">Why Jayasom Residences</a></li>
+          <li><a href="#">Residential Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved.</p>
+      <div class="links">
+        <span>Cookies Policy</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
