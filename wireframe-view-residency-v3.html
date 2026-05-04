@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>View Residency v3 · Jayasom Wireframe</title>
+  <style>
+:root { --background: 16 33% 93%; --foreground: 300 2% 27%; --card: 16 33% 93%; --card-foreground: 300 2% 27%; --muted: 16 20% 86%; --muted-foreground: 300 2% 40%; --accent: 16 20% 86%; --accent-foreground: 300 2% 27%; --border: 300 2% 60%; --input: 300 2% 60%; --primary: 300 2% 27%; --primary-foreground: 16 33% 93%; --wire-placeholder: 16 20% 88%; --wire-line: 300 2% 55%; --wire-dark: 300 2% 30%; --wire-mid: 300 2% 45%; --radius: 0rem; }
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; } a { color: inherit; text-decoration: none; }
+html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif; font-weight: 300; line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; } .section-tight { padding: 32px; } .section-tall { padding: 80px 32px; } .section-strip { padding: 4px 0; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow, .section-dark .body-copy, .section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero, .section-dark .h-section, .section-dark .h-sub, .section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(3, 1fr); } .grid-4 { grid-template-columns: repeat(4, 1fr); } .grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; } }
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; } .wire-image .label { font-size: 11px; }
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; } .wire-card.muted { background: hsl(var(--muted)); }
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input, .form-field textarea, .form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) { .site-footer .cols { grid-template-columns: 1fr; } .site-footer .bottom { flex-direction: column; gap: 16px; } }
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); } .breadcrumb a { color: inherit; } .breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-overlay-bottom-left { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 0 0 64px 32px; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+.text-center { text-align: center; } .flex { display: flex; } .flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; } .justify-center { justify-content: center; } .justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4px; }
+.gallery-grid > .tall { grid-row: span 2; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } .gallery-grid { grid-template-columns: 1fr; } }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout .callout-body { font-size: 14px; color: hsl(var(--foreground)); line-height: 1.65; }
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; display: flex; gap: 12px; padding-left: 0; }
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
+.stat-block .stat-num { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.spec-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.spec-card h4 { margin-bottom: 12px; }
+.viewing-slot { border: 1px solid hsl(var(--border)); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.viewing-slot .slot-date { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); }
+.viewing-slot .slot-time { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.viewing-slot .btn { padding: 8px 14px; font-size: 10px; }
+.agent-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; gap: 20px; align-items: center; }
+.agent-card .avatar { width: 80px; height: 80px; border-radius: 50%; background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: hsl(var(--muted-foreground)); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span class="sep">›</span><a href="#residences">Wellness Residences</a><span class="sep">›</span>View Residency
+</div>
+
+<main>
+
+<!-- HERO + GALLERY GRID (gallery-led) -->
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow">A wellness residence · Triple Bay AMAALA</p>
+    <h1 class="h-hero">A home that breathes to the rhythms of the Red Sea</h1>
+    <p class="body-copy mb-6 full">Privately spaced amid lush gardens directly on the beach, each Jayasom Wellness Residence is set on a sunset-facing rise, backed by privacy-assuring rock formations. Open, light-filled spaces emphasise simplicity and serenity. Indigenous materials and exceptional local craftsmanship carry a distinct sense of place.</p>
+    <div class="flex gap-4 mb-8" style="flex-wrap:wrap;">
+      <a href="#enquire" class="btn btn-solid">Enquire about ownership</a>
+      <a href="#viewing" class="btn">Schedule a private viewing</a>
+    </div>
+    <div class="gallery-grid">
+      <div class="wire-image tall" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Living, sea-facing</span>
+      </div>
+      <div class="wire-image" style="height:258px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="label">Plunge pool</span></div>
+      <div class="wire-image" style="height:258px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="label">Bedroom</span></div>
+      <div class="wire-image" style="height:258px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="label">Kitchen</span></div>
+      <div class="wire-image" style="height:258px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="label">Bath</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FACTS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">At a glance</p>
+      <h2 class="h-section">This residence</h2>
+    </div>
+    <div class="grid-4" style="gap:32px 48px;">
+      <div class="stat-block"><p class="stat-num">3</p><p class="stat-label">Bedrooms</p></div>
+      <div class="stat-block"><p class="stat-num">423.9</p><p class="stat-label">Total area · sqm</p></div>
+      <div class="stat-block"><p class="stat-num">82.3</p><p class="stat-label">Private pool · sqm</p></div>
+      <div class="stat-block"><p class="stat-num">Sea</p><p class="stat-label">Sunset orientation</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOOR PLAN -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Floor plan</p>
+      <h2 class="h-section">Floor plan and layout</h2>
+    </div>
+    <div class="wire-image" style="height:520px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><path d="M3 9h18M9 3v18M15 9v12"/></svg>
+      <span class="label">Floor plan</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIFICATIONS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Specifications</p>
+      <h2 class="h-section">Materials and finishes</h2>
+    </div>
+    <div class="grid-3">
+      <div class="spec-card"><h4 class="h-card">Living</h4><p class="caption">Flooring: natural stone. Wall and ceiling finish: specialist plaster and timber veneer. Unit door hardware: Hard and Ware and Hafele. Door locks: Hafele and Salto Systems. Blackout: Silent Gliss. Drapery: motorised.</p></div>
+      <div class="spec-card"><h4 class="h-card">Kitchen</h4><p class="caption">Cabinetry: custom natural wood by contractor. Countertop: stone. Plumbing: Gessi and Teka. Appliances: Miele (fridge, cooktop hood, oven, coffee machine).</p></div>
+      <div class="spec-card"><h4 class="h-card">Bedroom and wardrobe</h4><p class="caption">Flooring: natural stone. Wall finish: specialist plaster and timber veneer. Doors: wood veneer. Headboard: woven fabric. Wardrobes finished in specialist plaster and timber veneer. Bedrooms anchor on Coco-mat handcrafted natural mattresses.</p></div>
+      <div class="spec-card"><h4 class="h-card">Bathroom</h4><p class="caption">Bathroom: flooring natural stone, wall tiles natural stone and specialist plaster, bath partition Bisson Bruneel glass with fabric, plumbing Zucchetti, vanity natural stone, mirrors silver.</p></div>
+      <div class="spec-card"><h4 class="h-card">General</h4><p class="caption">Salto door lock system, Visual Comfort and Co ceiling fans, Interel lighting and temperature control, Smart Home throughout.</p></div>
+      <div class="spec-card"><h4 class="h-card">Outdoor</h4><p class="caption">Private plunge pool angled to the Red Sea horizon. Sea-facing terrace. Direct beach access through privacy-assuring rock formations.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WELLNESS PROGRAMME OWNER CALLOUT -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Investment and ownership</p>
+        <h2 class="h-section">Owners join the Jayasom Longevity Assessment Programme</h2>
+        <p class="body-copy mb-4 full">Owners join the Jayasom Longevity Assessment Programme. The programme appoints a personal Wellness Advisor, runs blood test analysis and micronutrient analysis once a year, and runs fitness, postural, kinesthetic, skin and biofeedback assessments twice a year. Daily activity programme access. Complimentary land transfer up to two round trips per year. Twenty per cent off treatments and food and beverage.</p>
+        <p class="caption" style="font-style:italic;">Ownership enquiries route to the residences team. Pricing on application.</p>
+      </div>
+      <div>
+        <ul class="bullet-list">
+          <li>An appointed personal Wellness Advisor</li>
+          <li>Annual blood test and micronutrient analysis</li>
+          <li>Biannual fitness, postural, kinesthetic, skin and biofeedback assessments</li>
+          <li>Daily activity programme access</li>
+          <li>Complimentary land transfer (up to two round trips per year)</li>
+          <li>Twenty per cent off treatments and food and beverage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELLNESS ADVISOR CONTINUITY CALLOUT -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="callout">
+      <p class="callout-label">Wellness Advisor continuity</p>
+      <p class="callout-body">The same Wellness Advisor who shapes a retreat stay shapes the residence cycle. Pre-arrival conversations, in-residence consultations and post-departure follow-up sit within one continuous file. Owners arrive into a known relationship; the body of work built across earlier retreats threads into the longer cadence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIEWING SCHEDULE -->
+<section class="section" id="viewing">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:start;">
+      <div>
+        <p class="eyebrow">Schedule a viewing</p>
+        <h2 class="h-section">Available appointments</h2>
+        <p class="body-copy mb-6 full">Private viewings run by appointment with the residences team. Travel arrangements can be coordinated through the office.</p>
+        <div class="flex flex-col gap-3">
+          <div class="viewing-slot">
+            <div><p class="slot-date">Monday 12 May 2026</p><p class="slot-time">10:00 AM · 90 minutes</p></div>
+            <a href="#" class="btn">Book this slot</a>
+          </div>
+          <div class="viewing-slot">
+            <div><p class="slot-date">Wednesday 14 May 2026</p><p class="slot-time">2:00 PM · 90 minutes</p></div>
+            <a href="#" class="btn">Book this slot</a>
+          </div>
+          <div class="viewing-slot">
+            <div><p class="slot-date">Saturday 17 May 2026</p><p class="slot-time">11:00 AM · 90 minutes</p></div>
+            <a href="#" class="btn">Book this slot</a>
+          </div>
+          <div class="viewing-slot">
+            <div><p class="slot-date">Tuesday 20 May 2026</p><p class="slot-time">3:00 PM · 90 minutes</p></div>
+            <a href="#" class="btn">Book this slot</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Your residences team</p>
+        <h2 class="h-section">A direct line</h2>
+        <div class="agent-card mb-4">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
+          </div>
+          <div>
+            <h4 class="h-card" style="margin-bottom:4px;">Residences advisor</h4>
+            <p class="caption">Available for private appointments by arrangement.</p>
+            <p class="caption mt-2">residential@redseaglobal.com</p>
+          </div>
+        </div>
+        <p class="caption" style="font-style:italic;">Reviewed by Sascha Hemmann, General Manager, Jayasom AMAALA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY FORM -->
+<section class="section section-muted" id="enquire">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;">
+      <div>
+        <p class="eyebrow">Speak to the residences team</p>
+        <h2 class="h-section">Ownership enquiries</h2>
+        <p class="body-copy mb-6 full">Pricing on application. A residences advisor will respond within 48 hours.</p>
+        <form>
+          <div class="form-field"><label>Full name</label><input type="text"/></div>
+          <div class="form-field"><label>Email</label><input type="email"/></div>
+          <div class="form-field"><label>Phone</label><input type="tel"/></div>
+          <div class="form-field"><label>Layout of interest</label><select><option>This residence</option><option>Two-bedroom beach villa · 350.2 sqm</option><option>Three-bedroom beach villa · 423.9 sqm</option><option>Four-bedroom beach villa · 525.3 sqm</option><option>Five-bedroom Jayela Residence</option></select></div>
+          <div class="form-field"><label>Message</label><textarea rows="4"></textarea></div>
+          <button type="button" class="btn btn-solid">Submit enquiry</button>
+        </form>
+      </div>
+      <div>
+        <p class="eyebrow">Reserve a stay</p>
+        <h2 class="h-section">When not in residence</h2>
+        <p class="body-copy mb-6 full">The villa can be included in the resort rental programme when owners are not in residence. The Jayasom team manages the rental, scheduling and guest care.</p>
+        <a href="#" class="btn">Enquire about a stay</a>
+        <div class="wire-image" style="height:280px;margin-top:32px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Beach access from terrace</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DENSITY: BRAND POSITIONING + WELLNESS ADVISOR -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">A note on the practice</p>
+      <h2 class="h-section">Place is part of the practice</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:20px;">Studio Carter's interior detailing carries a pause-object register: smaller objects placed where the eye and hand naturally rest, materials warmed to the touch, and natural light shaped through the day. Coco-mat natural mattresses run across every bedroom. The kitchen carries a fitted layout calibrated to the residence's day-rhythm.</p>
+      <p style="margin-bottom:20px;">Owners receive the Jayasom Longevity Assessment Programme, a seven-component annual baseline carried out across the Health and Wellness Centre. Cardiovascular, metabolic, hormonal, neurocognitive, gut, sleep and movement markers run on a calibrated cadence. Standing access to the resort's amenity map sits alongside.</p>
+      <p>Jayasom is a wellness destination, not a luxury hospitality concept. The work is precise, measurable and answerable to the body in front of us. Place is a method, not a backdrop. Residences hold this register as much as the resort villas do; the practice runs across the property without distinction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER LAYOUTS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Other layouts</p>
+      <h2 class="h-section">Across the residences</h2>
+    </div>
+    <div class="grid-3">
+      <a href="wireframe-rv-2br-villa-v3.html" class="cross-card"><p class="name">Two-bedroom beach villa</p><p class="tag">350.2 sqm · ten in the residences mix.</p></a>
+      <a href="wireframe-rv-3br-villa-v3.html" class="cross-card"><p class="name">Three-bedroom beach villa</p><p class="tag">423.9 sqm · twelve in the residences mix.</p></a>
+      <a href="wireframe-rv-4br-villa-v3.html" class="cross-card"><p class="name">Four-bedroom beach villa</p><p class="tag">525.3 sqm · the largest standard configuration.</p></a>
+      <a href="wireframe-rv-5br-jayela-residence-v3.html" class="cross-card"><p class="name">Five-bedroom Jayela Residence</p><p class="tag">Flagship layout with a private wellness studio.</p></a>
+      <a href="wireframe-amaala-residences-v3.html" class="cross-card"><p class="name">All AMAALA Residences</p><p class="tag">Twenty-four wellness homes at the heart of Triple Bay.</p></a>
+      <a href="wireframe-residential-community-v3.html" class="cross-card"><p class="name">Residential community</p><p class="tag">Fifteen amenities woven into the wellness-led community.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently asked questions</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Who designed the residences?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Heah &amp; Co designed the architecture; Studio Carter designed the interiors.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">What is included with ownership?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Access to the Jayasom Longevity Assessment Programme, a personal Wellness Advisor, daily activities, complimentary land transfers, and twenty per cent off treatments and food and beverage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALITY -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;">
+      <div>
+        <p class="eyebrow">Brand partners</p>
+        <h3 class="h-sub">Architecture by Heah &amp; Co. Interiors by Studio Carter. Bedrooms anchor on Coco-mat handcrafted natural mattresses.</h3>
+      </div>
+      <div>
+        <p class="eyebrow">Locality</p>
+        <p class="body-copy full">Saudi Arabia. AMAALA. Triple Bay. Red Sea coast. Operated by Triple Bay Wellness Resort Tourism Accommodation Company under the Jayasom brand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan your viewing</p>
+    <h2 class="h-section">Schedule a private viewing</h2>
+    <p class="body-copy" style="margin:0 auto 32px;">A residences advisor will reach out to confirm dates, view options and pricing on application.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#viewing" class="btn btn-on-dark">Schedule a viewing</a>
+      <a href="wireframe-amaala-residences-v3.html" class="btn btn-on-dark">All residences</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Insights v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.wire-card .pad-tight { padding: 14px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input,
+.form-field textarea,
+.form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-header nav a { color: inherit; }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 720px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); cursor: pointer; }
+.tag-active { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+
+.pull-quote { border-left: 2px solid hsl(var(--foreground)); padding: 8px 24px; font-size: 18px; font-weight: 300; font-style: italic; color: hsl(var(--foreground)); margin: 24px 0; }
+.pull-quote .attribution { display: block; margin-top: 16px; font-size: 12px; font-style: normal; color: hsl(var(--muted-foreground)); }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+
+.icon-card-centered { text-align: center; padding: 24px; border: 1px solid hsl(var(--border)); }
+.icon-card-centered .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 16px; color: hsl(var(--foreground));
+}
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.callout .callout-body { font-size: 12px; color: hsl(var(--foreground)); line-height: 1.6; }
+
+.hover-underline:hover .h-card { text-decoration: underline; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.search-bar { display: flex; align-items: center; gap: 12px; border: 1px solid hsl(var(--border)); padding: 14px 18px; background: hsl(var(--background)); max-width: 520px; margin: 0 auto; }
+.search-bar input { flex: 1; border: 0; background: transparent; font-size: 14px; color: hsl(var(--foreground)); font-family: inherit; outline: none; }
+.search-bar svg { width: 18px; height: 18px; stroke-width: 1.5; color: hsl(var(--muted-foreground)); }
+
+.article-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; }
+.article-card .meta { display: flex; gap: 12px; align-items: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.article-card .read-link { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--foreground)); margin-top: auto; padding-top: 16px; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span>Insights
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="section section-tall">
+  <div class="shell">
+    <div class="text-center" style="max-width:760px;margin:0 auto;">
+      <p class="eyebrow">Insights</p>
+      <h1 class="h-hero">Insights</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;font-size:16px;">Perspectives, stories, and updates from Jayasom.</p>
+      <p class="body-copy" style="margin:0 auto 40px;">Four bodies of writing, each with its own register. Blogs answer the questions people actually search for, research-led and SEO-aware. Journals document life at the property and at the retreats, immersive and human in turn. Thought Leadership comes from the Specialists, written from inside their practice. News covers property-and-press from the brand. Each piece carries an author and a date.</p>
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search Insights"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE TO START - 4 STREAM CARDS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Streams</p>
+      <h2 class="h-section">Where to start</h2>
+    </div>
+    <div class="grid-4" style="margin-top:48px;">
+
+      <div class="icon-card-centered">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <p class="eyebrow-mini">Blogs</p>
+        <h4 class="h-card">Wellness, longevity, and practice</h4>
+        <p class="caption" style="font-style:italic;margin-bottom:16px;">"Research-led writing that answers what people are actually searching for."</p>
+        <a href="#" class="btn">Read the blog</a>
+      </div>
+
+      <div class="icon-card-centered">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.586 7.586"/></svg>
+        </div>
+        <p class="eyebrow-mini">Journals</p>
+        <h4 class="h-card">Life at Jayasom AMAALA</h4>
+        <p class="caption" style="font-style:italic;margin-bottom:16px;">"A Day at Jayasom AMAALA. Inside Our 7-Day Sleep Retreat. Morning Rituals at AMAALA."</p>
+        <a href="wireframe-journals-and-stories-v3.html" class="btn">Read the journals</a>
+      </div>
+
+      <div class="icon-card-centered">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3-3m0 0l-3 3m3-3v8"/></svg>
+        </div>
+        <p class="eyebrow-mini">Thought Leadership</p>
+        <h4 class="h-card">The voice of our Specialists</h4>
+        <p class="caption" style="font-style:italic;margin-bottom:16px;">"The clinical and conceptual writing of the people who do the work."</p>
+        <a href="#" class="btn">Read Thought Leadership</a>
+      </div>
+
+      <div class="icon-card-centered">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8M10 10h8"/></svg>
+        </div>
+        <p class="eyebrow-mini">News</p>
+        <h4 class="h-card">Property updates and press</h4>
+        <p class="caption" style="font-style:italic;margin-bottom:16px;">"Milestones, partnerships, and what other people are saying."</p>
+        <a href="wireframe-news-v3.html" class="btn">Read the news</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED ARTICLE BLOCK (LARGE) -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Featured</p>
+      <h2 class="h-section">Editor's selection</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Refreshed weekly. The carousel pulls the most-read piece in each stream plus a current Specialist column.</p>
+    </div>
+
+    <a href="wireframe-view-insight-v3.html" class="wire-card hover-underline" style="display:block;margin-top:48px;">
+      <div class="grid-2" style="gap:0;align-items:stretch;">
+        <div class="wire-image" style="height:480px;border:0;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Featured article hero</span>
+        </div>
+        <div class="pad" style="padding:48px;display:flex;flex-direction:column;justify-content:center;">
+          <div class="meta" style="display:flex;gap:12px;align-items:center;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:hsl(var(--muted-foreground));margin-bottom:16px;">
+            <span>Journal</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+          <h3 class="h-section" style="font-size:30px;margin-bottom:16px;">Morning Rituals at Amala</h3>
+          <p class="body-copy mb-6 full">An immersive notebook entry from a single morning at the property. The salt air, the eleven o'clock Stretch, what the Wellness Advisor brings into the room when sleep has not arrived the night before. Carries the author byline and date.</p>
+          <p class="caption mb-4">By Carol El Hadi · Director of Marketing, PR &amp; Communications</p>
+          <span class="btn" style="align-self:flex-start;">Read article →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- LATEST + FILTER CHIPS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="flex justify-between items-center mb-8" style="flex-wrap:wrap;gap:24px;">
+      <div>
+        <p class="eyebrow">Latest</p>
+        <h2 class="h-section" style="margin:0;">The most recent six pieces</h2>
+      </div>
+      <div class="caption" style="font-style:italic;">Newest first. Filter by stream from the chips below.</div>
+    </div>
+
+    <div class="tag-row" style="margin-bottom:40px;">
+      <span class="tag tag-active">All</span>
+      <span class="tag">Blogs</span>
+      <span class="tag">Journals</span>
+      <span class="tag">Thought Leadership</span>
+      <span class="tag">News</span>
+    </div>
+
+    <div class="grid-3">
+
+      <a href="wireframe-view-insight-v3.html" class="article-card hover-underline">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="meta"><span>Blog</span><span>·</span><span>5 min</span></div>
+          <h4 class="h-card">Understanding Circadian Wellness</h4>
+          <p class="caption mb-4">A research-led look at how light, sleep, and meal timing line up across the day. By the editorial team.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="wireframe-view-insight-v3.html" class="article-card hover-underline">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="meta"><span>Journal</span><span>·</span><span>6 min</span></div>
+          <h4 class="h-card">A Day at Jayasom AMAALA</h4>
+          <p class="caption mb-4">A Tuesday afternoon, written from inside it. The salt air, the slow lunch, the four-to-five family slot when the property meets in the middle.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="wireframe-view-insight-v3.html" class="article-card hover-underline">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="meta"><span>Thought Leadership</span><span>·</span><span>14 min</span></div>
+          <h4 class="h-card">The Future of Longevity Travel</h4>
+          <p class="caption mb-4">A specialist's framing on what changes when wellness moves from package to practice. Citations included.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="wireframe-view-insight-v3.html" class="article-card hover-underline">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="meta"><span>Journal</span><span>·</span><span>8 min</span></div>
+          <h4 class="h-card">Inside Our 7-Day Sleep Retreat</h4>
+          <p class="caption mb-4">Notes from the inside of a week. The hours that move; the hours that don't. A returning guest's pacing, mid-stay.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="wireframe-view-insight-v3.html" class="article-card hover-underline">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="meta"><span>Blog</span><span>·</span><span>7 min</span></div>
+          <h4 class="h-card">The Science of Sleep Retreats</h4>
+          <p class="caption mb-4">What the literature carries on multi-day sleep work and what we see in practice at the property. Cited and reviewed.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="wireframe-view-insight-v3.html" class="article-card hover-underline">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="meta"><span>News</span><span>·</span><span>3 min</span></div>
+          <h4 class="h-card">Property update: opening calendar confirmed</h4>
+          <p class="caption mb-4">Operational milestones from the team. Dates, partners, and the quiet work behind the build.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" class="btn">Older articles</a>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL PRINCIPLES -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="callout">
+      <p class="callout-label" style="letter-spacing:0.15em;text-transform:uppercase;">How we write</p>
+      <p class="callout-body" style="font-size:14px;">Each piece carries an author and a date. We don't ghost-write under the brand name; the people writing get the byline. We name the practitioners we cite, link the studies we draw on, and update older pieces when the practice moves. The point is to be useful, not to be everywhere.</p>
+    </div>
+    <p class="caption mt-6 text-center" style="font-style:italic;">Editorial direction from Carol El Hadi, Director of Marketing, PR and Communications. Each article carries its own author byline.</p>
+  </div>
+</section>
+
+<!-- NEWSLETTER SIGNUP -->
+<section class="section section-tall section-dark">
+  <div class="shell">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div>
+        <p class="eyebrow">Subscribe</p>
+        <h2 class="h-section">A monthly note</h2>
+        <p class="body-copy" style="max-width:480px;">New writing, what's on at the property, anything else worth flagging.</p>
+      </div>
+      <div>
+        <div class="form-field">
+          <label>Your email</label>
+          <input type="email" placeholder="you@example.com"/>
+        </div>
+        <a href="#" class="btn btn-on-dark mt-2">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      <div style="border-top:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">What's the difference between Blogs and Journals at Jayasom?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Blogs are research-led and answer search-driven questions about wellness, longevity, and practice. Journals are immersive and human; they document what life at the property actually looks like.</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Who writes the Insights articles?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">The wellness team, the practitioners in residence, and the editorial team at Jayasom. Each piece carries the author's byline and date.</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">How often is the content updated?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Featured updates weekly. New writing lands across the streams as it's ready; we don't run a fixed publishing calendar. The newsletter goes out monthly.</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Who writes the Thought Leadership pieces?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Pieces are authored by named members of the Jayasom team and named visiting practitioners. Each Thought Leadership entry carries an author bio and a reviewed-by line; named credentials are visible in the byline.</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">How are Journal pieces different from Blog pieces?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Journal pieces are immersive entries from life at the wellness destination, often a single morning or a single retreat moment. Blog pieces sit closer to research and longevity science. The streams are filtered separately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

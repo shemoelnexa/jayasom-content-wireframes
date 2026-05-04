@@ -3,7 +3,9 @@ Thumbs.db
 *.log
 .vscode/
 .idea/
+.claude/
 node_modules/
 dist/
 .env
 .env.local
+_agent-brief.md

@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>As a Feather v3 · Jayasom Wireframe</title>
+  <style>
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout ul { display: flex; flex-direction: column; gap: 10px; padding-left: 0; list-style: none; }
+.callout ul li { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); font-style: italic; line-height: 1.5; padding-left: 20px; position: relative; }
+.callout ul li::before { content: ""; position: absolute; left: 0; top: 12px; width: 10px; height: 1px; background: hsl(var(--foreground)); }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 14px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+.wire-table tfoot td { font-weight: 700; background: hsla(var(--foreground),0.04); }
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; display: flex; gap: 12px; padding-left: 0; }
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.day-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; display: grid; grid-template-columns: 120px 1fr; gap: 32px; }
+.day-card .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.day-card .day-title { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); }
+.day-card .day-body p { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-bottom: 14px; }
+.day-card .day-body p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .day-card { grid-template-columns: 1fr; gap: 16px; } }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<main>
+
+<!-- HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Detox &amp; weight management retreat · Jayasom AMAALA</p>
+      <h1 class="h-hero">As a Feather</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">Physical vitality, detox, and optimal weight.</p>
+      <p class="body-copy" style="margin:0 auto 32px;">As a Feather is the detox-and-weight-management retreat at Jayasom AMAALA, on Saudi Arabia's Red Sea coast. The regional healing tradition runs as the working methodology of the property, not as setting; contemporary clinical practice sits next to it through the same hours. The retreat is elastic, not regimented; some come for five nights, some for fifteen, and the work shapes to the body that arrives.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+        <a href="#" class="btn btn-solid">Plan Your Retreat</a>
+        <a href="#" class="btn">Request a private call with your Wellness Advisor</a>
+      </div>
+      <p class="caption mt-4" style="font-style:italic;">Response within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA STRIP -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="body-copy" style="margin:0 auto 24px;max-width:680px;">A Wellness Advisor walks the brief through with you before you arrive.</p>
+    <a href="#" class="btn">Speak to a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- FEATURED TREATMENTS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Detox &amp; Weight Management Retreat at Jayasom AMAALA</p>
+      <h2 class="h-section">Featured Treatments</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Six detox-paired treatments hold the As a Feather week. Two of them are recurring rather than one-off: the daily one-to-one with your Wellness Advisor, and the Nutritional Consultation, which calibrates the nourishment approach across the week.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+
+      <div class="treatment-card hero-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Detox Body Wrap</span>
+        </div>
+        <h4 class="h-card">Detox Body Wrap</h4>
+        <p class="duration">Duration: 90 minutes</p>
+        <p class="caption mb-4">A full-body wrap that draws on mineral-rich clays and herbal preparations to support the skin's clearance pathways. The body is warmed slowly; the wrap holds the heat long enough for the lymphatic system to settle into a cleansing rhythm.</p>
+        <p class="caption" style="font-style:italic;">Available across all stay tiers.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Detoxifying Balneotherapy</span>
+        </div>
+        <h4 class="h-card">Detoxifying Balneotherapy</h4>
+        <p class="duration">Duration: 60 minutes</p>
+        <p class="caption mb-4">A mineral-water immersion designed to support fluid clearance and ease metabolic load. The water is warmed and lightly carbonated; the body sits supported and still.</p>
+        <p class="caption" style="font-style:italic;">Available from seven nights upward.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Far Infrared Therapy</span>
+        </div>
+        <h4 class="h-card">Far Infrared Therapy</h4>
+        <p class="duration">Duration: 45 minutes</p>
+        <p class="caption mb-4">Heat-based detox in a low-radiant infrared cabin. The session reaches deep tissue without strain on the cardiovascular system, suitable for sedentary-adjacent guests for whom higher-intensity sweating is not yet appropriate.</p>
+        <p class="caption" style="font-style:italic;">Available across all stay tiers.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Taoist Abdominal Massage</span>
+        </div>
+        <h4 class="h-card">Taoist Abdominal Massage (Chi Nei Tsang)</h4>
+        <p class="duration">Duration: 75 minutes</p>
+        <p class="caption mb-4">A lineage-specific abdominal practice from the Taoist tradition. Slow pressure works through the visceral organs, supporting digestive function, fluid clearance, and the gut-brain axis.</p>
+        <p class="caption" style="font-style:italic;">Available from seven nights upward.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Therapeutic Lymphatic Drainage</span>
+        </div>
+        <h4 class="h-card">Therapeutic Lymphatic Drainage</h4>
+        <p class="duration">Duration: 60 minutes</p>
+        <p class="caption mb-4">A light-pressure manual technique that follows the body's lymphatic pathways, easing fluid load and supporting the immune system. Particularly relevant for guests arriving with sluggish digestion or chronic puffiness.</p>
+        <p class="caption" style="font-style:italic;">Available across all stay tiers.</p>
+      </div>
+
+      <div class="treatment-card">
+        <div class="wire-image" style="height:200px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Udvarthanam</span>
+        </div>
+        <h4 class="h-card">Udvarthanam (Ayurvedic Herbal Powder Massage)</h4>
+        <p class="duration">Duration: 60 minutes</p>
+        <p class="caption mb-4">A herbal-powder body massage from the Ayurvedic tradition. Worked against the natural growth of body hair, the powders promote circulation and lymphatic drainage, and the practice has long been associated with weight management and skin clarity.</p>
+        <p class="caption" style="font-style:italic;">Available from seven nights upward.</p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-8" style="max-width:900px;margin-left:auto;margin-right:auto;">
+      <p class="caption" style="font-style:italic;margin-top:32px;">Available across the stay: Pinda Sweda (Ayurvedic herbal compress), Dry Skin Brushing, Pranayama (Ayurvedic breathwork), Tai Chi, Sound Healing Therapy, and the daily 60-minute treatment from the seven-treatment menu (Jayasom Signature, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga) all run through the property and are placed by the Wellness Advisor where they fit.</p>
+    </div>
+
+    <div class="tag-row justify-center mt-8" style="display:flex;justify-content:center;flex-wrap:wrap;margin-top:32px;">
+      <span class="tag">Beauty</span>
+      <span class="tag">Detox</span>
+      <span class="tag">Weight Loss</span>
+      <span class="tag">Stress Management</span>
+      <span class="tag">Relaxation</span>
+      <span class="tag">Physical Fitness</span>
+      <span class="tag">Mindfulness</span>
+      <span class="tag">Pain Management</span>
+      <span class="tag">Recovery</span>
+      <span class="tag">Emotional Balance</span>
+      <span class="tag">General Health</span>
+    </div>
+  </div>
+</section>
+
+<!-- PURE LIGHTNESS METHODOLOGY -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">Methodology</p>
+    <h2 class="h-section text-center" style="margin-bottom:48px;">The Pure Lightness Methodology</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The As a Feather retreat is shaped around the work the body is asking for. For some guests, that work is shedding the weight of habits that have settled in over years. For others, it is restoring digestive function after a period of strain, or finding the metabolic baseline that earlier life kept easy and that sedentary work has slowly clouded. Either entry point fits the As a Feather frame; the Wellness Advisor sets the programme around the guest's stated direction at the pre-arrival conversation.</p>
+    </div>
+    <div class="callout" style="margin:32px 0;">
+      <p class="callout-label">Designed to detoxify and achieve optimal weight</p>
+      <ul>
+        <li>Digestive health is supported by an anti-inflammatory nutrition plan that promotes cleansing.</li>
+        <li>Metabolism is strengthened to sustain weight balance.</li>
+      </ul>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;"><strong style="font-weight:700;color:hsl(var(--foreground));">Target.</strong> Individuals seeking holistic health improvement through weight management and detoxification. Mostly sedentary jobs looking to change inadequate habits. Those who seek advice on nutrition and weight loss, revitalize their metabolism.</p>
+      <p style="margin-bottom:24px;"><strong style="font-weight:700;color:hsl(var(--foreground));">Goals.</strong> Achieve a healthy weight by counteracting any metabolic imbalances. Undergo cleansing and detoxification by correcting inadequate habits, promoting physical activity and following a customised diet plan.</p>
+      <p>The structure is light enough to follow you. Where the assessment surfaces a deeper concern, a Visiting Practitioner in residence may carry the relevant work for the stay. Where the body asks for less than the calendar offers, the day eases back to meet it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR DAYS AT FEATHER -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">A typical As a Feather day</span>
+      </div>
+      <div>
+        <p class="eyebrow">Daily rhythm</p>
+        <h2 class="h-section">Your Days at Feather</h2>
+        <p class="body-copy mb-4 full">Each day takes its shape on the morning you arrive. Your Wellness Advisor sits down with you, reads the questionnaire you completed in the weeks before, and listens to where the body is on the day. The programme is built from there. The conversation runs longer than a standard arrival intake; what you say on the day shapes the week.</p>
+        <p class="body-copy mb-4 full">A typical As a Feather day begins gently. Pranayama, Tai Chi, or Yin Yoga run at seven; you choose by mood and by what the body has settled into overnight. The eleven o'clock Stretch is the universal anchor across every retreat at Jayasom and lands here too. Lunch follows by one, lighter than dinner, drawn from the Gut Healing and Cleansing menu calibrated to the work of the stay. The afternoon holds one of the restorative detox treatments, Detox Body Wrap, Far Infrared, Detoxifying Balneotherapy, or Therapeutic Lymphatic Drainage, and recovery sits inside the day rather than added on top of it. A walk along the coastline or up to the Stonecrop Maze frames the early evening, and dinner sits at half past seven. By nine, the body is asking for the bed, and the room is set up to oblige.</p>
+        <p class="body-copy full">Three meals each day from the kitchen, beginning with dinner on arrival. The room is set up around your stated preferences: aroma options of Calming Lavender or Spirited Rosemary, a chosen pillow from the seven on the menu, a Coco-mat&trade; natural mattress. Pacing is part of the practice. Each day stays open enough to catch what the body and the cleansing rhythm surface.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SETTING AT AMAALA -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">The setting</p>
+      <h2 class="h-section">The Setting at AMAALA</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;max-width:820px;margin:0 auto;">
+      <p style="margin-bottom:24px;">The buildings step back where the coast asks them to and stay low against the line of the sea. Sea breeze handles the cooling load before any mechanical system gets involved. Materials are local wherever the climate allows.</p>
+      <p style="margin-bottom:24px;">For As a Feather guests, the relevant zone is Jayana, the adults retreat area at the southern end of Triple Bay. Two Jayana-side gardens sit closest to the lightness-and-clearance register of the retreat.</p>
+      <p style="margin-bottom:24px;">The Yasmeen Night Garden takes its name from the jasmine that opens only after dark. Its fragrance lands lightly on the path at dusk; the air softens around it, suited to the slower pacing of a detox week. The garden sits at the foot of the Wellness Plateau and is reached through a moon gate, where reclining loungers angle towards the night sky and the path of the moon.</p>
+      <p style="margin-bottom:24px;">The Stonecrop Maze sits on the plateau above. The maze, sometimes referred to as a labyrinth for what it offers in function, invites slow walking with attention on breath and on each step the foot makes; the centre marks a moment of reflection. Stonecrop is a succulent that grows on rocks and stores water; the plant associates with peace, perseverance, and calmness. For Feather guests, the slow-walking pace of the maze pairs naturally with the quieter intensity of the cleansing rhythm.</p>
+      <p style="margin-bottom:24px;">Phoenix Garden sits near Sarat&ocirc; on the Jayana side and is open to all guests. Family-side gardens (the Colour Garden chakra journey and the Poa Garden Theatre amphitheatre) sit on the Jayela side and are also accessible to any guest.</p>
+      <p style="margin-bottom:24px;">The standard accommodation is set up around your stated preferences: aroma options of Calming Lavender or Spirited Rosemary, your pillow chosen from the seven on the menu, and Coco-mat&reg; bedding throughout. Where the assessment surfaces a preference, different bedding tier, additional pillow, room-temperature variation, the Wellness Advisor adjusts before arrival. The room itself sits low against the coastline; the sea is visible from the bed; the path to the gardens is short.</p>
+      <p>Sixty villas plus twenty-four private residences hold the property. Phase one is a small property by destination-resort scale, and the design is for it to stay that way; the daily wellness rhythm is sized to the cohort, not to the building.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE STRIP -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:240px;"><span class="label">Yasmeen Night Garden</span></div>
+    <div class="wire-image" style="height:240px;"><span class="label">Stonecrop Maze</span></div>
+    <div class="wire-image" style="height:240px;"><span class="label">Phoenix Garden</span></div>
+    <div class="wire-image" style="height:240px;"><span class="label">Coastline path</span></div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Programme inclusions</p>
+      <h2 class="h-section">What's Included</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Stay length shapes the depth of the work. From the methodology your Wellness Advisor draws on, four tier names hold the structure: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. The cleansing rhythm matches the tier; nothing across the stay is added because of the calendar.</p>
+    </div>
+
+    <div class="grid-aside" style="margin-top:48px;">
+      <div>
+        <p class="eyebrow-mini">Every As a Feather stay includes</p>
+        <ul class="bullet-list" style="margin-top:16px;">
+          <li>Accommodation in your chosen room category, with daily housekeeping</li>
+          <li>Three wellness cuisine meals per night, beginning with dinner on the day of arrival</li>
+          <li>Wellness minibar in your room</li>
+          <li>Individual health and wellness consultation with your Wellness Advisor</li>
+          <li>Physical analysis (optional)</li>
+          <li>Skin consultation (optional)</li>
+          <li>Daily fitness and leisure activities (up to six classes daily; lighter slots prioritised)</li>
+          <li>Unlimited use of all wellness destination facilities (steam, sauna, mineral and vitality pools, salt inhalation rooms, infrared rooms, mixed gym)</li>
+          <li>One daily treatment per night of stay, chosen from a seven-treatment menu (Jayasom Signature Massage, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga)</li>
+          <li>Physical and Postural Assessment plus VISIA Facial Imaging, complimentary on request</li>
+          <li>The Jayasom Collection (welcome amenity)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout" style="background:hsl(var(--background));border-width:1px;">
+          <p class="callout-label">Personalisation note</p>
+          <p class="caption" style="color:hsl(var(--foreground));font-size:13px;line-height:1.6;">Programme inclusions are indicative; alternatives are available; your Wellness Advisor finalises the programme shortly after arrival, around your individual needs and stated objectives.</p>
+        </div>
+        <p class="caption mt-4" style="font-style:italic;">Services and facilities are subject to government health regulations.</p>
+      </div>
+    </div>
+
+    <!-- Per-tier table -->
+    <div style="margin-top:64px;">
+      <p class="eyebrow-mini text-center mb-4">Per-tier inclusions</p>
+      <h3 class="h-sub text-center mb-8">Stay length and depth</h3>
+      <div style="overflow-x:auto;">
+        <table class="wire-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th class="center">Per session</th>
+              <th class="center">4 nights</th>
+              <th class="center">7 nights</th>
+              <th class="center">10 nights</th>
+              <th class="center">14 nights</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Health Consultation</td><td class="center">60 min</td><td class="center">&#10003;</td><td class="center">&#10003;</td><td class="center">&#10003;</td><td class="center">&#10003;</td></tr>
+            <tr><td>Nutritional Consultation (Specialist)</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
+            <tr><td>Holistic Treatments (Detox-paired)</td><td class="center">60 min</td><td class="center">6</td><td class="center">9</td><td class="center">11</td><td class="center">15</td></tr>
+            <tr><td>Spa Treatments</td><td class="center">60 min</td><td class="center">3</td><td class="center">6</td><td class="center">8</td><td class="center">11</td></tr>
+            <tr><td>Motion Sessions</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">4</td><td class="center">6</td></tr>
+            <tr><td>Group Classes</td><td class="center">60 min</td><td class="center">&#10003;</td><td class="center">&#10003;</td><td class="center">&#10003;</td><td class="center">&#10003;</td></tr>
+            <tr><td>3 Meals (per night of stay)</td><td class="center">&mdash;</td><td class="center">&#10003;</td><td class="center">&#10003;</td><td class="center">&#10003;</td><td class="center">&#10003;</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Total treatments</td><td class="center"></td><td class="center">11</td><td class="center">18</td><td class="center">25</td><td class="center">35</td></tr>
+            <tr><td>Average per day</td><td class="center"></td><td class="center">2.75</td><td class="center">2.57</td><td class="center">2.5</td><td class="center">2.5</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIONS AND RITUALS SHAPED FOR LIGHTNESS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">For lightness</p>
+      <h2 class="h-section">Sessions and rituals shaped for lightness</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Across the As a Feather retreat, several treatments and sessions are placed where the practice asks for slower pace and lower load. The list below sits alongside the daily 60-minute treatment menu and the wellness classes; it adds depth at the moments where the cleansing rhythm asks for steadier attention.</p>
+    </div>
+
+    <div class="grid-3" style="gap:24px;margin-top:48px;">
+      <div class="treatment-card">
+        <p class="eyebrow-mini">All tiers, returning across longer stays</p>
+        <h4 class="h-card">Nutritional Consultation</h4>
+        <p class="duration">60 minutes</p>
+        <p class="caption">The Wellness Advisor and the in-house nutrition specialist read the assessment, the food preferences, and any digestive history, and shape the meal plan around them.</p>
+      </div>
+      <div class="treatment-card">
+        <p class="eyebrow-mini">7 nights and longer</p>
+        <h4 class="h-card">Cooking class with the Nakeha Studio chef</h4>
+        <p class="duration">60 minutes</p>
+        <p class="caption">Hands-on session at Nakeha Studio. The kitchen's research on which foods support digestive clearance, which support metabolic balance, and which support the gut-brain axis runs continuously; the class is the way that work meets the guest.</p>
+      </div>
+      <div class="treatment-card">
+        <p class="eyebrow-mini">Across the stay</p>
+        <h4 class="h-card">Lighter movement series</h4>
+        <p class="duration">Tier-progressive</p>
+        <p class="caption">Pranayama, Tai Chi, Yin Yoga, and Super Stretch sessions paced to a sedentary-adjacent starting point. 4-night stays anchor on Pranayama and Tai Chi; 7+ adds Yin and Super Stretch; 10+ adds Sound Healing as a recurring rhythm.</p>
+      </div>
+    </div>
+    <p class="caption text-center mt-8" style="font-style:italic;max-width:780px;margin:32px auto 0;">"Evidence-based treatments, mindful movement practices, personalised coaching, healthy cooking classes and holistic detoxifying therapies provide comprehensive education and support across the stay."</p>
+  </div>
+</section>
+
+<!-- WELLNESS THROUGH NUTRITION -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">At the table</p>
+      <h2 class="h-section">Wellness Through Nutrition</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The kitchen's healing-menu research runs across three programmes; for As a Feather, the primary anchor is Gut Healing and Cleansing. From the canonical Gut Health Reset framing: the work is to repair gut mucosa, improve food intolerances, optimise the microbiome, and reduce the impact of stress on the gut-brain axis.</p>
+      <p>The modalities the kitchen and clinical team draw on for this menu include Chi Nei Tsang (the Taoist abdominal practice referenced in Featured Treatments above), Ayurvedic purgation, colon hydrotherapy, and gut-brain sound healing. Where Sports Nutrition anchors As a Flow, and Women's Hormonal Health anchors As a Woman, Gut Healing and Cleansing anchors As a Feather. Where the assessment surfaces alignment with a different programme, the Wellness Advisor pulls the relevant elements in for that stay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTITIONERS IN RESIDENCE -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">In residence</p>
+        <h2 class="h-section">Practitioners in Residence</h2>
+        <p class="body-copy mb-4 full">Visiting Practitioners arrive at Jayasom in residence, for weeks at a time, through the year. Each is chosen for the depth of practice they carry. What they teach the team during their residency continues in the work after they leave.</p>
+        <p class="body-copy mb-4 full">Through any As a Feather stay, the practitioners in residence are surfaced in the consultation. Where one of them aligns with what the assessment reveals, the relevant work moves to them for that stay. Detox-paired treatments often book around the practitioner's residency week.</p>
+        <p class="body-copy mb-4 full">The roster rotates through the year and varies by season. Disciplines drawn on for As a Feather include detox clinical practice, nutritional medicine, and gut-health teaching, among others depending on the cohort in residence.</p>
+        <p class="body-copy full">The Wellness Advisor flags fits at the consultation. Where one of the practitioners aligns with what the assessment surfaces, their work layers into the daily rhythm of the property and deepens the brief; otherwise the daily team holds the work.</p>
+      </div>
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Visiting Practitioner spotlight</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND THE STAY -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">After departure</p>
+    <h2 class="h-section text-center" style="margin-bottom:32px;">Beyond the Stay</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">The work asked at Jayasom does not finish at checkout. Through any As a Feather stay, a continuity plan is built with the Wellness Advisor for what carries into the months after. The plan is light. Its job is to keep one or two of the practices, paced for daily life, after the property's rhythm is no longer holding them.</p>
+      <p style="margin-bottom:24px;">For Feather guests, continuity often centres on the nourishment approach calibrated during the stay, on a small set of digestive and metabolic protocols, and on the lighter movement practice that fits where the body has reached.</p>
+      <p>A Wellness Residences pathway runs alongside, for guests whose practice asks for an annual or seasonal home at the property. Twenty-four branded villas hold the same brief as the wider property, brought into private ownership. The residences sit privately spaced amid gardens, directly on the beach. The Jayasom Longevity Assessment Programme runs across seven components annually for residence owners, supported by the same Wellness Advisor who shapes the retreat stay. The pathway carries continuity that scales beyond any single visit.</p>
+    </div>
+    <div class="text-center mt-8">
+      <a href="wireframe-wellness-residences-v3.html" class="btn">Visit the Residences</a>
+    </div>
+  </div>
+</section>
+
+<!-- DAY BY DAY -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Day by day</p>
+      <h2 class="h-section">A typical seven-night stay</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:820px;">The body is asking for less weight to carry. Take that as the brief. Days are paced around the cleansing rhythm rather than a fixed grid, so the structure flexes where it needs to.</p>
+    </div>
+
+    <div class="flex flex-col" style="gap:16px;margin-top:48px;">
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 01</p>
+          <p class="day-title">Arrival and the Brief</p>
+        </div>
+        <div class="day-body">
+          <p>Afternoon arrival. The villa is set when you walk in: pillow choice already on the bed from the seven on the menu, your scent profile selected from the booking form (Calming Lavender or Spirited Rosemary), the Coco-mat&trade; mattress. Power juice, water, fruit, and a small spread of nutrient-dense bites on the table.</p>
+          <p>Your Wellness Advisor comes by not long after. The questionnaire you sent in is already read. The conversation is more practical than you'd expect. Where the body is today. What the dietary history has been. What you want the next phase to look like, and what the kitchen needs to know going in. From that, the programme starts at your first treatment slot tomorrow.</p>
+          <p>Dinner runs slow at Sarat&ocirc;. The kitchen reaches first for the Farm Belt and works from a nutrient-dense, whole-food line. Pranayama or Singing Bowl Meditation is on offer earlier; Better Sleep Class sits later. None of it is required tonight.</p>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 02</p>
+          <p class="day-title">Finding the Day's Rhythm</p>
+        </div>
+        <div class="day-body">
+          <p>The studio opens at seven. Pranayama, Tai Chi, Yin, or Morning Yoga Flow, depending on the day. The early hour is quiet. Most guests come anyway, the morning class lands lighter than expected.</p>
+          <p>The eleven o'clock Stretch holds. Twenty to forty minutes on the mat, breath-led, sized to whatever the afternoon's going to ask for. Lunch at Sarat&ocirc; usually follows what the Farm Belt picked that morning.</p>
+          <p>The Bespoke Nutritional Specialist Consultation comes in the afternoon. Fifty minutes mapping the kitchen against where the body is now, calibrated to your starting point. From there, the meal plan tightens; restrictions lift or land based on the assessment. Far Infrared Therapy follows for some guests, depending on the assessment.</p>
+          <p>By six, things settle. The pace slows tonight. Most guests close out the night early. Day 2 is calibration. The work tomorrow is real.</p>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 03</p>
+          <p class="day-title">First Clearance</p>
+        </div>
+        <div class="day-body">
+          <p>Mineral water. Herbal heat. Time spent on the table without anywhere else to be; the room feels softer afterwards.</p>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 04</p>
+          <p class="day-title">Active Lightness</p>
+        </div>
+        <div class="day-body">
+          <p>The morning is softer still. Yin, Tai Chi, or Pranayama at seven. The floor work eases off after yesterday.</p>
+          <p>The eleven o'clock Stretch is in. Ten o'clock aqua fits well today: light Pool Noodle or Hand Buoy work in the cool of the mineral pool. Off the studio floor, the body works without weight.</p>
+          <p>Taoist Abdominal Massage comes in for Immerse and Commit guests in the afternoon. Chi Nei Tsang lineage work, paced and unhurried. You feel the difference more the next morning than during.</p>
+          <p>In the evening, the Nakeha Studio cooking class runs for Absorb stays and longer. The chef takes what the Farm Belt brought in that morning and works it into the lesson, anchored to the meal plan from Day 2's Nutrition Consultation. Dinner is what you cooked, served at Sarat&ocirc;.</p>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 05</p>
+          <p class="day-title">Deeper Clearance</p>
+        </div>
+        <div class="day-body">
+          <p>The seven o'clock class today is dynamic but contained; Pilates or Tai Chi depending on the day. Eleven o'clock Stretch preps you for what the afternoon will ask.</p>
+          <p>Udvarthanam fills the late morning. Fifty minutes, herbal-powder body massage; promotes circulation, supports lymphatic clearance, leaves the skin warm and lifted. The work links cleanly back to Day 3's first clearance, on purpose.</p>
+          <p>For Immerse and Commit guests, a second Far Infrared Therapy session follows in the afternoon. The mechanics are in the Featured Treatments section above; what matters here is the timing. By day five the body holds heat differently.</p>
+          <p>The hydrothermal circuit takes the wind-down. Infrared sauna into waterfall bathing into Kneipp walking, then vitality pools, steam, Rasul, the flotation pool. The order is yours.</p>
+          <p>Sarat&ocirc; takes dinner tonight, or Jiraka for a change (beef-free, spice-route). The kitchen keeps gluten, refined sugars, salt, and coffee low across the board, with anti-inflammatory ingredients leading the line. Better Sleep Class is on offer at eight.</p>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 06</p>
+          <p class="day-title">Restoration</p>
+        </div>
+        <div class="day-body">
+          <p>Day six is the deload. The clearance work from earlier in the week settles in here, and you don't push against it. Morning class is gentle again: Yin, Tai Chi, or Pranayama. The eleven o'clock Stretch holds, as ever.</p>
+          <p>The afternoon is where Commit stays open up. Pinda Sweda comes in: Ayurvedic herbal-compress massage. The compress holds heat against the body for longer than expected; the muscles soften, fluid moves. It belongs on day six because the body is asking for it now, not earlier.</p>
+          <p>Immerse stays pair a second hydrothermal block with a longer Stretch. Absorb stays draw the day's treatment from the seven-treatment menu (Jayasom Signature, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga), take the circuit through the afternoon, and close the day light.</p>
+          <p>The six o'clock slot offers Floating Meditation or Aerial Yoga. The pace slows tonight, dinner runs longer than the others. By eight, most guests are in the villa or somewhere quiet in the Yasmeen Night Garden.</p>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div>
+          <p class="day-num">Day 07</p>
+          <p class="day-title">Walking Out Lighter</p>
+        </div>
+        <div class="day-body">
+          <p>The day moves loose. The seven o'clock class is there if you want it; most guests skip it and walk along the cove instead.</p>
+          <p>Breakfast at Sarat&ocirc;. The eleven o'clock Stretch still happens, even today. Some guests take it as the close of the week.</p>
+          <p>The final Wellness Advisor session is before checkout. This is where the take-home plan gets written up: the meal plan, the gut and digestion protocols, the morning practices that fit your home cadence, the supplements and any continuing referrals. The plan deliberately stays narrow. One or two practices is what works, not seven days copy-pasted.</p>
+          <p>Lunch is the closing meal. Checkout follows. The transfer follows the airport you noted on Day 1: Al Wajh, NEOM Bay, or Red Sea International.</p>
+          <p>You leave with the load measured and a lighter set of habits drawn out. The next phase begins on the table at home.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tier compression / expansion -->
+    <div style="margin-top:64px;max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow text-center">Beyond the seven-night canonical tier</p>
+      <h3 class="h-sub text-center mb-6">How the rhythm flexes across stay lengths</h3>
+      <div class="body-copy full text-center" style="font-size:14px;line-height:1.7;">
+        <p style="margin-bottom:18px;">Four-night Explore stays compress what's above. The Specialist Nutritional Consultation, the early studio rotation, and the eleven o'clock Stretch all stay in. Detoxifying Balneotherapy stays in. Pinda Sweda, Udvarthanam, and the cooking class drop out at this tier. Explore is calibration. The deeper clearance work starts at ten nights.</p>
+        <p style="margin-bottom:18px;">Ten-night Immerse stays bring Pinda Sweda, Udvarthanam, and a second Far Infrared Therapy session into the cleansing rhythm. The Healthy Cooking session runs in the second week. Holistic detox work extends to eleven across the stay.</p>
+        <p style="margin-bottom:18px;">Fourteen-night Commit stays open the deeper clearance work in earnest. Two Detoxifying Balneotherapy sessions over the fortnight. The fifteen Holistic Treatments span the stay; the assessment-driven addition of Therapeutic Lymphatic Drainage and Far Infrared Therapy lands in the second week. The closing conversation reads the work back across fourteen days, which lands differently than reading it across seven.</p>
+        <p>Across all four tiers, two things stay constant: the eleven o'clock Stretch, and your Wellness Advisor. The afternoon detox block adapts to what the body is asking for that day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-SELL -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Other directions</p>
+      <h2 class="h-section">Other ways to retreat at Jayasom</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:760px;">Each retreat runs four to fourteen nights and is shaped at arrival by your Wellness Advisor.</p>
+    </div>
+    <div class="grid-5" style="margin-top:48px;">
+      <a href="wireframe-as-a-pair-v3.html" class="cross-card"><p class="name">As a Pair</p><p class="tag">Profound connection, relaxing together, renewal.</p></a>
+      <a href="wireframe-as-a-woman-v3.html" class="cross-card"><p class="name">As a Woman</p><p class="tag">Sisterhood, balance, confidence.</p></a>
+      <a href="wireframe-as-a-family-v3.html" class="cross-card"><p class="name">As a Family</p><p class="tag">Communication, joy, united trust.</p></a>
+      <a href="wireframe-as-a-leader-v3.html" class="cross-card"><p class="name">As a Leader</p><p class="tag">Optimised performance, focus, resilience.</p></a>
+      <a href="wireframe-as-a-flow-v3.html" class="cross-card"><p class="name">As a Flow</p><p class="tag">Agility, focused energy, being in control.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan your stay</p>
+    <h2 class="h-section">Plan Your Stay</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">Speak to a Wellness Advisor and let the brief begin.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Plan Your Retreat</a>
+      <a href="#" class="btn btn-on-dark">Request a private call with your Wellness Advisor</a>
+    </div>
+    <p class="caption mt-4" style="color:hsla(var(--primary-foreground),0.7);font-style:italic;">Response within 48 hours.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      <div class="faq-item"><div class="q"><p class="q-text">What's the best detox and weight management wellness retreat in Saudi Arabia?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">Jayasom AMAALA's As a Feather retreat sits on the Red Sea coast within the Triple Bay master plan, integrating Traditional Arabic Medicine with contemporary clinical science. It runs four to fourteen nights and is shaped at arrival by a Wellness Advisor, anchored on Pure Lightness, the Jayasom methodology for detox and weight balance.</p></div>
+      <div class="faq-item"><div class="q"><p class="q-text">How intense is the cleansing on As a Feather?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">The cleansing rhythm is calibrated to your starting point. Sedentary-adjacent guests begin with lighter modalities such as Pranayama, Tai Chi, dry skin brushing, and Far Infrared Therapy, before deeper detox practices are introduced. The structure is light enough to follow you; nothing is added because of the calendar.</p></div>
+      <div class="faq-item"><div class="q"><p class="q-text">What does the meal plan on As a Feather involve?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">The kitchen reaches first for the Farm Belt and leans on nutrient-dense, whole-food meals, with calorie-controlled options where the assessment indicates them. Anti-inflammatory ingredients and digestive-supportive cooking methods anchor the plan.</p></div>
+      <div class="faq-item"><div class="q"><p class="q-text">Is As a Feather suitable for guests with chronic digestive conditions?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">The retreat is shaped around the assessment and the questionnaire completed before arrival. For guests with chronic conditions, your Wellness Advisor calibrates the programme accordingly and may align the stay with a Visiting Practitioner whose specialism fits the condition. Where the assessment indicates that medical supervision beyond Jayasom's clinical scope is needed, this is flagged at the pre-arrival conversation.</p></div>
+      <div class="faq-item"><div class="q"><p class="q-text">Who is As a Feather for?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">The retreat is shaped for individuals seeking thorough health improvement through weight management and cleansing. Mostly sedentary jobs looking to change inadequate habits, and those who seek advice on nutrition and weight to revitalise their metabolism. The Wellness Advisor sets the programme around the guest's stated direction at the pre-arrival conversation.</p></div>
+      <div class="faq-item"><div class="q"><p class="q-text">How does the retreat support detox without being punitive?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">The Pure Lightness methodology pairs an anti-inflammatory nourishment approach with a structured cleansing rhythm and a sedentary-friendly daily pacing. Where the body asks for less than the calendar offers, the day eases back to meet it. Pacing is part of the practice, not the obstacle.</p></div>
+      <div class="faq-item"><div class="q"><p class="q-text">How long is the typical stay, and can the programme flex?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div><p class="a">Stays run from four to fourteen nights. Four tiers hold the structure: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. The cleansing rhythm matches the tier; nothing across the stay is added because of the calendar.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

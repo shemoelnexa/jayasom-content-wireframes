@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Detoxifying Balneotherapy v3 · Jayasom Wireframe</title>
+  <style>
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+html, body {
+  background: hsl(var(--background)); color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300; line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh;
+}
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow, .section-dark .body-copy, .section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero, .section-dark .h-section, .section-dark .h-sub, .section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+.grid-2, .grid-3, .grid-4 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 24px; } }
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) { .site-footer .cols { grid-template-columns: 1fr; } .site-footer .bottom { flex-direction: column; gap: 16px; } }
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+.text-center { text-align: center; }
+.flex { display: flex; } .justify-center { justify-content: center; }
+.gap-2 { gap: 8px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+.section-tall { padding: 80px 32px; }
+.section-strip { padding: 4px 0; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.bullet-list { display: flex; flex-direction: column; gap: 8px; }
+.bullet-list li { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.6; display: flex; gap: 12px; }
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
+.stat-block .stat-num { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.step-card { padding: 24px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.step-card .step-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.step-card .step-num::before { content: ""; width: 24px; height: 1px; background: hsl(var(--foreground)); display: inline-block; }
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 720px; }
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; letter-spacing:0.15em; text-transform:uppercase; }
+.callout .callout-body { font-size: 13px; color: hsl(var(--foreground)); line-height: 1.6; }
+.dual-list-card { border: 1px solid hsl(var(--border)); padding: 24px; }
+.dual-list-card .sublist { margin-bottom: 16px; }
+.dual-list-card .sublist + .sublist { padding-top: 16px; border-top: 1px solid hsl(var(--border)); }
+.dual-list-card .sublist .label-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.dual-list-card .sublist ul { display: flex; flex-direction: column; gap: 4px; }
+.dual-list-card .sublist li { font-size: 12px; color: hsl(var(--muted-foreground)); display: flex; align-items: center; gap: 8px; }
+.dual-list-card .sublist li::before { content: ""; width: 4px; height: 4px; background: hsl(var(--foreground)); border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<nav class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span>
+    <a href="#wellness">Wellness</a><span class="sep">›</span>
+    <a href="#treatments">Treatments</a><span class="sep">›</span>
+    <span>Detoxifying Balneotherapy</span>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO — water imagery, full width -->
+<section style="position:relative;">
+  <div class="wire-image" style="height:520px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0M3 17c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0M3 7c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/></svg>
+    <span class="label">Mineral bath surface</span>
+  </div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+    <div class="text-center" style="background:hsla(16,33%,93%,0.92);padding:40px;border:1px solid hsl(var(--border));max-width:680px;">
+      <p class="eyebrow">Treatment · Hydrothermal</p>
+      <h1 class="h-hero">Detoxifying Balneotherapy</h1>
+      <p class="body-copy" style="margin:0 auto 16px;font-style:italic;">Mineral bathing, paced for the detox arc.</p>
+      <p class="body-copy" style="margin:0 auto 32px;">Balneotherapy is mineral bathing in a controlled hydrothermal protocol. The thirty-minute session uses warm mineral water under a measured temperature and duration to draw out fluid retention, ease the load on the lymphatic system, and open the body's clearance pathways. The work sits within Jayasom's Hydrothermal facilities, alongside hammam, steam, sauna and salt inhalation.</p>
+      <a href="#" class="btn btn-solid">Plan a session</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS — three column -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:720px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Overview</p>
+      <h2 class="h-section">What the session is</h2>
+    </div>
+    <div class="grid-3" style="margin-top:48px;">
+      <div>
+        <p class="eyebrow-mini">What it is</p>
+        <h3 class="h-sub">A controlled mineral immersion</h3>
+        <p class="body-copy full">The session is a controlled mineral immersion. The bath is prepared with mineral concentrate at a temperature and salinity selected for detox aims; the practitioner reads the body before and after, sets a precise duration, and stays within the room. The detoxifying register pairs naturally with adjacent hydrothermal facilities, so a session is often planned alongside salt inhalation or infrared.</p>
+      </div>
+      <div>
+        <p class="eyebrow-mini">Why guests choose it</p>
+        <h3 class="h-sub">When the body is holding fluid</h3>
+        <p class="body-copy full">Guests come to Balneotherapy when the body is holding fluid, when circulation is sluggish at the extremities, when a longer detox arc is in motion across the stay. The work is small and constant, the kind that holds up across a year. The change registers as a body that reads less swollen, hands and feet that warm more readily, and a clearer line between stored load and what has cleared.</p>
+      </div>
+      <div>
+        <p class="eyebrow-mini">How it feels</p>
+        <h3 class="h-sub">Warm, suspended, paced</h3>
+        <p class="body-copy full">Warm mineral water held at a consistent temperature; the body floats with light buoyancy; underwater jets work through back and legs in a programmed sequence. Most guests close their eyes within the first two minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE STRIP — water/hydrothermal -->
+<section class="section-strip">
+  <div class="image-strip">
+    <div class="wire-image" style="height:200px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c1.5-2 3-2 4.5 0s3 2 4.5 0 3-2 4.5 0 3 2 4.5 0"/></svg>
+      <span class="label">Mineral pool</span>
+    </div>
+    <div class="wire-image" style="height:200px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>
+      <span class="label">Salt inhalation room</span>
+    </div>
+    <div class="wire-image" style="height:200px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V11M19 22V11M5 11l7-9 7 9"/></svg>
+      <span class="label">Hammam chamber</span>
+    </div>
+    <div class="wire-image" style="height:200px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/></svg>
+      <span class="label">Cold plunge</span>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD — three stages -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:720px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Method</p>
+      <h2 class="h-section">How the session works</h2>
+      <p class="body-copy" style="margin:0 auto;">The session draws on Body across the Therapeutic Pillars and sits within the Hydrothermal facilities. The protocol follows three stages.</p>
+    </div>
+    <div class="grid-3" style="margin-top:48px;">
+      <div class="step-card">
+        <p class="step-num">Stage 01 · Read</p>
+        <h4 class="h-card">Body and brief</h4>
+        <p class="caption">A brief reading of the body and brief; the Wellness Advisor's notes on the wider stay set where Balneotherapy sits.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Stage 02 · Immerse</p>
+        <h4 class="h-card">Prepared mineral bath</h4>
+        <p class="caption">The prepared mineral bath at controlled temperature and salinity for a measured duration. The practitioner stays in the room and reads vitals between intervals.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Stage 03 · Rest</p>
+        <h4 class="h-card">Slow closing rest</h4>
+        <p class="caption">A slow closing rest. The session pairs naturally with adjacent hydrothermal work: salt inhalation rooms, infrared, or a closing cold plunge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HYDROTHERMAL CONTEXT -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div class="dual-list-card">
+        <div class="sublist">
+          <div class="label-row">
+            <p class="eyebrow-mini" style="margin:0;">Hydrothermal facilities at Jayasom</p>
+          </div>
+          <ul>
+            <li>Hammam</li>
+            <li>Steam room</li>
+            <li>Sauna</li>
+            <li>Cold plunge</li>
+            <li>Mineral bathing</li>
+            <li>Salt inhalation rooms</li>
+            <li>Family Rasoul</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Read as one practice</p>
+        <h2 class="h-section">Read into the wider arc</h2>
+        <p class="body-copy mb-4 full">The Hydrothermal facilities at Jayasom include hammam, steam, sauna, cold plunge, mineral bathing, salt inhalation rooms and a family Rasoul. Detoxifying Balneotherapy is read into this practice as the controlled mineral-bathing protocol.</p>
+        <p class="body-copy full">The Wellness Advisor sequences these together where the brief calls for an extended hydrothermal arc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:start;">
+      <div>
+        <p class="eyebrow">Afterwards</p>
+        <h2 class="h-section">What guests notice afterwards</h2>
+      </div>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>A body that reads less swollen</li>
+        <li>Hands and feet that warm more readily</li>
+        <li>Slower, deeper sleep on the night of the session</li>
+        <li>A clearer line between stored load and what has cleared</li>
+        <li>A baseline for the rest of the stay's hydrothermal and detox work</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DURATION + INCLUSIONS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Practical</p>
+      <h2 class="h-section">What is included</h2>
+    </div>
+    <div class="grid-3" style="margin-top:32px;">
+      <div class="stat-block">
+        <p class="stat-num">30</p>
+        <p class="stat-label">Minutes</p>
+        <p class="caption mt-2">Duration</p>
+      </div>
+      <div class="stat-block">
+        <p class="stat-label">Preparation</p>
+        <p class="caption mt-2" style="font-size:13px;">A pre-session brief read with your Wellness Advisor; light meal cadence the day of, water before; no alcohol the day of (resort canonical, no alcohol on property).</p>
+      </div>
+      <div class="stat-block">
+        <p class="stat-label">Aftercare</p>
+        <p class="caption mt-2" style="font-size:13px;">Hydration, a slow rest period, light meal afterwards; pairs naturally with a cool plunge or salt inhalation room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USED IN RETREATS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Where this session appears</p>
+      <h2 class="h-section">Pairs naturally with</h2>
+    </div>
+    <div class="grid-3" style="margin-top:48px;">
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s2-7 10-7 10 7 10 7-2 7-10 7S2 12 2 12z"/></svg>
+          <span class="label">As a Feather</span>
+        </div>
+        <div class="pad">
+          <h4 class="h-card">As a Feather</h4>
+          <p class="caption mb-4">Threaded through the Feather retreat as part of the central detox arc, alongside the Detox Body Wrap, dry skin brushing and lymphatic drainage. Tier counts adjust across four, seven, ten and fourteen nights.</p>
+          <a href="#" class="btn">Visit As a Feather</a>
+        </div>
+      </div>
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+          <span class="label">As a Woman</span>
+        </div>
+        <div class="pad">
+          <h4 class="h-card">As a Woman</h4>
+          <p class="caption mb-4">Read into the Woman retreat alongside Therapeutic Lymphatic Drainage and Watsu, where the body is holding fluid through hormonal change or a long-running cycle of stress.</p>
+          <a href="wireframe-as-a-woman-v3.html" class="btn">Visit As a Woman</a>
+        </div>
+      </div>
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="4"/><circle cx="15" cy="12" r="4"/></svg>
+          <span class="label">As a Pair</span>
+        </div>
+        <div class="pad">
+          <h4 class="h-card">As a Pair</h4>
+          <p class="caption mb-4">Available within the Pair retreat as paired hydrothermal time, often planned alongside Floatation Therapy or Watsu across the same day for guests who arrive carrying physical load between them.</p>
+          <a href="wireframe-as-a-pair-v3.html" class="btn">Visit As a Pair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALIST -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div>
+        <p class="eyebrow">Who delivers the session</p>
+        <h2 class="h-section">Resident Specialist</h2>
+        <p class="eyebrow-mini">Hydrothermal and detox protocols</p>
+        <p class="body-copy mt-4 mb-4 full">Hydrothermal and detox training sit behind the session, with precise reading at the heart of the protocol: water temperature, salinity, jet sequence, hold time, all calibrated against the brief at arrival. The body reads the practitioner as much as the device does.</p>
+        <a href="#" class="btn">Read the full bio</a>
+      </div>
+      <div class="wire-image" style="height:380px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        <span class="label">Specialist photo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Common questions</p>
+      <h2 class="h-section">Frequently asked</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">What does balneotherapy mean?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Balneotherapy is the practice of bathing in mineral water for therapeutic aim. The Detoxifying protocol at Jayasom uses controlled mineral concentration, temperature and duration to support the body's clearance pathways. The work sits within the resort's Hydrothermal facilities.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Is the session safe?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">The bath is prepared by a hydrothermal practitioner who stays in the room, reads vitals between intervals, and adjusts duration where the body asks for less. The session is held back where contraindications surface in the pre-session brief; the Wellness Advisor reviews medical history ahead of placement.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Should I plan it alongside other hydrothermal work?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Yes, often. The Hydrothermal facilities at Jayasom are designed to read as one practice. A Balneotherapy session pairs naturally with salt inhalation rooms, infrared, hammam, or a closing cool plunge. The Wellness Advisor sequences these together where the brief calls for an extended hydrothermal arc.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">How is this different from a regular spa bath?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">The water composition, temperature and duration are selected for a specific detox aim, not a generic relaxation register. The practitioner stays in the room, reads vitals, and adjusts the protocol. The work is read into a wider stay through the Wellness Advisor brief, not booked as a stand-alone indulgence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALITY -->
+<section class="section">
+  <div class="shell" style="max-width:720px;text-align:center;">
+    <p class="eyebrow">Where it is delivered</p>
+    <p class="body-copy" style="margin:0 auto;">Jayasom Wellness Resort sits at AMAALA, on Saudi Arabia's Red Sea coast at Triple Bay. Detoxifying Balneotherapy is delivered on-property within the Hydrothermal facilities; one hour by car from Al Wajh airport.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan a session</p>
+    <h2 class="h-section">Plan the session into your stay</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">Balneotherapy is included across the Pair, Woman and Feather retreats. Plan the placement and adjacent hydrothermal pairings with the Wellness Advisor team ahead of arrival; the brief read on the day will set duration and sequencing.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Plan your stay</a>
+      <a href="#" class="btn btn-on-dark">Speak with a Wellness Advisor</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

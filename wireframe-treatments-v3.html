@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Treatments v3 · Jayasom Wireframe</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.wire-card.muted { background: hsl(var(--muted)); }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+
+.timeline { display: flex; flex-direction: column; gap: 32px; }
+.timeline-row { display: grid; grid-template-columns: 24px 1fr; gap: 16px; }
+.timeline-marker { display: flex; flex-direction: column; align-items: center; }
+.timeline-dot { width: 12px; height: 12px; border: 2px solid hsl(var(--foreground)); border-radius: 50%; }
+.timeline-line { width: 1px; flex: 1; background: hsl(var(--border)); margin-top: 4px; min-height: 24px; }
+
+.pull-quote { border-left: 2px solid hsl(var(--foreground)); padding: 8px 24px; font-size: 18px; font-weight: 300; font-style: italic; color: hsl(var(--foreground)); margin: 24px 0; }
+.pull-quote .attribution { display: block; margin-top: 16px; font-size: 12px; font-style: normal; color: hsl(var(--muted-foreground)); }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.icon-card-centered { text-align: center; padding: 24px; }
+.icon-card-centered .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 16px; color: hsl(var(--foreground));
+}
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+
+.icon-card-inline { padding: 24px; border: 1px solid hsl(var(--border)); }
+.icon-card-inline .head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.icon-card-inline .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex-shrink: 0;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  color: hsl(var(--foreground));
+}
+.icon-card-inline .icon-circle svg { width: 16px; height: 16px; stroke-width: 1.25; }
+
+.dual-list-card { border: 1px solid hsl(var(--border)); padding: 24px; }
+.dual-list-card .sublist { margin-bottom: 16px; }
+.dual-list-card .sublist + .sublist { padding-top: 16px; border-top: 1px solid hsl(var(--border)); }
+.dual-list-card .sublist .label-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.dual-list-card .sublist ul { display: flex; flex-direction: column; gap: 4px; }
+.dual-list-card .sublist li {
+  font-size: 12px; color: hsl(var(--muted-foreground));
+  display: flex; align-items: center; gap: 8px;
+}
+.dual-list-card .sublist li::before {
+  content: ""; width: 4px; height: 4px;
+  background: hsl(var(--foreground)); border-radius: 50%;
+  display: inline-block; flex-shrink: 0;
+}
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout ul { display: flex; flex-direction: column; gap: 10px; padding-left: 0; list-style: none; }
+.callout ul li { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); font-style: italic; line-height: 1.5; padding-left: 20px; position: relative; }
+.callout ul li::before { content: ""; position: absolute; left: 0; top: 12px; width: 10px; height: 1px; background: hsl(var(--foreground)); }
+
+.centered-note {
+  max-width: 720px; margin: 0 auto; text-align: center;
+  border: 1px solid hsl(var(--border)); background: hsl(var(--muted));
+  padding: 32px;
+}
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li {
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+  display: flex; gap: 12px; padding-left: 0;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
+.stat-block .stat-num { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.step-card { padding: 24px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.step-card .step-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.step-card .step-num::before { content: ""; width: 24px; height: 1px; background: hsl(var(--foreground)); display: inline-block; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.treatment-card .pillar { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.treatment-card .read-more { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--foreground)); margin-top: 16px; border-bottom: 1px solid hsl(var(--foreground)); padding-bottom: 4px; align-self: flex-start; }
+
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; border: 0; padding: 0; }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<nav class="breadcrumb">
+  <a href="index.html">Home</a><span class="sep">›</span>
+  <a href="#wellness">Wellness</a><span class="sep">›</span>
+  <span>Treatments</span>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:480px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    <span class="label">Practitioner working in a treatment room at Jayasom AMAALA</span>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Wellness · Treatments</p>
+      <h1 class="h-hero">Treatments</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">Sixty treatments, each chosen for what it does, not how it sounds.</p>
+      <p class="body-copy" style="margin:0 auto 32px;">The sixty published here are the ones that earn their place. Three things qualify them. The Wellness Advisors prescribe them most often. The practitioners are accredited to deliver them. And the rituals hold up across a week of daily use.</p>
+      <a href="#" class="btn btn-solid">Speak with a Wellness Advisor</a>
+    </div>
+  </div>
+</section>
+
+<!-- COHORT SCOPE NARRATIVE -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Sixty treatments are published on the website, drawn from a wider operational catalogue of more than two hundred. The published cohort is the working set for retreat guests; the wider catalogue surfaces through the Wellness Advisor where it fits a programme.</p>
+      <p style="margin-bottom:24px;">Treatments fall across four categories: massage and bodywork, Ayurvedic protocols, Traditional Arabic and Islamic Medicine, and contemporary clinical care. Each draws on a Therapeutic Pillar and is anchored by a named practitioner.</p>
+      <p>Each treatment page carries a duration, a practitioner anchor, the Therapeutic Pillar it belongs to, and a contraindication note where relevant. Booking sits with your Wellness Advisor rather than direct-self-service.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THERAPEUTIC PILLARS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:760px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">The architecture</p>
+      <h2 class="h-section">Three Therapeutic Pillars</h2>
+      <p class="body-copy" style="margin:0 auto;">Body work covers spa, physiotherapy, fitness, and corrective movement. Health work draws on Ayurveda, Traditional Arabic and Islamic Medicine, hydrotherapy, and energy practice. Aesthetic work runs across facials, brand-partner systems, and longevity-led skin care.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M5 8c0 0 3-3 7-3s7 3 7 3M5 16c0 0 3 3 7 3s7-3 7-3"/></svg>
+        </span>
+        <h4 class="h-card">Body work</h4>
+        <p class="caption">Spa, physiotherapy, fitness, corrective movement.</p>
+      </div>
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </span>
+        <h4 class="h-card">Health work</h4>
+        <p class="caption">Ayurveda, Traditional Arabic and Islamic Medicine, hydrotherapy, energy practice.</p>
+      </div>
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        </span>
+        <h4 class="h-card">Aesthetic work</h4>
+        <p class="caption">Facials, brand-partner systems, longevity-led skin care.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER + GRID -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-6">
+      <p class="eyebrow">Browse</p>
+      <h2 class="h-section">Filter by what you need</h2>
+    </div>
+
+    <div class="tag-row justify-center mb-8" style="margin-bottom:16px;">
+      <span class="tag">Body work</span>
+      <span class="tag">Health work</span>
+      <span class="tag">Aesthetic</span>
+      <span class="tag">Ayurveda</span>
+      <span class="tag">TAIM</span>
+      <span class="tag">Energy practice</span>
+      <span class="tag">Hydrotherapy</span>
+      <span class="tag">Mindfulness</span>
+      <span class="tag">Facials</span>
+      <span class="tag">Fitness</span>
+      <span class="tag">Yoga</span>
+      <span class="tag">Pilates</span>
+      <span class="tag">Corrective movement</span>
+      <span class="tag">Brand-partner systems</span>
+    </div>
+
+    <p class="caption text-center" style="margin-bottom:48px;">Sort: by category · by duration · alphabetical</p>
+
+    <!-- 15-treatment cohort grid -->
+    <div class="grid-3" style="gap:24px;">
+
+      <!-- 1 Jayasom Signature Massage -->
+      <a href="wireframe-tx-jayasom-signature-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Body work · 50 / 90 min</p>
+        <h4 class="h-card">Jayasom Signature Massage</h4>
+        <p class="caption">Bamboo and walnut exfoliation followed by Lomilomi, Shiatsu, and Thai oil.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 2 Shirodhara -->
+      <a href="wireframe-tx-shirodhara-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Health work · Ayurveda · 90 min</p>
+        <h4 class="h-card">Shirodhara</h4>
+        <p class="caption">A continuous warm pour of medicated oil onto the third eye.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 3 Marma Point Therapy -->
+      <a href="wireframe-tx-marma-point-therapy-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Health work · Ayurveda · 50 min</p>
+        <h4 class="h-card">Marma Point Therapy</h4>
+        <p class="caption">One hundred and seven points where matter and consciousness meet.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 4 Pinda Sweda -->
+      <a href="wireframe-tx-pinda-sweda-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Health work · Ayurveda · 90 min</p>
+        <h4 class="h-card">Pinda Sweda</h4>
+        <p class="caption">Warm linen bags filled with medicinal herbs and rice, applied to ease joint stiffness.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 5 Watsu -->
+      <a href="wireframe-tx-watsu-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Hydrotherapy · 50 min</p>
+        <h4 class="h-card">Watsu</h4>
+        <p class="caption">Bodywork in warm water; the spine remembers a different shape.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 6 Sound Healing -->
+      <a href="wireframe-tx-sound-healing-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Energy and Sound · 50 min</p>
+        <h4 class="h-card">Sound Healing</h4>
+        <p class="caption">Tibetan singing bowls, gongs, and toned voice in a quiet room.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 7 Floatation Therapy -->
+      <a href="wireframe-tx-floatation-therapy-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Hydrotherapy · 50 min</p>
+        <h4 class="h-card">Floatation Therapy</h4>
+        <p class="caption">A held quiet, in skin-temperature, magnesium-rich water.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 8 Crystal Aroma Massage -->
+      <a href="wireframe-tx-crystal-aroma-massage-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Energy work · 50 / 90 min</p>
+        <h4 class="h-card">Crystal Aroma Massage</h4>
+        <p class="caption">Heated Jade crystal paired with Arabic-inspired essential oils.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 9 QALBAIN -->
+      <a href="wireframe-tx-qalbain-two-hearts-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Body work · Couples ritual · 120 min</p>
+        <h4 class="h-card">QALBAIN (Two Hearts)</h4>
+        <p class="caption">A two-hour couples ritual: Grounding Ritual, BIOME Facial, shared pause.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 10 Ulfa Ritual -->
+      <a href="wireframe-tx-ulfa-ritual-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">TAIM · Ritual</p>
+        <h4 class="h-card">Ulfa Ritual</h4>
+        <p class="caption">A regional bonding ritual rooted in Traditional Arabic and Islamic Medicine.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 11 Vagus Nerve Ritual -->
+      <a href="wireframe-tx-vagus-nerve-ritual-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Mindfulness · Nervous-system work</p>
+        <h4 class="h-card">Vagus Nerve Ritual</h4>
+        <p class="caption">A protocol designed to step the autonomic system out of vigilance.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 12 Hijama -->
+      <a href="wireframe-tx-hijama-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">TAIM · Cupping</p>
+        <h4 class="h-card">Hijama</h4>
+        <p class="caption">The regional cupping practice, drawn from Traditional Arabic and Islamic Medicine.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 13 Hydrafacial Platinum -->
+      <a href="wireframe-tx-hydrafacial-platinum-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Aesthetic · Brand partner · 60 min</p>
+        <h4 class="h-card">Hydrafacial Platinum</h4>
+        <p class="caption">Brand partner Hydrafacial system, layered with personalised serums.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 14 Detoxifying Balneotherapy -->
+      <a href="wireframe-tx-detox-balneotherapy-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Hydrotherapy · 60 min</p>
+        <h4 class="h-card">Detoxifying Balneotherapy</h4>
+        <p class="caption">A mineral-bath protocol that supports lymphatic flow and elimination.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+      <!-- 15 Reiki T'aqa -->
+      <a href="wireframe-tx-reiki-taqa-v3.html" class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:16px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <p class="pillar">Energy practice</p>
+        <h4 class="h-card">Reiki T'aqa</h4>
+        <p class="caption">An energy-practice session held by hand position and presence.</p>
+        <span class="read-more">View treatment</span>
+      </a>
+
+    </div>
+
+    <p class="caption text-center" style="margin-top:48px;font-style:italic;max-width:760px;margin-left:auto;margin-right:auto;">Fifteen treatments hold the published cohort across the website. The full Treatment Directory carries the wider operational set across the property; the Wellness Advisor reads where each belongs.</p>
+  </div>
+</section>
+
+<!-- COUNTER-NARRATIVE PULL QUOTE -->
+<section class="section section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="pull-quote" style="border-left:0;padding:0;font-size:24px;text-align:center;">"wellbeing is not a luxury, but a birthright."</p>
+  </div>
+</section>
+
+<!-- DIRECTORY DEPTH -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">Treatment Directory</p>
+    <h2 class="h-section text-center" style="margin-bottom:32px;">A wider catalogue beneath the published cohort</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Jayasom AMAALA's Treatment Directory carries one hundred and fifty treatments across the Therapeutic Pillars of body, mind and spirit. Some anchor a single retreat; many thread across multiple retreat shapes. The Wellness Advisor places each against the brief at arrival, reading the body's starting point and the goals the stay is asking for.</p>
+      <p style="margin-bottom:24px;">Treatments cluster across categories: Wellness Assessments and clinical baselines; Sound and energetic therapies; Bodywork and manual practice; Hydrotherapy and water-borne work; Ayurvedic protocols; Traditional Arabic and Islamic Medicine; Beauty and skin care; and Recovery and active rehabilitation.</p>
+      <p style="margin-bottom:24px;">Anchor treatments differ by retreat. The Couple's Connect Spa Ritual sits within As a Pair; QALBAIN, separately, sits as a couples treatment alongside it. Watsu, Marma Point, and Pinda Sweda thread across multiple retreat shapes. The daily 60-minute treatment from the seven-treatment menu (Jayasom Signature Massage, Balinese, Deep Tissue, Classical Swedish, Chakra Balancing, Foot Reflexology, Abhyanga) runs across every retreat.</p>
+      <p>Every retreat opens with a one-to-one Health Consultation, plus a Specialist Consultation calibrated to the retreat shape. Physical and Postural Assessment plus VISIA Facial Imaging are complimentary on request. The Wellness Mentoring sessions thread across longer stays for guests carrying a longer-arc question.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TAIM ANCHOR -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Traditional Arabic and Islamic Medicine</p>
+        <h2 class="h-section">TAIM threads through many sessions</h2>
+        <p class="body-copy mb-4 full">Traditional Arabic and Islamic Medicine sits across many Jayasom treatments. Hijama, the regional cupping practice, runs as one of the published cohort. The Halalopathy framework threads across the practitioner roster, the kitchen, and the daily clinical practice; Phase 2 of Jayasom's growth opens a dedicated Harmony of Halal retreat that brings the framework into the foreground.</p>
+      </div>
+      <div class="wire-image" style="height:380px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">TAIM treatment room</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELLNESS ADVISOR MECHANIC -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Personalisation</p>
+    <h2 class="h-section">A Wellness Advisor builds your treatment plan</h2>
+    <p class="body-copy" style="margin:0 auto 32px;">Treatments aren't booked from a menu. A Wellness Advisor speaks with you before arrival, reviews any clinical context you choose to share, and shapes a plan that runs across your stay. The selection shifts as the week progresses; the plan stays yours.</p>
+    <a href="#" class="btn">Speak with a Wellness Advisor</a>
+  </div>
+</section>
+
+<!-- VISITING PRACTITIONERS -->
+<section class="section">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">In residence</p>
+    <h3 class="h-sub" style="font-size:22px;margin-bottom:16px;">Some treatments are delivered by Visiting Practitioners</h3>
+    <p class="body-copy" style="margin:0 auto 24px;">A handful of treatments only run when a specialist is in residence. Visiting Practitioners arrive for set windows of weeks at a time, and their treatments show on the calendar only during those weeks.</p>
+    <a href="#" class="btn">Meet our Specialists</a>
+  </div>
+</section>
+
+<!-- BRAND-PARTNER CREDITS -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-6">
+      <p class="eyebrow">Accredited systems</p>
+      <h3 class="h-sub" style="font-size:22px;">Treatments delivered with brand partners</h3>
+    </div>
+    <p class="body-copy text-center" style="margin:0 auto 24px;">Selected treatments use accredited brand-partner systems. Hydrafacial, Margaret Dabbs® London, Neurac®, Gyrotonic®, Gyrokinesis®, OPIALA, Cristal Fit, Cristal Pro, AstraeaNatura™, KOS Paris, and HeartMath are listed where their methods are used.</p>
+    <div class="tag-row justify-center" style="margin-top:16px;">
+      <span class="tag">Hydrafacial</span>
+      <span class="tag">Margaret Dabbs® London</span>
+      <span class="tag">Neurac®</span>
+      <span class="tag">Gyrotonic®</span>
+      <span class="tag">Gyrokinesis®</span>
+      <span class="tag">OPIALA</span>
+      <span class="tag">Cristal Fit</span>
+      <span class="tag">Cristal Pro</span>
+      <span class="tag">AstraeaNatura™</span>
+      <span class="tag">KOS Paris</span>
+      <span class="tag">HeartMath</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALITY -->
+<section class="section">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Where</p>
+    <h3 class="h-sub" style="font-size:22px;">Treatments at Jayasom AMAALA, Triple Bay, Saudi Arabia</h3>
+    <p class="body-copy" style="margin:0 auto;">Treatments are delivered at the Jayasom Wellness Resort at AMAALA on the Red Sea, one hour by car from Al Wajh airport (EJH). The Health and Wellness Centre houses spa, physiotherapy, hydrotherapy, and consultation rooms.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently asked questions</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How many treatments are available at Jayasom AMAALA?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Sixty treatments are published. The full operational catalogue runs to more than one hundred and fifty; the Wellness Advisor draws on the wider set when a guest's plan needs it.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What are the Therapeutic Pillars?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Three groupings: Body work, Health work, and Aesthetic. Most retreat weeks draw from all three; the Wellness Advisor decides the weighting.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Can I book treatments without a retreat?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Day-guest treatments are available subject to capacity. The booking team confirms availability per date; the Wellness Advisor consultation is included.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Do treatments include consultations?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">A Wellness Advisor consultation is included with any retreat booking and with most stand-alone treatment bookings of more than ninety minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan your stay</p>
+    <h2 class="h-section">Speak to a Wellness Advisor</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">Begin the brief and let the plan shape itself.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Plan Your Stay</a>
+      <a href="#" class="btn btn-on-dark">Request a private call</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

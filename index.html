@@ -70,20 +70,13 @@ html, body {
 
 .page-row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 20px;
   padding: 18px 24px;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background));
   transition: background 160ms ease, border-color 160ms ease;
-}
-.page-row .num {
-  font-size: 13px;
-  font-weight: 300;
-  color: hsl(var(--muted-foreground));
-  padding-right: 20px;
-  border-right: 1px solid hsl(var(--border));
 }
 .page-row .title {
   font-size: 15px;
@@ -100,6 +93,22 @@ html, body {
 .page-row:hover { background: hsl(var(--muted)); border-color: hsl(var(--foreground)); }
 .page-row:hover .arrow { color: hsl(var(--foreground)); transform: translateX(4px); }
 
+.section-group { padding: 32px 32px 8px; }
+.section-group .group-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 10px;
+}
+.section-group .group-title {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: hsl(var(--foreground)); font-weight: 700;
+}
+.section-group .group-count {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
   </style>
 </head>
 <body>
@@ -107,58 +116,182 @@ html, body {
 <section class="intro">
   <div class="shell">
     <h1 class="h-hero">JAYASOM CONTENT WIREFRAMES</h1>
+    <p class="body-copy" style="margin: 12px auto 0;">61 pages · V3 · static HTML deck for client review</p>
   </div>
 </section>
 
-<section class="section-tight">
+<section class="section-group">
   <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Brand &amp; Entry</span>
+      <span class="group-count">3 pages</span>
+    </div>
     <div class="page-list">
-
-      <a class="page-row" href="wireframe-homepage-v3.html">
-        <span class="num">01</span>
-        <span class="title">Homepage</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="page-row" href="wireframe-about-us-v3.html">
-        <span class="num">02</span>
-        <span class="title">About Us</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="page-row" href="wireframe-as-a-woman-v3.html">
-        <span class="num">03</span>
-        <span class="title">As a Woman</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="page-row" href="wireframe-as-a-pair-v3.html">
-        <span class="num">04</span>
-        <span class="title">As a Pair</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="page-row" href="wireframe-as-a-family-v3.html">
-        <span class="num">05</span>
-        <span class="title">As a Family</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="page-row" href="wireframe-as-a-flow-v3.html">
-        <span class="num">06</span>
-        <span class="title">As a Flow</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="page-row" href="wireframe-as-a-leader-v3.html">
-        <span class="num">07</span>
-        <span class="title">As a Leader</span>
-        <span class="arrow">→</span>
-      </a>
-
+      <a class="page-row" href="wireframe-homepage-v3.html"><span class="title">Homepage</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-about-us-v3.html"><span class="title">About Us</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-find-your-retreat-v3.html"><span class="title">Find Your Retreat</span><span class="arrow">→</span></a>
     </div>
   </div>
 </section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Retreats</span>
+      <span class="group-count">6 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-as-a-pair-v3.html"><span class="title">As a Pair</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-as-a-woman-v3.html"><span class="title">As a Woman</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-as-a-family-v3.html"><span class="title">As a Family</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-as-a-leader-v3.html"><span class="title">As a Leader</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-as-a-flow-v3.html"><span class="title">As a Flow</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-as-a-feather-v3.html"><span class="title">As a Feather</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Wellness</span>
+      <span class="group-count">4 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-wellness-v3.html"><span class="title">Wellness</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-individual-wellness-v3.html"><span class="title">Individual Wellness</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-wellbeing-spaces-v3.html"><span class="title">Wellbeing Spaces</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-retreats-and-programmes-v3.html"><span class="title">Retreats &amp; Programmes</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Treatments</span>
+      <span class="group-count">16 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-treatments-v3.html"><span class="title">Treatments (listing)</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-jayasom-signature-v3.html"><span class="title">Jayasom Signature</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-shirodhara-v3.html"><span class="title">Shirodhara</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-marma-point-therapy-v3.html"><span class="title">Marma Point Therapy</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-pinda-sweda-v3.html"><span class="title">Pinda Sweda</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-watsu-v3.html"><span class="title">Watsu</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-sound-healing-v3.html"><span class="title">Sound Healing</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-floatation-therapy-v3.html"><span class="title">Floatation Therapy</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-crystal-aroma-massage-v3.html"><span class="title">Crystal Aroma Massage</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-qalbain-two-hearts-v3.html"><span class="title">QALBAIN — Two Hearts</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-ulfa-ritual-v3.html"><span class="title">Ulfa Ritual</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-vagus-nerve-ritual-v3.html"><span class="title">Vagus Nerve Ritual</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-hijama-v3.html"><span class="title">Hijama</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-hydrafacial-platinum-v3.html"><span class="title">Hydrafacial Platinum</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-detox-balneotherapy-v3.html"><span class="title">Detox Balneotherapy</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-tx-reiki-taqa-v3.html"><span class="title">Reiki T'aqa</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Experts &amp; Specialists</span>
+      <span class="group-count">12 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-experts-v3.html"><span class="title">Our Experts &amp; Specialists</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-specialists-template-v3.html"><span class="title">Specialist Detail (template)</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-karen-campbell-v3.html"><span class="title">Karen Campbell</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-sascha-hemmann-v3.html"><span class="title">Sascha Hemmann</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-basel-shammout-v3.html"><span class="title">Basel Shammout</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-elodie-lefebvre-v3.html"><span class="title">Elodie Lefebvre</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-carol-el-hadi-v3.html"><span class="title">Carol El Hadi</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-lujain-alhussan-v3.html"><span class="title">Lujain Abdullah AlHussan</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-vazeeq-madhar-v3.html"><span class="title">Vazeeq Madhar</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-eman-alsayoud-v3.html"><span class="title">Eman Alsayoud</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-mohammad-almslmany-v3.html"><span class="title">Mohammad Almslmany</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-sp-amanda-hanna-v3.html"><span class="title">Amanda Hanna</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Activities &amp; Culinary</span>
+      <span class="group-count">3 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-culinary-nourishment-v3.html"><span class="title">Culinary Nourishment</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-group-activities-v3.html"><span class="title">Group Activities</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-activities-details-v3.html"><span class="title">Activity Detail</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Residences &amp; Villas</span>
+      <span class="group-count">10 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-wellness-residences-v3.html"><span class="title">Wellness Residences</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-residential-community-v3.html"><span class="title">Residential Community</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-amaala-residences-v3.html"><span class="title">AMAALA Residences</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-rooms-and-villas-v3.html"><span class="title">Rooms &amp; Villas</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-rooms-and-villas-details-v3.html"><span class="title">Rooms &amp; Villas Detail (template)</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-rv-2br-villa-v3.html"><span class="title">2-Bedroom Villa</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-rv-3br-villa-v3.html"><span class="title">3-Bedroom Villa</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-rv-4br-villa-v3.html"><span class="title">4-Bedroom Villa</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-rv-5br-jayela-residence-v3.html"><span class="title">5-Bedroom Jayela Residence</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-view-residency-v3.html"><span class="title">View Residency</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Family</span>
+      <span class="group-count">1 page</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-families-shared-wellbeing-v3.html"><span class="title">Families &amp; Shared Wellbeing</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Editorial &amp; News</span>
+      <span class="group-count">4 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-insights-v3.html"><span class="title">Insights</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-journals-and-stories-v3.html"><span class="title">Journals &amp; Stories</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-view-insight-v3.html"><span class="title">View Insight (article detail)</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-news-v3.html"><span class="title">News</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-group">
+  <div class="shell">
+    <div class="group-head">
+      <span class="group-title">Organisation</span>
+      <span class="group-count">2 pages</span>
+    </div>
+    <div class="page-list">
+      <a class="page-row" href="wireframe-careers-v3.html"><span class="title">Careers</span><span class="arrow">→</span></a>
+      <a class="page-row" href="wireframe-contact-v3.html"><span class="title">Contact</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section style="height: 64px;"></section>
 
 </body>
 </html>

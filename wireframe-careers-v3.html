@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Careers v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+/* === LAYOUT PRIMITIVES === */
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.wire-card .pad-tight { padding: 14px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input,
+.form-field textarea,
+.form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-header nav a { color: inherit; }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-overlay-bottom-left { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 0 0 64px 32px; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 720px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.tag-on-dark { border-color: hsla(var(--primary-foreground), 0.4); color: hsla(var(--primary-foreground), 0.8); }
+
+.timeline { display: flex; flex-direction: column; gap: 32px; }
+.timeline-row { display: grid; grid-template-columns: 24px 1fr; gap: 16px; }
+.timeline-marker { display: flex; flex-direction: column; align-items: center; }
+.timeline-dot { width: 12px; height: 12px; border: 2px solid hsl(var(--foreground)); border-radius: 50%; }
+.timeline-line { width: 1px; flex: 1; background: hsl(var(--border)); margin-top: 4px; min-height: 24px; }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 16px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+
+.pull-quote { border-left: 2px solid hsl(var(--foreground)); padding: 8px 24px; font-size: 18px; font-weight: 300; font-style: italic; color: hsl(var(--foreground)); margin: 24px 0; }
+.pull-quote .attribution { display: block; margin-top: 16px; font-size: 12px; font-style: normal; color: hsl(var(--muted-foreground)); }
+.section-dark .pull-quote { border-left-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .pull-quote .attribution { color: hsla(var(--primary-foreground), 0.7); }
+
+.carousel-wrap { position: relative; }
+.carousel { display: flex; gap: 24px; overflow-x: auto; scrollbar-width: none; padding-bottom: 16px; }
+.carousel::-webkit-scrollbar { display: none; }
+.carousel > * { min-width: 300px; flex-shrink: 0; }
+.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 8px; cursor: pointer; z-index: 1; }
+.carousel-arrow.left { left: 0; }
+.carousel-arrow.right { right: 0; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; } .gap-12 { gap: 48px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-mini { padding: 32px 32px; }
+.section-tall { padding: 80px 32px; }
+
+.wire-card.muted { background: hsl(var(--muted)); }
+.wire-card.dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.wire-card.dark .h-card { color: hsl(var(--primary-foreground)); }
+.wire-card.dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+
+.icon-card-centered { text-align: center; padding: 24px; }
+.icon-card-centered .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 16px; color: hsl(var(--foreground));
+}
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+
+.icon-card-inline { padding: 24px; border: 1px solid hsl(var(--border)); }
+.icon-card-inline .head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.icon-card-inline .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex-shrink: 0;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  color: hsl(var(--foreground));
+}
+.icon-card-inline .icon-circle svg { width: 16px; height: 16px; stroke-width: 1.25; }
+
+.dual-list-card { border: 1px solid hsl(var(--border)); padding: 24px; }
+.dual-list-card .sublist { margin-bottom: 16px; }
+.dual-list-card .sublist + .sublist { padding-top: 16px; border-top: 1px solid hsl(var(--border)); }
+.dual-list-card .sublist .label-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.dual-list-card .sublist .label-row svg { width: 12px; height: 12px; stroke-width: 1.5; }
+.dual-list-card .sublist ul { display: flex; flex-direction: column; gap: 4px; }
+.dual-list-card .sublist li {
+  font-size: 12px; color: hsl(var(--muted-foreground));
+  display: flex; align-items: center; gap: 8px;
+}
+.dual-list-card .sublist li::before {
+  content: ""; width: 4px; height: 4px;
+  background: hsl(var(--foreground)); border-radius: 50%;
+  display: inline-block; flex-shrink: 0;
+}
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.callout .callout-body { font-size: 12px; color: hsl(var(--foreground)); line-height: 1.6; }
+
+.centered-note {
+  max-width: 720px; margin: 0 auto; text-align: center;
+  border: 1px solid hsl(var(--border)); background: hsl(var(--muted));
+  padding: 32px;
+}
+.centered-note h3 { margin-bottom: 12px; }
+
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.hover-underline:hover .h-card { text-decoration: underline; }
+
+.divider-line { border-top: 1px solid hsl(var(--border)); margin: 32px 0; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.bullet-list { display: flex; flex-direction: column; gap: 8px; }
+.bullet-list li {
+  font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.6;
+  display: flex; gap: 12px;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
+.stat-block .stat-num { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.step-card { padding: 24px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.step-card .step-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.step-card .step-num::before { content: ""; width: 24px; height: 1px; background: hsl(var(--foreground)); display: inline-block; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 720px; }
+
+/* Role row pattern (extension of faq-item style) */
+.role-row { border-bottom: 1px solid hsl(var(--border)); padding: 20px 0; display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 24px; align-items: center; }
+.role-row:first-of-type { border-top: 1px solid hsl(var(--border)); }
+.role-row .role-title { font-size: 15px; color: hsl(var(--foreground)); }
+.role-row .role-meta { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.role-row .role-apply { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--foreground)); }
+@media (max-width: 768px) {
+  .role-row { grid-template-columns: 1fr; gap: 6px; }
+}
+
+.placeholder-pill { display: inline-block; padding: 2px 10px; min-width: 56px; height: 18px; background: hsl(var(--muted)); border: 1px solid hsl(var(--border)); border-radius: 0; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span><a href="#about">About</a><span class="sep">›</span><span>Careers</span>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:520px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    <span class="label">Team in residence at Jayasom AMAALA</span>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Careers</p>
+      <h1 class="h-hero">Careers at Jayasom</h1>
+      <p class="body-copy" style="margin:0 auto 16px;font-style:italic;">Roles for people who treat the work as a practice.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+        <a href="#open-roles" class="btn btn-solid">View Open Roles</a>
+        <a href="#" class="btn">Speak to a Recruiter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO BODY -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:start;">
+      <div>
+        <p class="eyebrow">Who we hire</p>
+        <h2 class="h-section">Hired for depth-of-practice</h2>
+      </div>
+      <div>
+        <p class="body-copy full">We hire for depth-of-practice at Jayasom. Practitioners who keep their craft sharp across years, not headlines. Hospitality teams who hold a guest experience together without flourish. Operations and residences teams who see the building as part of the practice. Leadership who treat hiring as the most senior thing they do. Roles open across wellness, hospitality, culinary, residences, operations, leadership, and corporate functions. We hire across grades, across regions, across the long arc of someone's career.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETHOS / CULTURE -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:420px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Practitioner in session</span>
+      </div>
+      <div>
+        <p class="eyebrow">Ethos and Culture</p>
+        <h2 class="h-section">A Jayasom Way of Life</h2>
+        <p class="body-copy full">Wellbeing is not a luxury. It is a birthright. That belief sits at the centre of how we build teams as much as how we build retreats. Our practitioners arrive in residence for weeks at a time. Our hospitality colleagues stay long enough to know guests by name. Our operations colleagues know the property well enough to hold its standards quietly. The work is small and constant, the kind that compounds across a year.</p>
+        <div class="pull-quote mt-6">
+          We trust your natural desire to realign with what feels right, your own unique essence.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE LOOK FOR -->
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow text-center">What we look for</p>
+    <h2 class="h-section text-center" style="margin-bottom:8px;">Five qualities thread through every role</h2>
+    <p class="body-copy text-center mb-8" style="margin:0 auto 48px;font-style:italic;">A genuine practice, not a credential file. Patience with detail. Calm under pressure. Curiosity about wisdom traditions and contemporary science in equal measure. And a way of treating colleagues that makes the work easier for everyone around you.</p>
+
+    <div class="grid-3" style="gap:24px;">
+
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4 class="h-card">A genuine practice</h4>
+        <p class="caption">Not a credential file. The work shows in how you hold a session, a kitchen, a conversation, day after day.</p>
+      </div>
+
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
+        </div>
+        <h4 class="h-card">Patience with detail</h4>
+        <p class="caption">The small things, repeated well, are what guests feel. The standards hold themselves when the team holds them.</p>
+      </div>
+
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 12h14"/></svg>
+        </div>
+        <h4 class="h-card">Calm under pressure</h4>
+        <p class="caption">Steady on a busy day, present on a slow one. The rhythm of a property does not bend to a single shift.</p>
+      </div>
+
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h4 class="h-card">Curiosity, both ways</h4>
+        <p class="caption">Wisdom traditions and contemporary science in equal measure. The third way is held by people who keep reading.</p>
+      </div>
+
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4 class="h-card">Treats colleagues well</h4>
+        <p class="caption">A way of working that makes the work easier for everyone around you. The team carries the practice together.</p>
+      </div>
+
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
+        </div>
+        <h4 class="h-card">In residence, in rhythm</h4>
+        <p class="caption">Practitioners arrive for weeks. Hospitality and operations colleagues live with the property. The work asks for time, and we return it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROLE AREAS -->
+<section class="section section-muted">
+  <div class="shell">
+    <p class="eyebrow text-center">Role areas</p>
+    <h2 class="h-section text-center mb-8">Where we hire</h2>
+
+    <div class="grid-3" style="gap:24px;">
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c1.71 1.97 1.95 5.27 0 7.83C18 12 16 13 14 13a4 4 0 0 0-4 4c0 1.4 1 3 3 3z"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Wellness Practice</h4>
+        </div>
+        <p class="caption">TAIM practitioners, Ayurvedic specialists, Wellness Advisors, Visiting Practitioners, integrative clinicians.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M9 17h6"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Hospitality</h4>
+        </div>
+        <p class="caption">Front of house, guest services, reservations, butler programme, residences team. Long-tenure roles in residence at AMAALA.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Culinary and F&amp;B</h4>
+        </div>
+        <p class="caption">Eight dining venues, Farm Belt growers, kitchen leadership, in-house bottling plant team.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Sustainability</h4>
+        </div>
+        <p class="caption">Mosa Hub team, environmental science, water and energy stewardship, organic gardens, conservation programme.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Tech and Digital</h4>
+        </div>
+        <p class="caption">Booking systems, CRM, guest data platforms, digital product, content engineering, internal tooling.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Design and Brand</h4>
+        </div>
+        <p class="caption">Brand experience, editorial, communications, photography and visual identity.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Operations</h4>
+        </div>
+        <p class="caption">Property operations, residences operations, security, engineering, supply chain, in-residence services.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Leadership</h4>
+        </div>
+        <p class="caption">Senior practitioner leads, department heads, executive functions, Singapore corporate office.</p>
+      </div>
+
+      <div class="icon-card-inline" style="background:hsl(var(--background));">
+        <div class="head">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3v18"/></svg>
+          </div>
+          <h4 class="h-card" style="margin:0;">Corporate Functions</h4>
+        </div>
+        <p class="caption">Finance, legal, people, partnerships, development. Singapore HQ and AMAALA-based positions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TEAM NEWS -->
+<section class="section">
+  <div class="shell">
+    <div class="flex justify-between mb-6" style="align-items:end;">
+      <div>
+        <p class="eyebrow">Team News</p>
+        <h2 class="h-section" style="margin:0;">Updates from the team in residence</h2>
+      </div>
+      <a href="#" class="caption" style="text-decoration:underline;">All news →</a>
+    </div>
+    <p class="body-copy mb-8 full">Recent appointments, programme launches, and visiting practitioners arriving across the season.</p>
+
+    <div class="grid-3">
+
+      <a href="#" class="hover-underline wire-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad">
+          <p class="eyebrow-mini">Appointment</p>
+          <h4 class="h-card">New Director of Wellness joins ahead of Phase 1 opening</h4>
+          <p class="caption">A short note about the appointment and what it means for the practice.</p>
+        </div>
+      </a>
+
+      <a href="#" class="hover-underline wire-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad">
+          <p class="eyebrow-mini">Programme</p>
+          <h4 class="h-card">As a Leader retreat enters its second cycle</h4>
+          <p class="caption">Notes from the team on what's changed, and what carried through from cycle one.</p>
+        </div>
+      </a>
+
+      <a href="#" class="hover-underline wire-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad">
+          <p class="eyebrow-mini">In residence</p>
+          <h4 class="h-card">Visiting Practitioners arriving this season</h4>
+          <p class="caption">Specialist residencies for the next quarter, with biographies and the retreats they anchor.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES LIST -->
+<section id="open-roles" class="section section-muted">
+  <div class="shell">
+    <div class="flex justify-between mb-6" style="align-items:end;flex-wrap:wrap;gap:16px;">
+      <div>
+        <p class="eyebrow">Open Roles</p>
+        <h2 class="h-section" style="margin:0;">Current vacancies</h2>
+      </div>
+      <a href="#" class="btn btn-solid">View Open Roles →</a>
+    </div>
+    <p class="body-copy mb-8 full">Current vacancies live in our HR system. Filter by team, location, or experience level. Apply directly through the linked portal.</p>
+
+    <div class="flex gap-2 mb-6" style="flex-wrap:wrap;">
+      <span class="tag">All teams</span>
+      <span class="tag">Wellness Practice</span>
+      <span class="tag">Hospitality</span>
+      <span class="tag">Culinary</span>
+      <span class="tag">Operations</span>
+      <span class="tag">Leadership</span>
+      <span class="tag">Corporate</span>
+    </div>
+
+    <div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Senior TAIM Practitioner</p>
+          <p class="caption mt-2">In-residence specialist anchoring As a Leader and Parallel Programming.</p>
+        </div>
+        <p class="role-meta">Wellness Practice</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Ayurvedic Doctor</p>
+          <p class="caption mt-2">Functional assessment lead within the Health and Wellness Centre.</p>
+        </div>
+        <p class="role-meta">Wellness Practice</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Wellness Advisor</p>
+          <p class="caption mt-2">Pre-arrival consultations and retreat-shaping with prospective guests.</p>
+        </div>
+        <p class="role-meta">Wellness Practice</p>
+        <p class="role-meta">Singapore / Remote</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Head of Front of House</p>
+          <p class="caption mt-2">Guest experience lead across Resort and Residences.</p>
+        </div>
+        <p class="role-meta">Hospitality</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Reservations Manager</p>
+          <p class="caption mt-2">Owner of the reservations workflow and pre-arrival logistics.</p>
+        </div>
+        <p class="role-meta">Hospitality</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Executive Chef, Farm Belt Kitchen</p>
+          <p class="caption mt-2">Leads one of eight dining venues. Field-to-table working with the in-house Farm Belt.</p>
+        </div>
+        <p class="role-meta">Culinary</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Sustainability Lead, Mosa Hub</p>
+          <p class="caption mt-2">Reporting on renewable energy, water conservation, organic gardens, conservation programme.</p>
+        </div>
+        <p class="role-meta">Sustainability</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Director of Residences</p>
+          <p class="caption mt-2">In-residence services and standards across the residential community.</p>
+        </div>
+        <p class="role-meta">Operations</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">Brand and Editorial Manager</p>
+          <p class="caption mt-2">Long-form writing and brand voice stewardship across journals and channels.</p>
+        </div>
+        <p class="role-meta">Design and Brand</p>
+        <p class="role-meta">Singapore HQ</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <p class="role-title">People Partner, KSA Operations</p>
+          <p class="caption mt-2">Hiring, onboarding, and team development for in-residence colleagues.</p>
+        </div>
+        <p class="role-meta">Corporate Functions</p>
+        <p class="role-meta">AMAALA, Triple Bay</p>
+        <a href="#" class="role-apply">Apply →</a>
+      </div>
+    </div>
+
+    <p class="caption text-center mt-8" style="font-style:italic;">Roles are listed indicatively. Live vacancies are managed through the HR system; the linked portal carries the canonical list.</p>
+  </div>
+</section>
+
+<!-- APPLICATION PROCESS -->
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow text-center">How it works</p>
+    <h2 class="h-section text-center mb-8">Application process</h2>
+
+    <div class="grid-4">
+      <div class="step-card">
+        <p class="step-num">Step 01</p>
+        <h4 class="h-card">Apply</h4>
+        <p class="caption">Submit your application through the HR portal. A short note in your own voice carries weight.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Step 02</p>
+        <h4 class="h-card">First conversation</h4>
+        <p class="caption">A long, unhurried call with the People team and the hiring lead. We listen for the practice.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Step 03</p>
+        <h4 class="h-card">In residence</h4>
+        <p class="caption">Where appropriate, candidates spend time in residence at AMAALA. The property is part of the answer.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Step 04</p>
+        <h4 class="h-card">Offer</h4>
+        <p class="caption">A clear offer, written in plain language. Relocation, residency and start-date arrangements follow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONTANEOUS APPLICATIONS -->
+<section class="section section-dark">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Don't see your role?</p>
+        <h2 class="h-section">Send a short note</h2>
+        <p class="body-copy full">We keep a small file of practitioners and hospitality colleagues who write to us with a clear sense of what they bring. If that sounds like you, send a short note and recent work.</p>
+      </div>
+      <div>
+        <div class="callout" style="border-color:hsl(var(--primary-foreground));background:transparent;">
+          <p class="callout-label" style="color:hsl(var(--primary-foreground));">Recruiter contact</p>
+          <p class="callout-body" style="color:hsl(var(--primary-foreground));">Write to us directly:</p>
+          <p class="h-sub mt-2"><a href="mailto:careers@jayasom.com" style="text-decoration:underline;">careers@jayasom.com</a></p>
+        </div>
+        <div class="flex gap-4 mt-6">
+          <a href="mailto:careers@jayasom.com" class="btn btn-on-dark">Send a Note</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-aside" style="align-items:start;">
+      <div>
+        <p class="eyebrow">Common Questions</p>
+        <h2 class="h-section">Working at Jayasom</h2>
+        <p class="body-copy full">A short index of the questions candidates ask most often.</p>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="mt-8">
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Where is Jayasom located?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a">Jayasom Wellness Resort sits at AMAALA, Triple Bay, on Saudi Arabia's Red Sea coast. The nearest international airport is Al Wajh, one hour by car.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What kinds of roles does Jayasom hire for?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a">Practitioner, hospitality, culinary, operations, residences, leadership, and corporate functions. Wellness Advisors and Visiting Practitioners arrive in residence for weeks at a time. Hospitality and operations colleagues are full-time in residence at AMAALA.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Do you provide accommodation for in-residence team members?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a"><span class="placeholder-pill"></span></p>
+      </div>
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Are there opportunities for visiting practitioners?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a">Yes. Visiting Practitioners join us in residence across the year, contributing to specific retreats and shared wellbeing programming. Send a short note with your specialism and availability.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How do I apply?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a">Open roles live in the HR system, linked above. For spontaneous applications, send a short note to <a href="mailto:careers@jayasom.com" style="text-decoration:underline;">careers@jayasom.com</a> with recent work.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RELATED READING -->
+<section class="section section-muted">
+  <div class="shell">
+    <p class="eyebrow text-center">Read more</p>
+    <h2 class="h-section text-center mb-8">Where the work lives on the site</h2>
+    <p class="body-copy text-center mb-8" style="margin:0 auto 32px;">About Us, Wellness with Wisdom, Our Experts and Specialists, and the Visiting Practitioners directory. The retreat detail pages show how the work is delivered week-by-week, which is what most candidates want to see.</p>
+
+    <div class="grid-3">
+      <a href="wireframe-about-us-v3.html" class="hover-underline wire-card">
+        <div class="pad">
+          <p class="eyebrow-mini">About</p>
+          <h4 class="h-card">About Us</h4>
+          <p class="caption">The brand, the founders, and the philosophy behind the practice.</p>
+        </div>
+      </a>
+      <a href="wireframe-experts-v3.html" class="hover-underline wire-card">
+        <div class="pad">
+          <p class="eyebrow-mini">Wellness</p>
+          <h4 class="h-card">Our Experts and Specialists</h4>
+          <p class="caption">In-residence and visiting practitioners who anchor the work.</p>
+        </div>
+      </a>
+      <a href="wireframe-as-a-pair-v3.html" class="hover-underline wire-card">
+        <div class="pad">
+          <p class="eyebrow-mini">Retreats</p>
+          <h4 class="h-card">Retreat detail pages</h4>
+          <p class="caption">As a Pair, As a Woman, As a Family, As a Leader, As a Flow, As a Feather.</p>
+        </div>
+      </a>
+    </div>
+
+    <p class="caption text-center mt-8" style="font-style:italic;">Reviewed by Carol El Hadi, Director of Marketing, PR and Communications.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

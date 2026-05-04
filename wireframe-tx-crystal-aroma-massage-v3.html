@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Crystal Aroma Massage v3 · Jayasom Wireframe</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <style>
+:root { --background: 16 33% 93%; --foreground: 300 2% 27%; --card: 16 33% 93%; --card-foreground: 300 2% 27%; --muted: 16 20% 86%; --muted-foreground: 300 2% 40%; --accent: 16 20% 86%; --accent-foreground: 300 2% 27%; --border: 300 2% 60%; --input: 300 2% 60%; --primary: 300 2% 27%; --primary-foreground: 16 33% 93%; --wire-placeholder: 16 20% 88%; --wire-line: 300 2% 55%; --wire-dark: 300 2% 30%; --wire-mid: 300 2% 45%; --radius: 0rem; }
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; } a { color: inherit; text-decoration: none; }
+html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif; font-weight: 300; line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; } .section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow, .section-dark .body-copy, .section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero, .section-dark .h-section, .section-dark .h-sub, .section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(3, 1fr); } .grid-4 { grid-template-columns: repeat(4, 1fr); } .grid-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; gap: 24px; } }
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; } .wire-image .label { font-size: 11px; }
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) { .site-footer .cols { grid-template-columns: 1fr; } .site-footer .bottom { flex-direction: column; gap: 16px; } }
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; } .breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.text-center { text-align: center; } .flex { display: flex; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 16px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+.section-strip { padding: 4px 0; } .section-tall { padding: 80px 32px; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.icon-card-centered { text-align: center; padding: 24px; }
+.icon-card-centered .icon-circle { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 1px solid hsl(var(--border)); border-radius: 50%; margin-bottom: 16px; color: hsl(var(--foreground)); }
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; display: flex; gap: 12px; padding-left: 0; }
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
+.stat-block .stat-num { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
+.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tagline { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<nav class="breadcrumb">
+  <a href="index.html">Home</a><span class="sep">›</span>
+  <a href="#wellness">Wellness</a><span class="sep">›</span>
+  <a href="wireframe-treatments-v3.html">Treatments</a><span class="sep">›</span>
+  <span>Crystal Aroma Massage</span>
+</nav>
+
+<main>
+
+<!-- HERO — split right text -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:520px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Heated Jade crystals on a draped table</span>
+      </div>
+      <div>
+        <p class="eyebrow">Treatment · Energy work · 50 / 90 min</p>
+        <h1 class="h-hero">Crystal Aroma Massage</h1>
+        <p class="body-copy" style="font-style:italic;margin-bottom:24px;">Heated Jade crystal, Arabic-inspired essential oils, slow hands.</p>
+        <p class="body-copy mb-4 full">Heated Jade crystal pairs with Arabic-inspired essential oils on a body that the practitioner reads before the first stroke. Slow, weighted passes follow; oils are matched to the day rather than to a fixed protocol. Warm room, low light, the pace held to whatever the body sets. Fifty or ninety minutes.</p>
+        <a href="#" class="btn btn-solid">Plan a session</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELEMENTS — three icon cards (Crystal · Aromatherapy · Energy work) -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:720px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Three layers</p>
+      <h2 class="h-section">Aromatherapy, heated stone, energy work</h2>
+      <p class="body-copy" style="margin:0 auto;">A bodywork session in three layers. The Jade is held at body temperature on entry and warmed by the room as the session proceeds; the oil blend is chosen at the start by the practitioner from a small palette of Arabic-inspired essences.</p>
+    </div>
+    <div class="grid-3" style="margin-top:32px;">
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <span class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l4 7-4 13-4-13z"/></svg></span>
+        <h4 class="h-card">Heated Jade crystal</h4>
+        <p class="caption">Carries weight the hand alone cannot match, and holds heat well.</p>
+      </div>
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <span class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2c0 0-5 6-5 11a5 5 0 0010 0c0-5-5-11-5-11z"/></svg></span>
+        <h4 class="h-card">Arabic-inspired oils</h4>
+        <p class="caption">Drawn from the Traditional Arabic Medicine cluster the property has built around.</p>
+      </div>
+      <div class="icon-card-centered" style="border:1px solid hsl(var(--border));background:hsl(var(--background));">
+        <span class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18"/></svg></span>
+        <h4 class="h-card">Energy work</h4>
+        <p class="caption">The session draws on the Energy Work Therapeutic Pillar; bodywork and aromatherapy thread through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AROMA PALETTE — tag row -->
+<section class="section">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="eyebrow">Aroma palette</p>
+    <h2 class="h-section">A small Arabic-inspired oil palette</h2>
+    <p class="body-copy" style="margin:0 auto 24px;">The blend is matched to the brief, not to a fixed protocol. Common notes include:</p>
+    <div class="tag-row justify-center" style="margin-top:16px;">
+      <span class="tag">Oud</span>
+      <span class="tag">Frankincense</span>
+      <span class="tag">Jasmine</span>
+      <span class="tag">Rose</span>
+      <span class="tag">Neroli</span>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIPTION — narrative -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Description</p>
+      <h2 class="h-section">What the session is</h2>
+    </div>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">A bodywork session in three layers: aromatherapy, heated stone, energy work. The Jade is held at body temperature on entry and warmed by the room as the session proceeds; the oil blend is chosen at the start by the practitioner from a small palette of Arabic-inspired essences.</p>
+      <p style="margin-bottom:24px;">Across a stay, the work is small and constant. Muscle release without deep pressure draws most guests; some come for the heat that lengthens the breath, others for the quiet that scent and weighted touch leave behind.</p>
+      <p>Warm, slow, scented. Jade carries weight in the hand; strokes run long. Most guests notice the room before the practitioner begins, and the breath before the muscle release.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES — bullet list -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Outcomes</p>
+        <h2 class="h-section">What guests notice afterwards</h2>
+        <ul class="bullet-list" style="margin-top:24px;">
+          <li>Muscle release without deep pressure</li>
+          <li>A breath that opens with the heat</li>
+          <li>A nervous system that settles into scent and weighted touch</li>
+          <li>Skin that holds the oil and the warmth for the rest of the day</li>
+          <li>A way back into the body when the day has been spent in the head</li>
+        </ul>
+      </div>
+      <div class="wire-image" style="height:420px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Treatment room, low light</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DURATION + INCLUSIONS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">What's included</p>
+      <h2 class="h-section">Duration, preparation, aftercare</h2>
+    </div>
+    <div class="grid-3">
+      <div class="stat-block">
+        <p class="stat-num">50 / 90</p>
+        <p class="stat-label">Minutes</p>
+        <p class="caption mt-2">Pressure light to medium, paced by what the body permits.</p>
+      </div>
+      <div class="stat-block">
+        <p class="stat-num">Prep</p>
+        <p class="stat-label">Before the session</p>
+        <p class="caption mt-2">A pre-session brief with your Wellness Advisor; loose layers; a light meal cadence the day of.</p>
+      </div>
+      <div class="stat-block">
+        <p class="stat-num">After</p>
+        <p class="stat-label">Aftercare</p>
+        <p class="caption mt-2">Hydration, a slow afternoon, the oil left on the skin for several hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTITIONER -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Specialist anchor · Resident Specialist, Energy Work and Bodywork</p>
+        <h2 class="h-section">Who delivers the session</h2>
+        <p class="body-copy mb-4 full">Bodywork lineage and an aromatherapy palette sit behind every session here. Jade temperature, oil blend, pacing: each is the practitioner's call, made from the brief read at arrival rather than from a menu chosen in advance. Most rooms hold a steady presence, a few words at the start, an unhurried close, an aftercare note about the rest of the day. Crystal Aroma Massage threads body, mind and spirit across the same week.</p>
+        <a href="#" class="btn">Read the full bio</a>
+      </div>
+      <div class="wire-image" style="height:380px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Practitioner portrait</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USED IN RETREATS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Where this session appears</p>
+      <h2 class="h-section">Used across these retreats</h2>
+    </div>
+    <div class="grid-3" style="margin-top:32px;">
+      <a href="wireframe-as-a-pair-v3.html" class="cross-card">
+        <p class="name">As a Pair</p>
+        <p class="caption" style="margin-top:8px;">Crystal Aroma Massage sits in the As a Pair inclusions catalogue. Couples can take the session in adjacent rooms or paired rooms; tier-counts vary across four, seven, ten, and fourteen nights.</p>
+      </a>
+      <a href="wireframe-as-a-woman-v3.html" class="cross-card">
+        <p class="name">As a Woman</p>
+        <p class="caption" style="margin-top:8px;">The session pairs naturally with Lymphatic Drainage and Shirodhara on the As a Woman retreat, where slow, scented work supports the recovery layer of the week.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">As a Feather</p>
+        <p class="caption" style="margin-top:8px;">Crystal Aroma Massage threads through the lighter days of the As a Feather rhythm, where scent and warmth do most of the work.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIRS WELL WITH -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Pairs well with</p>
+      <h2 class="h-section">Related treatments</h2>
+    </div>
+    <div class="grid-3" style="margin-top:32px;">
+      <a href="#" class="cross-card">
+        <p class="name">Gemstone Therapy</p>
+        <p class="tagline">A distinct stone-led practice within the Energy and Sound pillar.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">Reiki</p>
+        <p class="tagline">An energy-practice session held by hand position and presence.</p>
+      </a>
+      <a href="#" class="cross-card">
+        <p class="name">Himalayan Salt Stone Massage</p>
+        <p class="tagline">Heated salt stones across the long muscle lines.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Common questions</p>
+      <h2 class="h-section">Frequently asked</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Why Jade rather than another stone?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">The crystal carries weight the hand alone cannot match, and it holds heat well. Other stones in the property's range include heated salt and basalt; the practitioner chooses with the brief.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Are the oils Arabic?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Arabic-inspired. The blend draws on the Traditional Arabic Medicine cluster the property has built around: oud, frankincense, jasmine, rose, neroli among them. The blend is matched to the brief, not to a fixed protocol.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Is this the same as Gemstone Therapy or Crystal Healing?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">They sit alongside each other in the property's catalogue but they are distinct. Crystal Aroma Massage is a bodywork session with heated Jade and aromatherapy. Gemstone Therapy and Crystal Healing each have their own structure.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Will the pressure be deep?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Light to medium. The Jade delivers the weight; the hand directs it. Guests who want deeper pressure usually move to Deep Tissue or Pinda Sweda within the same week.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">What does the Energy Work Pillar mean here?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Energy and Sound is one of the Therapeutic Pillars at Jayasom. The pillar covers Reiki, Gemstone Therapy, Sound Healing, and Crystal Aroma Massage among others; the work is felt rather than discussed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALITY -->
+<section class="section">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Where</p>
+    <h3 class="h-sub" style="font-size:22px;">On-property at Jayasom AMAALA</h3>
+    <p class="body-copy" style="margin:0 auto;">Jayasom Wellness Resort sits at AMAALA, on Saudi Arabia's Red Sea coast at Triple Bay. Sessions are delivered on-property; one hour by car from Al Wajh airport.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Plan a session</p>
+    <h2 class="h-section">Plan your stay</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">Crystal Aroma Massage sits inside a retreat or a Plan Your Stay route. The Wellness Advisor team will pair the session with the wider work of the week.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Plan your stay</a>
+      <a href="#" class="btn btn-on-dark">Speak with a Wellness Advisor</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

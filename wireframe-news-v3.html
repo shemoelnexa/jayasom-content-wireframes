@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>News v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 24px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input,
+.form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) { .site-footer .cols { grid-template-columns: 1fr; } }
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); cursor: pointer; }
+.tag-active { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+.tag-placeholder { background: hsl(var(--muted)); border-color: hsl(var(--border)); color: hsl(var(--muted-foreground)); padding: 4px 24px; min-width: 60px; display: inline-block; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-tall { padding: 80px 32px; }
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout .callout-body { font-size: 14px; color: hsl(var(--foreground)); line-height: 1.7; }
+
+.hover-underline:hover .h-card { text-decoration: underline; }
+.hover-underline:hover .h-section { text-decoration: underline; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.press-meta { display: flex; gap: 12px; align-items: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.press-meta .sep { color: hsl(var(--border)); }
+.press-meta .publication { color: hsl(var(--foreground)); font-weight: 700; }
+
+.read-link { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--foreground)); margin-top: auto; padding-top: 16px; }
+
+.press-list-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 24px; align-items: center; padding: 20px 0; border-bottom: 1px solid hsl(var(--border)); }
+.press-list-row:first-child { border-top: 1px solid hsl(var(--border)); }
+.press-list-row .date { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+@media (max-width: 768px) { .press-list-row { grid-template-columns: 1fr; gap: 8px; } }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span>News
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="section section-tall">
+  <div class="shell">
+    <div class="text-center" style="max-width:760px;margin:0 auto;">
+      <p class="eyebrow">Press · Media</p>
+      <h1 class="h-hero">News</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;font-size:16px;">Trade-related news, press announcements, and recent coverage.</p>
+      <p class="body-copy" style="margin:0 auto;">Updates from Jayasom Wellness Resort. Trade announcements, press coverage of the brand and the property, partner news, and operational milestones. Consumer storytelling lives in our Insights section: Blog, Journal, and Thought Leadership.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRESS MENTION -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Featured</p>
+      <h2 class="h-section">Recent Coverage</h2>
+    </div>
+
+    <a href="#" class="wire-card hover-underline" style="display:block;margin-top:48px;">
+      <div class="grid-2" style="gap:0;align-items:stretch;">
+        <div class="wire-image" style="height:480px;border:0;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">VOGUE Arabia · feature opener</span>
+        </div>
+        <div style="padding:48px;display:flex;flex-direction:column;justify-content:center;">
+          <div class="press-meta">
+            <span class="publication">VOGUE Arabia</span>
+            <span class="sep">·</span>
+            <span>Feature</span>
+            <span class="sep">·</span>
+            <span>Apr 2026</span>
+          </div>
+          <h3 class="h-section" style="font-size:30px;margin-bottom:16px;">
+            <span class="tag tag-placeholder">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </h3>
+          <p class="body-copy mb-6 full">A long-form feature on the wellness destination at AMAALA. Headline placeholder pending publication confirmation. The piece traces the property from the Wellness Plateau to the Yasmeen Night Garden and sits with the Wellness Wisdom philosophy that anchors the brand.</p>
+          <span class="btn" style="align-self:flex-start;">Read article →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FILTER + GRID -->
+<section class="section">
+  <div class="shell">
+    <div class="flex justify-between items-center mb-8" style="flex-wrap:wrap;gap:24px;">
+      <div>
+        <p class="eyebrow">News listing</p>
+        <h2 class="h-section" style="margin:0;">Filter and browse</h2>
+      </div>
+      <p class="caption" style="font-style:italic;max-width:420px;">Filter by topic, year, or partner. Each item links through to a full news detail page or to the original third-party source.</p>
+    </div>
+
+    <div class="grid-4 mb-8" style="gap:16px;">
+      <div class="form-field" style="margin:0;">
+        <label>Topic</label>
+        <select><option>All topics</option><option>Press releases</option><option>Coverage</option><option>Partnerships</option><option>Industry</option></select>
+      </div>
+      <div class="form-field" style="margin:0;">
+        <label>Year</label>
+        <select><option>All years</option><option>2026</option><option>2025</option></select>
+      </div>
+      <div class="form-field" style="margin:0;">
+        <label>Partner</label>
+        <select><option>All partners</option><option>Red Sea Global</option><option>Worldwide Kids</option><option>Pavigym</option><option>Omni One</option></select>
+      </div>
+      <div class="form-field" style="margin:0;">
+        <label>Type</label>
+        <select><option>All types</option><option>Press release</option><option>Coverage</option><option>PR announcement</option></select>
+      </div>
+    </div>
+
+    <!-- 9-card press grid -->
+    <div class="grid-3" style="margin-top:24px;">
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">VOGUE Arabia</span><span class="sep">·</span><span>Apr 2026</span></div>
+          <h4 class="h-card"><span class="tag tag-placeholder">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h4>
+          <p class="caption mb-4">Editorial feature on Jayasom AMAALA. Headline pending publication confirmation.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Forbes Deep Luxury 2026</span><span class="sep">·</span><span>Mar 2026</span></div>
+          <h4 class="h-card"><span class="tag tag-placeholder">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h4>
+          <p class="caption mb-4">Coverage of the Wellness Residences at Jayasom AMAALA in the Forbes Deep Luxury 2026 index.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">LIST Magazine</span><span class="sep">·</span><span>Feb 2026</span></div>
+          <h4 class="h-card"><span class="tag tag-placeholder">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h4>
+          <p class="caption mb-4">Karen Campbell interview on the Wellness Wisdom philosophy. Headline pending publication confirmation.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Press release</span><span class="sep">·</span><span>Feb 2026</span></div>
+          <h4 class="h-card">Jayasom announces opening calendar for Triple Bay property</h4>
+          <p class="caption mb-4">Official release on the phased opening of Jayasom Wellness Resort at AMAALA. Issued via the press team.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Partnership</span><span class="sep">·</span><span>Jan 2026</span></div>
+          <h4 class="h-card">Worldwide Kids partnership extended for Growing Studios</h4>
+          <p class="caption mb-4">Programming partnership extended across the four Growing Studios on the Jayela family side.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Conde Nast Traveller</span><span class="sep">·</span><span>Jan 2026</span></div>
+          <h4 class="h-card">Inside the wellness destination shaping Saudi Arabia's Red Sea coast</h4>
+          <p class="caption mb-4">Travel feature on the property, threading from the Yasmeen Night Garden through the Wellness Plateau.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Press release</span><span class="sep">·</span><span>Dec 2025</span></div>
+          <h4 class="h-card">Visiting Practitioners residency programme announced</h4>
+          <p class="caption mb-4">Official release on the inaugural year of Visiting Practitioner residencies, led by Director of Health &amp; Wellness Elodie Lefebvre.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Industry</span><span class="sep">·</span><span>Nov 2025</span></div>
+          <h4 class="h-card">Jayasom joins regional wellness tourism advisory board</h4>
+          <p class="caption mb-4">Trade-facing announcement on Jayasom's seat at the regional advisory board for wellness tourism in the Red Sea region.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+      <a href="#" class="wire-card hover-underline" style="display:flex;flex-direction:column;">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;flex:1;">
+          <div class="press-meta"><span class="publication">Partnership</span><span class="sep">·</span><span>Oct 2025</span></div>
+          <h4 class="h-card">Pavigym integrated flooring confirmed for Active Courts</h4>
+          <p class="caption mb-4">Family-side facilities partner Pavigym confirmed for the rubberised flooring across the Jayela Active Courts.</p>
+          <span class="read-link">Read article →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" class="btn">Load more</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS ANNOUNCEMENTS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Press announcements</p>
+      <h2 class="h-section">Official releases</h2>
+      <p class="body-copy" style="margin:0 auto;">Official press releases from Jayasom and from our partners at Red Sea Global. Issued via the press contact below; available for syndication and trade publication.</p>
+    </div>
+
+    <div style="margin-top:48px;">
+      <div class="press-list-row">
+        <span class="date">14 Feb 2026</span>
+        <p class="h-card" style="font-weight:300;font-size:15px;margin:0;">Jayasom announces opening calendar for Triple Bay property</p>
+        <a href="#" class="btn">Download PDF</a>
+      </div>
+      <div class="press-list-row">
+        <span class="date">22 Jan 2026</span>
+        <p class="h-card" style="font-weight:300;font-size:15px;margin:0;">Worldwide Kids partnership extended across the four Growing Studios</p>
+        <a href="#" class="btn">Download PDF</a>
+      </div>
+      <div class="press-list-row">
+        <span class="date">04 Dec 2025</span>
+        <p class="h-card" style="font-weight:300;font-size:15px;margin:0;">Visiting Practitioners residency programme announced</p>
+        <a href="#" class="btn">Download PDF</a>
+      </div>
+      <div class="press-list-row">
+        <span class="date">17 Oct 2025</span>
+        <p class="h-card" style="font-weight:300;font-size:15px;margin:0;">Pavigym integrated flooring confirmed for Active Courts</p>
+        <a href="#" class="btn">Download PDF</a>
+      </div>
+      <div class="press-list-row">
+        <span class="date">09 Sep 2025</span>
+        <p class="h-card" style="font-weight:300;font-size:15px;margin:0;">Red Sea Global and Jayasom confirm Triple Bay master plan integration</p>
+        <a href="#" class="btn">Download PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA KIT -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Media kit</p>
+      <h2 class="h-section">Brand assets, fact sheets, photography</h2>
+      <p class="body-copy" style="margin:0 auto;">Brand assets, fact sheets, photography, and bio kits for trade and press use. Submit a short request via the press contact below; we ship within two working days.</p>
+    </div>
+    <div class="grid-5" style="margin-top:48px;">
+      <a href="#" class="wire-card hover-underline" style="padding:24px;text-align:center;">
+        <p class="eyebrow-mini">01</p>
+        <h4 class="h-card">Brand Assets</h4>
+        <p class="caption mb-4">Logos, marks, colour tokens.</p>
+        <span class="read-link">Request →</span>
+      </a>
+      <a href="#" class="wire-card hover-underline" style="padding:24px;text-align:center;">
+        <p class="eyebrow-mini">02</p>
+        <h4 class="h-card">Fact Sheet</h4>
+        <p class="caption mb-4">Property facts, location, dates.</p>
+        <span class="read-link">Request →</span>
+      </a>
+      <a href="#" class="wire-card hover-underline" style="padding:24px;text-align:center;">
+        <p class="eyebrow-mini">03</p>
+        <h4 class="h-card">Photography</h4>
+        <p class="caption mb-4">Signed-release imagery library.</p>
+        <span class="read-link">Request →</span>
+      </a>
+      <a href="#" class="wire-card hover-underline" style="padding:24px;text-align:center;">
+        <p class="eyebrow-mini">04</p>
+        <h4 class="h-card">Bios</h4>
+        <p class="caption mb-4">Named-team biographies.</p>
+        <span class="read-link">Request →</span>
+      </a>
+      <a href="#" class="wire-card hover-underline" style="padding:24px;text-align:center;">
+        <p class="eyebrow-mini">05</p>
+        <h4 class="h-card">Press Releases</h4>
+        <p class="caption mb-4">Year-filtered release archive.</p>
+        <span class="read-link">Request →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS CONTACT STRIP -->
+<section class="section section-tall section-dark">
+  <div class="shell">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div>
+        <p class="eyebrow">Press contact</p>
+        <h2 class="h-section">Carol El Hadi</h2>
+        <p class="body-copy" style="max-width:480px;margin-bottom:8px;">Director of Marketing, PR &amp; Communications, leads media relations for Jayasom.</p>
+        <p class="body-copy" style="max-width:480px;">For media enquiries, interview requests, and image use, write to our press team.</p>
+      </div>
+      <div style="text-align:right;">
+        <a href="mailto:press@jayasom.com" class="btn btn-on-dark" style="font-size:14px;letter-spacing:0.05em;padding:16px 32px;">press@jayasom.com</a>
+        <p class="caption mt-4" style="color:hsla(var(--primary-foreground),0.7);font-style:italic;">Media-kit assets shipped within two working days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Press</p>
+      <h2 class="h-section">Common Questions</h2>
+    </div>
+    <div>
+      <div style="border-top:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Who can I contact for press enquiries?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Carol El Hadi, Director of Marketing, PR &amp; Communications, leads media relations. Write to press@jayasom.com or use the smart form on the Contact page (select "Press and Media" from the dropdown).</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">How do I request photography or video?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Submit a short request via press@jayasom.com naming the publication, intended use, and deadline. We ship media-kit assets within two working days.</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Where is Jayasom located?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Jayasom Wellness Resort sits at AMAALA, Triple Bay, on Saudi Arabia's Red Sea coast. The nearest international airport is Al Wajh, one hour by car.</p>
+      </div>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Do you accept FAM trip requests?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;display:flex;align-items:center;gap:12px;"><span class="tag tag-placeholder">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div>
+        <p class="eyebrow">Subscribe</p>
+        <h2 class="h-section">News updates from Jayasom</h2>
+        <p class="body-copy" style="max-width:520px;">Trade and media subscribers receive PR announcements, coverage links, and partnership news. Consumer subscribers receive Insights and Journal stories.</p>
+      </div>
+      <div>
+        <div class="form-field">
+          <label>Your email</label>
+          <input type="email" placeholder="you@example.com"/>
+        </div>
+        <div class="form-field">
+          <label>Subscriber type</label>
+          <select><option>Trade / media</option><option>Consumer</option></select>
+        </div>
+        <a href="#" class="btn mt-2">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

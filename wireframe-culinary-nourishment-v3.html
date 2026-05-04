@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Culinary Nourishment v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-strip { padding: 4px 0; }
+.section-tall { padding: 80px 32px; }
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+.callout ul { display: flex; flex-direction: column; gap: 10px; padding-left: 0; list-style: none; }
+.callout ul li { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); font-style: italic; line-height: 1.5; padding-left: 20px; position: relative; }
+.callout ul li::before { content: ""; position: absolute; left: 0; top: 12px; width: 10px; height: 1px; background: hsl(var(--foreground)); }
+
+.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wire-table th, .wire-table td { padding: 12px 14px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
+.wire-table th { background: hsl(var(--muted)); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); }
+.wire-table td.center, .wire-table th.center { text-align: center; }
+.wire-table tfoot td { font-weight: 700; background: hsla(var(--foreground),0.04); }
+
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li {
+  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
+  display: flex; gap: 12px; padding-left: 0;
+}
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+.day-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; display: grid; grid-template-columns: 120px 1fr; gap: 32px; }
+.day-card .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.day-card .day-title { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); }
+.day-card .day-body p { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-bottom: 14px; }
+.day-card .day-body p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .day-card { grid-template-columns: 1fr; gap: 16px; } }
+
+.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
+.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
+.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+
+.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
+.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.breadcrumb { padding: 16px 32px; border-bottom: 1px solid hsl(var(--border)); font-size: 12px; color: hsl(var(--muted-foreground)); letter-spacing: 0.05em; }
+.breadcrumb a { color: hsl(var(--muted-foreground)); }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid hsl(var(--border)); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); background: transparent; }
+.tag.muted { color: hsl(var(--muted-foreground)); border-style: dashed; }
+.placeholder-pill { display: inline-block; min-width: 36px; height: 16px; background: hsl(var(--muted)); border: 1px dashed hsl(var(--border)); vertical-align: middle; }
+
+.pull-quote { border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); padding: 56px 0; text-align: center; }
+.pull-quote .quote { font-size: 26px; font-weight: 300; line-height: 1.35; color: hsl(var(--foreground)); max-width: 760px; margin: 0 auto 20px; font-style: italic; }
+.pull-quote .attr { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.venue-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; }
+.venue-card .pad { padding: 20px; }
+.venue-card .venue-zone { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.venue-card .venue-name { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.venue-card .venue-cuisine { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.venue-card .venue-body { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.65; }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;"><a href="index.html">Home</a> &nbsp;/&nbsp; AMAALA &nbsp;/&nbsp; Culinary Nourishment</div>
+</div>
+<main>
+
+<!-- HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:560px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    <span class="label">Saratô · evening service at the cove</span>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">F&amp;B · Jayasom AMAALA</p>
+      <h1 class="h-hero">Culinary Nourishment</h1>
+      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">The kitchens cook for restoration.</p>
+      <p class="body-copy" style="margin:0 auto;">Eight venues across the property. One shared discipline: no alcohol, no deep frying, in-house bottled water, fourteen approved cooking methods, and produce drawn from the Farm Belt that runs the length of the property. The plates change with what's at the table; the standards do not.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Approach</p>
+      <h2 class="h-section">Philosophy of Nourishment</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Six Core Values guide the kitchen, anchored to five Cornerstones of Wellness Cuisine. Ingredients lead. Preparation supports. The plate carries the work, not the noise.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:48px;">
+      <div class="treatment-card">
+        <p class="eyebrow-mini">01</p>
+        <h4 class="h-card">Six Core Values</h4>
+        <p class="caption">Wellness through nourishment, not denial. Local-region preference where the fit is genuine. Seasonal rhythm. Honest sourcing. Skill in service of restoration. The plate as a quiet teacher.</p>
+      </div>
+      <div class="treatment-card">
+        <p class="eyebrow-mini">02</p>
+        <h4 class="h-card">Five Cornerstones of Wellness Cuisine</h4>
+        <p class="caption">Whole-food preference. Plant-led. Mineral-aware. Cooked at the lowest necessary heat. Plated to the appetite that arrives, not the menu's idea of one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINDFUL DINING -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="eyebrow">Across the day</p>
+    <h2 class="h-section">Mindful Dining</h2>
+    <p class="body-copy" style="margin:0 auto;">Each meal sits inside the day's wellness rhythm. Saratô runs breakfast at the cove from seven to nine-thirty. Loumi Rue holds the family side from seven to ten. Lunch is slower; dinner longer than the others. Ten-step service across all venues.</p>
+  </div>
+</section>
+
+<!-- HARD STANDARDS -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Discipline</p>
+      <h2 class="h-section">What we do not serve</h2>
+    </div>
+    <div class="callout">
+      <ul>
+        <li>No alcohol, anywhere on the property.</li>
+        <li>No deep frying. Fourteen cooking methods only.</li>
+        <li>All dishes gluten-free at Saratô and at Loumi Rue.</li>
+        <li>Beef appears only at Chez Mitzuba (Wagyu).</li>
+        <li>Salt, sugar, coffee, and gluten minimised across the kitchens.</li>
+        <li>Water bottled in-house. Two international brands permitted; local spring water optional.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VENUES INTRO -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Eight kitchens</p>
+      <h2 class="h-section">The Eight Venues</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Three on the adult side, three on the family side, two shared at the Health and Wellness Centre. Each venue carries its own story; each kitchen runs to the same standard.</p>
+    </div>
+
+    <!-- VENUE GRID -->
+    <div class="grid-4" style="margin-top:48px;">
+
+      <!-- 1 Saratô -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Saratô</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Jayana · Adult side</p>
+          <p class="venue-name">Saratô</p>
+          <p class="venue-cuisine">Three meals · Cove kitchen</p>
+          <p class="venue-body">Three meals a day on the cove side, the heart of the adult kitchen. The first meal of your week often happens here, paired with the brief from your Wellness Advisor. The week begins at the table.</p>
+        </div>
+      </div>
+
+      <!-- 2 Jiraka -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Jiraka</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Jayana · Adult speciality</p>
+          <p class="venue-name">Jiraka</p>
+          <p class="venue-cuisine">Indian-Saudi spice route · Beef-free</p>
+          <p class="venue-body">Jiraka is the Sanskrit origin of the word cumin, an Indian spice essential in a cuisine that has travelled from India to Saudi Arabia. The specialty kitchen surprises with Indian spice work in Saudi-rooted dishes. Beef-free.</p>
+        </div>
+      </div>
+
+      <!-- 3 Shay Waard -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Shay Waard</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Jayana · Adult side</p>
+          <p class="venue-name">Shay Waard</p>
+          <p class="venue-cuisine">Tea lounge</p>
+          <p class="venue-body">A tea lounge on the adult side. The afternoon slows here; ceremony when it's wanted, quiet when it's not.</p>
+        </div>
+      </div>
+
+      <!-- 4 Loumi Rue -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Loumi Rue</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Jayela · Family side</p>
+          <p class="venue-name">Loumi Rue</p>
+          <p class="venue-cuisine">Three meals · Family kitchen</p>
+          <p class="venue-body">The family three-meal restaurant. Loumi is the name for a black lemon, born into a family of citrus, different and misunderstood. Loumi finds a friendship with parsley, who is often confused with coriander. The two of them found a friendship that comes from being misunderstood.</p>
+        </div>
+      </div>
+
+      <!-- 5 Chez Mitzuba -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Chez Mitzuba</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Jayela · Family speciality</p>
+          <p class="venue-name">Chez Mitzuba <span class="placeholder-pill" style="margin-left:4px;"></span></p>
+          <p class="venue-cuisine">Japanese · French · Wagyu</p>
+          <p class="venue-body">Family-side specialty, dinner only. Japanese plates with French construction. The only kitchen on property that serves beef (Wagyu).</p>
+        </div>
+      </div>
+
+      <!-- 6 Breezy Kale -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Breezy Kale</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Jayela · Family side</p>
+          <p class="venue-name">Breezy Kale</p>
+          <p class="venue-cuisine">Healthy deli</p>
+          <p class="venue-body">The family healthy deli. Kale at the centre, the word "breezy" carrying the lighter register. Breezy Kale is the place for a slight deviation in your wellness programme. Feeling mischievous? There's ice cream.</p>
+        </div>
+      </div>
+
+      <!-- 7 Chia Bite -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Chia Bite</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Wellness Centre · Shared</p>
+          <p class="venue-name">Chia Bite</p>
+          <p class="venue-cuisine">Healthy bar · Active pit stop</p>
+          <p class="venue-body">A healthy bar at the Health and Wellness Centre, shared by adults and families. Chia is derived from an Aztec word meaning oily, hinting at the seed's omega-three content. There's no real rush here; consider it an active pit stop in your daily programme.</p>
+        </div>
+      </div>
+
+      <!-- 8 Nakeha Studio -->
+      <div class="venue-card">
+        <div class="wire-image" style="height:200px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Nakeha Studio</span>
+        </div>
+        <div class="pad">
+          <p class="venue-zone">Wellness Centre · Shared</p>
+          <p class="venue-name">Nakeha Studio</p>
+          <p class="venue-cuisine">Cooking studio</p>
+          <p class="venue-body">Nakeha is the Arabic word for flavour, often used to describe the specific taste of a food or a drink. In the studio you cook alongside the chefs from each restaurant. Soul of the kitchen, served.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KITCHENS PHILOSOPHY NARRATIVE -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow text-center">The brief in the kitchen</p>
+    <h2 class="h-section text-center" style="margin-bottom:32px;">One discipline across eight kitchens</h2>
+    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+      <p style="margin-bottom:24px;">Eight dining venues run across the property: Saratô on three meals at Jayana, Jiraka as the Jayana speciality, Shay Waard as the tea house, Loumi Rue on three meals at Jayela, Chez Mitzuba as the Jayela speciality, Breezy Kale as a healthy deli, Chia Bite as the active pit stop, and Nakeha Studio as the cooking studio.</p>
+      <p style="margin-bottom:24px;">Hard standards run across every venue: no alcohol resort-wide, no deep frying, fourteen approved cooking methods, all dishes gluten-free at Saratô and Loumi Rue, beef available only at Chez Mitzuba, in-house water bottling and a Farm Belt growing terrace feeding the kitchens.</p>
+      <p>Culinary direction sits with the Director of Health and Wellness alongside the Executive Chef. Menus are reviewed against the nourishment approach: thorough, restorative and shaped to support what each retreat is asking the body to do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WELLNESS THROUGH NUTRITION — three healing menus -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Three healing menus</p>
+      <h2 class="h-section">Wellness Through Nutrition</h2>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Three brand-anchored healing menus run alongside the everyday kitchens. Each is built with our medical leads to support a specific outcome. The plates change with the season; the architecture does not.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <h4 class="h-card">Gut Healing and Cleansing</h4>
+        <p class="caption">Built for guests who arrive heavy, slow, or carrying inflammation. Sequenced courses, fermented and bitter notes early in the day, fibre-led plates through the afternoon. Used inside As a Feather; available across the property on request.</p>
+      </div>
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <h4 class="h-card">Neuro Nourish</h4>
+        <p class="caption">Cognition and clarity. Plates anchored to omega-three sources, polyphenol-rich produce, and a lower glycaemic curve through the day. Used inside As a Leader; available across the property on request.</p>
+      </div>
+      <div class="treatment-card">
+        <div class="wire-image" style="height:180px;margin-bottom:20px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <h4 class="h-card">Women's Hormonal Health</h4>
+        <p class="caption">Built around cycle, peri-menopause, and post-menopause needs. Iron, magnesium, and protein rhythms run through the menus. Used inside As a Woman; available across the property on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAMILY DINING -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="wire-image" style="height:380px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Loumi Rue · long table</span>
+      </div>
+      <div>
+        <p class="eyebrow">For families</p>
+        <h2 class="h-section">Family Bonding at the Table</h2>
+        <p class="body-copy full">Loumi Rue holds the family meals. Nakeha Studio runs cook-together classes for adults and children, with adapted versions for the youngest guests. Nothing rushes; nothing is excessive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section class="section">
+  <div class="shell">
+    <div class="pull-quote">
+      <p class="quote">"Peace is the Ultimate Luxury"</p>
+      <p class="attr">Jayasom AMAALA, kitchen brief</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCING PARTNERS -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="eyebrow-mini">Sourcing partners</p>
+    <p class="body-copy" style="margin:0 auto;">Farm Belt produce on the property. Two international water brands permitted alongside in-house bottling. Crockery from Kevala Customised, Churchill Raku, Rona Mode, and Riedel.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Is alcohol served at Jayasom AMAALA?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">No. The property is alcohol-free across all eight venues, in-room, and at events.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What dietary needs are accommodated? <span class="placeholder-pill" style="margin-left:8px;"></span></p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Saratô and Loumi Rue run gluten-free across all dishes. Vegetarian, vegan, and pescatarian menus run across all venues. Allergens and condition-specific protocols are flagged in the Wellness Advisor consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALITY + REVIEWED-BY -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;text-align:center;">
+    <p class="caption" style="font-style:italic;">Reviewed by Elodie Lefebvre, Director of Health and Wellness, Jayasom Wellness Resort AMAALA. Last reviewed 1 May 2026. <span class="placeholder-pill" style="margin-left:8px;"></span></p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-tall section-dark">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">At the table</p>
+    <h2 class="h-section">Begin your week at the kitchen</h2>
+    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">A Wellness Advisor sets your meals around the brief; reservations open across the eight venues.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-on-dark">Speak to a Wellness Advisor</a>
+      <a href="#" class="btn btn-on-dark">Reserve a table at our restaurants</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

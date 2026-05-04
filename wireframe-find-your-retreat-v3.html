@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Find Your Retreat v3 · Jayasom Wireframe</title>
+  <style>
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 8px 16px; font-size: 12px; color: hsl(var(--muted-foreground)); cursor: pointer; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-tall { padding: 80px 32px; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; max-width: 720px; }
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+.retreat-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; transition: border-color .15s; }
+.retreat-card.hero { border: 2px solid hsl(var(--foreground)); }
+.retreat-card .pad { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.retreat-card .feel { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--foreground)); font-weight: 700; margin-bottom: 8px; }
+.retreat-card .name { font-size: 22px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.retreat-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.retreat-card .teaser { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-bottom: 20px; flex: 1; }
+.retreat-card .cta-row { margin-top: auto; }
+
+.fit-tag { display: inline-block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 10px; border: 1px solid hsl(var(--foreground)); color: hsl(var(--foreground)); margin-bottom: 12px; background: hsla(var(--foreground),0.06); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a> <span class="sep">/</span>
+    <a href="#retreats">Retreats</a> <span class="sep">/</span>
+    Find Your Retreat
+  </div>
+</div>
+
+<main>
+
+<!-- HERO INTRO -->
+<section class="section section-tall">
+  <div class="shell text-center" style="max-width:760px;">
+    <p class="eyebrow">Retreat Finder</p>
+    <h1 class="h-hero">Find the retreat that matches what you came in for.</h1>
+    <p class="body-copy" style="margin:0 auto 16px;font-style:italic;">Six retreats. One question first. What is asking for attention right now?</p>
+    <p class="body-copy" style="margin:0 auto 32px;">The retreat that fits is not always the one that catches the eye first. A few short questions, the same ones a Wellness Advisor would open with, point you toward the retreat the body and mind are asking for. The shape of the stay is built around you on arrival, after a clinical functional assessment. This page is the door.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#filter" class="btn btn-solid">Start the questions</a>
+      <a href="#" class="btn">Speak to a Wellness Advisor</a>
+    </div>
+  </div>
+</section>
+
+<!-- FELT-NEED FILTER -->
+<section class="section section-muted" id="filter">
+  <div class="shell" style="max-width:920px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Step one</p>
+      <h2 class="h-section">What is asking for attention?</h2>
+      <p class="body-copy" style="margin:0 auto;max-width:680px;">Pick what feels closest. You can choose more than one. The questions move with you, and the retreat results adjust as the picture sharpens. Nothing here commits you. The Wellness Advisor will refine the shape on arrival.</p>
+    </div>
+    <div class="tag-row justify-center" style="margin-top:32px;">
+      <span class="tag">Sleep</span>
+      <span class="tag">Stress</span>
+      <span class="tag">Energy</span>
+      <span class="tag">Connection</span>
+      <span class="tag">Weight</span>
+      <span class="tag">Fatigue</span>
+      <span class="tag">Digestion</span>
+      <span class="tag">Hormonal change</span>
+    </div>
+    <p class="caption text-center mt-8" style="font-style:italic;max-width:600px;margin:24px auto 0;">Tell us a little more. Has it been weeks, or longer? What does it feel like in the day? You won't be locked in by what you say here.</p>
+  </div>
+</section>
+
+<!-- 6 RETREAT CARDS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Step two</p>
+      <h2 class="h-section">Six retreats. One that fits.</h2>
+      <p class="body-copy" style="margin:0 auto;max-width:680px;">One retreat is highlighted as the closest match to what you said. Two more sit alongside as adjacent fits. Each is offered in 4, 7, 10, or 14-night durations and shaped at arrival by your Wellness Advisor.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top:48px;">
+
+      <!-- As a Pair -->
+      <div class="retreat-card">
+        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">As a Pair</span>
+        </div>
+        <div class="pad">
+          <p class="feel">Profound connection, relaxing together, renewal</p>
+          <p class="name">As a Pair</p>
+          <p class="duration">4, 7, 10, or 14 nights</p>
+          <p class="teaser">Pair, treated as a unit. Six couple-paired treatments anchor the week, and a few sessions sit aside as recurring conversations between practitioners and the two of you. The questionnaire you sent ahead shapes how the week is built.</p>
+          <div class="cta-row"><a href="wireframe-as-a-pair-v3.html" class="btn">Visit the retreat</a></div>
+        </div>
+      </div>
+
+      <!-- As a Woman -->
+      <div class="retreat-card">
+        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">As a Woman</span>
+        </div>
+        <div class="pad">
+          <p class="feel">Replenished, not reinvented</p>
+          <p class="name">As a Woman</p>
+          <p class="duration">4, 7, 10, or 14 nights</p>
+          <p class="teaser">A retreat shaped around her, in the company of practitioners who do this work. Hormonal Health is the menu emphasis at the table; pelvic and post-natal restoration sits within the body work; Eman Alsayoud anchors the Wellness Mentor stream when she is in residence. The week reads as a soft return, not a renovation.</p>
+          <div class="cta-row"><a href="wireframe-as-a-woman-v3.html" class="btn">Visit the retreat</a></div>
+        </div>
+      </div>
+
+      <!-- As a Family -->
+      <div class="retreat-card">
+        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">As a Family</span>
+        </div>
+        <div class="pad">
+          <p class="feel">Together, at each age</p>
+          <p class="name">As a Family</p>
+          <p class="duration">4, 7, 10, or 14 nights</p>
+          <p class="teaser">Adult depth-of-practice and a children's programme that does not compromise it. Both running every day, in parallel, with overlap when wanted. The children's programme runs through four age-banded studios at the Jayela Health and Wellness Centre, named after botanical stages. Multi-generational nourishment is the menu emphasis. Amanda Hanna anchors the family-wellness stream when she is in residence.</p>
+          <div class="cta-row"><a href="wireframe-as-a-family-v3.html" class="btn">Visit the retreat</a></div>
+        </div>
+      </div>
+
+      <!-- As a Leader -->
+      <div class="retreat-card">
+        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">As a Leader</span>
+        </div>
+        <div class="pad">
+          <p class="feel">Optimised performance, focus and resilience</p>
+          <p class="name">As a Leader</p>
+          <p class="duration">4, 7, 10, or 14 nights</p>
+          <p class="teaser">Built for leaders carrying weight that does not switch off. Neuro Nourish is the menu emphasis at the table; cognitive-load assessments sit within the consultation; the body work leans into recovery, posture, and breath. Short, defensible weeks built against the rest of the year.</p>
+          <div class="cta-row"><a href="wireframe-as-a-leader-v3.html" class="btn">Visit the retreat</a></div>
+        </div>
+      </div>
+
+      <!-- As a Flow -->
+      <div class="retreat-card">
+        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">As a Flow</span>
+        </div>
+        <div class="pad">
+          <p class="feel">Rebuilding, at your pace</p>
+          <p class="name">As a Flow</p>
+          <p class="duration">4, 7, 10, or 14 nights</p>
+          <p class="teaser">Most guests arrive carrying a load. The week takes that as the starting point. Days build around the body's recovery curve, not a fixed grid. Some sessions move; others hold. Sports Nutrition is the menu emphasis; mobility and rebuilding sit within the body work; Mohammad Almslmany anchors the physiotherapy stream.</p>
+          <div class="cta-row"><a href="wireframe-as-a-flow-v3.html" class="btn">Visit the retreat</a></div>
+        </div>
+      </div>
+
+      <!-- As a Feather -->
+      <div class="retreat-card">
+        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">As a Feather</span>
+        </div>
+        <div class="pad">
+          <p class="feel">Physical vitality, detox, optimal weight</p>
+          <p class="name">As a Feather</p>
+          <p class="duration">4, 7, 10, or 14 nights</p>
+          <p class="teaser">Lightness, clearance, quietness. Gut Healing and Cleansing is the menu emphasis at the table; the body work runs through detox-paired and digestive-supporting protocols; the week is set up for sedentary-adjacent guests as much as for guests rebuilding from a heavier load. The retreat carries the highest restorative-treatment count of the six and the lowest motion-session count.</p>
+          <div class="cta-row"><a href="wireframe-as-a-feather-v3.html" class="btn">Visit the retreat</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IF THE PICTURE IS STILL FORMING -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">If unsure</p>
+    <h2 class="h-section">If the picture is still forming, talk to someone.</h2>
+    <p class="body-copy" style="margin:0 auto 32px;">Some guests arrive with a clear question. Others arrive with a sense that something needs attention but cannot yet name it. A Wellness Advisor takes the call before you book; the conversation is closer to a clinical intake than a booking enquiry. Where the assessment surfaces a need that does not match the six retreats above, an Individual Wellness pathway is shaped instead.</p>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="#" class="btn btn-solid">Request a call</a>
+      <a href="wireframe-individual-wellness-v3.html" class="btn">Individual Wellness</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXT NOTE -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="callout">
+      <p class="callout-label">Karen Campbell on the approach</p>
+      <p class="body-copy full" style="font-style:italic;color:hsl(var(--foreground));font-size:14px;">Karen Campbell calls this the ingredients-in-the-kitchen approach. The kitchen is the property: Therapeutic Pillars, named practitioners, treatments, gardens, dining venues. The felt-need is what you came to cook. Your Wellness Advisor walks you through how to combine the two.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Common questions before booking</h2>
+    </div>
+    <div>
+      <div class="faq-item"><p class="q-text">How does Find Your Retreat work?</p><p class="a">You answer a short series of questions about what is asking for attention right now: sleep, stress, energy, connection, weight, fatigue, digestion, hormonal change, or something else. The system surfaces one retreat as the closest match, two more as adjacent, and three as further afield. You read the cards. You speak to a Wellness Advisor before booking if it helps.</p></div>
+      <div class="faq-item"><p class="q-text">Can I choose more than one felt-need?</p><p class="a">Yes. The questions are designed for that. Most guests arrive with two or three things layered together; the matching takes that into account.</p></div>
+      <div class="faq-item"><p class="q-text">What is the minimum stay?</p><p class="a">Retreats run from four nights upward. The most common stays are seven, ten, and fourteen nights. Per-tier inclusions vary; longer stays add more practitioner time and deeper assessment.</p></div>
+      <div class="faq-item"><p class="q-text">Do I have to know what I want?</p><p class="a">No. If the picture is still forming, request a call with a Wellness Advisor. Many guests arrive with a sense that something needs to shift, without yet knowing what. The pre-arrival call shapes the week around what each guest says.</p></div>
+      <div class="faq-item"><p class="q-text">What is AMAALA?</p><p class="a">AMAALA is a wellness destination on Saudi Arabia's Red Sea coast, at Triple Bay. Jayasom AMAALA is one of twenty-four Phase 1 communities within the master plan. The destination is reached via Al Wajh Airport (one hour by car) or Red Sea International Airport (under two hours).</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
