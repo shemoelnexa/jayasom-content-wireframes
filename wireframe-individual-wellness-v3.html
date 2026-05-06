@@ -140,6 +140,133 @@ html, body {
 .cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
 .cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
 .cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; border: 0; padding: 0; }
+
+/* === LAYOUT VARIATIONS === */
+.split-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.split-row.reverse > :first-child { order: 2; }
+.split-row .split-img { height: 380px; }
+@media (max-width: 768px) {
+  .split-row { grid-template-columns: 1fr; gap: 32px; }
+  .split-row.reverse > :first-child { order: 0; }
+  .split-row .split-img { height: 240px; }
+}
+
+/* Pillar columns — text-only 3-column with vertical dividers */
+.pillar-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+}
+.pillar-col {
+  padding: 48px 32px;
+  border-right: 1px solid hsl(var(--border));
+}
+.pillar-col:last-child { border-right: 0; }
+.pillar-col .pillar-num { font-size: 56px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 28px; }
+.pillar-col .pillar-eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
+.pillar-col .pillar-name { font-size: 24px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 20px; }
+.pillar-col .pillar-text { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.75; }
+@media (max-width: 768px) {
+  .pillar-columns { grid-template-columns: 1fr; }
+  .pillar-col { border-right: 0; border-bottom: 1px solid hsl(var(--border)); padding: 32px; }
+  .pillar-col:last-child { border-bottom: 0; }
+}
+
+/* Modality thumbnails — 5-up portrait cards with image on top */
+.modality-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.modality-thumb {
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+}
+.modality-thumb .wire-image {
+  height: 220px;
+  border: 0;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.modality-thumb .pad {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.modality-thumb .pad .num { font-size: 10px; letter-spacing: 0.2em; color: hsl(var(--muted-foreground)); }
+.modality-thumb .pad .name { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 4px; }
+.modality-thumb .pad .desc { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.65; }
+@media (max-width: 1024px) {
+  .modality-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .modality-grid { grid-template-columns: 1fr; }
+}
+
+/* Retreat cards — 3 stacked landscape rows with image-left + text-right per card */
+.retreat-cards { display: flex; flex-direction: column; gap: 16px; }
+.retreat-card {
+  display: grid;
+  grid-template-columns: 200px 1fr 64px;
+  gap: 0;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  align-items: stretch;
+  transition: background 160ms ease;
+}
+.retreat-card:hover { background: hsl(var(--muted)); }
+.retreat-card .wire-image {
+  height: 100%;
+  min-height: 140px;
+  border: 0;
+  border-right: 1px solid hsl(var(--border));
+}
+.retreat-card .pad {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+.retreat-card .pad .rname { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); }
+.retreat-card .pad .rtag { font-size: 13px; color: hsl(var(--muted-foreground)); font-style: italic; }
+.retreat-card .rarrow {
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid hsl(var(--border));
+  font-size: 18px;
+  color: hsl(var(--muted-foreground));
+}
+@media (max-width: 768px) {
+  .retreat-card { grid-template-columns: 1fr; }
+  .retreat-card .wire-image { min-height: 140px; border-right: 0; border-bottom: 1px solid hsl(var(--border)); }
+  .retreat-card .rarrow { display: none; }
+}
+
+/* Editorial split (long-form 2-col) */
+.editorial-split { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+.editorial-split .ed-left { position: sticky; top: 32px; }
+.editorial-split .ed-left .lead { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1.45; font-style: italic; margin-top: 16px; }
+.editorial-split .ed-right p { margin-bottom: 18px; font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.85; }
+.editorial-split .ed-right p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) {
+  .editorial-split { grid-template-columns: 1fr; gap: 32px; }
+  .editorial-split .ed-left { position: static; }
+}
+
+/* Stat callout */
+.stat-callout {
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  padding: 40px 32px;
+  text-align: center;
+}
+.stat-callout .stat-num { font-size: 64px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 12px; }
+.stat-callout .stat-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+.stat-callout .stat-desc { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; max-width: 360px; margin: 0 auto; }
   </style>
 </head>
 <body>
@@ -188,12 +315,18 @@ html, body {
 
 <!-- WHAT IT COVERS -->
 <section class="section">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Overview</p>
-      <h2 class="h-section">What Individual Wellness covers</h2>
+  <div class="shell">
+    <div class="split-row">
+      <div>
+        <p class="eyebrow">Overview</p>
+        <h2 class="h-section">What Individual Wellness covers</h2>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">Yoga, Pilates, functional training, corrective exercise, breathwork, sound, and one-to-one bodywork. Sessions run inside the open studios on the upper terrace and inside garden-facing treatment rooms. The Wellness Advisor builds the path with you on day one.</p>
+      </div>
+      <div class="wire-image split-img">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Open studio · upper terrace</span>
+      </div>
     </div>
-    <p class="body-copy full" style="font-size:15px;line-height:1.85;">Yoga, Pilates, functional training, corrective exercise, breathwork, sound, and one-to-one bodywork. Sessions run inside the open studios on the upper terrace and inside garden-facing treatment rooms. The Wellness Advisor builds the path with you on day one.</p>
   </div>
 </section>
 
@@ -228,66 +361,140 @@ html, body {
   </div>
 </section>
 
-<!-- THERAPEUTIC PILLARS -->
+<!-- THERAPEUTIC PILLARS · NUMBERED HORIZONTAL ROWS -->
 <section class="section">
-  <div class="shell">
-    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
+  <div class="shell" style="max-width:920px;">
+    <div class="text-center mb-8">
       <p class="eyebrow">Body, mind, spirit</p>
       <h2 class="h-section">The Therapeutic Pillars</h2>
-      <p class="body-copy" style="margin:0 auto;font-style:italic;">Three Pillars hold the work: Body, Mind, and Spirit. They overlap rather than separate; restoration sits at the intersection. The Pillars describe the approach, not a fixed menu &mdash; the work is what they hold.</p>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;max-width:680px;">Three Pillars hold the work: Body, Mind, and Spirit. They overlap rather than separate; restoration sits at the intersection. The Pillars describe the approach, not a fixed menu &mdash; the work is what they hold.</p>
     </div>
-    <div class="grid-3" style="margin-top:48px;">
-      <div class="icon-card-centered">
-        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="6" r="3"/><path d="M12 9v6M9 13h6M9 21l3-6 3 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <p class="eyebrow-mini">Pillar 01</p>
-        <h4 class="h-card">Body</h4>
-        <p class="caption">Movement, hydrotherapy, sleep, nutrition, bodywork. The fastest changes show up here. The slowest ones are also here, the ones that hold across the year.</p>
+    <div class="pillar-columns" style="margin-top:48px;">
+      <div class="pillar-col">
+        <p class="pillar-num">01</p>
+        <p class="pillar-eyebrow">Pillar 01</p>
+        <h4 class="pillar-name">Body</h4>
+        <p class="pillar-text">Movement, hydrotherapy, sleep, nutrition, bodywork. The fastest changes show up here. The slowest ones are also here, the ones that hold across the year.</p>
       </div>
-      <div class="icon-card-centered">
-        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12a3 3 0 0 1-3-3M15 12a3 3 0 0 0 3-3M9 12v6a3 3 0 0 0 6 0v-6M6 9a3 3 0 0 1 6-3 3 3 0 0 1 6 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <p class="eyebrow-mini">Pillar 02</p>
-        <h4 class="h-card">Mind</h4>
-        <p class="caption">Breath, stillness, sound, talking work, contemplative practice. The mind softens when the body is held; the body softens when the mind is heard.</p>
+      <div class="pillar-col">
+        <p class="pillar-num">02</p>
+        <p class="pillar-eyebrow">Pillar 02</p>
+        <h4 class="pillar-name">Mind</h4>
+        <p class="pillar-text">Breath, stillness, sound, talking work, contemplative practice. The mind softens when the body is held; the body softens when the mind is heard.</p>
       </div>
-      <div class="icon-card-centered">
-        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2c-4 6-4 14 0 20M12 2c4 6 4 14 0 20M2 12h20" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <p class="eyebrow-mini">Pillar 03</p>
-        <h4 class="h-card">Spirit</h4>
-        <p class="caption">The cultural threads. Saudi tradition, Asian lineage, contemplative practice. We are a neighbour to the culture, a neighbour to the locals; the work is rooted, not imported.</p>
+      <div class="pillar-col">
+        <p class="pillar-num">03</p>
+        <p class="pillar-eyebrow">Pillar 03</p>
+        <h4 class="pillar-name">Spirit</h4>
+        <p class="pillar-text">The cultural threads. Saudi tradition, Asian lineage, contemplative practice. We are a neighbour to the culture, a neighbour to the locals; the work is rooted, not imported.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WITHIN THE PILLARS / MODALITIES -->
+<!-- WITHIN THE PILLARS · MODALITY THUMBNAILS -->
 <section class="section section-muted">
   <div class="shell">
     <div class="text-center mb-8">
       <p class="eyebrow">Modalities</p>
       <h2 class="h-section">Within the Pillars</h2>
     </div>
-    <div class="grid-5" style="margin-top:48px;">
-      <div class="wire-card"><div class="pad"><p class="eyebrow-mini">01</p><h4 class="h-card">Yoga</h4><p class="caption">Hatha and slow vinyasa across the open studios. Outdoor yoga at the Wellness Plateau pavilion. Water-borne yoga at the Beach Hut.</p></div></div>
-      <div class="wire-card"><div class="pad"><p class="eyebrow-mini">02</p><h4 class="h-card">Pilates</h4><p class="caption">Mat and reformer Pilates, paired with corrective exercise where the body asks for it. Small, repeatable work, held across many days.</p></div></div>
-      <div class="wire-card"><div class="pad"><p class="eyebrow-mini">03</p><h4 class="h-card">Functional training</h4><p class="caption">Movement patterns drawn from the day, not from the gym. Carrying, hinging, balancing, breathing under load. Run on the Pavigym-integrated floors with one-to-one or paired coaching.</p></div></div>
-      <div class="wire-card"><div class="pad"><p class="eyebrow-mini">04</p><h4 class="h-card">Corrective exercise</h4><p class="caption">Postural assessment, gait analysis, and mobility paired with bodywork. The starting point is your body's current shape, not a generic template.</p></div></div>
-      <div class="wire-card"><div class="pad"><p class="eyebrow-mini">05</p><h4 class="h-card">Breath and sound</h4><p class="caption">Functional breath, sound healing, talking work. Sessions run alone or are stitched into longer treatment days. The instrument is your nervous system; the practitioner is reading it back to you.</p></div></div>
+    <div class="modality-grid" style="margin-top:48px;">
+      <div class="modality-thumb">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2"/><path d="M12 8c-3 3-3 7 0 12M12 8c3 3 3 7 0 12M5 14c4 0 7-2 7-2s3 2 7 2"/></svg>
+        </div>
+        <div class="pad">
+          <p class="num">01</p>
+          <p class="name">Yoga</p>
+          <p class="desc">Hatha and slow vinyasa across the open studios. Outdoor yoga at the Wellness Plateau pavilion. Water-borne yoga at the Beach Hut.</p>
+        </div>
+      </div>
+      <div class="modality-thumb">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12c4-4 14-4 18 0M3 12c4 4 14 4 18 0"/></svg>
+        </div>
+        <div class="pad">
+          <p class="num">02</p>
+          <p class="name">Pilates</p>
+          <p class="desc">Mat and reformer Pilates, paired with corrective exercise where the body asks for it. Small, repeatable work, held across many days.</p>
+        </div>
+      </div>
+      <div class="modality-thumb">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 8-4 8M14 4l4 8-4 8"/></svg>
+        </div>
+        <div class="pad">
+          <p class="num">03</p>
+          <p class="name">Functional Training</p>
+          <p class="desc">Movement patterns drawn from the day, not from the gym. Carrying, hinging, balancing, breathing under load. Run on the Pavigym-integrated floors.</p>
+        </div>
+      </div>
+      <div class="modality-thumb">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg>
+        </div>
+        <div class="pad">
+          <p class="num">04</p>
+          <p class="name">Corrective Exercise</p>
+          <p class="desc">Postural assessment, gait analysis, and mobility paired with bodywork. The starting point is your body's current shape.</p>
+        </div>
+      </div>
+      <div class="modality-thumb">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 5a7 7 0 0 1 0 14M12 5a7 7 0 0 0 0 14"/></svg>
+        </div>
+        <div class="pad">
+          <p class="num">05</p>
+          <p class="name">Breath and Sound</p>
+          <p class="desc">Functional breath, sound healing, talking work. Sessions run alone or are stitched into longer treatment days.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- USED IN RETREATS / TREATMENTS CROSS-LINK -->
+<!-- USED IN RETREATS · HORIZONTAL ROWS -->
 <section class="section">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Used in retreats</p>
-      <h2 class="h-section">Threading through the signature retreats</h2>
+  <div class="shell" style="max-width:920px;">
+    <div class="grid-2" style="gap:64px;align-items:start;margin-bottom:32px;">
+      <div>
+        <p class="eyebrow">Used in retreats</p>
+        <h2 class="h-section">Threading through the signature retreats</h2>
+      </div>
+      <p class="body-copy full">One-to-one work threads through the signature retreats. Detox runs heavier hydrotherapy and gut-led plates. Longevity runs measurement and slow strength. Family Rebalance runs lighter movement, paired with parental rest. The Wellness Advisor names which thread to follow.</p>
     </div>
-    <p class="body-copy full" style="font-size:15px;line-height:1.85;">One-to-one work threads through the signature retreats. Detox runs heavier hydrotherapy and gut-led plates. Longevity runs measurement and slow strength. Family Rebalance runs lighter movement, paired with parental rest. The Wellness Advisor names which thread to follow.</p>
-    <div class="grid-3" style="margin-top:32px;gap:16px;">
-      <a href="wireframe-as-a-feather-v3.html" class="cross-card"><p class="name">As a Feather</p><p class="tag">Detox, gut healing, lightness.</p></a>
-      <a href="wireframe-as-a-flow-v3.html" class="cross-card"><p class="name">As a Flow</p><p class="tag">Movement rehab, athletic recovery.</p></a>
-      <a href="wireframe-as-a-leader-v3.html" class="cross-card"><p class="name">As a Leader</p><p class="tag">Cognitive load, posture, sleep.</p></a>
+    <div class="retreat-cards">
+      <a href="wireframe-as-a-feather-v3.html" class="retreat-card">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c0-9 6-15 15-15M8 16c2-4 5-7 9-9M3 21l4-4"/></svg>
+        </div>
+        <div class="pad">
+          <p class="rname">As a Feather</p>
+          <p class="rtag">Detox, gut healing, lightness.</p>
+        </div>
+        <div class="rarrow">→</div>
+      </a>
+      <a href="wireframe-as-a-flow-v3.html" class="retreat-card">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M3 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+        </div>
+        <div class="pad">
+          <p class="rname">As a Flow</p>
+          <p class="rtag">Movement rehab, athletic recovery.</p>
+        </div>
+        <div class="rarrow">→</div>
+      </a>
+      <a href="wireframe-as-a-leader-v3.html" class="retreat-card">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-9 8-9s8 4 8 9"/></svg>
+        </div>
+        <div class="pad">
+          <p class="rname">As a Leader</p>
+          <p class="rtag">Cognitive load, posture, sleep.</p>
+        </div>
+        <div class="rarrow">→</div>
+      </a>
     </div>
   </div>
 </section>
@@ -301,48 +508,64 @@ html, body {
   </div>
 </section>
 
-<!-- WHY INTEGRATIVE -->
+<!-- WHY INTEGRATIVE · SPLIT -->
 <section class="section">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Approach</p>
-      <h2 class="h-section">Why an integrative approach</h2>
+  <div class="shell">
+    <div class="split-row reverse">
+      <div class="wire-image split-img">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/><circle cx="12" cy="8" r="6"/></svg>
+        <span class="label">Three Pillars · overlapping practice</span>
+      </div>
+      <div>
+        <p class="eyebrow">Approach</p>
+        <h2 class="h-section">Why an integrative approach</h2>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">The three Pillars overlap rather than separate. The Wellness Advisor builds the path; the Visiting Practitioners arrive in residence for weeks at a time. Small, constant practice compounds across a year.</p>
+      </div>
     </div>
-    <p class="body-copy full" style="font-size:15px;line-height:1.85;">The three Pillars overlap rather than separate. The Wellness Advisor builds the path; the Visiting Practitioners arrive in residence for weeks at a time. Small, constant practice compounds across a year.</p>
   </div>
 </section>
 
-<!-- WELLNESS WISDOM BACKFILL / DEEP DENSITY -->
+<!-- HOW THE WORK RUNS · EDITORIAL 2-COL -->
 <section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Inside the practice</p>
-      <h2 class="h-section">How the work runs day-to-day</h2>
-    </div>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:24px;">One-to-one wellness at Jayasom AMAALA draws on the Wellness Wisdom philosophy: each programme shaped by what you arrive needing, anchored by a named practitioner, and built across Therapeutic Pillars rather than off a fixed package menu.</p>
-      <p style="margin-bottom:24px;">Treatments cross-cut the programme: Shirodhara, Marma Point Therapy and Pinda Sweda from the Ayurvedic lineage; Hijama, &Ucirc;lfa Ritual and the Vagus Nerve Ritual from Traditional Arabic and Islamic Medicine; Watsu, Floatation Therapy and Sound Healing for nervous-system release.</p>
-      <p style="margin-bottom:24px;">Wellness Wisdom is the brand pillar that joins Traditional Arabic and Islamic Medicine, Ayurvedic protocols, contemporary clinical care and the Health and Wellness Centre's daily practice. Precision, measurement, and accountability to the body in front of us run through it. Traditional wisdom met by contemporary practice; one practice, not a list of treatments.</p>
-      <p style="margin-bottom:24px;">Therapeutic Pillars cross-cut the work: body, mind and spirit. Within each, approaches run alongside one another rather than separately. Ayurvedic protocols meet contemporary clinical care; Traditional Arabic and Islamic Medicine meets sport science; mindfulness practice meets the hydrothermal circuit. The Wellness Advisor reads where the body is and shapes the programme across all three.</p>
-      <p style="margin-bottom:24px;">The Treatment Directory carries the property's treatments across the Therapeutic Pillars. Some treatments anchor a single retreat; others thread across many. The Couple's Connect Spa Ritual sits within As a Pair; Pinda Sweda runs across As a Feather and the wider cleansing arm; the daily 60-minute treatment from the seven-treatment menu runs across every retreat tier.</p>
-      <p style="margin-bottom:24px;">Traditional Arabic and Islamic Medicine sits as a foundational practice across every retreat. Halalopathy carries the seven principles that thread through the kitchen, the practitioner roster and the daily clinical practice. Phase 2 of Jayasom's growth opens a dedicated Harmony of Halal retreat; for now, the framework runs across every signature retreat as a working layer of the methodology.</p>
-      <p style="margin-bottom:24px;">Every retreat opens with a one-to-one Health Consultation, plus a Specialist Consultation calibrated to the retreat shape. Physical and Postural Assessment plus VISIA Facial Imaging are complimentary on request. The Jayasom Longevity Assessment Programme runs across seven components annually for residence owners. The work compounds across stays.</p>
-      <p style="margin-bottom:24px;">The Wellness Advisor takes the brief on arrival, reading what the body brought through the door and shaping the programme around what the week is asking for. Pre-arrival conversations, in-residence consultations and post-departure follow-up sit within one continuous file. Each Advisor holds a small caseload at any one time, so each stay is shaped, not delivered.</p>
-      <p>Continuity is part of the design. Your Wellness Advisor stays with you across the stay and can be reached after departure, with optional quarterly check-ins and access to the Visiting Practitioner schedule for return visits.</p>
+  <div class="shell">
+    <div class="editorial-split">
+      <div class="ed-left">
+        <p class="eyebrow">Inside the practice</p>
+        <h2 class="h-section">How the work runs day-to-day</h2>
+        <p class="lead">Wellness Wisdom shaped by what you arrive needing, anchored by a named practitioner, built across the Therapeutic Pillars rather than off a fixed package menu.</p>
+      </div>
+      <div class="ed-right">
+        <p>One-to-one wellness at Jayasom AMAALA draws on the Wellness Wisdom philosophy: each programme shaped by what you arrive needing, anchored by a named practitioner, and built across Therapeutic Pillars rather than off a fixed package menu.</p>
+        <p>Treatments cross-cut the programme: Shirodhara, Marma Point Therapy and Pinda Sweda from the Ayurvedic lineage; Hijama, &Ucirc;lfa Ritual and the Vagus Nerve Ritual from Traditional Arabic and Islamic Medicine; Watsu, Floatation Therapy and Sound Healing for nervous-system release.</p>
+        <p>Wellness Wisdom is the brand pillar that joins Traditional Arabic and Islamic Medicine, Ayurvedic protocols, contemporary clinical care and the Health and Wellness Centre's daily practice. Precision, measurement, and accountability to the body in front of us run through it. Traditional wisdom met by contemporary practice; one practice, not a list of treatments.</p>
+        <p>Therapeutic Pillars cross-cut the work: body, mind and spirit. Within each, approaches run alongside one another rather than separately. Ayurvedic protocols meet contemporary clinical care; Traditional Arabic and Islamic Medicine meets sport science; mindfulness practice meets the hydrothermal circuit. The Wellness Advisor reads where the body is and shapes the programme across all three.</p>
+        <p>The Treatment Directory carries the property's treatments across the Therapeutic Pillars. Some treatments anchor a single retreat; others thread across many. The Couple's Connect Spa Ritual sits within As a Pair; Pinda Sweda runs across As a Feather and the wider cleansing arm; the daily 60-minute treatment from the seven-treatment menu runs across every retreat tier.</p>
+        <p>Traditional Arabic and Islamic Medicine sits as a foundational practice across every retreat. Halalopathy carries the seven principles that thread through the kitchen, the practitioner roster and the daily clinical practice. Phase 2 of Jayasom's growth opens a dedicated Harmony of Halal retreat; for now, the framework runs across every signature retreat as a working layer of the methodology.</p>
+        <p>Every retreat opens with a one-to-one Health Consultation, plus a Specialist Consultation calibrated to the retreat shape. Physical and Postural Assessment plus VISIA Facial Imaging are complimentary on request. The Jayasom Longevity Assessment Programme runs across seven components annually for residence owners. The work compounds across stays.</p>
+        <p>The Wellness Advisor takes the brief on arrival, reading what the body brought through the door and shaping the programme around what the week is asking for. Pre-arrival conversations, in-residence consultations and post-departure follow-up sit within one continuous file. Each Advisor holds a small caseload at any one time, so each stay is shaped, not delivered.</p>
+        <p>Continuity is part of the design. Your Wellness Advisor stays with you across the stay and can be reached after departure, with optional quarterly check-ins and access to the Visiting Practitioner schedule for return visits.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- VISITING PRACTITIONERS -->
+<!-- VISITING PRACTITIONERS · SPLIT WITH STAT -->
 <section class="section">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">In residence</p>
-      <h2 class="h-section">Practitioners in residence</h2>
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">In residence</p>
+        <h2 class="h-section">Practitioners in residence</h2>
+        <p class="body-copy full" style="margin-bottom:20px;">Eight to ten Visiting Practitioners are in residence at any given time, alongside the resident Wellness Advisors. Categories rotate; an activity might not be available because somebody goes on leave or gets pregnant or is somehow not available. The Advisor builds your week around who is there.</p>
+        <p class="body-copy full">Visiting Practitioners arrive in residence at intervals through the year, drawn from a roster of clinical and movement specialists. Each is chosen for the depth of practice they carry; the teaching that arrives with a Visiting Practitioner stays with the resident team once they have left.</p>
+        <a href="#" class="btn mt-6">Meet our Wellness Advisors</a>
+      </div>
+      <div class="stat-callout">
+        <p class="stat-num">8&ndash;10</p>
+        <p class="stat-label">Visiting Practitioners</p>
+        <p class="stat-desc">In residence at any given time, alongside the resident Wellness Advisors. The roster rotates through the year.</p>
+      </div>
     </div>
-    <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:24px;">Eight to ten Visiting Practitioners are in residence at any given time, alongside the resident Wellness Advisors. Categories rotate; an activity might not be available because somebody goes on leave or gets pregnant or is somehow not available. The Advisor builds your week around who is there.</p>
-    <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:24px;">Visiting Practitioners arrive in residence at intervals through the year, drawn from a roster of clinical and movement specialists. Each is chosen for the depth of practice they carry; the teaching that arrives with a Visiting Practitioner stays with the resident team once they have left. Eight to ten specialists sit on the directory at any one time.</p>
-    <div class="text-center mt-6"><a href="#" class="btn">Meet our Wellness Advisors</a></div>
   </div>
 </section>
 
