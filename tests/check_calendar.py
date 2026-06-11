@@ -27,8 +27,14 @@ check('rail cells present', 'cal-rail' in section)
 check('chip cells present', 'cal-chip' in section)
 check('chip-day spans present', 'chip-day' in section)
 check('today marker present', 'd-today' in section)
-check('legend present', 'cal-legend' in section)
 check('old wire-table removed from section', 'wire-table' not in section)
+
+# Simplified content: only window names, session names, and day names remain.
+check('category labels removed', 'chip-cat' not in section)
+check('tap / time text removed', 'chip-tap' not in section)
+check('time-of-day cue removed', 'r-cue' not in section)
+check('legend removed', 'cal-legend' not in section)
+check('window rail names kept', 'r-name' in section)
 
 chips = re.findall(r'class="cal-chip(?: is-anchor)?"', section)
 check('exactly 42 chips', len(chips) == 42)

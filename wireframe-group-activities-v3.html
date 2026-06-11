@@ -197,12 +197,12 @@ html, body {
 /* === ACTIVITY CALENDAR === */
 .cal {
   display: grid;
-  grid-template-columns: 168px repeat(7, 1fr);
+  grid-template-columns: 188px repeat(7, 1fr);
   border: 1px solid hsl(var(--border));
 }
 .cal > * {
-  border-right: 1px solid hsla(var(--border), 0.35);
-  border-bottom: 1px solid hsla(var(--border), 0.35);
+  border-right: 1px solid hsla(var(--border), 0.3);
+  border-bottom: 1px solid hsla(var(--border), 0.3);
 }
 .cal > *:nth-child(8n) { border-right: 0; }
 .cal > *:nth-child(n+49) { border-bottom: 0; }
@@ -211,11 +211,11 @@ html, body {
 .cal-corner { background: hsl(var(--primary)); }
 .cal-dayhead {
   background: hsl(var(--primary));
-  padding: 14px 8px; text-align: center;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 16px 8px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
 }
 .cal-dayhead .d-name {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
   text-transform: uppercase; color: hsl(var(--primary-foreground));
 }
 .cal-dayhead .d-today {
@@ -224,93 +224,59 @@ html, body {
   padding: 2px 7px;
 }
 
-/* window rail — a labelled spine down the left */
-.cal-rail { background: hsl(var(--muted)); padding: 16px 14px 16px 18px; position: relative; }
+/* window rail — bold window name on a spined left column */
+.cal-rail {
+  background: hsl(var(--muted));
+  padding: 18px 16px 18px 22px; position: relative;
+  display: flex; align-items: center;
+}
 .cal-rail::before {
-  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
   background: hsl(var(--foreground));
 }
-.cal-rail .r-cue {
-  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: hsl(var(--muted-foreground)); margin-bottom: 6px;
-}
 .cal-rail .r-name {
-  font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); line-height: 1.25;
-}
-
-/* session chips */
-.cal-chip {
-  background: hsl(var(--background));
-  padding: 14px 13px 15px;
-  display: flex; flex-direction: column; gap: 6px;
-  cursor: pointer;
-  transition: background 160ms ease, box-shadow 160ms ease;
-}
-.cal-chip:hover {
-  background: hsl(var(--muted));
-  box-shadow: inset 0 0 0 1.5px hsla(var(--foreground), 0.42);
-}
-.cal-chip .chip-day { display: none; }
-.cal-chip .chip-cat {
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: hsl(var(--muted-foreground));
-  display: inline-flex; align-items: center; gap: 7px;
-}
-.cal-chip .chip-cat::before {
-  content: ""; width: 9px; height: 1px; background: hsl(var(--wire-line)); flex-shrink: 0;
-}
-.cal-chip .chip-name {
-  font-size: 14px; font-weight: 300; color: hsl(var(--foreground));
+  font-size: 15px; font-weight: 700; color: hsl(var(--foreground));
   line-height: 1.3; letter-spacing: 0.01em;
 }
-.cal-chip .chip-tap {
-  margin-top: 1px; font-size: 10px; color: hsl(var(--muted-foreground));
-  display: inline-flex; align-items: center; gap: 6px;
-  opacity: 0; transition: opacity 160ms ease;
+
+/* session chips — name only, centred, with a dark-fill hover */
+.cal-chip {
+  background: hsl(var(--background));
+  min-height: 68px; padding: 16px 12px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
 }
-.cal-chip .chip-tap::before {
-  content: ""; width: 5px; height: 5px; border-radius: 50%;
-  background: hsl(var(--foreground)); flex-shrink: 0;
+.cal-chip .chip-day { display: none; }
+.cal-chip .chip-name {
+  font-size: 15px; font-weight: 300; color: hsl(var(--foreground));
+  line-height: 1.3; letter-spacing: 0.01em;
 }
-.cal-chip:hover .chip-tap { opacity: 1; }
+.cal-chip:hover,
+.cal-chip.is-anchor:hover { background: hsl(var(--primary)); }
+.cal-chip:hover .chip-name,
+.cal-chip.is-anchor:hover .chip-name { color: hsl(var(--primary-foreground)); }
 
 /* the Midday Stretch anchor — the steady spine of the day */
-.cal-chip.is-anchor { background: hsla(var(--foreground), 0.07); }
-.cal-chip.is-anchor:hover { background: hsla(var(--foreground), 0.11); }
+.cal-chip.is-anchor { background: hsla(var(--foreground), 0.08); }
 .cal-chip.is-anchor .chip-name { font-weight: 700; }
-.cal-chip.is-anchor .chip-cat::before { background: hsl(var(--foreground)); }
-.cal-chip.is-anchor .chip-tap { opacity: 1; }
-
-.cal-legend {
-  display: flex; flex-wrap: wrap; gap: 18px 32px;
-  margin-top: 22px; padding-top: 20px; border-top: 1px solid hsl(var(--border));
-}
-.cal-legend .leg-item { display: flex; gap: 10px; align-items: flex-start; max-width: 300px; }
-.cal-legend .leg-key {
-  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
-  color: hsl(var(--foreground)); flex-shrink: 0; padding-top: 1px;
-}
-.cal-legend .leg-text { font-size: 11px; color: hsl(var(--muted-foreground)); line-height: 1.55; }
 
 /* calendar: stack by window on mobile */
 @media (max-width: 768px) {
   .cal { display: block; border: 1px solid hsl(var(--border)); border-bottom: 0; }
   .cal-corner, .cal-dayhead { display: none; }
-  .cal > * { border-right: 0; border-bottom: 1px solid hsla(var(--border), 0.45); }
-  .cal > *:nth-child(n+49) { border-bottom: 1px solid hsla(var(--border), 0.45); }
-  .cal-rail { padding: 14px 16px 14px 18px; }
+  .cal > * { border-right: 0; border-bottom: 1px solid hsla(var(--border), 0.4); }
+  .cal > *:nth-child(n+49) { border-bottom: 1px solid hsla(var(--border), 0.4); }
+  .cal-rail { padding: 14px 16px 14px 20px; }
   .cal-chip {
-    flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
-    padding: 13px 16px;
+    min-height: 0; justify-content: flex-start; text-align: left;
+    gap: 14px; padding: 14px 16px;
   }
-  .cal-chip:hover { box-shadow: none; }
   .cal-chip .chip-day {
-    display: inline-block; min-width: 42px;
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
-    color: hsl(var(--foreground));
+    display: inline-block; min-width: 44px; flex-shrink: 0;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+    color: hsl(var(--muted-foreground));
   }
-  .cal-chip .chip-cat { order: 3; width: 100%; }
-  .cal-chip .chip-tap { order: 4; width: 100%; margin-top: 0; opacity: 1; }
 }
 
   </style>
@@ -575,65 +541,59 @@ html, body {
       <div class="cal-dayhead"><span class="d-name">Sat</span></div>
       <div class="cal-dayhead"><span class="d-name">Sun</span></div>
 
-      <div class="cal-rail"><div class="r-cue">Sunrise</div><div class="r-name">Morning Movement</div></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-cat">Pilates</span><span class="chip-name">Mat Pilates</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-cat">Yoga</span><span class="chip-name">Yin Yoga</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-cat">Tai Chi</span><span class="chip-name">Tai Chi</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-cat">Yoga</span><span class="chip-name">Yoga Flow</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-cat">Pilates</span><span class="chip-name">Mat Pilates</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-cat">Yoga</span><span class="chip-name">Yin Yoga</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-cat">Tai Chi</span><span class="chip-name">Tai Chi</span><span class="chip-tap">Tap for time</span></div>
+      <div class="cal-rail"><span class="r-name">Morning Movement</span></div>
+      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Mat Pilates</span></div>
+      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Yin Yoga</span></div>
+      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-name">Tai Chi</span></div>
+      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Yoga Flow</span></div>
+      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Mat Pilates</span></div>
+      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Yin Yoga</span></div>
+      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Tai Chi</span></div>
 
-      <div class="cal-rail"><div class="r-cue">Mid-morning</div><div class="r-name">Aqua</div></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-cat">Aqua</span><span class="chip-name">Pool Noodle</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-cat">Aqua</span><span class="chip-name">Hand Buoy</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-cat">Aqua</span><span class="chip-name">Aqua Boxing</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-cat">Aqua</span><span class="chip-name">Pool Noodle</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-cat">Aqua</span><span class="chip-name">Hand Buoy</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-cat">Aqua</span><span class="chip-name">Aqua Boxing</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-cat">Aqua</span><span class="chip-name">Pool Noodle</span><span class="chip-tap">Tap for time</span></div>
+      <div class="cal-rail"><span class="r-name">Aqua</span></div>
+      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Pool Noodle</span></div>
+      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Hand Buoy</span></div>
+      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-name">Aqua Boxing</span></div>
+      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Pool Noodle</span></div>
+      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Hand Buoy</span></div>
+      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Aqua Boxing</span></div>
+      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Pool Noodle</span></div>
 
-      <div class="cal-rail"><div class="r-cue">Midday</div><div class="r-name">Stretch</div></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Mon</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Tue</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Wed</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Thu</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Fri</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Sat</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Sun</span><span class="chip-cat">Stretch</span><span class="chip-name">Stretch</span><span class="chip-tap">Every day</span></div>
+      <div class="cal-rail"><span class="r-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Mon</span><span class="chip-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Tue</span><span class="chip-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Wed</span><span class="chip-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Thu</span><span class="chip-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Fri</span><span class="chip-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Sat</span><span class="chip-name">Stretch</span></div>
+      <div class="cal-chip is-anchor"><span class="chip-day">Sun</span><span class="chip-name">Stretch</span></div>
 
-      <div class="cal-rail"><div class="r-cue">Afternoon</div><div class="r-name">Strength &amp; HIIT</div></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-cat">Strength</span><span class="chip-name">HIIT</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-cat">Strength</span><span class="chip-name">TRX</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-cat">Strength</span><span class="chip-name">Tabata</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-cat">Strength</span><span class="chip-name">Circuit</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-cat">Dance</span><span class="chip-name">Zumba</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-cat">Cardio</span><span class="chip-name">Step Aerobics</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-cat">Strength</span><span class="chip-name">Boot Camp</span><span class="chip-tap">Tap for time</span></div>
+      <div class="cal-rail"><span class="r-name">Strength &amp; HIIT</span></div>
+      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">HIIT</span></div>
+      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">TRX</span></div>
+      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-name">Tabata</span></div>
+      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Circuit</span></div>
+      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Zumba</span></div>
+      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Step Aerobics</span></div>
+      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Boot Camp</span></div>
 
-      <div class="cal-rail"><div class="r-cue">Early evening</div><div class="r-name">Breath &amp; Meditation</div></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-cat">Breath</span><span class="chip-name">Pranayama</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-cat">Sound</span><span class="chip-name">Singing Bowl</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-cat">Meditation</span><span class="chip-name">Floating Med.</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-cat">Yoga</span><span class="chip-name">Aerial Yoga</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-cat">Breath</span><span class="chip-name">Pranayama</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-cat">Sound</span><span class="chip-name">Singing Bowl</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-cat">Meditation</span><span class="chip-name">Floating Med.</span><span class="chip-tap">Tap for time</span></div>
+      <div class="cal-rail"><span class="r-name">Breath &amp; Meditation</span></div>
+      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Pranayama</span></div>
+      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Singing Bowl</span></div>
+      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-name">Floating Med.</span></div>
+      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Aerial Yoga</span></div>
+      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Pranayama</span></div>
+      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Singing Bowl</span></div>
+      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Floating Med.</span></div>
 
-      <div class="cal-rail"><div class="r-cue">Closing</div><div class="r-name">Night Practice</div></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-cat">Meditation</span><span class="chip-name">Candlelight Med.</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-cat">Rest</span><span class="chip-name">Better Sleep</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-cat">Outdoor</span><span class="chip-name">Star Gazing</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-cat">Meditation</span><span class="chip-name">Candlelight Med.</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-cat">Rest</span><span class="chip-name">Better Sleep</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-cat">Outdoor</span><span class="chip-name">Star Gazing</span><span class="chip-tap">Tap for time</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-cat">Meditation</span><span class="chip-name">Candlelight Med.</span><span class="chip-tap">Tap for time</span></div>
-    </div>
-
-    <div class="cal-legend">
-      <div class="leg-item"><span class="leg-key">Category</span><span class="leg-text">Each session is tagged by discipline — yoga, breath, aqua, strength, sound and more.</span></div>
-      <div class="leg-item"><span class="leg-key">Anchor</span><span class="leg-text">The Midday Stretch is the daily anchor — held every day, it is always there.</span></div>
-      <div class="leg-item"><span class="leg-key">Times</span><span class="leg-text">Names are indicative; tap any session for the day's confirmed time, set daily at the front desk.</span></div>
+      <div class="cal-rail"><span class="r-name">Night Practice</span></div>
+      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Candlelight Med.</span></div>
+      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Better Sleep</span></div>
+      <div class="cal-chip"><span class="chip-day">Wed</span><span class="chip-name">Star Gazing</span></div>
+      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Candlelight Med.</span></div>
+      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Better Sleep</span></div>
+      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Star Gazing</span></div>
+      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Candlelight Med.</span></div>
     </div>
   </div>
 </section>
