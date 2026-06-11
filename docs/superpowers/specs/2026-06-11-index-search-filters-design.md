@@ -6,11 +6,11 @@
 
 ## Context
 
-`index.html` is the front door of the Jayasom V3 wireframe deck: 67 page links arranged in 10 themed `section.section-group` blocks. Each link is an `a.page-row` with a `.title` span; each group has a `.group-title` and `.group-count` in its header. The page is fully static (no JS) and styled exclusively with the locked Jayasom design tokens. `index-client.html` merely redirects to it and is not touched.
+`index.html` is the front door of the Jayasom V3 wireframe deck: 69 page links arranged in 10 themed `section.section-group` blocks. (The hero line still says "67 pages" — a stale figure; this feature makes all counts DOM-derived, which corrects it.) Each link is an `a.page-row` with a `.title` span; each group has a `.group-title` and `.group-count` in its header. The page is fully static (no JS) and styled exclusively with the locked Jayasom design tokens. `index-client.html` merely redirects to it and is not touched.
 
 ## Goal
 
-Anyone opening the deck can find a page by typing a few characters or clicking a category, instead of scrolling a 67-row list.
+Anyone opening the deck can find a page by typing a few characters or clicking a category, instead of scrolling a 69-row list.
 
 ## UI
 
@@ -18,7 +18,7 @@ A toolbar section inserted between the intro (`section.intro`) and the first `se
 
 - **Search input** — placeholder "Search pages…", ⌕ glyph on the left, ✕ clear button shown only while the input is non-empty.
 - **Filter chips** — "All" plus one chip per group, generated at load from the `.group-title` texts. Single-select; the active chip uses the `--primary` fill with `--primary-foreground` text. Default selection: All.
-- **Count line** — "N of 67 pages", updated live.
+- **Count line** — "N of 69 pages", updated live.
 - The toolbar is `position: sticky; top: 0`, filled with `--background` and finished with a 1px bottom border so rows scroll beneath it cleanly.
 - Styling uses the existing tokens and conventions only: square corners, 1px `hsl(var(--border))` borders, uppercase 10–11px letter-spaced labels, the existing font stack. The locked token block is not modified.
 
@@ -52,6 +52,6 @@ Drive the page in a browser against the dev server (port 8765):
 1. "villa" narrows to the villa pages; "taqa" finds Reiki T'aqa (normalization).
 2. Chip *Treatments* + query "ritual" composes correctly.
 3. Groups with no matches disappear; counts read "X of Y pages"; total count updates.
-4. Gibberish query shows the empty-state panel; its clear button restores all 67 rows.
+4. Gibberish query shows the empty-state panel; its clear button restores all 69 rows.
 5. `/` focuses search, `Esc` clears, `Enter` opens the first visible result.
 6. With JS disabled, the page renders the full list as before.
