@@ -26,7 +26,7 @@ check('day headers present', 'cal-dayhead' in section)
 check('rail cells present', 'cal-rail' in section)
 check('chip cells present', 'cal-chip' in section)
 check('chip-day spans present', 'chip-day' in section)
-check('today marker present', 'd-today' in section)
+check('today marker removed', 'd-today' not in section)
 check('old wire-table removed from section', 'wire-table' not in section)
 
 # Simplified content: only window names, session names, and day names remain.
