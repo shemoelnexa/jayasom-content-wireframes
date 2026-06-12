@@ -87,7 +87,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 /* --- gallery-specific (masonry + lightbox) --- */
 .masonry { columns: 3 300px; column-gap: 24px; }
 @media (max-width: 768px) { .masonry { columns: 1; } }
-.g-item { break-inside: avoid; margin: 0 0 24px; display: block; width: 100%; cursor: pointer; }
+.g-item { break-inside: avoid; margin: 0 0 24px; display: block; width: 100%; cursor: pointer; position: relative; }
 .g-item .wire-image { width: 100%; }
 .g-item .g-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-top: 10px; }
 .g-item .g-meta { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 4px; }
@@ -103,6 +103,18 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); color: hsl(var(--foreground)); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .lb-prev { left: -22px; } .lb-next { right: -22px; }
 @media (max-width: 768px) { .lb-prev { left: 4px; } .lb-next { right: 4px; } }
+/* --- gallery multi-filter controls --- */
+.filter-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 28px; max-width: 1000px; margin: 32px auto 0; }
+.filter-field { display: flex; flex-direction: column; gap: 9px; min-width: 168px; flex: 1 1 168px; max-width: 220px; }
+@media (max-width: 768px) { .filter-field { max-width: none; flex-basis: 100%; } }
+.filter-select { font-family: inherit; font-weight: 300; font-size: 13px; color: hsl(var(--foreground)); background-color: hsl(var(--background)); border: 1px solid hsl(var(--border)); border-radius: 0; padding: 12px 38px 12px 14px; cursor: pointer; width: 100%; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6669' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.filter-select:focus { outline: none; border-color: hsl(var(--foreground)); }
+.filter-foot { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 32px; flex-wrap: wrap; }
+.filter-count { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.filter-reset { font-family: inherit; font-weight: 300; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--foreground)); background: transparent; border-bottom: 1px solid hsl(var(--foreground)); padding: 0 0 2px; cursor: pointer; }
+.filter-reset[hidden] { display: none; }
+.g-badge { position: absolute; top: 10px; left: 10px; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 8px; background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
   </style>
 </head>
 <body>
@@ -141,14 +153,20 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 </section>
 
 <!-- FILTER -->
-<section class="section" style="padding-bottom:24px;">
+<section class="section" style="padding-bottom:24px;" id="filterRoot">
   <div class="shell">
     <div class="text-center mb-8">
       <p class="eyebrow">Filter</p>
       <h2 class="h-section">Browse the collection</h2>
-      <p class="body-copy" style="margin:0 auto;font-style:italic;">Choose a category, then select any frame to view it larger.</p>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Combine filters to narrow the collection, then select any frame to view it larger.</p>
     </div>
-    <div id="catChips" class="tag-row justify-center" style="margin-top:24px;"></div>
+
+    <div id="filterBar" class="filter-bar"></div>
+
+    <div class="filter-foot">
+      <p class="filter-count" id="filterCount"></p>
+      <button class="filter-reset" id="filterReset" type="button" hidden>Clear all filters</button>
+    </div>
   </div>
 </section>
 
@@ -287,71 +305,104 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <script>
 (function(){
+  // Each frame is tagged across five axes: subject (cat), zone, setting, media, theme.
   var ITEMS = [
-    {cat:"coastline",   t:"Red Sea coastline at dawn",        h:360, place:"Triple Bay"},
-    {cat:"architecture",t:"Arrival pavilion",                 h:300, place:"Resort entrance"},
-    {cat:"spaces",      t:"Health and Wellness Centre",       h:420, place:"Between Jayela and Jayana"},
-    {cat:"treatments",  t:"Watsu pool",                       h:340, place:"Hydrotherapy wing"},
-    {cat:"coastline",   t:"Fringing reef and lagoon",         h:300, place:"South lagoon"},
-    {cat:"dining",      t:"Yasmeen Night Garden",             h:360, place:"Jayana"},
-    {cat:"architecture",t:"Over-water villa",                 h:420, place:"The cove"},
-    {cat:"spaces",      t:"Sound healing studio",             h:300, place:"Wellbeing spaces"},
-    {cat:"treatments",  t:"Marma point therapy suite",        h:340, place:"Treatment wing"},
-    {cat:"landscape",   t:"Garden walkway",                   h:300, place:"Landscaped grounds"},
-    {cat:"dining",      t:"Loumi Rue",                        h:360, place:"Jayela"},
-    {cat:"coastline",   t:"Beachfront pool villa terrace",    h:340, place:"Shoreline"},
-    {cat:"architecture",t:"Hammam courtyard",                 h:300, place:"Bathing house"},
-    {cat:"spaces",      t:"Floatation therapy room",          h:420, place:"Wellbeing spaces"},
-    {cat:"landscape",   t:"Hilltop view villa",               h:300, place:"Elevated terrain"},
-    {cat:"treatments",  t:"Crystal aroma massage room",       h:340, place:"Treatment wing"},
-    {cat:"dining",      t:"The tea garden",                   h:300, place:"Herb garden"},
-    {cat:"coastline",   t:"Sunset over the bay",              h:360, place:"West deck"}
+    {cat:"coastline",   t:"Red Sea coastline at dawn",        h:360, place:"Triple Bay",                 zone:"jayela", setting:"outdoor", media:"photo", theme:"rest"},
+    {cat:"architecture",t:"Arrival pavilion",                 h:300, place:"Resort entrance",            zone:"jayela", setting:"outdoor", media:"360",   theme:"connection"},
+    {cat:"spaces",      t:"Health and Wellness Centre",       h:420, place:"Between Jayela and Jayana",  zone:"jayana", setting:"indoor",  media:"360",   theme:"movement"},
+    {cat:"treatments",  t:"Watsu pool",                       h:340, place:"Hydrotherapy wing",          zone:"jayana", setting:"indoor",  media:"video", theme:"movement"},
+    {cat:"coastline",   t:"Fringing reef and lagoon",         h:300, place:"South lagoon",               zone:"jayana", setting:"outdoor", media:"video", theme:"rest"},
+    {cat:"dining",      t:"Yasmeen Night Garden",             h:360, place:"Jayana",                     zone:"jayana", setting:"outdoor", media:"photo", theme:"nourishment"},
+    {cat:"architecture",t:"Over-water villa",                 h:420, place:"The cove",                   zone:"jayela", setting:"outdoor", media:"360",   theme:"rest"},
+    {cat:"spaces",      t:"Sound healing studio",             h:300, place:"Wellbeing spaces",           zone:"jayana", setting:"indoor",  media:"video", theme:"rest"},
+    {cat:"treatments",  t:"Marma point therapy suite",        h:340, place:"Treatment wing",             zone:"jayana", setting:"indoor",  media:"photo", theme:"movement"},
+    {cat:"landscape",   t:"Garden walkway",                   h:300, place:"Landscaped grounds",         zone:"jayela", setting:"outdoor", media:"photo", theme:"connection"},
+    {cat:"dining",      t:"Loumi Rue",                        h:360, place:"Jayela",                     zone:"jayela", setting:"outdoor", media:"photo", theme:"nourishment"},
+    {cat:"coastline",   t:"Beachfront pool villa terrace",    h:340, place:"Shoreline",                  zone:"jayela", setting:"outdoor", media:"photo", theme:"rest"},
+    {cat:"architecture",t:"Hammam courtyard",                 h:300, place:"Bathing house",              zone:"jayana", setting:"indoor",  media:"photo", theme:"rest"},
+    {cat:"spaces",      t:"Floatation therapy room",          h:420, place:"Wellbeing spaces",           zone:"jayana", setting:"indoor",  media:"video", theme:"rest"},
+    {cat:"landscape",   t:"Hilltop view villa",               h:300, place:"Elevated terrain",           zone:"jayela", setting:"outdoor", media:"360",   theme:"rest"},
+    {cat:"treatments",  t:"Crystal aroma massage room",       h:340, place:"Treatment wing",             zone:"jayana", setting:"indoor",  media:"photo", theme:"movement"},
+    {cat:"dining",      t:"The tea garden",                   h:300, place:"Herb garden",                zone:"jayela", setting:"outdoor", media:"photo", theme:"nourishment"},
+    {cat:"coastline",   t:"Sunset over the bay",              h:360, place:"West deck",                  zone:"jayela", setting:"outdoor", media:"photo", theme:"rest"}
   ];
 
-  var CATS = [
-    {k:"all",          n:"All"},
-    {k:"coastline",    n:"Coastline"},
-    {k:"landscape",    n:"Landscapes"},
-    {k:"architecture", n:"Architecture"},
-    {k:"spaces",       n:"Wellbeing Spaces"},
-    {k:"treatments",   n:"Treatments"},
-    {k:"dining",       n:"Culinary"}
+  // Each filter axis becomes a labelled dropdown. "All" means unfiltered on that axis.
+  var FIELDS = [
+    {key:"cat",     label:"Subject",    opts:[{k:"all",n:"All subjects"},{k:"coastline",n:"Coastline"},{k:"landscape",n:"Landscapes"},{k:"architecture",n:"Architecture"},{k:"spaces",n:"Wellbeing Spaces"},{k:"treatments",n:"Treatments"},{k:"dining",n:"Culinary"}]},
+    {key:"zone",    label:"Zone",       opts:[{k:"all",n:"All zones"},{k:"jayela",n:"Jayela"},{k:"jayana",n:"Jayana"}]},
+    {key:"setting", label:"Setting",    opts:[{k:"all",n:"Indoor & outdoor"},{k:"outdoor",n:"Outdoor"},{k:"indoor",n:"Indoor"}]},
+    {key:"media",   label:"Media",      opts:[{k:"all",n:"All media"},{k:"photo",n:"Photos"},{k:"video",n:"Video"},{k:"360",n:"360°"}]},
+    {key:"theme",   label:"Experience", opts:[{k:"all",n:"All experiences"},{k:"rest",n:"Rest"},{k:"movement",n:"Movement"},{k:"nourishment",n:"Nourishment"},{k:"connection",n:"Connection"}]}
   ];
-  var CATNAME = {coastline:"Coastline", landscape:"Landscape", architecture:"Architecture", spaces:"Wellbeing Space", treatments:"Treatment", dining:"Culinary"};
+
+  var CATNAME  = {coastline:"Coastline", landscape:"Landscape", architecture:"Architecture", spaces:"Wellbeing Space", treatments:"Treatment", dining:"Culinary"};
+  var ZONENAME = {jayela:"Jayela", jayana:"Jayana"};
+  var SETNAME  = {outdoor:"Outdoor", indoor:"Indoor"};
+  var MEDIANAME= {photo:"Photo", video:"Video", "360":"360° Tour"};
 
   var ICON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
 
-  var cat = "all";
-  var grid = document.getElementById("galleryGrid");
-  var chipBar = document.getElementById("catChips");
+  // One key per axis; "all" means unfiltered on that axis. Frames must match every axis (AND).
+  var state = {cat:"all", zone:"all", setting:"all", media:"all", theme:"all"};
+
+  var grid    = document.getElementById("galleryGrid");
+  var filterBar = document.getElementById("filterBar");
+  var filterRoot = document.getElementById("filterRoot");
+  var countEl = document.getElementById("filterCount");
+  var resetBtn = document.getElementById("filterReset");
   var lb = document.getElementById("lightbox");
   var visible = [];   // indices currently shown
   var pos = 0;        // position within visible[]
 
-  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-  function renderChips(){
-    chipBar.innerHTML = CATS.map(function(c){
-      return '<span class="tag'+(cat===c.k?" active":"")+'" data-cat="'+c.k+'">'+esc(c.n)+'</span>';
+  function anyActive(){
+    return state.cat!=="all" || state.zone!=="all" || state.setting!=="all" || state.media!=="all" || state.theme!=="all";
+  }
+
+  function matches(it){
+    return (state.cat==="all"     || it.cat===state.cat)
+        && (state.zone==="all"    || it.zone===state.zone)
+        && (state.setting==="all" || it.setting===state.setting)
+        && (state.media==="all"   || it.media===state.media)
+        && (state.theme==="all"   || it.theme===state.theme);
+  }
+
+  function renderControls(){
+    filterBar.innerHTML = FIELDS.map(function(f){
+      return '<div class="filter-field">'
+        + '<label class="filter-label" for="f_'+f.key+'">'+esc(f.label)+'</label>'
+        + '<select class="filter-select" id="f_'+f.key+'" data-group="'+f.key+'">'
+        + f.opts.map(function(o){ return '<option value="'+o.k+'">'+esc(o.n)+'</option>'; }).join("")
+        + '</select></div>';
     }).join("");
-    Array.prototype.forEach.call(chipBar.querySelectorAll(".tag"), function(t){
-      t.addEventListener("click", function(){
-        cat = this.getAttribute("data-cat");
-        renderChips(); renderGrid();
-      });
+    syncActive();
+  }
+
+  function syncActive(){
+    Array.prototype.forEach.call(filterBar.querySelectorAll(".filter-select"), function(sel){
+      sel.value = state[sel.getAttribute("data-group")];
     });
   }
 
   function renderGrid(){
     visible = [];
-    ITEMS.forEach(function(it, i){ if(cat === "all" || it.cat === cat) visible.push(i); });
-    if(!visible.length){ grid.innerHTML = '<p class="g-empty">No frames in this category yet.</p>'; return; }
+    ITEMS.forEach(function(it, i){ if(matches(it)) visible.push(i); });
+
+    countEl.textContent = visible.length + (visible.length===1 ? " frame" : " frames")
+      + (anyActive() ? " · filtered from " + ITEMS.length : "");
+    resetBtn.hidden = !anyActive();
+
+    if(!visible.length){ grid.innerHTML = '<p class="g-empty">No frames match these filters. Try clearing one.</p>'; return; }
     grid.innerHTML = visible.map(function(i){
       var it = ITEMS[i];
+      var badge = it.media==="video" ? '<span class="g-badge">▶ Video</span>'
+                : it.media==="360"   ? '<span class="g-badge">360°</span>' : '';
       return '<div class="g-item" data-i="'+i+'">'
-        + '<div class="wire-image" style="height:'+it.h+'px;">'+ICON+'<span class="label">'+esc(it.t)+'</span></div>'
+        + '<div class="wire-image" style="height:'+it.h+'px;">'+badge+ICON+'<span class="label">'+esc(it.t)+'</span></div>'
         + '<p class="g-label">'+esc(it.t)+'</p>'
-        + '<p class="g-meta">'+esc(CATNAME[it.cat])+' · '+esc(it.place)+'</p>'
+        + '<p class="g-meta">'+esc(CATNAME[it.cat])+' · '+esc(ZONENAME[it.zone])+' · '+esc(it.place)+'</p>'
         + '</div>';
     }).join("");
     Array.prototype.forEach.call(grid.querySelectorAll(".g-item"), function(el){
@@ -360,6 +411,19 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
       });
     });
   }
+
+  filterBar.addEventListener("change", function(e){
+    var sel = e.target;
+    var g = sel.getAttribute && sel.getAttribute("data-group");
+    if(!g) return;
+    state[g] = sel.value;
+    renderGrid();
+  });
+
+  resetBtn.addEventListener("click", function(){
+    state = {cat:"all", zone:"all", setting:"all", media:"all", theme:"all"};
+    syncActive(); renderGrid();
+  });
 
   function openLightbox(i){
     pos = visible.indexOf(i);
@@ -379,9 +443,9 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   function paint(){
     var it = ITEMS[visible[pos]];
     document.getElementById("lbLabel").textContent = it.t;
-    document.getElementById("lbCat").textContent = CATNAME[it.cat];
+    document.getElementById("lbCat").textContent = CATNAME[it.cat] + " · " + MEDIANAME[it.media];
     document.getElementById("lbTitle").textContent = it.t;
-    document.getElementById("lbCaption").textContent = it.place;
+    document.getElementById("lbCaption").textContent = it.place + " · " + ZONENAME[it.zone] + " · " + SETNAME[it.setting];
     document.getElementById("lbCount").textContent = (pos + 1) + " / " + visible.length;
   }
 
@@ -396,7 +460,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
     if(e.key === "ArrowLeft") step(-1);
   });
 
-  renderChips(); renderGrid();
+  renderControls(); renderGrid();
 })();
 </script>
 </body>
