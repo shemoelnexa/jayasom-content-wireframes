@@ -161,11 +161,12 @@ html, body {
 
 <main>
 
-<!-- HERO: split portrait + name/role -->
+<!-- INTRO + ABOUT (merged profile) -->
 <section class="section">
-  <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:center;">
-      <div class="wire-image" style="height:540px;">
+  <div class="shell" style="max-width:900px;">
+    <!-- Focal point: 1:1 square portrait left, identity right -->
+    <div class="grid-2" style="gap:56px;align-items:center;">
+      <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Karen Campbell · portrait</span>
       </div>
@@ -180,24 +181,20 @@ html, body {
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ABOUT BIO -->
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <p class="eyebrow text-center">About</p>
-    <h2 class="h-section text-center mb-8">About Karen</h2>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:24px;">Karen Campbell has long believed that wellbeing is not a luxury, but a birthright. Raised in New Zealand in a family where healthy living was instinctive and intuitive, and growing fruits and vegetables, tending to sheep and bees, preserving and conserving, and recycling was part of daily life. These early experiences shaped a lifelong reverence for nature, balance, and conscious living.</p>
-      <p style="margin-bottom:24px;">Karen co-founded Jayasom in 2014, envisioning sanctuaries where ancient healing traditions and modern science come together to guide deeply personalised wellbeing. AMAALA is its flagship destination, a new benchmark for integrative wellbeing rooted in nature, guided by purpose, and committed to sustainability.</p>
-      <p>Karen brings decades of senior leadership in finance and trade across Thailand, including roles in banking and diplomacy, to the work of building Jayasom. Her academic foundation bridges biology and strategy. The endurance she discovered in Thailand, first as a marathon runner and now exploring triathlons, sits beneath the way she leads.</p>
+    <!-- About bio, readable single column -->
+    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
+      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+        <p style="margin-bottom:24px;">Karen Campbell has long believed that wellbeing is not a luxury, but a birthright. Raised in New Zealand in a family where healthy living was instinctive and intuitive, and growing fruits and vegetables, tending to sheep and bees, preserving and conserving, and recycling was part of daily life. These early experiences shaped a lifelong reverence for nature, balance, and conscious living.</p>
+        <p style="margin-bottom:24px;">Karen co-founded Jayasom in 2014, envisioning sanctuaries where ancient healing traditions and modern science come together to guide deeply personalised wellbeing. AMAALA is its flagship destination, a new benchmark for integrative wellbeing rooted in nature, guided by purpose, and committed to sustainability.</p>
+        <p>Karen brings decades of senior leadership in finance and trade across Thailand, including roles in banking and diplomacy, to the work of building Jayasom. Her academic foundation bridges biology and strategy. The endurance she discovered in Thailand, first as a marathon runner and now exploring triathlons, sits beneath the way she leads.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CREDENTIALS / EDUCATION -->
-<section class="section">
+<section class="section section-muted">
   <div class="shell">
     <div class="grid-2" style="gap:64px;">
       <div>
@@ -212,6 +209,7 @@ html, body {
           <li>Decades of senior leadership in finance and trade across Thailand</li>
           <li>Long-time Thailand resident</li>
           <li>Marathon runner and triathlete</li>
+          <li>Languages: English (native), Thai</li>
         </ul>
       </div>
     </div>
@@ -219,7 +217,7 @@ html, body {
 </section>
 
 <!-- THERAPEUTIC PILLARS / SPECIALISMS -->
-<section class="section section-muted">
+<section class="section">
   <div class="shell">
     <p class="eyebrow text-center">Specialisms</p>
     <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>
