@@ -87,10 +87,12 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
+<!-- INTRO + ABOUT (merged profile) -->
 <section class="section">
-  <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:center;">
-      <div class="wire-image" style="height:540px;">
+  <div class="shell" style="max-width:900px;">
+    <!-- Focal point: 1:1 square portrait left, identity right -->
+    <div class="grid-2" style="gap:56px;align-items:center;">
+      <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Carol El Hadi · portrait</span>
       </div>
@@ -105,22 +107,19 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <p class="eyebrow text-center">About</p>
-    <h2 class="h-section text-center mb-8">About Carol</h2>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:24px;">Seventeen years across luxury hospitality and lifestyle have shaped how Carol El Hadi approaches brand. Her career stretches from the United States to the Middle East, partnering with leading brands <span class="placeholder-pill">prior employer</span> on integrated marketing and communications work that strengthens positioning and brand presence.</p>
-      <p style="margin-bottom:24px;">Brand, marketing, and PR functions across the international sector are her territory; Carol holds them with clarity and disciplined execution. Pre-opening strategy, brand positioning, digital transformation, and multi-channel campaigns sit in her core remit, delivering commercial results while building long-term brand equity.</p>
-      <p>At Jayasom Wellness Resort AMAALA, the role spans marketing, PR, and communications, shaping a cohesive brand narrative so every touchpoint reflects the destination's positioning. Fluent in English, Arabic, and Turkish, Carol brings a culturally attuned international perspective to brands that resonate across markets.</p>
+    <!-- About bio, readable single column -->
+    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
+      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+        <p style="margin-bottom:24px;">Seventeen years across luxury hospitality and lifestyle have shaped how Carol El Hadi approaches brand. Her career stretches from the United States to the Middle East, partnering with leading brands <span class="placeholder-pill">prior employer</span> on integrated marketing and communications work that strengthens positioning and brand presence.</p>
+        <p style="margin-bottom:24px;">Brand, marketing, and PR functions across the international sector are her territory; Carol holds them with clarity and disciplined execution. Pre-opening strategy, brand positioning, digital transformation, and multi-channel campaigns sit in her core remit, delivering commercial results while building long-term brand equity.</p>
+        <p>At Jayasom Wellness Resort AMAALA, the role spans marketing, PR, and communications, shaping a cohesive brand narrative so every touchpoint reflects the destination's positioning. Fluent in English, Arabic, and Turkish, Carol brings a culturally attuned international perspective to brands that resonate across markets.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-muted">
   <div class="shell">
     <div class="grid-2" style="gap:64px;">
       <div>
@@ -141,7 +140,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   </div>
 </section>
 
-<section class="section section-muted">
+<section class="section">
   <div class="shell">
     <p class="eyebrow text-center">Specialisms</p>
     <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>

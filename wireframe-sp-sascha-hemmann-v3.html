@@ -102,10 +102,12 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
+<!-- INTRO + ABOUT (merged profile) -->
 <section class="section">
-  <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:center;">
-      <div class="wire-image" style="height:540px;">
+  <div class="shell" style="max-width:900px;">
+    <!-- Focal point: 1:1 square portrait left, identity right -->
+    <div class="grid-2" style="gap:56px;align-items:center;">
+      <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Sascha Hemmann · portrait</span>
       </div>
@@ -120,22 +122,19 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <p class="eyebrow text-center">About</p>
-    <h2 class="h-section text-center mb-8">About Sascha</h2>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:24px;">Sascha Hemmann brings decades of global hospitality experience into the evolving world of wellness. Born in East Germany, Sascha's first steps into hospitality were driven by curiosity and a desire to see the world. That career began in London and led to leadership roles across South East Asia, the Americas, the Middle East, and recently in Europe.</p>
-      <p style="margin-bottom:24px;">Internationally recognised properties shaped his career; Sascha is known for guest experiences built on connection, service, and presence. He believes in people over titles, draws teams together, and connects work across disciplines.</p>
-      <p>His leadership philosophy is simple: treat others the way you want to be treated, with fairness, encouragement, and authenticity. After years at full speed, Sascha paused, reflected, and rebalanced. That work led him to wellness as much in his own life as in his profession.</p>
+    <!-- About bio, readable single column -->
+    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
+      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+        <p style="margin-bottom:24px;">Sascha Hemmann brings decades of global hospitality experience into the evolving world of wellness. Born in East Germany, Sascha's first steps into hospitality were driven by curiosity and a desire to see the world. That career began in London and led to leadership roles across South East Asia, the Americas, the Middle East, and recently in Europe.</p>
+        <p style="margin-bottom:24px;">Internationally recognised properties shaped his career; Sascha is known for guest experiences built on connection, service, and presence. He believes in people over titles, draws teams together, and connects work across disciplines.</p>
+        <p>His leadership philosophy is simple: treat others the way you want to be treated, with fairness, encouragement, and authenticity. After years at full speed, Sascha paused, reflected, and rebalanced. That work led him to wellness as much in his own life as in his profession.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-muted">
   <div class="shell">
     <div class="grid-2" style="gap:64px;">
       <div>
@@ -155,7 +154,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   </div>
 </section>
 
-<section class="section section-muted">
+<section class="section">
   <div class="shell">
     <p class="eyebrow text-center">Specialisms</p>
     <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>

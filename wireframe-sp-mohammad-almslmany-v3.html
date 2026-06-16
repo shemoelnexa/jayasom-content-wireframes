@@ -88,10 +88,12 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
+<!-- INTRO + ABOUT (merged profile) -->
 <section class="section">
-  <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:center;">
-      <div class="wire-image" style="height:540px;">
+  <div class="shell" style="max-width:900px;">
+    <!-- Focal point: 1:1 square portrait left, identity right -->
+    <div class="grid-2" style="gap:56px;align-items:center;">
+      <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Mohammad Almslmany · portrait</span>
       </div>
@@ -106,22 +108,19 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <p class="eyebrow text-center">About</p>
-    <h2 class="h-section text-center mb-8">About Mohammad</h2>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:24px;">Mohammad Almslmany is a physiotherapist with a strong background in rehabilitation, fitness training, and patient-centred care. With experience across healthcare facilities and large-scale wellness projects in Saudi Arabia, Mohammad brings a practical, results-driven approach to physical therapy, focused on restoring movement, improving function, and supporting long-term wellbeing.</p>
-      <p style="margin-bottom:24px;">Mohammad holds a Bachelor's degree in Physiotherapy from a leading Saudi university; he has worked across rehabilitation centres, private clinics, and the broader AMAALA destination. The work runs through musculoskeletal rehabilitation, injury recovery, and functional training, paired with a habit of continuous self-development.</p>
-      <p>Certified in Orthopaedic Manual Therapy, Myofascial Needling Therapy, and as a Personal Trainer (ISSA), Mohammad integrates evidence-based physiotherapy techniques with fitness and mobility training to support each guest's individual goals.</p>
+    <!-- About bio, readable single column -->
+    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
+      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+        <p style="margin-bottom:24px;">Mohammad Almslmany is a physiotherapist with a strong background in rehabilitation, fitness training, and patient-centred care. With experience across healthcare facilities and large-scale wellness projects in Saudi Arabia, Mohammad brings a practical, results-driven approach to physical therapy, focused on restoring movement, improving function, and supporting long-term wellbeing.</p>
+        <p style="margin-bottom:24px;">Mohammad holds a Bachelor's degree in Physiotherapy from a leading Saudi university; he has worked across rehabilitation centres, private clinics, and the broader AMAALA destination. The work runs through musculoskeletal rehabilitation, injury recovery, and functional training, paired with a habit of continuous self-development.</p>
+        <p>Certified in Orthopaedic Manual Therapy, Myofascial Needling Therapy, and as a Personal Trainer (ISSA), Mohammad integrates evidence-based physiotherapy techniques with fitness and mobility training to support each guest's individual goals.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-muted">
   <div class="shell">
     <div class="grid-2" style="gap:64px;">
       <div>
@@ -142,7 +141,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   </div>
 </section>
 
-<section class="section section-muted">
+<section class="section">
   <div class="shell">
     <p class="eyebrow text-center">Specialisms</p>
     <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>

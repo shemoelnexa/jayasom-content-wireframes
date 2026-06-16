@@ -86,10 +86,12 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
+<!-- INTRO + ABOUT (merged profile) -->
 <section class="section">
-  <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:center;">
-      <div class="wire-image" style="height:540px;">
+  <div class="shell" style="max-width:900px;">
+    <!-- Focal point: 1:1 square portrait left, identity right -->
+    <div class="grid-2" style="gap:56px;align-items:center;">
+      <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Vazeeq Madhar · portrait</span>
       </div>
@@ -104,22 +106,19 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <p class="eyebrow text-center">About</p>
-    <h2 class="h-section text-center mb-8">About Vazeeq</h2>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:24px;">Vazeeq Madhar brings more than twenty years of international hospitality experience, shaped by leadership roles across the Middle East, the Indian Ocean, and the Caribbean. He trained at a leading hotel-management programme in India, then began his career in guest-facing operations and went on to senior positions with internationally recognised hospitality brands across Dubai, Doha, Mauritius, and Bermuda.</p>
-      <p style="margin-bottom:24px;">Front-office operations and team culture were his early focus; the wellness lens came later, shaped by surroundings and personal routine while he was based on island properties. Daily yoga, morning walks, and time outside reshaped his approach to leadership, not just to life.</p>
-      <p>Vazeeq brings a considered vision to wellness hospitality, designing experiences that are engaging, inclusive, and rooted in real developmental value. Psychology training and a career leading multicultural teams sit underneath the work; he shapes environments that hold both adults seeking balance and families seeking harmony. Structure pairs with sensitivity, so every interaction carries intention.</p>
+    <!-- About bio, readable single column -->
+    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
+      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
+        <p style="margin-bottom:24px;">Vazeeq Madhar brings more than twenty years of international hospitality experience, shaped by leadership roles across the Middle East, the Indian Ocean, and the Caribbean. He trained at a leading hotel-management programme in India, then began his career in guest-facing operations and went on to senior positions with internationally recognised hospitality brands across Dubai, Doha, Mauritius, and Bermuda.</p>
+        <p style="margin-bottom:24px;">Front-office operations and team culture were his early focus; the wellness lens came later, shaped by surroundings and personal routine while he was based on island properties. Daily yoga, morning walks, and time outside reshaped his approach to leadership, not just to life.</p>
+        <p>Vazeeq brings a considered vision to wellness hospitality, designing experiences that are engaging, inclusive, and rooted in real developmental value. Psychology training and a career leading multicultural teams sit underneath the work; he shapes environments that hold both adults seeking balance and families seeking harmony. Structure pairs with sensitivity, so every interaction carries intention.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-muted">
   <div class="shell">
     <div class="grid-2" style="gap:64px;">
       <div>
@@ -140,7 +139,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   </div>
 </section>
 
-<section class="section section-muted">
+<section class="section">
   <div class="shell">
     <p class="eyebrow text-center">Specialisms</p>
     <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>
