@@ -176,6 +176,34 @@ html, body {
 .form-field { margin-bottom: 16px; }
 .form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
 
+/* Tier selector (per-tier inclusions, non-table) */
+.tier-select { display: flex; border: 1px solid hsl(var(--border)); max-width: 680px; margin: 0 auto; }
+.tier-tab { flex: 1; background: transparent; border: 0; border-right: 1px solid hsl(var(--border)); padding: 18px 10px; cursor: pointer; text-align: center; font-family: inherit; }
+.tier-tab:last-child { border-right: 0; }
+.tier-tab .n { display: block; font-size: 22px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; }
+.tier-tab .nm { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 8px; }
+.tier-tab.active { background: hsl(var(--foreground)); }
+.tier-tab.active .n, .tier-tab.active .nm { color: hsl(var(--background)); }
+
+.tier-summary { text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 16px; }
+.tier-summary strong { color: hsl(var(--foreground)); font-weight: 700; }
+
+.session-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+@media (max-width: 768px) { .session-grid { grid-template-columns: 1fr; } }
+.session-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 18px 20px; display: flex; gap: 16px; align-items: center; }
+.session-card .qty { flex-shrink: 0; width: 46px; height: 46px; border: 1px solid hsl(var(--foreground)); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); }
+.session-card .meta { min-width: 0; }
+.session-card .meta .nm { font-size: 14px; color: hsl(var(--foreground)); line-height: 1.4; margin-bottom: 4px; }
+.session-card .meta .nm sup { font-size: 9px; color: hsl(var(--muted-foreground)); }
+.session-card .meta .dur { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.session-card .ico { flex-shrink: 0; width: 26px; height: 26px; margin-left: auto; color: hsl(var(--muted-foreground)); }
+.session-card .ico svg { width: 100%; height: 100%; display: block; }
+
+.tier-notes { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; max-width: 900px; margin-left: auto; margin-right: auto; }
+@media (max-width: 768px) { .tier-notes { grid-template-columns: 1fr; } }
+.tier-notes p { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.tier-notes .mk { color: hsl(var(--foreground)); font-weight: 700; }
+
   </style>
 </head>
 <body>
@@ -429,51 +457,18 @@ html, body {
       </div>
     </div>
 
-    <!-- Per-tier table -->
+    <!-- Per-tier inclusions (interactive tier selector) -->
     <div style="margin-top:64px;">
       <p class="eyebrow-mini text-center mb-4">Per-tier inclusions</p>
-      <h3 class="h-sub text-center mb-8">Stay length and depth</h3>
-      <div style="overflow-x:auto;">
-        <table class="wire-table">
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th class="center">Per session</th>
-              <th class="center">4 nights</th>
-              <th class="center">7 nights</th>
-              <th class="center">10 nights</th>
-              <th class="center">14 nights</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Nutrition &amp; Lifestyle Consultation</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Couples Wellness Counselling</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">2</td><td class="center">3</td></tr>
-            <tr><td>Express Hammam Ritual</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Couple's Connect Spa Ritual</td><td class="center">120 min</td><td class="center">1</td><td class="center">1</td><td class="center">2</td><td class="center">2</td></tr>
-            <tr><td>Crystal Aroma Massage</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Sound Healing Therapy</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Floatation Therapy</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Watsu</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Pranayama</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
-            <tr><td>Meditation</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
-            <tr><td>Detoxifying Balneotherapy</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
-            <tr><td>Cooking class</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Personal Training</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Yoga</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Pilates (Reformer or Mat)</td><td class="center">60 min</td><td class="center">0</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Bootcamp</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Super Stretch</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Aquabiking</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
-            <tr><td>Postural Corrective Therapy</td><td class="center">60 min</td><td class="center">1</td><td class="center">1</td><td class="center">1</td><td class="center">1</td></tr>
-            <tr><td>Gyrotonic®</td><td class="center">60 min</td><td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">1</td></tr>
-            <tr><td>Daily Treatment (60 min, from menu)</td><td class="center">60 min</td><td class="center">3</td><td class="center">6</td><td class="center">8</td><td class="center">12</td></tr>
-          </tbody>
-          <tfoot>
-            <tr><td>Total treatments</td><td class="center"></td><td class="center">11</td><td class="center">18</td><td class="center">25</td><td class="center">35</td></tr>
-            <tr><td>Average per day</td><td class="center"></td><td class="center">2.75</td><td class="center">2.57</td><td class="center">2.5</td><td class="center">2.5</td></tr>
-          </tfoot>
-        </table>
-      </div>
+      <h3 class="h-sub text-center mb-4">Choose your stay length</h3>
+      <p class="caption text-center" style="max-width:680px;margin:0 auto 24px;font-style:italic;">The numbers below show the included sessions for each stay length. Your Health &amp; Wellness Advisor may adjust the sequencing around guest energy, recovery needs, and practitioner guidance.</p>
+
+      <div class="tier-select" id="tier-select" role="tablist" aria-label="Stay length"></div>
+      <p class="tier-summary" id="tier-summary"></p>
+
+      <div class="session-grid" id="session-grid"></div>
+
+      <div class="tier-notes" id="tier-notes"></div>
     </div>
   </div>
 </section>
@@ -768,6 +763,122 @@ html, body {
 </section>
 
 </main>
+
+<script>
+(function () {
+  var TIERS = [
+    { nights: 4,  total: 11, name: 'Explore' },
+    { nights: 7,  total: 18, name: 'Absorb' },
+    { nights: 10, total: 25, name: 'Immerse' },
+    { nights: 14, total: 35, name: 'Commit' }
+  ];
+
+  // line-icon paths (drawn inside a shared 24x24 stroked <svg> wrapper)
+  var IC = {
+    leaf:     '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
+    talk:     '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+    heart:    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+    droplet:  '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+    gem:      '<path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/>',
+    waves:    '<path d="M2 7c.6.5 1.2 1 2.5 1C7 8 7 6 9.5 6c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 13c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 19c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>',
+    sound:    '<circle cx="12" cy="12" r="2"/><path d="M4.93 19.07a10 10 0 0 1 0-14.14"/><path d="M7.76 16.24a6 6 0 0 1 0-8.48"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>',
+    focus:    '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>',
+    person:   '<circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6"/><path d="m6 8 6 2 6-2"/><path d="M12 10v4"/>',
+    barbell:  '<path d="M5 12h14"/><path d="M3.5 9v6"/><path d="M20.5 9v6"/><path d="M6.5 7.5v9"/><path d="M17.5 7.5v9"/>',
+    lotus:    '<circle cx="12" cy="5" r="2"/><path d="M5 19c2-1.2 4.5-2 7-2s5 .8 7 2"/><path d="m12 11-4.5 7"/><path d="m12 11 4.5 7"/>',
+    pulse:    '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+    stretch:  '<path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/>',
+    rotate:   '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/>',
+    bike:     '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>',
+    utensils: '<path d="M3 2v7c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+    sparkle:  '<path d="M9.94 14.06A2 2 0 0 0 8.5 12.62L2.37 11.04a.5.5 0 0 1 0-.96L8.5 8.5a2 2 0 0 0 1.44-1.44l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13A2 2 0 0 0 15.5 8.5l6.13 1.58a.5.5 0 0 1 0 .96L15.5 12.62a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/>'
+  };
+
+  // counts indexed to TIERS order: [4n, 7n, 10n, 14n]
+  var SESSIONS = [
+    { nm: 'Nutrition & Lifestyle Consultation',          dur: '60 min', counts: [1, 1, 1, 1],     ic: IC.leaf },
+    { nm: 'Personalised Couples Wellness Counselling',   dur: '60 min', counts: [1, 1, 2, 3],     ic: IC.talk },
+    { nm: 'Two Hearts Ritual',                           dur: '90 min', counts: [1, 1, 2, 2], ic: IC.heart },
+    { nm: 'Express Hammam Ritual',                       dur: '60 min', counts: [1, 1, 1, 1],     ic: IC.droplet },
+    { nm: 'Crystal Massage',                             dur: '60 min', counts: [0, 1, 1, 1],     ic: IC.gem },
+    { nm: 'Floatation Therapy',                          dur: '45 min', counts: [0, 1, 1, 1],     ic: IC.waves },
+    { nm: 'Sound Bath Meditation',                       dur: '60 min', counts: [1, 1, 1, 1],     ic: IC.sound },
+    { nm: 'Meditation',                                  dur: '60 min', counts: [0, 0, 0, 1],     ic: IC.focus },
+    { nm: 'Watsu — Aquatic Therapy',                     dur: '60 min', counts: [0, 0, 1, 1],     ic: IC.droplet },
+    { nm: 'Detoxifying Balneotherapy',                   dur: '45 min', counts: [0, 0, 0, 1],     ic: IC.waves },
+    { nm: 'Posture & Alignment Therapy',                 dur: '60 min', counts: [1, 1, 1, 1],     ic: IC.person },
+    { nm: 'Personal Training',                           dur: '60 min', counts: [1, 1, 2, 2], mk: '**',   ic: IC.barbell },
+    { nm: 'Yoga',                                        dur: '60 min', counts: [1, 1, 1, 2], mk: '***',  ic: IC.lotus },
+    { nm: 'Pilates Reformer',                            dur: '60 min', counts: [0, 1, 1, 1], mk: '****', ic: IC.pulse },
+    { nm: 'Super Stretch',                               dur: '60 min', counts: [0, 0, 1, 1],     ic: IC.stretch },
+    { nm: 'Gyrotonic Rehabilitation',                    dur: '60 min', counts: [0, 0, 0, 1],     ic: IC.rotate },
+    { nm: 'Aqua Biking',                                 dur: '60 min', counts: [0, 0, 0, 1], mk: '*****', ic: IC.bike },
+    { nm: 'Wellness Cooking Class',                      dur: '90 min', counts: [0, 1, 1, 1],     ic: IC.utensils },
+    { nm: 'Choice of One Daily Treatment',               dur: '60 min', counts: [3, 6, 8, 12], mk: '*', ic: IC.sparkle }
+  ];
+
+  var NOTES = {
+    '*':     'Choice of One Daily Treatment selected from Jayasom Signature Massage, Swedish Massage, Abhyanga, Deep Tissue Massage, and Balinese Massage.',
+    '**':    'Personal Training may alternate with Boxing, Boot Camp, Function Fit, HIIT Burn, Kettlebell Training, Tabata Training, TRX Suspension Training, and Fitball Training.',
+    '***':   'Yoga may alternate with Aerial Yoga, Somatic Movement Coaching, Somatic Release Stretch, Pranayama, and Tai Chi.',
+    '****':  'Pilates Reformer may alternate with Mat Pilates.',
+    '*****': 'Aqua Biking may alternate with Aquatic Exercise.'
+  };
+
+  var tabsEl    = document.getElementById('tier-select');
+  var summaryEl = document.getElementById('tier-summary');
+  var gridEl    = document.getElementById('session-grid');
+  var notesEl   = document.getElementById('tier-notes');
+
+  function render(i) {
+    var tier = TIERS[i];
+
+    // tabs
+    tabsEl.innerHTML = '';
+    TIERS.forEach(function (t, idx) {
+      var b = document.createElement('button');
+      b.className = 'tier-tab' + (idx === i ? ' active' : '');
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+      b.innerHTML = '<span class="n">' + t.nights + '</span><span class="nm">Nights · ' + t.name + '</span>';
+      b.addEventListener('click', function () { render(idx); });
+      tabsEl.appendChild(b);
+    });
+
+    summaryEl.innerHTML = '<strong>' + tier.total + '</strong> included sessions over ' + tier.nights + ' nights';
+
+    // session cards for this tier
+    gridEl.innerHTML = '';
+    var usedMarks = {};
+    SESSIONS.forEach(function (s) {
+      var c = s.counts[i];
+      if (!c) return;
+      if (s.mk) usedMarks[s.mk] = true;
+      var card = document.createElement('div');
+      card.className = 'session-card';
+      var sup = s.mk ? '<sup>' + s.mk + '</sup>' : '';
+      var icon = '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + s.ic + '</svg></span>';
+      card.innerHTML =
+        '<div class="qty">&times;' + c + '</div>' +
+        '<div class="meta"><p class="nm">' + s.nm + ' ' + sup + '</p><p class="dur">' + s.dur + '</p></div>' +
+        icon;
+      gridEl.appendChild(card);
+    });
+
+    // contextual footnotes — only those referenced in this tier
+    notesEl.innerHTML = '';
+    ['*', '**', '***', '****', '*****'].forEach(function (mk) {
+      if (!usedMarks[mk]) return;
+      var p = document.createElement('p');
+      p.innerHTML = '<span class="mk">' + mk + '</span> ' + NOTES[mk];
+      notesEl.appendChild(p);
+    });
+  }
+
+  render(1); // default to the canonical seven-night tier
+})();
+</script>
+
 <footer class="site-footer">
   <div class="shell">
     <div class="cols">
