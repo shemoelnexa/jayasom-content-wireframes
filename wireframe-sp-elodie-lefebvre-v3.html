@@ -52,6 +52,9 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 .breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .breadcrumb a { color: inherit; }
 .breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .text-center { text-align: center; }
@@ -80,6 +83,18 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   <a href="#book" class="btn">Book Now</a>
 </header>
 
+<!-- HERO BANNER (generic strip, name + title) -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:300px;width:100%;border-left:0;border-right:0;"></div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Specialist · In Residence</p>
+      <h1 class="h-hero" style="margin-bottom:12px;">Elodie Lefebvre</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Director of Health and Wellness, Jayasom Wellness Resort AMAALA</p>
+    </div>
+  </div>
+</section>
+
 <div class="breadcrumb">
   <div class="shell" style="padding:0;">
     <a href="index.html">Home</a><span class="sep">›</span><a href="wireframe-about-us-v3.html">About</a><span class="sep">›</span><a href="wireframe-experts-v3.html">Our Experts</a><span class="sep">›</span><span>Elodie Lefebvre</span>
@@ -88,46 +103,38 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
-<!-- INTRO + ABOUT (merged profile) -->
+<!-- PROFILE: portrait + body copy -->
 <section class="section">
-  <div class="shell" style="max-width:900px;">
-    <!-- Focal point: 1:1 square portrait left, identity right -->
+  <div class="shell">
     <div class="grid-2" style="gap:56px;align-items:center;">
       <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Elodie Lefebvre · portrait</span>
       </div>
       <div>
-        <p class="eyebrow">Specialist · In Residence</p>
-        <h1 class="h-hero">Elodie Lefebvre</h1>
-        <p class="h-sub" style="font-style:italic;">Director of Health and Wellness, Jayasom Wellness Resort AMAALA</p>
-        <p class="body-copy mt-4 full">Fifteen years shaping wellness experiences across leading destinations; senior wellness lead behind the methodology.</p>
+        <p class="eyebrow">About</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Originally from France, Elodie Lefebvre has spent fifteen years shaping wellness experiences at internationally recognised destinations. Her family practised alternative healing; that grounding deepened through her own recovery, where yoga and meditation became central. What began as personal healing became a lifelong commitment to creating spaces where others could find their way back.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Leadership roles across Asia and the Indian Ocean sit behind her; teams of more than one hundred and twenty people have moved with her, alongside pre-opening projects and the mentoring of Wellness Directors across international properties. Empathy, respect, and collaboration are the registers she leads in.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">At Jayasom Wellness Resort AMAALA, Elodie leads health and wellness strategy, from concept and facility design through to medical and experiential programming. Time in nature and a sensitivity to people and place sit beneath an intuitive style, she reads what is often unspoken, so each guest's stay feels personal.</p>
         <div class="flex gap-4 mt-6" style="flex-wrap:wrap;">
           <a href="#" class="btn btn-solid">Book a wellness consultation</a>
           <a href="wireframe-experts-v3.html" class="btn">Back to all specialists</a>
         </div>
       </div>
     </div>
-
-    <!-- About bio, readable single column -->
-    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
-      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-        <p style="margin-bottom:24px;">Originally from France, Elodie Lefebvre has spent fifteen years shaping wellness experiences at internationally recognised destinations. Her family practised alternative healing; that grounding deepened through her own recovery, where yoga and meditation became central. What began as personal healing became a lifelong commitment to creating spaces where others could find their way back.</p>
-        <p style="margin-bottom:24px;">Leadership roles across Asia and the Indian Ocean sit behind her; teams of more than one hundred and twenty people have moved with her, alongside pre-opening projects and the mentoring of Wellness Directors across international properties. Empathy, respect, and collaboration are the registers she leads in.</p>
-        <p>At Jayasom Wellness Resort AMAALA, Elodie leads health and wellness strategy, from concept and facility design through to medical and experiential programming. Time in nature and a sensitivity to people and place sit beneath an intuitive style, she reads what is often unspoken, so each guest's stay feels personal.</p>
-      </div>
-    </div>
   </div>
 </section>
 
+<!-- EDUCATION AND EXPERTISE (merged) -->
 <section class="section section-muted">
-  <div class="shell">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Background</p>
+      <h2 class="h-section">Education and Expertise</h2>
+    </div>
     <div class="grid-2" style="gap:64px;">
       <div>
-        <p class="eyebrow">Credentials</p>
-        <h2 class="h-section">Practitioner Credentials</h2>
-      </div>
-      <div>
+        <p class="label-tiny">Education and background</p>
         <ul class="bullet-list">
           <li>Director of Health and Wellness, Jayasom Wellness Resort AMAALA</li>
           <li>Over fifteen years international wellness leadership</li>
@@ -137,24 +144,20 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
           <li>Teams of one hundred and twenty plus professionals led</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="shell">
-    <p class="eyebrow text-center">Specialisms</p>
-    <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>
-    <div class="tag-row justify-center" style="max-width:760px;margin:0 auto;">
-      <span class="tag">Wellness operations and programme strategy</span>
-      <span class="tag">Yoga and meditation</span>
-      <span class="tag">Reiki</span>
-      <span class="tag">Craniosacral therapy</span>
-      <span class="tag">Chi Nei Tsang</span>
-      <span class="tag">Plant-based nutrition</span>
-      <span class="tag">Wellness counselling</span>
-      <span class="tag">Multigenerational programming</span>
-      <span class="tag">Mindful sound experience</span>
+      <div>
+        <p class="label-tiny">Therapeutic pillars and areas of focus</p>
+        <ul class="bullet-list">
+          <li>Wellness operations and programme strategy</li>
+          <li>Yoga and meditation</li>
+          <li>Reiki</li>
+          <li>Craniosacral therapy</li>
+          <li>Chi Nei Tsang</li>
+          <li>Plant-based nutrition</li>
+          <li>Wellness counselling</li>
+          <li>Multigenerational programming</li>
+          <li>Mindful sound experience</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

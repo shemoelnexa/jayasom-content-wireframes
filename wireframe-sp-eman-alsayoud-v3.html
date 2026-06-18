@@ -52,6 +52,9 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 .breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .breadcrumb a { color: inherit; }
 .breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .text-center { text-align: center; }
@@ -80,6 +83,18 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   <a href="#book" class="btn">Book Now</a>
 </header>
 
+<!-- HERO BANNER (generic strip, name + title) -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:300px;width:100%;border-left:0;border-right:0;"></div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Specialist · In Residence</p>
+      <h1 class="h-hero" style="margin-bottom:12px;">Eman Alsayoud</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Wellness Mentor, Jayasom Wellness Resort AMAALA</p>
+    </div>
+  </div>
+</section>
+
 <div class="breadcrumb">
   <div class="shell" style="padding:0;">
     <a href="index.html">Home</a><span class="sep">›</span><a href="wireframe-about-us-v3.html">About</a><span class="sep">›</span><a href="wireframe-experts-v3.html">Our Experts</a><span class="sep">›</span><span>Eman Alsayoud</span>
@@ -88,46 +103,38 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
-<!-- INTRO + ABOUT (merged profile) -->
+<!-- PROFILE: portrait + body copy -->
 <section class="section">
-  <div class="shell" style="max-width:900px;">
-    <!-- Focal point: 1:1 square portrait left, identity right -->
+  <div class="shell">
     <div class="grid-2" style="gap:56px;align-items:center;">
       <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Eman Alsayoud · portrait</span>
       </div>
       <div>
-        <p class="eyebrow">Specialist · In Residence</p>
-        <h1 class="h-hero">Eman Alsayoud</h1>
-        <p class="h-sub" style="font-style:italic;">Wellness Mentor, Jayasom Wellness Resort AMAALA</p>
-        <p class="body-copy mt-4 full">Bridging neuroscience, psychology, and humanities; CBT, DBT, and ACT clinical training, with curiosity at the heart of practice.</p>
+        <p class="eyebrow">About</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Eman Alsayoud is a wellness mentor with a strong interdisciplinary background spanning psychology, neuroscience, education, and workforce wellbeing. She holds a Bachelor's degree in Psychology with a concentration in Neuroscience, alongside a Bachelor's degree in Comparative Literature, from a leading United States university.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Clinical, educational, and high-performance environments are all on her CV. Psychological assessment and counselling in high-pressure industrial and construction settings, support for neurodiverse children and families, and early developmental research are the through-lines. The clinical toolkit is evidence-based: Cognitive Behavioural Therapy, Dialectical Behaviour Therapy, and Acceptance and Commitment Therapy.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">At Jayasom Wellness Resort AMAALA, the interdisciplinary lens is what distinguishes her work: literature and brain science share the academic ground, and she holds complex scientific principles in a way that lands personally. Analytical expertise and narrative sensitivity meet in her sessions, supporting cognitive wellbeing, emotional regulation, and sustainable performance.</p>
         <div class="flex gap-4 mt-6" style="flex-wrap:wrap;">
           <a href="#" class="btn btn-solid">Book a wellness consultation</a>
           <a href="wireframe-experts-v3.html" class="btn">Back to all specialists</a>
         </div>
       </div>
     </div>
-
-    <!-- About bio, readable single column -->
-    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
-      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-        <p style="margin-bottom:24px;">Eman Alsayoud is a wellness mentor with a strong interdisciplinary background spanning psychology, neuroscience, education, and workforce wellbeing. She holds a Bachelor's degree in Psychology with a concentration in Neuroscience, alongside a Bachelor's degree in Comparative Literature, from a leading United States university.</p>
-        <p style="margin-bottom:24px;">Clinical, educational, and high-performance environments are all on her CV. Psychological assessment and counselling in high-pressure industrial and construction settings, support for neurodiverse children and families, and early developmental research are the through-lines. The clinical toolkit is evidence-based: Cognitive Behavioural Therapy, Dialectical Behaviour Therapy, and Acceptance and Commitment Therapy.</p>
-        <p>At Jayasom Wellness Resort AMAALA, the interdisciplinary lens is what distinguishes her work: literature and brain science share the academic ground, and she holds complex scientific principles in a way that lands personally. Analytical expertise and narrative sensitivity meet in her sessions, supporting cognitive wellbeing, emotional regulation, and sustainable performance.</p>
-      </div>
-    </div>
   </div>
 </section>
 
+<!-- EDUCATION AND EXPERTISE (merged) -->
 <section class="section section-muted">
-  <div class="shell">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Background</p>
+      <h2 class="h-section">Education and Expertise</h2>
+    </div>
     <div class="grid-2" style="gap:64px;">
       <div>
-        <p class="eyebrow">Credentials</p>
-        <h2 class="h-section">Practitioner Credentials</h2>
-      </div>
-      <div>
+        <p class="label-tiny">Education and background</p>
         <ul class="bullet-list">
           <li>Wellness Mentor, Jayasom Wellness Resort AMAALA</li>
           <li>Dual undergraduate degrees from a leading United States university, Psychology with a Neuroscience concentration, and Comparative Literature</li>
@@ -136,22 +143,18 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
           <li>Interdisciplinary lens bridging neuroscience, psychology, and humanities</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="shell">
-    <p class="eyebrow text-center">Specialisms</p>
-    <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>
-    <div class="tag-row justify-center" style="max-width:760px;margin:0 auto;">
-      <span class="tag">Psychological counselling and mentoring</span>
-      <span class="tag">CBT</span>
-      <span class="tag">DBT</span>
-      <span class="tag">ACT</span>
-      <span class="tag">Neuroscience-informed wellbeing</span>
-      <span class="tag">Cognitive resilience</span>
-      <span class="tag">Cross-cultural and educational settings</span>
+      <div>
+        <p class="label-tiny">Therapeutic pillars and areas of focus</p>
+        <ul class="bullet-list">
+          <li>Psychological counselling and mentoring</li>
+          <li>CBT</li>
+          <li>DBT</li>
+          <li>ACT</li>
+          <li>Neuroscience-informed wellbeing</li>
+          <li>Cognitive resilience</li>
+          <li>Cross-cultural and educational settings</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

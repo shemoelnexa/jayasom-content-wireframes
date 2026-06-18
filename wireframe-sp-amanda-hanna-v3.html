@@ -52,6 +52,9 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 .breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .breadcrumb a { color: inherit; }
 .breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .text-center { text-align: center; }
@@ -80,6 +83,18 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
   <a href="#book" class="btn">Book Now</a>
 </header>
 
+<!-- HERO BANNER (generic strip, name + title) -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:300px;width:100%;border-left:0;border-right:0;"></div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Specialist · In Residence</p>
+      <h1 class="h-hero" style="margin-bottom:12px;">Amanda Hanna</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Family and Multigenerational Wellness Manager, Jayasom Wellness Resort AMAALA</p>
+    </div>
+  </div>
+</section>
+
 <div class="breadcrumb">
   <div class="shell" style="padding:0;">
     <a href="index.html">Home</a><span class="sep">›</span><a href="wireframe-about-us-v3.html">About</a><span class="sep">›</span><a href="wireframe-experts-v3.html">Our Experts</a><span class="sep">›</span><span>Amanda Hanna</span>
@@ -88,46 +103,38 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 <main>
 
-<!-- INTRO + ABOUT (merged profile) -->
+<!-- PROFILE: portrait + body copy -->
 <section class="section">
-  <div class="shell" style="max-width:900px;">
-    <!-- Focal point: 1:1 square portrait left, identity right -->
+  <div class="shell">
     <div class="grid-2" style="gap:56px;align-items:center;">
       <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Amanda Hanna · portrait</span>
       </div>
       <div>
-        <p class="eyebrow">Specialist · In Residence</p>
-        <h1 class="h-hero">Amanda Hanna</h1>
-        <p class="h-sub" style="font-style:italic;">Family and Multigenerational Wellness Manager, Jayasom Wellness Resort AMAALA</p>
-        <p class="body-copy mt-4 full">Trained clinical psychologist with a background in child development and therapeutic care.</p>
+        <p class="eyebrow">About</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Amanda Hanna is a trained clinical psychologist with a strong background in child development and therapeutic care. Amanda holds both a master's and bachelor's degree in psychology from a Lebanese university, and has worked across clinical, educational, and wellness settings in the UAE.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Before joining Jayasom, Amanda held roles at leading child-focused centres in Dubai, where she supported children with autism and developmental needs. Her work combined behaviour therapy, emotional support, and family education, always with a focus on practical tools and long-term growth.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">Her move into wellness came after an autoimmune diagnosis prompted her to explore restorative approaches to healing. Reset of daily habits, daily movement, and a deeper connection to wellbeing reshaped her approach, personally as much as professionally. At Jayasom, Amanda designs and leads programmes that help children build confidence, emotional awareness, and social connection; clinical training meets creativity in every session, age-appropriate by design.</p>
         <div class="flex gap-4 mt-6" style="flex-wrap:wrap;">
           <a href="#" class="btn btn-solid">Book a wellness consultation</a>
           <a href="wireframe-experts-v3.html" class="btn">Back to all specialists</a>
         </div>
       </div>
     </div>
-
-    <!-- About bio, readable single column -->
-    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
-      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-        <p style="margin-bottom:24px;">Amanda Hanna is a trained clinical psychologist with a strong background in child development and therapeutic care. Amanda holds both a master's and bachelor's degree in psychology from a Lebanese university, and has worked across clinical, educational, and wellness settings in the UAE.</p>
-        <p style="margin-bottom:24px;">Before joining Jayasom, Amanda held roles at leading child-focused centres in Dubai, where she supported children with autism and developmental needs. Her work combined behaviour therapy, emotional support, and family education, always with a focus on practical tools and long-term growth.</p>
-        <p>Her move into wellness came after an autoimmune diagnosis prompted her to explore restorative approaches to healing. Reset of daily habits, daily movement, and a deeper connection to wellbeing reshaped her approach, personally as much as professionally. At Jayasom, Amanda designs and leads programmes that help children build confidence, emotional awareness, and social connection; clinical training meets creativity in every session, age-appropriate by design.</p>
-      </div>
-    </div>
   </div>
 </section>
 
+<!-- EDUCATION AND EXPERTISE (merged) -->
 <section class="section section-muted">
-  <div class="shell">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Background</p>
+      <h2 class="h-section">Education and Expertise</h2>
+    </div>
     <div class="grid-2" style="gap:64px;">
       <div>
-        <p class="eyebrow">Credentials</p>
-        <h2 class="h-section">Practitioner Credentials</h2>
-      </div>
-      <div>
+        <p class="label-tiny">Education and background</p>
         <ul class="bullet-list">
           <li>Family and Multigenerational Wellness Manager, Jayasom Wellness Resort AMAALA</li>
           <li>Trained clinical psychologist</li>
@@ -137,22 +144,18 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
           <li>Behaviour therapy, emotional support, and family education across UAE clinical and educational settings</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="shell">
-    <p class="eyebrow text-center">Specialisms</p>
-    <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>
-    <div class="tag-row justify-center" style="max-width:760px;margin:0 auto;">
-      <span class="tag">Child development and clinical psychology</span>
-      <span class="tag">Family wellness programme design</span>
-      <span class="tag">Multigenerational wellbeing</span>
-      <span class="tag">Behaviour therapy</span>
-      <span class="tag">Emotional awareness and social connection</span>
-      <span class="tag">Supporting children with autism and developmental needs</span>
-      <span class="tag">Family education</span>
+      <div>
+        <p class="label-tiny">Therapeutic pillars and areas of focus</p>
+        <ul class="bullet-list">
+          <li>Child development and clinical psychology</li>
+          <li>Family wellness programme design</li>
+          <li>Multigenerational wellbeing</li>
+          <li>Behaviour therapy</li>
+          <li>Emotional awareness and social connection</li>
+          <li>Supporting children with autism and developmental needs</li>
+          <li>Family education</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

@@ -102,6 +102,9 @@ html, body {
 .breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .breadcrumb a { color: inherit; }
 .breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
 .text-center { text-align: center; }
@@ -153,6 +156,18 @@ html, body {
   <a href="#book" class="btn">Book Now</a>
 </header>
 
+<!-- HERO BANNER (generic strip, name + title) -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:300px;width:100%;border-left:0;border-right:0;"></div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Specialist · In Residence</p>
+      <h1 class="h-hero" style="margin-bottom:12px;">Karen Campbell</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">CEO and Co-Founder, Jayasom</p>
+    </div>
+  </div>
+</section>
+
 <div class="breadcrumb">
   <div class="shell" style="padding:0;">
     <a href="index.html">Home</a><span class="sep">›</span><a href="wireframe-about-us-v3.html">About</a><span class="sep">›</span><a href="wireframe-experts-v3.html">Our Experts</a><span class="sep">›</span><span>Karen Campbell</span>
@@ -161,47 +176,38 @@ html, body {
 
 <main>
 
-<!-- INTRO + ABOUT (merged profile) -->
+<!-- PROFILE: portrait + body copy -->
 <section class="section">
-  <div class="shell" style="max-width:900px;">
-    <!-- Focal point: 1:1 square portrait left, identity right -->
+  <div class="shell">
     <div class="grid-2" style="gap:56px;align-items:center;">
       <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
         <span class="label">Karen Campbell · portrait</span>
       </div>
       <div>
-        <p class="eyebrow">Specialist · In Residence</p>
-        <h1 class="h-hero">Karen Campbell</h1>
-        <p class="h-sub" style="font-style:italic;">CEO and Co-Founder, Jayasom</p>
-        <p class="body-copy mt-4 full">Founder voice for the brand, anchoring conscious-awareness philosophy and the Wellness Wisdom® pillar across every retreat.</p>
+        <p class="eyebrow">About</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Karen Campbell has long believed that wellbeing is not a luxury, but a birthright. Raised in New Zealand in a family where healthy living was instinctive and intuitive, and growing fruits and vegetables, tending to sheep and bees, preserving and conserving, and recycling was part of daily life. These early experiences shaped a lifelong reverence for nature, balance, and conscious living.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Karen co-founded Jayasom in 2014, envisioning sanctuaries where ancient healing traditions and modern science come together to guide deeply personalised wellbeing. AMAALA is its flagship destination, a new benchmark for integrative wellbeing rooted in nature, guided by purpose, and committed to sustainability.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">Karen brings decades of senior leadership in finance and trade across Thailand, including roles in banking and diplomacy, to the work of building Jayasom. Her academic foundation bridges biology and strategy. The endurance she discovered in Thailand, first as a marathon runner and now exploring triathlons, sits beneath the way she leads.</p>
         <div class="flex gap-4 mt-6" style="flex-wrap:wrap;">
           <a href="#" class="btn btn-solid">Book a consultation</a>
           <a href="wireframe-experts-v3.html" class="btn">Back to all specialists</a>
         </div>
       </div>
     </div>
-
-    <!-- About bio, readable single column -->
-    <div style="border-top:1px solid hsl(var(--border));margin-top:48px;padding-top:48px;">
-      <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-        <p style="margin-bottom:24px;">Karen Campbell has long believed that wellbeing is not a luxury, but a birthright. Raised in New Zealand in a family where healthy living was instinctive and intuitive, and growing fruits and vegetables, tending to sheep and bees, preserving and conserving, and recycling was part of daily life. These early experiences shaped a lifelong reverence for nature, balance, and conscious living.</p>
-        <p style="margin-bottom:24px;">Karen co-founded Jayasom in 2014, envisioning sanctuaries where ancient healing traditions and modern science come together to guide deeply personalised wellbeing. AMAALA is its flagship destination, a new benchmark for integrative wellbeing rooted in nature, guided by purpose, and committed to sustainability.</p>
-        <p>Karen brings decades of senior leadership in finance and trade across Thailand, including roles in banking and diplomacy, to the work of building Jayasom. Her academic foundation bridges biology and strategy. The endurance she discovered in Thailand, first as a marathon runner and now exploring triathlons, sits beneath the way she leads.</p>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- CREDENTIALS / EDUCATION -->
+<!-- EDUCATION AND EXPERTISE (merged) -->
 <section class="section section-muted">
-  <div class="shell">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Background</p>
+      <h2 class="h-section">Education and Expertise</h2>
+    </div>
     <div class="grid-2" style="gap:64px;">
       <div>
-        <p class="eyebrow">Background</p>
-        <h2 class="h-section">Education and Background</h2>
-      </div>
-      <div>
+        <p class="label-tiny">Education and background</p>
         <ul class="bullet-list">
           <li>Co-founded Jayasom in 2014</li>
           <li>Bachelor of Science in Zoology, Canterbury University, New Zealand</li>
@@ -212,21 +218,16 @@ html, body {
           <li>Languages: English (native), Thai</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- THERAPEUTIC PILLARS / SPECIALISMS -->
-<section class="section">
-  <div class="shell">
-    <p class="eyebrow text-center">Specialisms</p>
-    <h2 class="h-section text-center mb-8">Therapeutic Pillars and Areas of Focus</h2>
-    <div class="tag-row justify-center" style="max-width:760px;margin:0 auto;">
-      <span class="tag">Integrative wellbeing strategy</span>
-      <span class="tag">Conscious-awareness philosophy</span>
-      <span class="tag">Sustainability leadership</span>
-      <span class="tag">Cross-cultural wellness leadership</span>
-      <span class="tag">Founder vision and brand stewardship</span>
+      <div>
+        <p class="label-tiny">Therapeutic pillars and areas of focus</p>
+        <ul class="bullet-list">
+          <li>Integrative wellbeing strategy</li>
+          <li>Conscious-awareness philosophy</li>
+          <li>Sustainability leadership</li>
+          <li>Cross-cultural wellness leadership</li>
+          <li>Founder vision and brand stewardship</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
