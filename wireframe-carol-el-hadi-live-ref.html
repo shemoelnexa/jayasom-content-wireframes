@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Carol El Hadi (Live page reference) · Jayasom Wireframe</title>
+  <style>
+:root { --background: 16 33% 93%; --foreground: 300 2% 27%; --card: 16 33% 93%; --card-foreground: 300 2% 27%; --muted: 16 20% 86%; --muted-foreground: 300 2% 40%; --accent: 16 20% 86%; --accent-foreground: 300 2% 27%; --border: 300 2% 60%; --input: 300 2% 60%; --primary: 300 2% 27%; --primary-foreground: 16 33% 93%; --wire-placeholder: 16 20% 88%; --wire-line: 300 2% 55%; --wire-dark: 300 2% 30%; --wire-mid: 300 2% 45%; --radius: 0rem; }
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif; font-weight: 300; line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow, .section-dark .body-copy, .section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero, .section-dark .h-section, .section-dark .h-sub, .section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+.grid-2, .grid-3 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 24px; } }
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 0; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) { .site-footer .cols { grid-template-columns: 1fr; } .site-footer .bottom { flex-direction: column; gap: 16px; } }
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 16px; }
+.mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+.section-tall { padding: 80px 32px; }
+.bullet-list { display: flex; flex-direction: column; gap: 10px; }
+.bullet-list li { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; display: flex; gap: 12px; padding-left: 0; }
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+.placeholder-pill { display: inline-block; background: hsl(var(--muted)); border: 1px dashed hsl(var(--border)); padding: 4px 14px; font-size: 11px; color: hsl(var(--muted-foreground)); letter-spacing: 0.05em; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav><a href="#destinations">Destinations</a><a href="#retreats">Retreats</a><a href="#wellness">Wellness</a><a href="#residences">Residences</a><a href="#insights">Insights</a></nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<!-- HERO BANNER (generic strip, name + title) -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:300px;width:100%;border-left:0;border-right:0;"></div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Specialist · In Residence</p>
+      <h1 class="h-hero" style="margin-bottom:12px;">Carol El Hadi</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Director of Marketing, PR and Communications, Jayasom Wellness Resort AMAALA</p>
+    </div>
+  </div>
+</section>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span><a href="wireframe-about-us-v3.html">About</a><span class="sep">›</span><a href="wireframe-experts-v3.html">Our Experts</a><span class="sep">›</span><span>Carol El Hadi</span>
+  </div>
+</div>
+
+<main>
+
+<!-- PROFILE: portrait + body copy -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:56px;align-items:center;">
+      <div class="wire-image" style="aspect-ratio:1/1;width:100%;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        <span class="label">Carol El Hadi · portrait</span>
+      </div>
+      <div>
+        <p class="eyebrow">About</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Seventeen years across luxury hospitality and lifestyle have shaped how Carol El Hadi approaches brand. Her career stretches from the United States to the Middle East, partnering with leading brands <span class="placeholder-pill">prior employer</span> on integrated marketing and communications work that strengthens positioning and brand presence.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Brand, marketing, and PR functions across the international sector are her territory; Carol holds them with clarity and disciplined execution. Pre-opening strategy, brand positioning, digital transformation, and multi-channel campaigns sit in her core remit, delivering commercial results while building long-term brand equity.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;">At Jayasom Wellness Resort AMAALA, the role spans marketing, PR, and communications, shaping a cohesive brand narrative so every touchpoint reflects the destination's positioning. Fluent in English, Arabic, and Turkish, Carol brings a culturally attuned international perspective to brands that resonate across markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION AND EXPERTISE (merged) -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Background</p>
+      <h2 class="h-section">Education and Expertise</h2>
+    </div>
+    <div class="grid-2" style="gap:64px;">
+      <div>
+        <p class="label-tiny">Education and background</p>
+        <ul class="bullet-list">
+          <li>Director of Marketing, PR and Communications, Jayasom Wellness Resort AMAALA</li>
+          <li>Over seventeen years in luxury hospitality and lifestyle marketing</li>
+          <li>Master's degree in Hospitality Business Management</li>
+          <li>Career across the United States and the Middle East</li>
+          <li>Trilingual in English, Arabic, and Turkish</li>
+          <li>Specialisms across pre-opening strategy, brand positioning, digital transformation, and multi-channel campaigns</li>
+        </ul>
+      </div>
+      <div>
+        <p class="label-tiny">Therapeutic pillars and areas of focus</p>
+        <ul class="bullet-list">
+          <li>Brand strategy and positioning</li>
+          <li>Pre-opening marketing leadership</li>
+          <li>Digital transformation</li>
+          <li>Multi-channel campaigns</li>
+          <li>PR and communications</li>
+          <li>Trilingual cross-cultural communications</li>
+          <li>Brand equity stewardship</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN YOUR STAY (dual CTA) -->
+<section class="section section-tall">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <h2 class="h-section mb-6">Plan your stay</h2>
+    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
+      <a href="wireframe-find-your-retreat-v3.html" class="btn">Explore retreats</a>
+      <a href="wireframe-contact-v3.html" class="btn">Contact a wellness advisor</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
