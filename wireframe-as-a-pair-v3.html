@@ -177,29 +177,29 @@ html, body {
 .form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
 
 /* Tier selector (per-tier inclusions, non-table) */
-.tier-select { display: flex; border: 1px solid hsl(var(--border)); max-width: 680px; margin: 0 auto; }
-.tier-tab { flex: 1; background: transparent; border: 0; border-right: 1px solid hsl(var(--border)); padding: 18px 10px; cursor: pointer; text-align: center; font-family: inherit; }
+.tier-select { display: flex; border: 1px solid hsl(var(--border)); margin: 0; }
+.tier-tab { flex: 1; background: transparent; border: 0; border-right: 1px solid hsl(var(--border)); padding: 16px 10px; cursor: pointer; text-align: center; font-family: inherit; }
 .tier-tab:last-child { border-right: 0; }
-.tier-tab .n { display: block; font-size: 22px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; }
-.tier-tab .nm { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 8px; }
+.tier-tab .n { display: block; font-size: 26px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; }
+.tier-tab .nu { display: block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 4px; }
+.tier-tab .nm { display: block; font-size: 16px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground)); margin-top: 10px; }
+.tier-tab .cnt { display: block; font-size: 10px; letter-spacing: 0.04em; color: hsl(var(--muted-foreground)); margin-top: 6px; font-style: italic; }
 .tier-tab.active { background: hsl(var(--foreground)); }
-.tier-tab.active .n, .tier-tab.active .nm { color: hsl(var(--background)); }
+.tier-tab.active .n, .tier-tab.active .nu, .tier-tab.active .nm, .tier-tab.active .cnt { color: hsl(var(--background)); }
 
-.tier-summary { text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 16px; }
-.tier-summary strong { color: hsl(var(--foreground)); font-weight: 700; }
-
-.session-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
-@media (max-width: 768px) { .session-grid { grid-template-columns: 1fr; } }
-.session-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 18px 20px; display: flex; gap: 16px; align-items: center; }
-.session-card .qty { flex-shrink: 0; width: 46px; height: 46px; border: 1px solid hsl(var(--foreground)); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); }
-.session-card .meta { min-width: 0; }
-.session-card .meta .nm { font-size: 14px; color: hsl(var(--foreground)); line-height: 1.4; margin-bottom: 4px; }
-.session-card .meta .nm sup { font-size: 9px; color: hsl(var(--muted-foreground)); }
-.session-card .meta .dur { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
-.session-card .ico { flex-shrink: 0; width: 26px; height: 26px; margin-left: auto; color: hsl(var(--muted-foreground)); }
+.session-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 24px; }
+@media (max-width: 980px) { .session-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .session-grid { grid-template-columns: 1fr; } }
+.session-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 12px 14px; display: flex; gap: 10px; align-items: center; }
+.session-card .ico { flex-shrink: 0; width: 22px; height: 22px; color: hsl(var(--muted-foreground)); }
 .session-card .ico svg { width: 100%; height: 100%; display: block; }
+.session-card .meta { min-width: 0; flex: 1; }
+.session-card .meta .nm { font-size: 12.5px; color: hsl(var(--foreground)); line-height: 1.35; margin-bottom: 2px; }
+.session-card .meta .nm sup { font-size: 9px; color: hsl(var(--muted-foreground)); }
+.session-card .meta .dur { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.session-card .qty { flex-shrink: 0; margin-left: 6px; font-size: 11px; font-weight: 700; color: hsl(var(--foreground)); border: 1px solid hsl(var(--border)); padding: 1px 6px; }
 
-.tier-notes { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; max-width: 900px; margin-left: auto; margin-right: auto; }
+.tier-notes { margin: 24px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 48px; }
 @media (max-width: 768px) { .tier-notes { grid-template-columns: 1fr; } }
 .tier-notes p { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
 .tier-notes .mk { color: hsl(var(--foreground)); font-weight: 700; }
@@ -458,13 +458,12 @@ html, body {
     </div>
 
     <!-- Per-tier inclusions (interactive tier selector) -->
-    <div style="margin-top:64px;">
+    <div style="margin-top:40px;">
       <p class="eyebrow-mini text-center mb-4">Per-tier inclusions</p>
       <h3 class="h-sub text-center mb-4">Choose your stay length</h3>
       <p class="caption text-center" style="max-width:680px;margin:0 auto 24px;font-style:italic;">The numbers below show the included sessions for each stay length. Your Health &amp; Wellness Advisor may adjust the sequencing around guest energy, recovery needs, and practitioner guidance.</p>
 
       <div class="tier-select" id="tier-select" role="tablist" aria-label="Stay length"></div>
-      <p class="tier-summary" id="tier-summary"></p>
 
       <div class="session-grid" id="session-grid"></div>
 
@@ -826,7 +825,6 @@ html, body {
   };
 
   var tabsEl    = document.getElementById('tier-select');
-  var summaryEl = document.getElementById('tier-summary');
   var gridEl    = document.getElementById('session-grid');
   var notesEl   = document.getElementById('tier-notes');
 
@@ -840,12 +838,10 @@ html, body {
       b.className = 'tier-tab' + (idx === i ? ' active' : '');
       b.setAttribute('role', 'tab');
       b.setAttribute('aria-selected', idx === i ? 'true' : 'false');
-      b.innerHTML = '<span class="n">' + t.nights + '</span><span class="nm">Nights · ' + t.name + '</span>';
+      b.innerHTML = '<span class="n">' + t.nights + '</span><span class="nu">Nights</span><span class="nm">' + t.name + '</span><span class="cnt">(' + t.total + ' included sessions)</span>';
       b.addEventListener('click', function () { render(idx); });
       tabsEl.appendChild(b);
     });
-
-    summaryEl.innerHTML = '<strong>' + tier.total + '</strong> included sessions over ' + tier.nights + ' nights';
 
     // session cards for this tier
     gridEl.innerHTML = '';
@@ -858,10 +854,11 @@ html, body {
       card.className = 'session-card';
       var sup = s.mk ? '<sup>' + s.mk + '</sup>' : '';
       var icon = '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + s.ic + '</svg></span>';
+      var qty = c > 1 ? '<div class="qty">&times;' + c + '</div>' : '';
       card.innerHTML =
-        '<div class="qty">&times;' + c + '</div>' +
+        icon +
         '<div class="meta"><p class="nm">' + s.nm + ' ' + sup + '</p><p class="dur">' + s.dur + '</p></div>' +
-        icon;
+        qty;
       gridEl.appendChild(card);
     });
 
