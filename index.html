@@ -27,6 +27,13 @@
   --radius: 0rem;
 }
 
+/* === INDEX PAGE EXTRAS (this page only; tokens above untouched) === */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --wrap: 1200px;
+  --topbar-h: 60px;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
 ul, ol { list-style: none; }
 a { color: inherit; text-decoration: none; }
@@ -40,297 +47,400 @@ html, body {
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
-/* === TYPOGRAPHY === */
-.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
-.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
-.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
-.h-card { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; letter-spacing: 0.02em; }
-.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
-.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
-.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+a:focus-visible, .search-input:focus-visible {
+  outline: 2px solid hsl(var(--foreground)); outline-offset: 3px;
+}
 
-/* === LAYOUT === */
-.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
-.section { padding: 64px 32px; }
-.section-tight { padding: 8px 32px 32px; }
+/* === TYPOGRAPHY HELPERS === */
+.eyebrow { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.label-tiny { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
 
-/* === HERO === */
-.intro { padding: 64px 32px 16px; text-align: center; }
-.intro .shell { max-width: 720px; }
-.intro .body-copy { max-width: 560px; margin-top: 8px; }
+/* === STICKY TOPBAR === */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: hsl(var(--background));
+  border-bottom: 1px solid hsl(var(--border) / 0.6);
+  transition: box-shadow 280ms var(--ease-out), border-color 280ms var(--ease-out);
+}
+.topbar.is-scrolled {
+  border-bottom-color: hsl(var(--border) / 0.3);
+  box-shadow: 0 10px 28px -22px hsl(300 2% 27% / 0.55);
+}
+.topbar-inner {
+  max-width: var(--wrap); margin: 0 auto; padding: 0 32px;
+  height: var(--topbar-h); display: flex; align-items: center; gap: 24px;
+}
+.wordmark {
+  font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
+  font-weight: 700; color: hsl(var(--foreground)); white-space: nowrap;
+}
+.wordmark .thin { font-weight: 300; color: hsl(var(--muted-foreground)); }
+.topbar .count { margin-left: auto; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: hsl(var(--muted-foreground)); white-space: nowrap; }
+.topbar .count b { font-weight: 700; color: hsl(var(--foreground)); font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .topbar-inner { padding: 0 20px; } }
 
 /* === SEARCH === */
-.search-wrap { max-width: 480px; margin: 20px auto 0; }
-.search-input { width: 100%; font-family: inherit; font-weight: 300; font-size: 14px; color: hsl(var(--foreground)); background: hsl(var(--background)); border: 1px solid hsl(var(--border)); border-radius: 0; padding: 12px 16px; }
-.search-input::placeholder { color: hsl(var(--muted-foreground)); }
-.search-input:focus { outline: none; border-color: hsl(var(--foreground)); }
-.search-empty { text-align: center; color: hsl(var(--muted-foreground)); font-size: 14px; padding: 8px 32px 32px; }
-.search-empty[hidden] { display: none; }
-
-/* === PAGE LIST === */
-.page-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px 24px;
+.hero-search { position: relative; width: 340px; flex: none; }
+.search-input {
+  width: 100%; font-family: inherit; font-weight: 300; font-size: 15px;
+  color: hsl(var(--foreground)); background: hsl(var(--background));
+  border: 1px solid hsl(var(--border)); border-radius: 0;
+  padding: 14px 16px 14px 44px;
+  transition: border-color 180ms var(--ease-out), box-shadow 220ms var(--ease-out);
 }
-@media (max-width: 768px) { .page-list { grid-template-columns: 1fr; } }
+.search-input::placeholder { color: hsl(var(--muted-foreground)); }
+.search-input:focus { outline: none; border-color: hsl(var(--foreground)); box-shadow: 0 0 0 3px hsl(300 2% 27% / 0.08); }
+.search-ico { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: hsl(var(--muted-foreground)); pointer-events: none; line-height: 0; }
+
+/* === HERO === */
+.hero { max-width: var(--wrap); margin: 0 auto; padding: 76px 32px 44px; display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.hero-text { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 768px) { .hero { flex-direction: column; align-items: stretch; gap: 30px; } .hero-search { width: 100%; } }
+.hero-title {
+  font-size: clamp(34px, 5.4vw, 62px); font-weight: 300; letter-spacing: -0.012em;
+  line-height: 1.03; color: hsl(var(--foreground)); margin: 16px 0 20px; max-width: 16ch;
+}
+.hero-meta { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.hero-meta .sep { color: hsl(var(--border)); }
+.hero-meta b { font-weight: 700; color: hsl(var(--foreground)); font-variant-numeric: tabular-nums; }
+
+/* === DIRECTORY LAYOUT (rail + content) === */
+.directory {
+  max-width: var(--wrap); margin: 0 auto; padding: 8px 32px 112px;
+  display: grid; grid-template-columns: 232px 1fr; gap: 64px; align-items: start;
+}
+@media (max-width: 1023px) {
+  .directory { grid-template-columns: 1fr; gap: 0; }
+  .rail { display: none; }
+}
+
+/* === SECTION RAIL === */
+.rail { position: sticky; top: 32px; }
+.rail-title { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; padding-bottom: 12px; border-bottom: 1px solid hsl(var(--border)); }
+.rail-link {
+  display: flex; align-items: baseline; gap: 11px; padding: 8px 0;
+  color: hsl(var(--muted-foreground)); border-bottom: 1px solid hsl(var(--border) / 0.3);
+  transition: color 200ms var(--ease-out), opacity 200ms var(--ease-out);
+}
+.rail-num { flex: none; width: 16px; font-size: 10px; letter-spacing: 0.08em; color: hsl(var(--border)); font-variant-numeric: tabular-nums; transition: color 200ms var(--ease-out); }
+.rail-name { font-size: 13px; font-weight: 300; }
+.rail-count { margin-left: auto; font-size: 10px; letter-spacing: 0.06em; color: hsl(var(--border)); font-variant-numeric: tabular-nums; transition: color 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .rail-link:hover { color: hsl(var(--foreground)); }
+  .rail-link:hover .rail-num, .rail-link:hover .rail-count { color: hsl(var(--muted-foreground)); }
+}
+.rail-link.is-active { color: hsl(var(--foreground)); }
+.rail-link.is-active .rail-num { color: hsl(var(--foreground)); }
+.rail-link.is-dim { opacity: 0.3; pointer-events: none; }
+
+/* === SECTION GROUPS === */
+.section-group { margin-bottom: 56px; scroll-margin-top: 28px; }
+.section-group:last-of-type { margin-bottom: 0; }
+.group-head {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 0 14px 13px; margin-bottom: 4px;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.group-index { font-size: 12px; font-weight: 300; letter-spacing: 0.1em; color: hsl(var(--muted-foreground)); font-variant-numeric: tabular-nums; }
+.group-title { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: hsl(var(--foreground)); }
+.group-count { margin-left: auto; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: hsl(var(--muted-foreground)); white-space: nowrap; }
+
+/* === PAGE ROWS === */
+.page-list { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 56px; row-gap: 0; }
+@media (max-width: 560px) { .page-list { grid-template-columns: 1fr; } }
 
 .page-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 20px;
-  padding: 18px 24px;
-  border: 1px solid hsl(var(--border));
-  background: hsl(var(--background));
-  transition: background 160ms ease, border-color 160ms ease;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: 14px 14px; border-bottom: 1px solid hsl(var(--border) / 0.42);
+  transition: background 200ms var(--ease-out);
 }
 .page-row .title {
-  font-size: 15px;
-  font-weight: 300;
-  color: hsl(var(--foreground));
-  line-height: 1.3;
+  font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1.35;
+  transition: transform 260ms var(--ease-out), color 200ms var(--ease-out);
 }
 .page-row .arrow {
-  font-size: 16px;
-  color: hsl(var(--muted-foreground));
-  line-height: 1;
-  transition: transform 160ms ease, color 160ms ease;
+  font-size: 15px; color: hsl(var(--muted-foreground)); line-height: 1;
+  transition: transform 260ms var(--ease-out), color 200ms var(--ease-out);
 }
-.page-row:hover { background: hsl(var(--muted)); border-color: hsl(var(--foreground)); }
-.page-row:hover .arrow { color: hsl(var(--foreground)); transform: translateX(4px); }
+@media (hover: hover) and (pointer: fine) {
+  .page-row:hover { background: hsl(var(--muted)); }
+  .page-row:hover .title { transform: translateX(7px); }
+  .page-row:hover .arrow { transform: translateX(4px); color: hsl(var(--foreground)); }
+}
+.page-row:active { background: hsl(var(--muted)); }
 
-.section-group { padding: 32px 32px 8px; }
-.section-group .group-head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  margin-bottom: 16px;
-  border-bottom: 1px solid hsl(var(--border));
-  padding-bottom: 10px;
+/* === SEARCH EMPTY === */
+.search-empty { padding: 28px 14px; color: hsl(var(--muted-foreground)); font-size: 14px; }
+.search-empty[hidden] { display: none; }
+
+/* === ENTRANCE === */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(12px); animation: rise 620ms var(--ease-out) forwards; }
+  .reveal.d1 { animation-delay: 70ms; }
 }
-.section-group .group-title {
-  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: hsl(var(--foreground)); font-weight: 700;
-}
-.section-group .group-count {
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: hsl(var(--muted-foreground));
-}
+@keyframes rise { to { opacity: 1; transform: none; } }
 
   </style>
 </head>
 <body>
 
-<section class="intro">
-  <div class="shell">
-    <h1 class="h-hero">JAYASOM CONTENT WIREFRAMES</h1>
-    <p class="body-copy" style="margin: 12px auto 0;">68 pages · V3</p>
-    <div class="search-wrap">
-      <input id="pageSearch" class="search-input" type="search" placeholder="Search pages by name…" autocomplete="off" aria-label="Search pages by name"/>
+<section class="hero reveal">
+  <div class="hero-text">
+    <h1 class="hero-title">Content Wireframes</h1>
+    <div class="hero-meta">
+      <span><b>72</b> Pages</span>
+      <span class="sep">/</span>
+      <span><b>11</b> Sections</span>
     </div>
+  </div>
+  <div class="hero-search">
+    <span class="search-ico" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="20.5" y1="20.5" x2="16.4" y2="16.4"/></svg>
+    </span>
+    <input id="pageSearch" class="search-input" type="search" placeholder="Search pages by name…" autocomplete="off" aria-label="Search pages by name"/>
   </div>
 </section>
 
-<p class="search-empty" id="searchEmpty" hidden>No pages match “<span id="searchTerm"></span>”.</p>
+<div class="directory">
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Brand &amp; Entry</span>
-      <span class="group-count">8 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-homepage-v3.html"><span class="title">Homepage</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-about-us-v3.html"><span class="title">About Us</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sustainability-v3.html"><span class="title">Sustainability (Sustainable Living)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-destinations-v3.html"><span class="title">Destinations</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-amaala-destination-v3.html"><span class="title">AMAALA (destination page)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-day-at-amaala-v3.html"><span class="title">A Day at AMAALA</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-find-your-retreat-v3.html"><span class="title">Find Your Retreat</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-gallery-v3.html"><span class="title">Gallery</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+  <aside class="rail reveal d1">
+    <p class="rail-title">Sections</p>
+    <nav>
+      <a class="rail-link" href="#g-brand"        data-target="g-brand"><span class="rail-num">01</span><span class="rail-name">Brand &amp; Entry</span><span class="rail-count">8</span></a>
+      <a class="rail-link" href="#g-retreats"     data-target="g-retreats"><span class="rail-num">02</span><span class="rail-name">Retreats</span><span class="rail-count">7</span></a>
+      <a class="rail-link" href="#g-wellness"      data-target="g-wellness"><span class="rail-num">03</span><span class="rail-name">Wellness</span><span class="rail-count">4</span></a>
+      <a class="rail-link" href="#g-treatments"    data-target="g-treatments"><span class="rail-num">04</span><span class="rail-name">Treatments</span><span class="rail-count">17</span></a>
+      <a class="rail-link" href="#g-experts"       data-target="g-experts"><span class="rail-num">05</span><span class="rail-name">Experts &amp; Specialists</span><span class="rail-count">12</span></a>
+      <a class="rail-link" href="#g-activities"    data-target="g-activities"><span class="rail-num">06</span><span class="rail-name">Activities &amp; Culinary</span><span class="rail-count">3</span></a>
+      <a class="rail-link" href="#g-residences"    data-target="g-residences"><span class="rail-num">07</span><span class="rail-name">Residences &amp; Villas</span><span class="rail-count">10</span></a>
+      <a class="rail-link" href="#g-family"        data-target="g-family"><span class="rail-num">08</span><span class="rail-name">Family</span><span class="rail-count">3</span></a>
+      <a class="rail-link" href="#g-editorial"     data-target="g-editorial"><span class="rail-num">09</span><span class="rail-name">Editorial &amp; News</span><span class="rail-count">4</span></a>
+      <a class="rail-link" href="#g-organisation"  data-target="g-organisation"><span class="rail-num">10</span><span class="rail-name">Organisation</span><span class="rail-count">2</span></a>
+      <a class="rail-link" href="#g-misc"          data-target="g-misc"><span class="rail-num">11</span><span class="rail-name">Miscellaneous</span><span class="rail-count">2</span></a>
+    </nav>
+  </aside>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Retreats</span>
-      <span class="group-count">7 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-retreat-template-v3.html"><span class="title">Retreat Template (layout reference)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-as-a-pair-v3.html"><span class="title">As a Pair</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-as-a-woman-v3.html"><span class="title">As a Woman</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-as-a-family-v3.html"><span class="title">As a Family</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-as-a-leader-v3.html"><span class="title">As a Leader</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-as-a-flow-v3.html"><span class="title">As a Flow</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-as-a-feather-v3.html"><span class="title">As a Feather</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+  <main>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Wellness</span>
-      <span class="group-count">4 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-wellness-v3.html"><span class="title">Wellness</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-individual-wellness-v3.html"><span class="title">Individual Wellness</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-wellbeing-spaces-v3.html"><span class="title">Wellbeing Spaces</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-retreats-and-programmes-v3.html"><span class="title">Retreats &amp; Programmes</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <p class="search-empty" id="searchEmpty" hidden>No pages match &ldquo;<span id="searchTerm"></span>&rdquo;.</p>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Treatments</span>
-      <span class="group-count">17 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-treatments-v3.html"><span class="title">Treatments (listing)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-template-v3.html"><span class="title">Treatments Template (layout reference)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-jayasom-signature-v3.html"><span class="title">Jayasom Signature</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-shirodhara-v3.html"><span class="title">Shirodhara</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-marma-point-therapy-v3.html"><span class="title">Marma Point Therapy</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-pinda-sweda-v3.html"><span class="title">Pinda Sweda</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-watsu-v3.html"><span class="title">Watsu</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-sound-healing-v3.html"><span class="title">Sound Healing</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-floatation-therapy-v3.html"><span class="title">Floatation Therapy</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-crystal-aroma-massage-v3.html"><span class="title">Crystal Aroma Massage</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-qalbain-two-hearts-v3.html"><span class="title">QALBAIN — Two Hearts</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-ulfa-ritual-v3.html"><span class="title">Ulfa Ritual</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-vagus-nerve-ritual-v3.html"><span class="title">Vagus Nerve Ritual</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-hijama-v3.html"><span class="title">Hijama</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-hydrafacial-platinum-v3.html"><span class="title">Hydrafacial Platinum</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-detox-balneotherapy-v3.html"><span class="title">Detox Balneotherapy</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-tx-reiki-taqa-v3.html"><span class="title">Reiki T'aqa</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-brand">
+      <div class="group-head">
+        <span class="group-index">01</span>
+        <span class="group-title">Brand &amp; Entry</span>
+        <span class="group-count">8 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-homepage-v3.html"><span class="title">Homepage</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-about-us-v3.html"><span class="title">About Us</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sustainability-v3.html"><span class="title">Sustainability (Sustainable Living)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-destinations-v3.html"><span class="title">Destinations</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-amaala-destination-v3.html"><span class="title">AMAALA (destination page)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-day-at-amaala-v3.html"><span class="title">A Day at AMAALA</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-find-your-retreat-v3.html"><span class="title">Find Your Retreat</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-gallery-v3.html"><span class="title">Gallery</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Experts &amp; Specialists</span>
-      <span class="group-count">12 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-experts-v3.html"><span class="title">Our Experts &amp; Specialists</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-specialists-template-v3.html"><span class="title">Specialist Detail (template)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-karen-campbell-v3.html"><span class="title">Karen Campbell</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-sascha-hemmann-v3.html"><span class="title">Sascha Hemmann</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-basel-shammout-v3.html"><span class="title">Basel Shammout</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-elodie-lefebvre-v3.html"><span class="title">Elodie Lefebvre</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-carol-el-hadi-v3.html"><span class="title">Carol El Hadi</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-lujain-alhussan-v3.html"><span class="title">Lujain Abdullah AlHussan</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-vazeeq-madhar-v3.html"><span class="title">Vazeeq Madhar</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-eman-alsayoud-v3.html"><span class="title">Eman Alsayoud</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-mohammad-almslmany-v3.html"><span class="title">Mohammad Almslmany</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-sp-amanda-hanna-v3.html"><span class="title">Amanda Hanna</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-retreats">
+      <div class="group-head">
+        <span class="group-index">02</span>
+        <span class="group-title">Retreats</span>
+        <span class="group-count">7 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-retreat-template-v3.html"><span class="title">Retreat Template (layout reference)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-as-a-pair-v3.html"><span class="title">As a Pair</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-as-a-woman-v3.html"><span class="title">As a Woman</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-as-a-family-v3.html"><span class="title">As a Family</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-as-a-leader-v3.html"><span class="title">As a Leader</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-as-a-flow-v3.html"><span class="title">As a Flow</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-as-a-feather-v3.html"><span class="title">As a Feather</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Activities &amp; Culinary</span>
-      <span class="group-count">3 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-culinary-nourishment-v3.html"><span class="title">Culinary Nourishment</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-group-activities-v3.html"><span class="title">Group Activities</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-activities-details-v3.html"><span class="title">Activity Detail</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-wellness">
+      <div class="group-head">
+        <span class="group-index">03</span>
+        <span class="group-title">Wellness</span>
+        <span class="group-count">4 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-wellness-v3.html"><span class="title">Wellness</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-individual-wellness-v3.html"><span class="title">Individual Wellness</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-wellbeing-spaces-v3.html"><span class="title">Wellbeing Spaces</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-retreats-and-programmes-v3.html"><span class="title">Retreats &amp; Programmes</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Residences &amp; Villas</span>
-      <span class="group-count">10 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-wellness-residences-v3.html"><span class="title">Wellness Residences</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-residential-community-v3.html"><span class="title">Residential Community</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-amaala-residences-v3.html"><span class="title">AMAALA Residences</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-rooms-and-villas-v3.html"><span class="title">Rooms &amp; Villas</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-rooms-and-villas-details-v3.html"><span class="title">Rooms &amp; Villas Detail (template)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-rv-2br-villa-v3.html"><span class="title">2-Bedroom Villa</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-rv-3br-villa-v3.html"><span class="title">3-Bedroom Villa</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-rv-4br-villa-v3.html"><span class="title">4-Bedroom Villa</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-rv-5br-jayela-residence-v3.html"><span class="title">5-Bedroom Jayela Residence</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-view-residency-v3.html"><span class="title">View Residency</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-treatments">
+      <div class="group-head">
+        <span class="group-index">04</span>
+        <span class="group-title">Treatments</span>
+        <span class="group-count">17 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-treatments-v3.html"><span class="title">Treatments (listing)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-template-v3.html"><span class="title">Treatments Template (layout reference)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-jayasom-signature-v3.html"><span class="title">Jayasom Signature</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-shirodhara-v3.html"><span class="title">Shirodhara</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-marma-point-therapy-v3.html"><span class="title">Marma Point Therapy</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-pinda-sweda-v3.html"><span class="title">Pinda Sweda</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-watsu-v3.html"><span class="title">Watsu</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-sound-healing-v3.html"><span class="title">Sound Healing</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-floatation-therapy-v3.html"><span class="title">Floatation Therapy</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-crystal-aroma-massage-v3.html"><span class="title">Crystal Aroma Massage</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-qalbain-two-hearts-v3.html"><span class="title">QALBAIN &mdash; Two Hearts</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-ulfa-ritual-v3.html"><span class="title">Ulfa Ritual</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-vagus-nerve-ritual-v3.html"><span class="title">Vagus Nerve Ritual</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-hijama-v3.html"><span class="title">Hijama</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-hydrafacial-platinum-v3.html"><span class="title">Hydrafacial Platinum</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-detox-balneotherapy-v3.html"><span class="title">Detox Balneotherapy</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-tx-reiki-taqa-v3.html"><span class="title">Reiki T&rsquo;aqa</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Family</span>
-      <span class="group-count">3 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-families-shared-wellbeing-v3.html"><span class="title">Families &amp; Shared Wellbeing</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-family-wellness-v3.html"><span class="title">Family &amp; Children Wellness</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-parallel-programming-v3.html"><span class="title">Parallel Programming</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-experts">
+      <div class="group-head">
+        <span class="group-index">05</span>
+        <span class="group-title">Experts &amp; Specialists</span>
+        <span class="group-count">12 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-experts-v3.html"><span class="title">Our Experts &amp; Specialists</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-specialists-template-v3.html"><span class="title">Specialist Detail (template)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-karen-campbell-v3.html"><span class="title">Karen Campbell</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-sascha-hemmann-v3.html"><span class="title">Sascha Hemmann</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-basel-shammout-v3.html"><span class="title">Basel Shammout</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-elodie-lefebvre-v3.html"><span class="title">Elodie Lefebvre</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-carol-el-hadi-v3.html"><span class="title">Carol El Hadi</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-lujain-alhussan-v3.html"><span class="title">Lujain Abdullah AlHussan</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-vazeeq-madhar-v3.html"><span class="title">Vazeeq Madhar</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-eman-alsayoud-v3.html"><span class="title">Eman Alsayoud</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-mohammad-almslmany-v3.html"><span class="title">Mohammad Almslmany</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-sp-amanda-hanna-v3.html"><span class="title">Amanda Hanna</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Editorial &amp; News</span>
-      <span class="group-count">4 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-insights-v3.html"><span class="title">Insights</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-journals-and-stories-v3.html"><span class="title">Journals &amp; Stories</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-view-insight-v3.html"><span class="title">View Insight (article detail)</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-news-v3.html"><span class="title">News</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-activities">
+      <div class="group-head">
+        <span class="group-index">06</span>
+        <span class="group-title">Activities &amp; Culinary</span>
+        <span class="group-count">3 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-culinary-nourishment-v3.html"><span class="title">Culinary Nourishment</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-group-activities-v3.html"><span class="title">Group Activities</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-activities-details-v3.html"><span class="title">Activity Detail</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section class="section-group">
-  <div class="shell">
-    <div class="group-head">
-      <span class="group-title">Organisation</span>
-      <span class="group-count">2 pages</span>
-    </div>
-    <div class="page-list">
-      <a class="page-row" href="wireframe-careers-v3.html"><span class="title">Careers</span><span class="arrow">→</span></a>
-      <a class="page-row" href="wireframe-contact-v3.html"><span class="title">Contact</span><span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="section-group" id="g-residences">
+      <div class="group-head">
+        <span class="group-index">07</span>
+        <span class="group-title">Residences &amp; Villas</span>
+        <span class="group-count">10 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-wellness-residences-v3.html"><span class="title">Wellness Residences</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-residential-community-v3.html"><span class="title">Residential Community</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-amaala-residences-v3.html"><span class="title">AMAALA Residences</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-rooms-and-villas-v3.html"><span class="title">Rooms &amp; Villas</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-rooms-and-villas-details-v3.html"><span class="title">Rooms &amp; Villas Detail (template)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-rv-2br-villa-v3.html"><span class="title">2-Bedroom Villa</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-rv-3br-villa-v3.html"><span class="title">3-Bedroom Villa</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-rv-4br-villa-v3.html"><span class="title">4-Bedroom Villa</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-rv-5br-jayela-residence-v3.html"><span class="title">5-Bedroom Jayela Residence</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-view-residency-v3.html"><span class="title">View Residency</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
 
-<section style="height: 64px;"></section>
+    <section class="section-group" id="g-family">
+      <div class="group-head">
+        <span class="group-index">08</span>
+        <span class="group-title">Family</span>
+        <span class="group-count">3 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-families-shared-wellbeing-v3.html"><span class="title">Families &amp; Shared Wellbeing</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-family-wellness-v3.html"><span class="title">Family &amp; Children Wellness</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-parallel-programming-v3.html"><span class="title">Parallel Programming</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
+
+    <section class="section-group" id="g-editorial">
+      <div class="group-head">
+        <span class="group-index">09</span>
+        <span class="group-title">Editorial &amp; News</span>
+        <span class="group-count">4 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-insights-v3.html"><span class="title">Insights</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-journals-and-stories-v3.html"><span class="title">Journals &amp; Stories</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-view-insight-v3.html"><span class="title">View Insight (article detail)</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-news-v3.html"><span class="title">News</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
+
+    <section class="section-group" id="g-organisation">
+      <div class="group-head">
+        <span class="group-index">10</span>
+        <span class="group-title">Organisation</span>
+        <span class="group-count">2 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-careers-v3.html"><span class="title">Careers</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-contact-v3.html"><span class="title">Contact</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
+
+    <section class="section-group" id="g-misc">
+      <div class="group-head">
+        <span class="group-index">11</span>
+        <span class="group-title">Miscellaneous</span>
+        <span class="group-count">2 pages</span>
+      </div>
+      <div class="page-list">
+        <a class="page-row" href="wireframe-practitioners-v3.html"><span class="title">Our Practitioners</span><span class="arrow">&rarr;</span></a>
+        <a class="page-row" href="wireframe-carol-el-hadi-live-ref.html"><span class="title">Carol El Hadi (Live page reference)</span><span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
+
+  </main>
+</div>
 
 <script>
 (function(){
-  var input = document.getElementById("pageSearch");
-  var empty = document.getElementById("searchEmpty");
-  var term  = document.getElementById("searchTerm");
-  var groups = Array.prototype.slice.call(document.querySelectorAll(".section-group"));
+  var input    = document.getElementById("pageSearch");
+  var empty    = document.getElementById("searchEmpty");
+  var term     = document.getElementById("searchTerm");
+  var totalEl  = document.getElementById("totalCount");
+  var groups   = Array.prototype.slice.call(document.querySelectorAll(".section-group"));
+  var railLinks = Array.prototype.slice.call(document.querySelectorAll(".rail-link"));
 
-  // Remember each group's original count label so we can restore it when the search clears.
+  // Map each rail link to its target group id.
+  var railByTarget = {};
+  railLinks.forEach(function(l){ railByTarget[l.getAttribute("data-target")] = l; });
+
+  // Remember original count labels so we can restore them when the search clears.
   groups.forEach(function(g){
     var c = g.querySelector(".group-count");
     if(c) c.setAttribute("data-orig", c.textContent);
   });
+  railLinks.forEach(function(l){
+    var c = l.querySelector(".rail-count");
+    if(c) c.setAttribute("data-orig", c.textContent);
+  });
+
+  var TOTAL = groups.reduce(function(n, g){ return n + g.querySelectorAll(".page-row").length; }, 0);
 
   function run(){
     var q = input.value.toLowerCase().trim();
-    var anyVisible = false;
+    var anyVisible = false, totalShown = 0;
+
     groups.forEach(function(g){
       var rows = g.querySelectorAll(".page-row");
       var shown = 0;
@@ -341,15 +451,41 @@ html, body {
         if(match) shown++;
       });
       g.style.display = shown ? "" : "none";
+
       var c = g.querySelector(".group-count");
       if(c) c.textContent = q ? (shown + (shown === 1 ? " match" : " matches")) : c.getAttribute("data-orig");
-      if(shown) anyVisible = true;
+
+      // Keep the section rail in sync with the search.
+      var rl = railByTarget[g.id];
+      if(rl){
+        rl.classList.toggle("is-dim", shown === 0);
+        var rc = rl.querySelector(".rail-count");
+        if(rc) rc.textContent = q ? shown : rc.getAttribute("data-orig");
+      }
+
+      if(shown){ anyVisible = true; totalShown += shown; }
     });
+
     empty.hidden = anyVisible;
     if(!anyVisible) term.textContent = input.value;
+    if(totalEl) totalEl.textContent = q ? totalShown : TOTAL;
   }
 
   input.addEventListener("input", run);
+
+  // Scroll-spy: highlight the rail link for the section currently in view.
+  if("IntersectionObserver" in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var rl = railByTarget[e.target.id];
+        if(!rl) return;
+        railLinks.forEach(function(l){ l.classList.remove("is-active"); });
+        rl.classList.add("is-active");
+      });
+    }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
+    groups.forEach(function(g){ spy.observe(g); });
+  }
 })();
 </script>
 
