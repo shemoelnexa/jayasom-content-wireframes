@@ -329,6 +329,83 @@ html, body {
 }
 @media (max-width: 768px) { .quote-device { padding: 28px 24px; } }
 
+/* === JOURNEY SLIDER === */
+.jslider { position: relative; }
+.jslider-viewport { overflow: hidden; border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
+.jslider-track { display: flex; transition: transform 450ms cubic-bezier(.4,0,.2,1); }
+.jslide { min-width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 56px 0; }
+.jslide-media .wire-image { height: 320px; width: 100%; }
+.jslide-media .quote-device { width: 100%; }
+.jslide-text .ph { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+.jslide-text .body-copy { max-width: none; }
+.jslider-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px; }
+.jslider-nav .nav-btns { display: flex; gap: 12px; }
+.jslider-nav button.arw { width: 48px; height: 48px; border: 1px solid hsl(var(--foreground)); background: transparent; color: hsl(var(--foreground)); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 160ms ease, color 160ms ease; }
+.jslider-nav button.arw:hover:not(:disabled) { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.jslider-nav button.arw:disabled { opacity: 0.3; cursor: default; }
+.jslider-nav button.arw svg { width: 18px; height: 18px; }
+.jslider-count { font-size: 13px; letter-spacing: 0.15em; color: hsl(var(--muted-foreground)); }
+.jslider-count b { color: hsl(var(--foreground)); font-weight: 400; }
+.jslider-dots { display: flex; gap: 8px; }
+.jslider-dots button { width: 8px; height: 8px; padding: 0; border: 1px solid hsl(var(--foreground)); background: transparent; cursor: pointer; border-radius: 0; }
+.jslider-dots button.active { background: hsl(var(--foreground)); }
+@media (max-width: 768px) {
+  .jslide { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
+  .jslide-media .wire-image { height: 220px; }
+  .jslider-dots { display: none; }
+}
+
+/* === NUMBERED VENUE / PILLAR GRID === */
+.num-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: hsl(var(--border)); border: 1px solid hsl(var(--border)); }
+.num-grid .cell { background: hsl(var(--background)); padding: 28px 24px; min-height: 150px; }
+.num-grid .n { font-size: 12px; letter-spacing: 0.2em; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
+.num-grid .nm { font-size: 15px; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.num-grid .ds { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.55; }
+@media (max-width: 768px) { .num-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* === CIRCUIT · NUMBERED STEP LIST === */
+.circuit { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.circuit-steps .st { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid hsl(var(--border)); }
+.circuit-steps .st:last-child { border-bottom: 1px solid hsl(var(--border)); }
+.circuit-steps .st .no { font-size: 13px; color: hsl(var(--muted-foreground)); }
+.circuit-steps .st .tx { font-size: 14px; color: hsl(var(--foreground)); line-height: 1.55; }
+.circuit-diagram .wire-image { height: 100%; min-height: 360px; }
+@media (max-width: 768px) { .circuit { grid-template-columns: 1fr; gap: 32px; } .circuit-diagram .wire-image { min-height: 240px; } }
+
+/* === PATHWAY CARDS === */
+.pathway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pathway-card { border: 1px solid hsl(var(--border)); padding: 32px; background: hsl(var(--background)); }
+.pathway-card .pn { font-size: 12px; letter-spacing: 0.2em; color: hsl(var(--muted-foreground)); margin-bottom: 18px; }
+.pathway-card .h-sub { margin-bottom: 12px; }
+@media (max-width: 768px) { .pathway-grid { grid-template-columns: 1fr; } }
+
+/* === PLACES INDEX === */
+.places-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 48px; grid-auto-rows: 1fr; }
+.places-grid .pl-item { padding: 16px 0; border-top: 1px solid hsl(var(--border)); }
+.places-grid .pl-item .nm { font-size: 14px; color: hsl(var(--foreground)); margin-bottom: 4px; }
+.places-grid .pl-item .ds { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.5; }
+@media (max-width: 768px) { .places-grid { grid-template-columns: 1fr; } }
+
+/* === SOCIAL · HEADING + ICONS / FEED GRID === */
+.social-band { display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px; align-items: center; }
+.sb-icons { display: flex; gap: 14px; margin-top: 28px; }
+.sb-icons a {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  transition: background 160ms ease, color 160ms ease;
+}
+.sb-icons a:hover { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.sb-icons a svg { width: 19px; height: 19px; }
+.sb-handle { font-size: 13px; letter-spacing: 0.08em; color: hsl(var(--muted-foreground)); margin-top: 20px; }
+.sb-feed { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.sb-feed .wire-image { aspect-ratio: 1 / 1; height: auto; }
+.sb-feed .wire-image .label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+@media (max-width: 768px) {
+  .social-band { grid-template-columns: 1fr; gap: 36px; }
+}
+
 /* === EXPLORE · EDITORIAL INDEX LINKS === */
 .explore-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; border-top: 1px solid hsl(var(--border)); }
 .explore-list a {
@@ -401,8 +478,8 @@ html, body {
   <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;"></div>
   <div class="hero-overlay-center">
     <div class="hero-text-center">
-      <p class="eyebrow">Jayasom AMAALA · A Day in the Life</p>
-      <h1 class="h-hero">A Day at AMAALA</h1>
+      <p class="eyebrow">Inside the wellness core at Jayasom AMAALA</p>
+      <h1 class="h-hero">A Day at Jayasom AMAALA</h1>
       <p class="body-copy" style="margin:0 auto 32px;font-style:italic;">A day shaped for you.</p>
       <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
         <a href="wireframe-contact-v3.html" class="btn btn-solid">Book a Complimentary Call</a>
@@ -411,257 +488,278 @@ html, body {
   </div>
 </section>
 
-<!-- M2 · THE JOURNEY · CONNECTED DAY FLOW -->
+<!-- M2 · THE JOURNEY · SLIDER -->
 <section class="section">
   <div class="shell">
-    <div class="text-center" style="max-width:720px;margin:0 auto 56px;">
+    <div class="text-center" style="max-width:720px;margin:0 auto 48px;">
       <p class="eyebrow">Arrival to Departure</p>
       <h2 class="h-section">The shape of a day</h2>
-      <p class="body-copy" style="margin:0 auto;">One day flows into the next. From the moment you arrive, the rhythm builds gently — discovery, introduction, treatment, rest — each step leading to the one that follows.</p>
+      <p class="body-copy" style="margin:0 auto;">One day flows into the next. Move through it step by step &mdash; discovery, introduction, treatment, rest &mdash; each leading to the one that follows.</p>
     </div>
 
-    <div class="flow">
-
-      <div class="flow-phase">
-        <span class="pl">Day One · Arrival</span>
-        <span class="pr"></span>
-      </div>
-
-      <!-- 01 · text left / quote right -->
-      <div class="flow-block">
-        <div class="fb-text">
-          <p class="step-num">01 · Arrival</p>
-          <h3 class="h-step">Pause. We've got you.</h3>
+    <div class="jslider">
+      <div class="jslider-viewport">
+        <div class="jslider-track">
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Day One &middot; Arrival</p>
+          <p class="step-num">01 &middot; Arrival</p>
+          <h3 class="h-step">Pause. We&rsquo;ve got you.</h3>
           <p class="body-copy">You'll arrive from a drive, or a flight, or perhaps both. Pause. We've got you. Breathe. Take a moment to ground. Time, and gravity, do their work. A restless pendulum moves ceaselessly across sand. Share tea. A silent meditation.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="quote-device">
-            <p>Here, silence becomes clarity. A deep breath, a pure sensation — the one thing that moves without noise.</p>
+            <p>Here, silence becomes clarity. A deep breath, a pure sensation &mdash; the one thing that moves without noise.</p>
           </div>
         </div>
       </div>
-
-      <!-- 02 · full-width feature · Discovery triptych (client-endorsed layout) -->
-      <div class="flow-feature">
-        <p class="step-num">02 · Discovery Journey</p>
-        <h3 class="h-step">An orientation, gently</h3>
-        <p class="body-copy lead">A guided walk, or buggy ride, and orientation. The Farm Belt, the Health &amp; Wellness Center, pools, dining, gardens, and viewing platforms — and on, to your villa or room.</p>
-        <div class="triptych" style="margin-top:32px;">
-          <figure>
-            <div class="wire-image" style="height:240px;">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
-            </div>
-            <figcaption>The Farm Belt</figcaption>
-          </figure>
-          <figure>
-            <div class="wire-image" style="height:240px;">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9-9a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c-2 4.65-7 9-7 9z"/><path d="M12 8v6M9 11h6"/></svg>
-            </div>
-            <figcaption>Health &amp; Wellness Center</figcaption>
-          </figure>
-          <figure>
-            <div class="wire-image" style="height:240px;">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M6 18c0-4 2-8 6-8s6 4 6 8"/><path d="M12 10V4"/></svg>
-            </div>
-            <figcaption>Gardens &amp; viewing platforms</figcaption>
-          </figure>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Day One &middot; Arrival</p>
+          <p class="step-num">02 &middot; Discovery Journey</p>
+          <h3 class="h-step">An orientation, gently</h3>
+          <p class="body-copy">A guided walk, or buggy ride, and orientation. The Farm Belt, the Health &amp; Wellness Center, pools, dining, gardens, and viewing platforms &mdash; and on, to your villa or room.</p>
+        </div>
+        <div class="jslide-media">
+          <div class="wire-image">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+            <span class="label">The discovery walk</span>
+          </div>
         </div>
       </div>
-
-      <!-- 03 · image left / text right -->
-      <div class="flow-block reverse">
-        <div class="fb-text">
-          <p class="step-num">03 · Wellness Introduction</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Day One &middot; Arrival</p>
+          <p class="step-num">03 &middot; Wellness Introduction</p>
           <h3 class="h-step">Meeting your Wellness Advisor</h3>
-          <p class="body-copy">Your first in-person meeting with your Wellness Advisor starts from the wellness reception. You may have already talked online, and if your wellness questionnaire is not already complete, this will be the time and place to do that. Your goals, your aspirations, and our opportunity to orchestrate the programming that will help fulfil them. Each retreat includes a range of assessments and treatments — but additionally, there are dozens of daily complimentary activities (the Daily Cadence) and supplemental treatments that may attract your interest.</p>
+          <p class="body-copy">Your first in-person meeting with your Wellness Advisor starts from the wellness reception. You may have already talked online, and if your wellness questionnaire is not already complete, this will be the time and place to do that. Your goals, your aspirations, and our opportunity to orchestrate the programming that will help fulfil them. Each retreat includes a range of assessments and treatments &mdash; but additionally, there are dozens of daily complimentary activities (the Daily Cadence) and supplemental treatments that may attract your interest.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg>
             <span class="label">Wellness reception</span>
           </div>
         </div>
       </div>
-
-      <!-- 04 · text left / image right -->
-      <div class="flow-block">
-        <div class="fb-text">
-          <p class="step-num">04 · First Treatments</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Day One &middot; Arrival</p>
+          <p class="step-num">04 &middot; First Treatments</p>
           <h3 class="h-step">As the first evening settles</h3>
           <p class="body-copy">Depending on the time remaining in the first day, a treatment or an assessment may be scheduled. Take a stroll to appreciate the sunset and the colour of the evening reflected on the hills. And dine, early enough to allow your digestion to do its work before retiring.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><path d="M12 9V3M4.2 10.2l1.4 1.4M1 18h22M18.4 11.6l1.4-1.4"/></svg>
             <span class="label">Sunset over the hills</span>
           </div>
         </div>
       </div>
-
-      <div class="flow-phase">
-        <span class="pl">Finding the Rhythm</span>
-        <span class="pr"></span>
-      </div>
-
-      <!-- 05 · image left / text right -->
-      <div class="flow-block reverse">
-        <div class="fb-text">
-          <p class="step-num">05 · First Night &amp; New Morning</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Finding the Rhythm</p>
+          <p class="step-num">05 &middot; First Night &amp; New Morning</p>
           <h3 class="h-step">Options, but no rules</h3>
-          <p class="body-copy">Awake, refreshed. Birdsong, or just silence. There are options but no rules. An early morning class — yoga, Tai Chi, stretching — or a more solitary moment — a stroll, a run, a meditation on the plateau. Breakfast is available; the Daily Cadence classes are on hand, and the rhythm of your own programme commences. The intensity is your choice.</p>
+          <p class="body-copy">Awake, refreshed. Birdsong, or just silence. There are options but no rules. An early morning class &mdash; yoga, Tai Chi, stretching &mdash; or a more solitary moment &mdash; a stroll, a run, a meditation on the plateau. Breakfast is available; the Daily Cadence classes are on hand, and the rhythm of your own programme commences. The intensity is your choice.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
             <span class="label">Dawn on the plateau</span>
           </div>
         </div>
       </div>
-
-      <!-- 06 · text left / image right -->
-      <div class="flow-block">
-        <div class="fb-text">
-          <p class="step-num">06 · Assessments &amp; Consultations</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Finding the Rhythm</p>
+          <p class="step-num">06 &middot; Assessments &amp; Consultations</p>
           <h3 class="h-step">Patterns begin to emerge</h3>
           <p class="body-copy">A conversation. A few questions. Perhaps a movement assessment, a scan, blood test, or time with a practitioner who notices what you may have stopped noticing yourself. Patterns begin to emerge: how you sleep, where you hold tension, what gives you energy and what quietly takes it away. Each encounter adds another piece, building a fuller picture.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg>
             <span class="label">A quiet consultation</span>
           </div>
         </div>
       </div>
-
-      <!-- 07 · image left / text right -->
-      <div class="flow-block reverse">
-        <div class="fb-text">
-          <p class="step-num">07 · Programme &amp; Treatments</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Finding the Rhythm</p>
+          <p class="step-num">07 &middot; Programme &amp; Treatments</p>
           <h3 class="h-step">Your programme begins to live</h3>
           <p class="body-copy">Your programme begins to live. A treatment here, a private session there, with time in between to pause, move, eat or simply be. Some experiences are deeply restorative; others invite effort, curiosity or change. Nothing feels hurried. Your Wellness Advisor remains present in the background, making small adjustments as the retreat gathers its own rhythm.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v13"/><path d="M3 21h18M8 21v-5a4 4 0 0 1 8 0v5"/><path d="M9 3h6"/></svg>
             <span class="label">A garden-facing treatment room</span>
           </div>
         </div>
       </div>
-
-      <!-- 08 · text left / image right -->
-      <div class="flow-block">
-        <div class="fb-text">
-          <p class="step-num">08 · Daily Cadence Options</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Finding the Rhythm</p>
+          <p class="step-num">08 &middot; Daily Cadence Options</p>
           <h3 class="h-step">A changing rhythm, around you</h3>
           <p class="body-copy">Around your personal programme, the Daily Cadence offers a changing rhythm of complimentary group activities. Join a movement class, explore breathwork or meditation, take part in a creative or cultural experience, or spend time outdoors. Choose what interests you and leave space where you need it. The cadence is there to support your stay, never to dictate it.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6M9 20l3-7 3 7M7 10l5 1 5-1"/></svg>
             <span class="label">A movement class</span>
           </div>
         </div>
       </div>
-
-      <!-- 09 · image left / text right -->
-      <div class="flow-block reverse">
-        <div class="fb-text">
-          <p class="step-num">09 · Rest &amp; Relaxation</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Finding the Rhythm</p>
+          <p class="step-num">09 &middot; Rest &amp; Relaxation</p>
           <h3 class="h-step">Not every moment needs a purpose</h3>
           <p class="body-copy">Not every moment needs a purpose. Rest beside the pool, return to the quiet of your room or villa, wander through the gardens, or pause at the beachfront as the light changes across the landscape. Sleep when you are tired. Read, float, reflect, or simply do nothing. These intervals are not separate from your retreat; they allow its benefits to settle, integrate and take hold.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16c2-1 4-1 6 0s4 1 6 0 4-1 6 0"/><path d="M2 20c2-1 4-1 6 0s4 1 6 0 4-1 6 0"/><path d="M12 4v6M9 7l3-3 3 3"/></svg>
             <span class="label">Midday beside the pool</span>
           </div>
         </div>
       </div>
-
-      <div class="flow-phase">
-        <span class="pl">Onward</span>
-        <span class="pr"></span>
-      </div>
-
-      <!-- 10 · text left / image right -->
-      <div class="flow-block">
-        <div class="fb-text">
-          <p class="step-num">10 · And so on…</p>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="ph">Onward</p>
+          <p class="step-num">10 &middot; And so on&hellip;</p>
           <h3 class="h-step">The days find their rhythm</h3>
           <p class="body-copy">The days find their rhythm. Morning light, movement, breakfast. A treatment, a conversation, a pause. Your phone becomes a distant memory; the urgency of elsewhere begins to soften. New habits feel less like resolutions and more like possibilities. You notice what restores you, what steadies you, and what you may no longer need.</p>
           <p class="body-copy" style="margin-top:16px;">Before departure, one final conversation with your Wellness Advisor. A moment to look back at what has shifted and consider what comes next. What can travel home with you: a practice, a different pace, a way of eating, moving or resting. And what can remain here, quietly left behind.</p>
         </div>
-        <div class="fb-media">
+        <div class="jslide-media">
           <div class="wire-image">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21l3-18M19 21l-3-18M12 5v2M12 11v2M12 17v2"/></svg>
             <span class="label">The road home</span>
           </div>
         </div>
       </div>
-
+        </div>
+      </div>
+      <div class="jslider-nav">
+        <div class="nav-btns">
+          <button class="arw js-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="arw js-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <span class="jslider-count"><b class="js-cur">01</b> / 10</span>
+        <div class="jslider-dots"><button class="active" aria-label="Step 1"></button><button aria-label="Step 2"></button><button aria-label="Step 3"></button><button aria-label="Step 4"></button><button aria-label="Step 5"></button><button aria-label="Step 6"></button><button aria-label="Step 7"></button><button aria-label="Step 8"></button><button aria-label="Step 9"></button><button aria-label="Step 10"></button></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- M9 · CLOSING REFLECTION -->
-<section class="closing-reflection">
-  <div class="shell">
-    <p class="eyebrow">The Day Behind You</p>
-    <div class="lines">
-      <p>Nothing here is hurried.</p>
-      <p>Nothing is excessive.</p>
-      <p>Only what is essential remains.</p>
-    </div>
-  </div>
-</section>
+<script>
+(function(){
+  var sl=document.querySelector('.jslider'); if(!sl) return;
+  var track=sl.querySelector('.jslider-track');
+  var slides=sl.querySelectorAll('.jslide');
+  var prev=sl.querySelector('.js-prev'), next=sl.querySelector('.js-next');
+  var cur=sl.querySelector('.js-cur');
+  var dots=sl.querySelectorAll('.jslider-dots button');
+  var i=0, n=slides.length;
+  function go(k){
+    i=Math.max(0,Math.min(n-1,k));
+    track.style.transform='translateX('+(-i*100)+'%)';
+    cur.textContent=('0'+(i+1)).slice(-2);
+    prev.disabled=i===0; next.disabled=i===n-1;
+    dots.forEach(function(d,idx){ d.classList.toggle('active',idx===i); });
+  }
+  prev.addEventListener('click',function(){go(i-1);});
+  next.addEventListener('click',function(){go(i+1);});
+  dots.forEach(function(d,idx){ d.addEventListener('click',function(){go(idx);}); });
+  go(0);
+})();
+</script>
 
-<!-- M10 · PLAN YOUR DAY -->
+<!-- KITCHEN PHILOSOPHY -->
 <section class="section">
   <div class="shell">
-    <div class="text-center" style="max-width:720px;margin:0 auto 48px;">
-      <p class="eyebrow">Plan Your Day</p>
-      <h2 class="h-section">What a day might hold</h2>
-      <p class="body-copy" style="margin:0 auto;">A loose anchor list. The Wellness Advisor will set the order each morning around what your body asks for, the practitioners on hand, and the weather.</p>
-    </div>
-
-    <div class="checklist-grid">
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>A sunrise breath session on the Wellness Plateau</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>A morning consultation with your Wellness Advisor</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>A treatment in a garden-facing room</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>A slow lunch at Saratô or Loumi Rue</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>An afternoon walk through the Stonecrop Maze</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Pilates or water-borne yoga at the Beach Hut</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>A Nakeha Studio class with the chefs</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Dinner under the Phoenix palms or in the Yasmeen Night Garden</span></div>
-      <div class="checklist-item"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>A short journal at the bench seat outside the Maze</span></div>
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Slow &amp; Mindful Dining</p>
+        <h2 class="h-section">How the kitchens think</h2>
+        <p class="body-copy full">The kitchens hold an intentional approach: no gluten, no refined sugar, no coffee, and a small amount of salt in use. Flavour comes from the herbs and the technique. The cuisine celebrates the vibrant local flavours of the region, expertly blended with global influences, minimising gluten, refined sugars, excessive salt, coffee, and inflammatory agents. The Farm Belt feeds the menus where possible. The research on what foods support what conditions runs continuously, and the menu adjusts as the assessments and the seasons move.</p>
+      </div>
+      <div class="split-image">
+        <div class="wire-image" style="height:360px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3 3-3 7 0 10s3 7 0 10"/><path d="M7 7c-2 2-2 5 0 7M17 7c2 2 2 5 0 7"/></svg>
+          <span class="label">Herbs from the Farm Belt</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FAQS -->
+<!-- DINING VENUES -->
 <section class="section section-muted">
   <div class="shell">
-    <p class="eyebrow text-center">Frequently Asked Questions</p>
-    <h2 class="h-section text-center mb-8">How the day works</h2>
+    <div class="text-center" style="max-width:720px;margin:0 auto 40px;">
+      <p class="eyebrow">Eight Venues Across the Property</p>
+      <h2 class="h-section">Where you eat</h2>
+    </div>
+    <div class="num-grid">
+      <div class="cell"><p class="n">01</p><p class="nm">Sarat&ocirc;</p><p class="ds">Cove-side dining, a slow lunch and dinner.</p></div>
+      <div class="cell"><p class="n">02</p><p class="nm">Loumi Rue</p><p class="ds">The family side, around the black-lemon story.</p></div>
+      <div class="cell"><p class="n">03</p><p class="nm">Chez Mitzuba</p><p class="ds">Japanese-French, plant-forward, the Mitsuba herb at its heart.</p></div>
+      <div class="cell"><p class="n">04</p><p class="nm">Shay Waard</p><p class="ds">The tea house; a tea that should not be rushed.</p></div>
+      <div class="cell"><p class="n">05</p><p class="nm">Nakeha Cooking Studio</p><p class="ds">Classes and a chef's table.</p></div>
+      <div class="cell"><p class="n">06</p><p class="nm">Venue</p><p class="ds">To be confirmed.</p></div>
+      <div class="cell"><p class="n">07</p><p class="nm">Venue</p><p class="ds">To be confirmed.</p></div>
+      <div class="cell"><p class="n">08</p><p class="nm">Venue</p><p class="ds">To be confirmed.</p></div>
+    </div>
+  </div>
+</section>
 
-    <div style="max-width:800px;margin:0 auto;">
-
-      <div class="faq-item">
-        <div class="q">
-          <p class="q-text">Does the schedule run on fixed times?</p>
-          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+<!-- MOSO HUB -->
+<section class="section">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div class="split-image">
+        <div class="wire-image" style="height:360px;">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21V3M12 21V5M16 21V7"/><path d="M8 7c2 0 3-1 4-1M12 11c2 0 3-1 4-1"/></svg>
+          <span class="label">The MOSO Hub</span>
         </div>
-        <p class="a">Yes, and no. Your personalised programme is established together with your Wellness Advisor according to your discussion and goals. The Daily Cadence is a set schedule of activities; you can choose to join as you wish (some classes require prior registration). Your wellness appointments, once established, are for specific times. Arriving late may result in a shorter session, as time extensions cannot be guaranteed.</p>
       </div>
+      <div>
+        <p class="eyebrow">At the MOSO Hub</p>
+        <h2 class="h-section">How the property holds itself</h2>
+        <p class="body-copy full">MOSO is the Chinese name for the giant bamboo, called Mao Zhu. It is among the fastest-growing plants on earth, and gives back more than it takes. The MOSO Hub is where the property tracks what it draws and what it returns: water cycles in the gardens, energy through the day, food miles to the kitchens, and the small measurements that hold the rhythm of the place. Sourcing decisions across the property are checked against what is recorded here.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="faq-item">
-        <div class="q">
-          <p class="q-text">Can families and adult guests share a day?</p>
-          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+<!-- BATHING WATERS CIRCUIT -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="circuit">
+      <div>
+        <p class="eyebrow">Eight Steps Through the Circuit</p>
+        <h2 class="h-section">Bathing waters</h2>
+        <p class="body-copy full" style="margin-bottom:28px;">Heat, water, contrast, rest, and hydration, adapted to age, comfort, heat tolerance, and any health considerations.</p>
+        <div class="circuit-diagram">
+          <div class="wire-image">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><circle cx="12" cy="5" r="2"/></svg>
+            <span class="label">Circuit diagram</span>
+          </div>
         </div>
-        <p class="a">Your Wellness Advisor will help navigate your programme to support time together and independent time to the extent desired. Some group family activities are available that enable everyone to be together, whilst some other activities are more age aligned.</p>
       </div>
-
+      <div class="circuit-steps">
+        <div class="st"><span class="no">01</span><span class="tx">Far Infrared Sauna. Gentle heat activation.</span></div>
+        <div class="st"><span class="no">02</span><span class="tx">Waterfall Bathing. Short hydro-massage; lymph flow; release at the neck and shoulders.</span></div>
+        <div class="st"><span class="no">03</span><span class="tx">Kneipp Walk. Warm and cool contrast walking; refresh in the legs.</span></div>
+        <div class="st"><span class="no">04</span><span class="tx">Vitality and Mineral Pools. Soak; warm bubbles; mineral support.</span></div>
+        <div class="st"><span class="no">05</span><span class="tx">Rest and Rehydrate. A planned pause.</span></div>
+        <div class="st"><span class="no">06</span><span class="tx">Steam and Rasul. Gentle heat and a cleansing ritual.</span></div>
+        <div class="st"><span class="no">07</span><span class="tx">Flotation. Quiet weightlessness.</span></div>
+        <div class="st"><span class="no">08</span><span class="tx">Closing rest. Return to the body.</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -703,23 +801,134 @@ html, body {
   </div>
 </section>
 
+<!-- EXPERIENCE PATHWAYS -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center" style="max-width:720px;margin:0 auto 40px;">
+      <p class="eyebrow">Adult, Family, and Beyond</p>
+      <h2 class="h-section">Pathways through the property</h2>
+    </div>
+    <div class="pathway-grid">
+      <div class="pathway-card">
+        <p class="pn">01</p>
+        <h3 class="h-sub">Jayana, the adult side</h3>
+        <p class="body-copy full">The Jayana day moves through the morning studio and the afternoon water: Yoga, Pranayama, restorative stretching, Mat Pilates, Pilates Reformer, Gyrokinesis, HIIT, Boot Camp, and aqua sessions in the cool of the mineral pool. Your Wellness Advisor reads the body each morning and shapes the order from there.</p>
+      </div>
+      <div class="pathway-card">
+        <p class="pn">02</p>
+        <h3 class="h-sub">Jayela, the family side</h3>
+        <p class="body-copy full">The Jayela day moves through hands-on rooms and outdoor places designed for every age at once. Time at the MOSO Hub. Classes at the Nakeha Cooking Studio. Music and sound at the Flax Studio. Slow walking through the Colour Garden. Evenings in the Yasmeen Night Garden. Time on the Wellness Plateau and at the Stonecrop Maze. The four Children's Studios (Seed, Sprout, STEM, and Blossom) run age-appropriate sessions through the day.</p>
+      </div>
+      <div class="pathway-card">
+        <p class="pn">03</p>
+        <h3 class="h-sub">Beyond the property</h3>
+        <p class="body-copy full">Adventure partners are introduced in residence: outdoor expeditions through the surrounding Prince Mohammed bin Salman Royal Reserve, marine experiences along the cove, and horse-assisted programmes. Details on enquiry as the partner roster is confirmed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARDENS & NAMED PLACES -->
+<section class="section section-muted">
+  <div class="shell">
+    <div style="max-width:720px;margin:0 0 40px;">
+      <p class="eyebrow">Gardens, Trails &amp; Named Places</p>
+      <h2 class="h-section">Gardens, trails, and named places</h2>
+      <p class="body-copy">Named for what grows along them and the stories they carry &mdash; a handful of the places that frame the day.</p>
+    </div>
+    <div class="places-grid">
+      <div class="pl-item"><p class="nm">Phoenix Garden</p><p class="ds">The palm garden, after Phoenix dactylifera.</p></div>
+      <div class="pl-item"><p class="nm">Nigella Temple</p><p class="ds">The earth temple, after Nigella sativa, the black cumin.</p></div>
+      <div class="pl-item"><p class="nm">Yasmeen Night Garden</p><p class="ds">Planted for the jasmine that opens after dark.</p></div>
+      <div class="pl-item"><p class="nm">Sound Gardens</p><p class="ds">Five play-stations along the Farm Belt near the Wellness Plateau.</p></div>
+      <div class="pl-item"><p class="nm">Colour Garden</p><p class="ds">Chakra colours, one bed at a time.</p></div>
+      <div class="pl-item"><p class="nm">Buttercup Play Spaces</p><p class="ds">For the youngest guests.</p></div>
+      <div class="pl-item"><p class="nm">Stonecrop Maze</p><p class="ds">On the Wellness Plateau.</p></div>
+      <div class="pl-item"><p class="nm">Aromatherapy Garden</p><p class="ds">Frames the rhythm of the day.</p></div>
+      <div class="pl-item"><p class="nm">Poa Garden Theatre</p><p class="ds">A semi-circular outdoor auditorium facing the cove.</p></div>
+      <div class="pl-item"><p class="nm">Health &amp; Wellness Garden</p><p class="ds">Medicinal plantings at the reception approach.</p></div>
+      <div class="pl-item"><p class="nm">Named Trails</p><p class="ds">Khimp, Salvia, and Saltbush, for what grows along them.</p></div>
+      <div class="pl-item"><p class="nm">Vera Avenue &amp; the Lanes</p><p class="ds">Vera Avenue, Jayana Lane, and Jayela Lane run through the property.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- M9 · CLOSING REFLECTION -->
+<section class="closing-reflection">
+  <div class="shell">
+    <p class="eyebrow">The Day Behind You</p>
+    <div class="lines">
+      <p>Nothing here is hurried.</p>
+      <p>Nothing is excessive.</p>
+      <p>Only what is essential remains.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQS -->
+<section class="section section-muted">
+  <div class="shell">
+    <p class="eyebrow text-center">Frequently Asked Questions</p>
+    <h2 class="h-section text-center mb-8">How the day works</h2>
+
+    <div style="max-width:800px;margin:0 auto;">
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Does the schedule run on fixed times?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a">Yes, and no. Your personalised programme is established together with your Wellness Advisor according to your discussion and goals. The Daily Cadence is a set schedule of activities; you can choose to join as you wish (some classes require prior registration). Your wellness appointments, once established, are for specific times. Arriving late may result in a shorter session, as time extensions cannot be guaranteed.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Can families and adult guests share a day?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <p class="a">Your Wellness Advisor will help navigate your programme to support time together and independent time to the extent desired. Some group family activities are available that enable everyone to be together, whilst some other activities are more age aligned.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- AMAALA SOCIAL -->
 <section class="section section-muted">
   <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:start;margin-bottom:40px;">
+    <div class="social-band">
       <div>
         <p class="eyebrow">The Wider Destination</p>
         <h2 class="h-section">Follow AMAALA</h2>
+        <p class="body-copy full">A day here moves between Jayasom and the destination around it. AMAALA keeps its own channels — marina life, seasonal openings, and what is taking shape across the bays beyond the wellness core.</p>
+        <div class="sb-icons">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+          <a href="#" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></a>
+        </div>
+        <p class="sb-handle">@amaala · amaala.com</p>
       </div>
-      <p class="body-copy full">A day here moves between Jayasom and the destination around it. AMAALA keeps its own channels — marina life, seasonal openings, and what is taking shape across the bays beyond the wellness core.</p>
-    </div>
-    <div class="link-grid">
-      <a href="#"><span style="display:inline-flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>Instagram · @amaala</span><span class="arrow">→</span></a>
-      <a href="#"><span style="display:inline-flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg>X · @amaala</span><span class="arrow">→</span></a>
-      <a href="#"><span style="display:inline-flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook · AMAALA</span><span class="arrow">→</span></a>
-      <a href="#"><span style="display:inline-flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn · AMAALA</span><span class="arrow">→</span></a>
-      <a href="#"><span style="display:inline-flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>YouTube · AMAALA</span><span class="arrow">→</span></a>
-      <a href="#"><span style="display:inline-flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>amaala.com</span><span class="arrow">→</span></a>
+      <div class="sb-feed">
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 3-3 6 6"/><path d="M2 20h20"/><circle cx="8" cy="8" r="1.5"/></svg>
+          <span class="label">Marina life</span>
+        </div>
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M2 20c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><circle cx="17" cy="7" r="3"/></svg>
+          <span class="label">The bays</span>
+        </div>
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-5h6v5"/></svg>
+          <span class="label">The wellness core</span>
+        </div>
+        <div class="wire-image">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6l1.5 1.5M16.5 16.5L18 18M18 6l-1.5 1.5M7.5 16.5L6 18"/><circle cx="12" cy="12" r="3.5"/></svg>
+          <span class="label">Seasonal openings</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
