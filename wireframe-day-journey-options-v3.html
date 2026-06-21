@@ -63,6 +63,19 @@ html,body{background:hsl(var(--background));color:hsl(var(--foreground));font-fa
 .jslider-dots button{width:8px;height:8px;padding:0;border:1px solid hsl(var(--foreground));background:transparent;cursor:pointer;}
 .jslider-dots button.active{background:hsl(var(--foreground));}
 @media(max-width:768px){.jslide{grid-template-columns:1fr;gap:28px;padding:36px 0;}.jslide-media .wire-image{height:220px;}.jslider-dots{display:none;}}
+
+/* SOCIAL - FOLLOW AMAALA */
+.social-links{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.social-card{display:flex;flex-direction:column;min-height:230px;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:32px;color:hsl(var(--foreground));transition:background 200ms ease;}
+.social-card:hover{background:hsl(var(--muted));}
+.social-card .ic{width:52px;height:52px;background:hsl(var(--foreground));color:hsl(var(--background));display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.social-card .ic svg{width:22px;height:22px;}
+.social-card .pname{font-size:19px;font-weight:300;margin-bottom:4px;}
+.social-card .phandle{font-size:13px;color:hsl(var(--muted-foreground));letter-spacing:0.02em;}
+.social-card .follow{margin-top:auto;padding-top:22px;border-top:1px solid hsl(var(--border));display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;}
+.social-card .follow .arrow{color:hsl(var(--muted-foreground));transition:transform 200ms ease;}
+.social-card:hover .follow .arrow{transform:translateX(5px);color:hsl(var(--foreground));}
+@media(max-width:768px){.social-links{grid-template-columns:1fr;}.social-card{min-height:0;}}
 </style>
 </head>
 <body>
@@ -173,6 +186,34 @@ html,body{background:hsl(var(--background));color:hsl(var(--foreground));font-fa
         <span class="jslider-count"><b class="js-cur">01</b> / 5</span>
         <div class="jslider-dots"><button class="active" aria-label="Step 1"></button><button aria-label="Step 2"></button><button aria-label="Step 3"></button><button aria-label="Step 4"></button><button aria-label="Step 5"></button></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL · FOLLOW AMAALA -->
+<section class="section section-muted">
+  <div class="shell">
+    <p class="eyebrow">The Wider Destination</p>
+    <h2 class="h-section" style="margin-bottom:36px;">Follow AMAALA</h2>
+    <div class="social-links">
+      <a class="social-card" href="#">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></span>
+        <p class="pname">Instagram</p>
+        <p class="phandle">@amaala</p>
+        <span class="follow">Follow<span class="arrow">&rarr;</span></span>
+      </a>
+      <a class="social-card" href="#">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+        <p class="pname">Facebook</p>
+        <p class="phandle">AMAALA</p>
+        <span class="follow">Follow<span class="arrow">&rarr;</span></span>
+      </a>
+      <a class="social-card" href="#">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></span>
+        <p class="pname">YouTube</p>
+        <p class="phandle">AMAALA</p>
+        <span class="follow">Subscribe<span class="arrow">&rarr;</span></span>
+      </a>
     </div>
   </div>
 </section>
