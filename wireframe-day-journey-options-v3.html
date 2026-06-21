@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>A Day at AMAALA &middot; Journey Layout Options &middot; Jayasom Wireframe</title>
+<style>
+:root{--background:16 33% 93%;--foreground:300 2% 27%;--muted:16 20% 86%;--muted-foreground:300 2% 40%;--border:300 2% 60%;--primary-foreground:16 33% 93%;--wire-placeholder:16 20% 88%;--radius:0rem;}
+*{box-sizing:border-box;margin:0;padding:0;border:0 solid hsl(var(--border));}
+a{color:inherit;text-decoration:none;}
+html,body{background:hsl(var(--background));color:hsl(var(--foreground));font-family:'Century Gothic','Didact Gothic','Futura','Trebuchet MS',Arial,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;}
+.shell{max-width:1152px;margin:0 auto;padding:0 32px;}
+.section{padding:64px 32px;}
+.section-muted{background:hsl(var(--muted));}
+.eyebrow{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:hsl(var(--muted-foreground));margin-bottom:12px;}
+.h-hero{font-size:34px;font-weight:300;line-height:1.15;margin-bottom:16px;}
+.h-section{font-size:28px;font-weight:300;line-height:1.2;margin-bottom:16px;}
+.h-step{font-size:22px;font-weight:300;line-height:1.2;margin:0 0 14px;color:hsl(var(--foreground));}
+.body-copy{font-size:14px;color:hsl(var(--muted-foreground));line-height:1.65;max-width:640px;}
+.body-copy.full{max-width:none;}
+.wire-image{background:hsl(var(--wire-placeholder));border:1px solid hsl(var(--border));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:hsl(var(--muted-foreground));}
+.wire-image .icon{width:28px;height:28px;opacity:0.7;}
+.wire-image .label{font-size:11px;}
+.site-header{border-bottom:1px solid hsl(var(--border));padding:20px 32px;display:flex;align-items:center;justify-content:space-between;}
+.site-header .logo{font-size:18px;font-weight:700;letter-spacing:0.2em;}
+.site-header a.back{font-size:12px;letter-spacing:0.1em;color:hsl(var(--muted-foreground));}
+.opt-label{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+.opt-label .tag{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;border:1px solid hsl(var(--foreground));padding:4px 10px;color:hsl(var(--foreground));}
+.opt-note{font-size:13px;color:hsl(var(--muted-foreground));margin-bottom:36px;max-width:640px;}
+.text-center{text-align:center;}
+
+.quote-device{border:1px solid hsl(var(--border));border-left:3px solid hsl(var(--foreground));background:hsl(var(--muted));padding:24px 28px;}
+.quote-device p{font-size:16px;font-weight:300;font-style:italic;line-height:1.5;color:hsl(var(--foreground));}
+
+/* OPTION A - CARD GRID (5) */
+.cardgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.jcard{border:1px solid hsl(var(--border));background:hsl(var(--background));padding:30px 32px;}
+.jcard.feature{grid-column:1 / -1;}
+.jcard .cn{font-size:13px;letter-spacing:0.2em;color:hsl(var(--muted-foreground));margin-bottom:14px;}
+.jcard .quote-device{margin-top:16px;}
+@media(max-width:768px){.cardgrid{grid-template-columns:1fr;}.jcard.feature{grid-column:auto;}}
+
+/* OPTION B - SLIDER (5) */
+.jslider{position:relative;}
+.jslider-viewport{overflow:hidden;border-top:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));}
+.jslider-track{display:flex;transition:transform 450ms cubic-bezier(.4,0,.2,1);}
+.jslide{min-width:100%;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:56px 0;}
+.jslide-media .wire-image{height:300px;width:100%;}
+.jslide-media .quote-device{width:100%;}
+.jslide-text .step-num{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:hsl(var(--muted-foreground));margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.jslide-text .step-num::before{content:"";width:32px;height:1px;background:hsl(var(--foreground));display:inline-block;}
+.jslide-text .body-copy{max-width:none;}
+.jslider-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;}
+.jslider-nav .nav-btns{display:flex;gap:12px;}
+.jslider-nav button.arw{width:48px;height:48px;border:1px solid hsl(var(--foreground));background:transparent;color:hsl(var(--foreground));cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 160ms ease,color 160ms ease;}
+.jslider-nav button.arw:hover:not(:disabled){background:hsl(var(--foreground));color:hsl(var(--background));}
+.jslider-nav button.arw:disabled{opacity:0.3;cursor:default;}
+.jslider-nav button.arw svg{width:18px;height:18px;}
+.jslider-count{font-size:13px;letter-spacing:0.15em;color:hsl(var(--muted-foreground));}
+.jslider-count b{color:hsl(var(--foreground));font-weight:400;}
+.jslider-dots{display:flex;gap:8px;}
+.jslider-dots button{width:8px;height:8px;padding:0;border:1px solid hsl(var(--foreground));background:transparent;cursor:pointer;}
+.jslider-dots button.active{background:hsl(var(--foreground));}
+@media(max-width:768px){.jslide{grid-template-columns:1fr;gap:28px;padding:36px 0;}.jslide-media .wire-image{height:220px;}.jslider-dots{display:none;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <a href="wireframe-day-at-amaala-v3.html" class="back">&larr; Back to A Day at AMAALA</a>
+</header>
+
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow">Design Exploration</p>
+    <h1 class="h-hero">The shape of a day &mdash; two simple layouts</h1>
+    <p class="body-copy">The same five-step journey, shown two ways. Compare and pick a direction. (The main page currently uses Option B, the slider.)</p>
+  </div>
+</section>
+
+<!-- OPTION A: CARDS -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="opt-label"><span class="tag">Option A</span><h2 class="h-section" style="margin:0;">Five cards</h2></div>
+    <p class="opt-note">Everything visible at once &mdash; no clicking. Arrival leads as a wider card; the other four sit in a simple grid.</p>
+    <div class="cardgrid">
+        <div class="jcard feature">
+          <p class="cn">01 &middot; 5</p>
+          <h3 class="h-step">Arrival</h3>
+          <p class="body-copy full">You arrive from a drive or a flight, or perhaps both. Pause, breathe, and take a moment to ground. Share tea, a silent meditation &mdash; time and gravity do their work.</p><div style="margin-top:16px;"><div class="quote-device"><p>Here, silence becomes clarity. A deep breath, a pure sensation &mdash; the one thing that moves without noise.</p></div></div>
+        </div>
+        <div class="jcard">
+          <p class="cn">02 &middot; 5</p>
+          <h3 class="h-step">Discovery &amp; introduction</h3>
+          <p class="body-copy full">A guided walk or buggy ride orients you to the property &mdash; the Farm Belt, the Health &amp; Wellness Center, pools, dining and gardens. Then your first meeting with your Wellness Advisor shapes the programme around your goals.</p>
+        </div>
+        <div class="jcard">
+          <p class="cn">03 &middot; 5</p>
+          <h3 class="h-step">First treatments &amp; new mornings</h3>
+          <p class="body-copy full">A first treatment or assessment as the evening settles, a sunset stroll, an unhurried dinner. Wake to options but no rules &mdash; an early class or a quiet moment, then breakfast and the Daily Cadence. The intensity is your choice.</p>
+        </div>
+        <div class="jcard">
+          <p class="cn">04 &middot; 5</p>
+          <h3 class="h-step">Your programme comes to life</h3>
+          <p class="body-copy full">Conversations, scans and movement assessments build a fuller picture &mdash; how you sleep, where you hold tension, what restores you. Your programme begins to live: treatments and private sessions, with time in between to pause, move, or simply be.</p>
+        </div>
+        <div class="jcard">
+          <p class="cn">05 &middot; 5</p>
+          <h3 class="h-step">Rhythm, rest, and onward</h3>
+          <p class="body-copy full">The Daily Cadence offers complimentary classes around your programme, and quiet hours hold space to rest. The days find their rhythm, and before departure a final conversation considers what travels home with you &mdash; and what can remain, quietly left behind.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTION B: SLIDER -->
+<section class="section">
+  <div class="shell">
+    <div class="opt-label"><span class="tag">Option B</span><h2 class="h-section" style="margin:0;">Five slides</h2></div>
+    <p class="opt-note">Compact &mdash; one movement at a time, with prev/next and dots. Smallest footprint on the page.</p>
+    <div class="jslider">
+      <div class="jslider-viewport">
+        <div class="jslider-track">
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="step-num">01 &middot; 5</p>
+          <h3 class="h-step">Arrival</h3>
+          <p class="body-copy">You arrive from a drive or a flight, or perhaps both. Pause, breathe, and take a moment to ground. Share tea, a silent meditation &mdash; time and gravity do their work.</p>
+        </div>
+        <div class="jslide-media"><div class="quote-device"><p>Here, silence becomes clarity. A deep breath, a pure sensation &mdash; the one thing that moves without noise.</p></div></div>
+      </div>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="step-num">02 &middot; 5</p>
+          <h3 class="h-step">Discovery &amp; introduction</h3>
+          <p class="body-copy">A guided walk or buggy ride orients you to the property &mdash; the Farm Belt, the Health &amp; Wellness Center, pools, dining and gardens. Then your first meeting with your Wellness Advisor shapes the programme around your goals.</p>
+        </div>
+        <div class="jslide-media"><div class="wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span class="label">Orientation &amp; reception</span></div></div>
+      </div>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="step-num">03 &middot; 5</p>
+          <h3 class="h-step">First treatments &amp; new mornings</h3>
+          <p class="body-copy">A first treatment or assessment as the evening settles, a sunset stroll, an unhurried dinner. Wake to options but no rules &mdash; an early class or a quiet moment, then breakfast and the Daily Cadence. The intensity is your choice.</p>
+        </div>
+        <div class="jslide-media"><div class="wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><path d="M12 9V3M4.2 10.2l1.4 1.4M1 18h22M18.4 11.6l1.4-1.4"/></svg><span class="label">Sunrise on the plateau</span></div></div>
+      </div>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="step-num">04 &middot; 5</p>
+          <h3 class="h-step">Your programme comes to life</h3>
+          <p class="body-copy">Conversations, scans and movement assessments build a fuller picture &mdash; how you sleep, where you hold tension, what restores you. Your programme begins to live: treatments and private sessions, with time in between to pause, move, or simply be.</p>
+        </div>
+        <div class="jslide-media"><div class="wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v13"/><path d="M3 21h18M8 21v-5a4 4 0 0 1 8 0v5"/><path d="M9 3h6"/></svg><span class="label">A garden-facing treatment room</span></div></div>
+      </div>
+      <div class="jslide">
+        <div class="jslide-text">
+          <p class="step-num">05 &middot; 5</p>
+          <h3 class="h-step">Rhythm, rest, and onward</h3>
+          <p class="body-copy">The Daily Cadence offers complimentary classes around your programme, and quiet hours hold space to rest. The days find their rhythm, and before departure a final conversation considers what travels home with you &mdash; and what can remain, quietly left behind.</p>
+        </div>
+        <div class="jslide-media"><div class="wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16c2-1 4-1 6 0s4 1 6 0 4-1 6 0"/><path d="M2 20c2-1 4-1 6 0s4 1 6 0 4-1 6 0"/><path d="M12 4v6M9 7l3-3 3 3"/></svg><span class="label">Quiet hours by the pool</span></div></div>
+      </div>
+        </div>
+      </div>
+      <div class="jslider-nav">
+        <div class="nav-btns">
+          <button class="arw js-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="arw js-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <span class="jslider-count"><b class="js-cur">01</b> / 5</span>
+        <div class="jslider-dots"><button class="active" aria-label="Step 1"></button><button aria-label="Step 2"></button><button aria-label="Step 3"></button><button aria-label="Step 4"></button><button aria-label="Step 5"></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var sl=document.querySelector('.jslider'); if(!sl) return;
+  var track=sl.querySelector('.jslider-track');
+  var slides=sl.querySelectorAll('.jslide');
+  var prev=sl.querySelector('.js-prev'), next=sl.querySelector('.js-next');
+  var cur=sl.querySelector('.js-cur');
+  var dots=sl.querySelectorAll('.jslider-dots button');
+  var i=0, n=slides.length;
+  function go(k){
+    i=Math.max(0,Math.min(n-1,k));
+    track.style.transform='translateX('+(-i*100)+'%)';
+    cur.textContent=('0'+(i+1)).slice(-2);
+    prev.disabled=i===0; next.disabled=i===n-1;
+    dots.forEach(function(d,idx){ d.classList.toggle('active',idx===i); });
+  }
+  prev.addEventListener('click',function(){go(i-1);});
+  next.addEventListener('click',function(){go(i+1);});
+  dots.forEach(function(d,idx){ d.addEventListener('click',function(){go(idx);}); });
+  go(0);
+})();
+</script>
+
+</body>
+</html>
