@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Wellness Through Nutrition — Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked — do not modify) === */
+/* Source of truth: jayasom-wireframe-files/src/index.css */
+
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+/* prose contexts re-enable native list counters/bullets */
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+/* === LAYOUT PRIMITIVES === */
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+/* grids */
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* image placeholder — exact match to WireImage.tsx */
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+/* card */
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.wire-card .pad-tight { padding: 14px; }
+
+/* buttons — exact match to WireButton.tsx */
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+/* nav / header */
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-header nav a { color: inherit; }
+
+/* footer — mirrors WireFooter.tsx */
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 80px; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+/* breadcrumb */
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+/* icon-led cards */
+.icon-card-centered { text-align: center; padding: 24px; }
+.icon-card-centered .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 16px; color: hsl(var(--foreground));
+}
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+
+/* utilities */
+.text-center { text-align: center; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+/* --- page-local: split header + healing-menu cards (replicate reference comp) --- */
+.menu-header { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: start; }
+@media (max-width: 768px) { .menu-header { grid-template-columns: 1fr; gap: 24px; } }
+.menu-title { font-size: 42px; font-weight: 300; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.01em; color: hsl(var(--foreground)); margin: 0; }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+@media (max-width: 768px) { .menu-grid { grid-template-columns: 1fr; } }
+.menu-card { border: 1px solid hsl(var(--border)); padding: 40px 32px; text-align: center; }
+.menu-card .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 24px; color: hsl(var(--foreground));
+}
+.menu-card .icon-circle svg { width: 26px; height: 26px; stroke-width: 1.1; }
+.menu-card .menu-card-title {
+  font-size: 18px; font-weight: 300; text-transform: uppercase;
+  letter-spacing: 0.06em; line-height: 1.25; color: hsl(var(--foreground));
+  margin-bottom: 16px;
+}
+  </style>
+</head>
+<body>
+<!--
+JAYASOM WIREFRAME MANIFEST (auto-generated)
+Page type: Overview (single-section replica)
+Sections placed:
+  1. split-header + icon-card-grid-3  → uses: eyebrow, title, intro, 3 healing menus + descriptions
+Note: card icons chosen for content relevance —
+  Gut Healing and Cleansing → leaf/sprout (fibre, fermented, plant cleansing)
+  Neuro Nourish            → brain (cognition, mental clarity)
+  Women's Hormonal Health  → Venus symbol (cycle, hormonal health)
+Source coverage check: 100%
+-->
+<header class="site-header">
+  <a href="#" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<nav class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a>
+    <span class="sep">/</span>
+    <span>Wellness Through Nutrition</span>
+  </div>
+</nav>
+
+<main>
+<!-- WELLNESS THROUGH NUTRITION — three healing menus -->
+<section class="section">
+  <div class="shell">
+    <div class="menu-header">
+      <div>
+        <p class="eyebrow">Three healing menus</p>
+        <h2 class="menu-title">Wellness Through Nutrition</h2>
+      </div>
+      <div>
+        <p class="body-copy full" style="padding-top:6px;">Three dedicated healing menus run alongside the everyday kitchens. Each is built with our medical leads to support a specific outcome. The plates change with the season; the architecture does not.</p>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <!-- Gut Healing and Cleansing -->
+      <div class="menu-card">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+        </div>
+        <h4 class="menu-card-title">Gut Healing and Cleansing</h4>
+        <p class="caption">Built for guests seeking to reduce inflammation. Sequenced courses, fermented and bitter notes early in the day, fibre-led plates through the afternoon. Used inside As a Feather; available elsewhere on request.</p>
+      </div>
+
+      <!-- Neuro Nourish -->
+      <div class="menu-card">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-3 3 3 3 0 0 0 1.2 5.4A2.3 2.3 0 0 0 12 19.5"/><path d="M12 5a3 3 0 0 1 3 3 3 3 0 0 1 3 3 3 3 0 0 1-1.2 5.4A2.3 2.3 0 0 1 12 19.5"/><path d="M12 5v14.5"/></svg>
+        </div>
+        <h4 class="menu-card-title">Neuro Nourish</h4>
+        <p class="caption">Built for focus and mental clarity — plates anchored to omega-three sources, polyphenol-rich produce, and a lower glycaemic curve through the day. Used inside As a Leader; available elsewhere on request.</p>
+      </div>
+
+      <!-- Women's Hormonal Health -->
+      <div class="menu-card">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15v7"/><path d="M9 19h6"/></svg>
+        </div>
+        <h4 class="menu-card-title">Women's Hormonal Health</h4>
+        <p class="caption">Built around cycle, peri-menopause, and post-menopause needs. Iron, magnesium, and protein rhythms run through the menus. Used inside As a Woman; available elsewhere on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;">Jayasom</p>
+        <p class="caption">Healing rooted in wisdom, guided by heart.</p>
+      </div>
+      <div>
+        <p class="col-title">Quick Links</p>
+        <ul>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Rooms &amp; Villas</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Retreat Finder</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Journals &amp; Stories</a></li>
+          <li><a href="#">Residences</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li>Our Philosophy</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Media</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Wellbeing Spaces</a></li>
+          <li><a href="#">Culinary Nourishment</a></li>
+          <li><a href="#">Families &amp; Wellbeing</a></li>
+          <li><a href="#">Our Experts</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Residences</p>
+        <ul>
+          <li><a href="#">Amaala Residences</a></li>
+          <li><a href="#">Why Jayasom Residences</a></li>
+          <li><a href="#">Residential Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved.</p>
+      <div class="links">
+        <span>Cookies Policy</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
