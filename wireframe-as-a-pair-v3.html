@@ -185,7 +185,7 @@ html, body {
 .dur-tick { font-size: 13px; color: hsl(var(--muted-foreground)); min-width: 34px; text-align: center; padding: 4px 6px; line-height: 1; }
 .dur-tick.on { color: hsl(var(--foreground)); border: 1px solid hsl(var(--border)); }
 .dur-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-.dur-slider { width: 320px; max-width: 100%; }
+.dur-slider { flex: 1; width: 100%; }
 .dur-custom { display: inline-block; margin-left: auto; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; white-space: nowrap; color: hsl(var(--muted-foreground)); border-bottom: 1px solid hsl(var(--border)); padding-bottom: 3px; }
 
 /* Inclusion cards (vertical list, revealed for the chosen duration) */
@@ -252,22 +252,9 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
     <p class="eyebrow text-center">The Intention</p>
     <h2 class="h-section text-center" style="margin-bottom:40px;">Two People, One Intention</h2>
 
-    <div class="body-copy full text-center" style="font-size:15px;line-height:1.85;max-width:680px;margin:0 auto 44px;">
-      <p>As a Pair is a stay for two people who want to give their connection more than ordinary life usually allows. Come to celebrate what you have – as friends, partners, siblings, parents. Come to find your way back to each other, or to find a deeper way forward together. Come because you know the connection between you deserves more investment than ordinary life allows.</p>
-    </div>
-
-    <div class="directions-head">
-      <span class="rule"></span>
-      <span class="lead">Six directions hold the work</span>
-      <span class="rule"></span>
-    </div>
-    <div class="directions">
-      <div class="direction"><span class="dnum">01</span><p class="dtext">Relax and renew together</p></div>
-      <div class="direction"><span class="dnum">02</span><p class="dtext">Deepen your connection</p></div>
-      <div class="direction"><span class="dnum">03</span><p class="dtext">Relate to each other in new ways</p></div>
-      <div class="direction"><span class="dnum">04</span><p class="dtext">Build trust and communicate better</p></div>
-      <div class="direction"><span class="dnum">05</span><p class="dtext">Discover how you move through the world together;</p></div>
-      <div class="direction"><span class="dnum">06</span><p class="dtext">Rejuvenate what you share.</p></div>
+    <div class="body-copy full text-center" style="font-size:15px;line-height:1.85;max-width:720px;margin:0 auto;">
+      <p style="margin-bottom:24px;">As a Pair is a stay for two people who want to give their connection more than ordinary life usually allows. Come to celebrate what you have – as friends, partners, siblings, parents. Come to find your way back to each other, or to find a deeper way forward together. Come because you know the connection between you deserves more investment than ordinary life allows.</p>
+      <p>Time away from everyday demands to fortify what you have, reflect, and enjoy each other's company with renewed attention and ease. Thoughtfully designed experiences, guided conversations and shared moments in nature encourage understanding, trust and lasting closeness. A Wellness Advisor reads where each of you is on arrival and builds your retreat from there.</p>
     </div>
 
     <div class="intention-close">
@@ -290,28 +277,6 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
         <span class="label">Guided conversations in nature</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Image strip (visual punctuation; labels from HOW copy) -->
-<section class="section-strip">
-  <div class="image-strip">
-    <div class="wire-image" style="height:240px;">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span class="label">Shared rituals</span>
-    </div>
-    <div class="wire-image" style="height:240px;">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span class="label">Restorative therapies</span>
-    </div>
-    <div class="wire-image" style="height:240px;">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span class="label">Engaging activities</span>
-    </div>
-    <div class="wire-image" style="height:240px;">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span class="label">Memorable adventures</span>
     </div>
   </div>
 </section>
@@ -418,7 +383,6 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
               <span class="dur-tick">14</span>
             </div>
           </div>
-          <a href="wireframe-contact-v3.html" class="dur-custom">Custom Duration</a>
         </div>
 
         <h3 class="h-sub" style="margin-top:44px;">Every Retreat Stay Includes</h3>
@@ -506,7 +470,7 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
     { t: 'Three wellness cuisine meals served daily, excluding in-room dining', ic: IC.utensils },
     { t: 'Access to scheduled daily fitness and leisure activities, wellness centre facilities, including hydrothermal bathing areas, pools and gym', ic: IC.barbell },
     { t: 'Complimentary assessments upon request and suitability', ic: IC.focus },
-    { t: 'Jayasom Flask · Wellness Journal · welcome kit including tote bag and amenity bag', ic: IC.sparkle }
+    { t: 'Jayasom Flask · Wellness Journal · Welcome Kit', ic: IC.sparkle }
   ];
 
   var DURATIONS = ['4 Nights', '7 Nights', '10 Nights', '14 Nights'];
