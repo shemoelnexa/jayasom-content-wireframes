@@ -179,6 +179,52 @@ html, body {
 .track-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 28px; }
 .track-card .track-name { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); margin-bottom: 14px; }
 
+
+/* === Included Sessions / duration section (shared) === */
+/* "Every Retreat Stay Includes" panel (right column of the duration section) */
+.stay-includes { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; }
+.stay-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.stay-list li { position: relative; padding: 0 0 0 22px; margin-bottom: 16px; font-size: 13px; line-height: 1.5; color: hsl(var(--foreground)); }
+.stay-list li:last-child { margin-bottom: 0; }
+.stay-list li::before { content: ''; position: absolute; left: 4px; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: hsl(var(--muted-foreground)); }
+/* Duration slider (discrete stops from doc: 4 / 7 / 10 / 14 nights) */
+.dur-control { max-width: 620px; margin: 0 auto; }
+.dur-head { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; min-height: 28px; text-align: center; }
+.dur-head .cur { font-size: 16px; font-weight: 300; color: hsl(var(--foreground)); }
+.dur-head .badge { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; background: hsl(var(--foreground)); color: hsl(var(--background)); padding: 4px 9px; }
+.dur-head .dur-count { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.dur-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: hsl(var(--border)); outline: none; margin: 14px 0 6px; cursor: pointer; }
+.dur-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--foreground)); border: 0; cursor: pointer; }
+.dur-range::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--foreground)); border: 0; cursor: pointer; }
+.dur-ticks { display: flex; justify-content: space-between; margin-top: 8px; }
+.dur-tick { font-size: 13px; color: hsl(var(--muted-foreground)); min-width: 34px; text-align: center; padding: 4px 6px; line-height: 1; }
+.dur-tick.on { color: hsl(var(--foreground)); border: 1px solid hsl(var(--border)); }
+.dur-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.dur-slider { flex: 1; width: 100%; }
+.dur-custom { display: inline-block; margin-left: auto; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; white-space: nowrap; color: hsl(var(--muted-foreground)); border-bottom: 1px solid hsl(var(--border)); padding-bottom: 3px; }
+
+/* Inclusion cards (vertical list, revealed for the chosen duration) */
+.incl-list { display: flex; flex-direction: column; gap: 10px; }
+.session-card { padding: 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+.incl-list.boxed .session-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 16px; }
+
+/* Box on/off toggle (this section only) */
+.incl-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 44px; }
+.incl-head .h-sub { margin-top: 0; }
+.box-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); cursor: pointer; user-select: none; white-space: nowrap; }
+.box-toggle .sw { position: relative; width: 32px; height: 18px; border: 1px solid hsl(var(--border)); border-radius: 999px; background: hsl(var(--muted)); transition: background .15s; flex-shrink: 0; }
+.box-toggle .sw::after { content: ''; position: absolute; top: 1px; left: 1px; width: 14px; height: 14px; border-radius: 50%; background: hsl(var(--muted-foreground)); transition: transform .15s; }
+.box-toggle.on .sw { background: hsl(var(--foreground)); }
+.box-toggle.on .sw::after { transform: translateX(14px); background: hsl(var(--background)); }
+.session-card .ico { flex-shrink: 0; width: 22px; height: 22px; color: hsl(var(--muted-foreground)); margin-top: 1px; }
+.session-card .ico svg { width: 100%; height: 100%; display: block; }
+.session-card .meta { min-width: 0; flex: 1; }
+.session-card .meta .nm { font-size: 13px; color: hsl(var(--foreground)); line-height: 1.45; }
+.session-card .meta .nm .qty { font-weight: 600; }
+.session-card .meta .nm .dur { color: hsl(var(--muted-foreground)); }
+.session-card .meta .nm .fn { color: hsl(var(--muted-foreground)); }
+.dur-foot { margin-top: 22px; font-size: 11px; line-height: 1.7; color: hsl(var(--muted-foreground)); }
+.dur-foot span { display:block; }
   </style>
 </head>
 <body>
@@ -420,43 +466,75 @@ html, body {
   </div>
 </section>
 
-<!-- M7. STAY STRUCTURE -->
+<!-- CHOOSE YOUR RETREAT DURATION -->
 <section class="section section-muted">
   <div class="shell">
-    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
-      <p class="eyebrow">Stay structure</p>
-      <h2 class="h-section">Stay length shapes the work</h2>
-      <p class="body-copy" style="margin:0 auto;font-style:italic;">Stay length shapes the depth of the work. Four tier names hold the structure: four nights to Explore, seven nights to Absorb, ten nights to Immerse, fourteen nights to Commit. The pacing matches the tier; nothing across the stay is added because of the calendar.</p>
+    <div class="text-center mb-8"><h2 class="h-section">Choose Your Retreat Duration</h2></div>
+    <div class="dur-control">
+      <div class="dur-head">
+        <span class="cur" id="dur-current">4 Nights</span>
+        <span class="dur-count" id="dur-count">11 included sessions</span>
+      </div>
+      <div class="dur-row"><div class="dur-slider">
+        <input type="range" class="dur-range" id="dur-range" min="0" max="3" step="1" value="0" aria-label="Retreat length"/>
+        <div class="dur-ticks" id="dur-ticks"><span class="dur-tick on">4</span><span class="dur-tick">7</span><span class="dur-tick">10</span><span class="dur-tick">14</span></div>
+      </div></div>
     </div>
-
-    <div style="margin-top:48px;max-width:820px;margin-left:auto;margin-right:auto;">
-      <table class="wire-table">
-        <thead>
-          <tr>
-            <th>Tier</th>
-            <th class="center">Nights</th>
-            <th class="center">Named treatments</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Explore</td><td class="center">4</td><td class="center">11</td></tr>
-          <tr><td>Absorb</td><td class="center">7</td><td class="center">18</td></tr>
-          <tr><td>Immerse</td><td class="center">10</td><td class="center">25</td></tr>
-          <tr><td>Commit</td><td class="center">14</td><td class="center">35</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;max-width:820px;margin:48px auto 0;">
-      <p style="margin-bottom:24px;">What each tier holds, in plain terms. Explore at four nights resets the rhythm around a short decompression or board-aligned visit. By seven nights, Absorb sees a full habit-cycle take hold. Immerse adds the depth where leadership work begins to compound. The fourteen-night Commit tier is for leaders wanting the full arc, with practitioner relationships built across the stay and the Wellness Mentoring Consultation running as a recurring conversation.</p>
-      <p>Your Wellness Advisor will recommend a tier during the pre-arrival conversation.</p>
-    </div>
-
-    <div class="text-center mt-8">
-      <a href="#" class="btn">Speak to a Wellness Advisor about the right tier for you</a>
+    <div class="grid-2" style="gap:56px;align-items:start;margin-top:48px;">
+      <div>
+        <div class="incl-head" style="margin-top:0;">
+          <h3 class="h-sub">Included Sessions</h3>
+          <span class="box-toggle" id="box-toggle" role="switch" aria-checked="false" tabindex="0">Boxes<span class="sw"></span></span>
+        </div>
+        <div class="incl-list" id="dur-cards" style="margin-top:16px;"></div>
+      </div>
+      <div>
+        <div class="stay-includes">
+          <h3 class="h-sub" style="margin-top:0;">Every Retreat Stay Includes</h3>
+          <ul class="stay-list">
+          <li>Your private villa or suite – beach-facing or waterside</li>
+          <li>Private health and well-being consultation and advisor guidance</li>
+          <li>Personalised programme of wellness treatments and therapies</li>
+          <li>Three wellness cuisine meals served daily, excluding in-room dining</li>
+          <li>Access to scheduled daily fitness and leisure activities, wellness centre facilities, including hydrothermal bathing areas, pools and gym</li>
+          <li>Complimentary assessments upon request and suitability</li>
+          <li>Jayasom Flask · Wellness Journal · Welcome Kit</li>
+          </ul>
+        </div>
+        <div id="dur-foot" style="margin-top:20px;font-size:10.5px;line-height:1.6;color:hsl(var(--muted-foreground));"></div>
+      </div>
     </div>
   </div>
 </section>
+<script>
+(function () {
+  var DATA = {"cols": [{"label": "4 Nights", "count": "11 included sessions", "tick": "4", "items": [["1 x Pinda Sweda Herbal Compress (60 min)", "heart"], ["1 x Personalised Wellness Counselling (60 min)", "talk"], ["2 x Pranayama (60 min)***", "lotus"], ["1 x Shirodhara (90 min)", "heart"], ["1 x Somatic Release Stretch (60 min)", "barbell"], ["1 x Deep Tissue Massage (60 min)", "hand"], ["1 x Gyrotonic Rehabilitation (60 min)**", "barbell"], ["1 x Super Stretch (60 min)", "barbell"], ["2 x Choice of One Daily Treatment (60 min)*", "sparkle"]]}, {"label": "7 Nights", "count": "18 included sessions", "tick": "7", "items": [["1 x Pinda Sweda Herbal Compress (60 min)", "heart"], ["1 x Personalised Wellness Counselling (60 min)", "talk"], ["2 x Pranayama (60 min)***", "lotus"], ["1 x Shirodhara (90 min)", "heart"], ["1 x Somatic Release Stretch (60 min)", "barbell"], ["1 x Deep Tissue Massage (60 min)", "hand"], ["1 x Gyrotonic Rehabilitation (60 min)**", "barbell"], ["1 x Super Stretch (60 min)", "barbell"], ["5 x Choice of One Daily  Treatment (60 min)*", "sparkle"], ["1 x Deep Rest Infrared Journey (45 min)", "flame"], ["1 x Traditional Thai Massage with Oil (60 min)", "hand"], ["1 x Watsu - Aquatic Therapy (60 min)", "wave"], ["1 x Boxing (60 min)****", "barbell"]]}, {"label": "10 Nights", "count": "25 included sessions", "tick": "10", "items": [["1 x Pinda Sweda Herbal Compress (60 min)", "heart"], ["2 x Personalised Wellness Counselling (60 min)", "talk"], ["3 x Pranayama (60 min)***", "lotus"], ["1 x Shirodhara (90 min)", "heart"], ["1 x Somatic Release Stretch (60 min)", "barbell"], ["1 x Deep Tissue Massage (60 min)", "hand"], ["1 x Gyrotonic Rehabilitation (60 min)**", "barbell"], ["2 x Super Stretch (60 min)", "barbell"], ["7 x Choice of One Daily Treatment (60 min)*", "sparkle"], ["1 x Deep Rest Infrared Journey (45 min)", "flame"], ["1 x Traditional Thai Massage with Oil (60 min)", "hand"], ["1 x Watsu - Aquatic Therapy (60 min)", "wave"], ["1 x Boxing (60 min)****", "barbell"], ["1 x Nutrition & Lifestyle Consultation (60 min)", "talk"], ["1 x Traditional Thai Massage (60 min)", "hand"]]}, {"label": "14 Nights", "count": "35 included sessions", "tick": "14", "items": [["2 x Pinda Sweda Herbal Compress (60 min)", "heart"], ["3 x Personalised Wellness Counselling (60 min)", "talk"], ["3 x Pranayama (60 min)***", "lotus"], ["1 x Shirodhara (90 min)", "heart"], ["1 x Somatic Release Stretch (60 min)", "barbell"], ["2 x Deep Tissue Massage (60 min)", "hand"], ["2 x Gyrotonic Rehabilitation (60 min)**", "barbell"], ["3 x Super Stretch (60 min)", "barbell"], ["10 x Choice of One Daily Treatment (60 min)*", "sparkle"], ["1 x Deep Rest Infrared Journey (45 min)", "flame"], ["1 x Traditional Thai Massage with Oil (60 min)", "hand"], ["1 x Watsu - Aquatic Therapy (60 min)", "wave"], ["2 x Boxing (60 min)****", "barbell"], ["1 x Nutrition & Lifestyle Consultation (60 min)", "talk"], ["1 x Traditional Thai Massage (60 min)", "hand"], ["1 x TCM Foot Reflexology (60 min)", "heart"]]}], "foot": ["* Choice of One Daily Treatment (60 min) selected from Jayasom Signature Massage, Swedish Massage, Abhyanga, Deep Tissue Massage and Balinese Massage.", "** Gyrotonic Rehabilitation (60 min) may alternate with Neurac Suspension Rehabilitation Training.", "*** Pranayama may alternate with Tai Chi.", "**** Boxing (60 min) may alternate with Personal Training, Boot Camp, Function Fit, High-Intensity Interval Training (HIIT) Burn, Kettlebell Training, Tabata Training, TRX Suspension Training and Fitball Training."]};
+  var IC = {"talk": "<path d=\"M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z\"/><path d=\"M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1\"/>", "lotus": "<circle cx=\"12\" cy=\"5\" r=\"2\"/><path d=\"M5 19c2-1.2 4.5-2 7-2s5 .8 7 2\"/><path d=\"m12 11-4.5 7\"/><path d=\"m12 11 4.5 7\"/>", "utensils": "<path d=\"M3 2v7c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2V2\"/><path d=\"M7 2v20\"/><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"/>", "barbell": "<path d=\"M5 12h14\"/><path d=\"M3.5 9v6\"/><path d=\"M20.5 9v6\"/><path d=\"M6.5 7.5v9\"/><path d=\"M17.5 7.5v9\"/>", "sparkle": "<path d=\"M9.94 14.06A2 2 0 0 0 8.5 12.62L2.37 11.04a.5.5 0 0 1 0-.96L8.5 8.5a2 2 0 0 0 1.44-1.44l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13A2 2 0 0 0 15.5 8.5l6.13 1.58a.5.5 0 0 1 0 .96L15.5 12.62a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z\"/>", "wave": "<path d=\"M2 12c1.5 0 1.5-3 3-3s1.5 3 3 3 1.5-3 3-3 1.5 3 3 3 1.5-3 3-3 1.5 3 3 3\"/><path d=\"M2 17c1.5 0 1.5-3 3-3s1.5 3 3 3 1.5-3 3-3 1.5 3 3 3 1.5-3 3-3 1.5 3 3 3\"/>", "align": "<path d=\"M12 3v18\"/><path d=\"M8 7h8\"/><path d=\"M9 12h6\"/><path d=\"M8 17h8\"/>", "heart": "<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z\"/>", "droplet": "<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7z\"/>", "hand": "<path d=\"M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8\"/><path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\"/>", "leaf": "<path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"/><path d=\"M2 21c0-3 1.85-5.36 5.08-6\"/>", "focus": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "flame": "<path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/>", "snow": "<path d=\"M12 2v20M4.93 5.93l14.14 14.14M2 12h20M19.07 5.93 4.93 20.07\"/>"};
+  var cardsEl=document.getElementById('dur-cards'), curEl=document.getElementById('dur-current'),
+      countEl=document.getElementById('dur-count'), ticksEl=document.getElementById('dur-ticks'),
+      footEl=document.getElementById('dur-foot'), rangeEl=document.getElementById('dur-range');
+  if(!cardsEl) return;
+  function row(it){
+    var s=it[0], ic=IC[it[1]]||IC.sparkle, k=s.indexOf(' x '), qty='', rest=s;
+    if(k>-1){qty=s.slice(0,k);rest=s.slice(k+3);}
+    return '<div class="session-card"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+ic+'</svg></span><div class="meta"><p class="nm">'+(qty?'<span class="qty">'+qty+' \u00d7</span> ':'')+rest+'</p></div></div>';
+  }
+  var ticks=ticksEl?Array.prototype.slice.call(ticksEl.querySelectorAll('.dur-tick')):[];
+  function select(i){
+    var col=DATA.cols[i];
+    cardsEl.innerHTML=col.items.map(row).join('');
+    if(curEl)curEl.textContent=col.label;
+    if(countEl)countEl.textContent=col.count;
+    ticks.forEach(function(t,x){t.className='dur-tick'+(x===i?' on':'');});
+  }
+  if(rangeEl)rangeEl.addEventListener('input',function(){select(parseInt(rangeEl.value,10));});
+  if(footEl&&DATA.foot&&DATA.foot.length)footEl.innerHTML=DATA.foot.map(function(f){return '<span style="display:block;margin-bottom:5px;">'+f+'</span>';}).join('');
+  select(0);
+  var bt=document.getElementById('box-toggle');
+  if(bt){bt.addEventListener('click',function(){var on=!cardsEl.classList.contains('boxed');cardsEl.classList.toggle('boxed',on);bt.classList.toggle('on',on);bt.setAttribute('aria-checked',on);});
+    bt.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();bt.click();}});}
+})();
+</script>
 
 <!-- M7b. PROGRAMME INCLUSIONS -->
 <section class="section">
@@ -625,6 +703,7 @@ html, body {
   </div>
 </section>
 
+
 <!-- CROSS-SELL -->
 <section class="section section-muted">
   <div class="shell">
@@ -719,6 +798,7 @@ html, body {
     </div>
   </div>
 </section>
+
 
 </main>
 <footer class="site-footer">
