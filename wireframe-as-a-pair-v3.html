@@ -178,6 +178,7 @@ html, body {
 .dur-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; min-height: 28px; }
 .dur-head .cur { font-size: 16px; font-weight: 300; color: hsl(var(--foreground)); }
 .dur-head .badge { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; background: hsl(var(--foreground)); color: hsl(var(--background)); padding: 4px 9px; }
+.dur-head .dur-count { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-left: auto; }
 .dur-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: hsl(var(--border)); outline: none; margin: 14px 0 6px; cursor: pointer; }
 .dur-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--foreground)); border: 0; cursor: pointer; }
 .dur-range::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--foreground)); border: 0; cursor: pointer; }
@@ -190,11 +191,24 @@ html, body {
 
 /* Inclusion cards (vertical list, revealed for the chosen duration) */
 .incl-list { display: flex; flex-direction: column; gap: 10px; }
-.session-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 16px; display: flex; gap: 12px; align-items: flex-start; }
+.session-card { padding: 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+.incl-list.boxed .session-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 16px; }
+
+/* Box on/off toggle (this section only) */
+.incl-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 44px; }
+.incl-head .h-sub { margin-top: 0; }
+.box-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); cursor: pointer; user-select: none; white-space: nowrap; }
+.box-toggle .sw { position: relative; width: 32px; height: 18px; border: 1px solid hsl(var(--border)); border-radius: 999px; background: hsl(var(--muted)); transition: background .15s; flex-shrink: 0; }
+.box-toggle .sw::after { content: ''; position: absolute; top: 1px; left: 1px; width: 14px; height: 14px; border-radius: 50%; background: hsl(var(--muted-foreground)); transition: transform .15s; }
+.box-toggle.on .sw { background: hsl(var(--foreground)); }
+.box-toggle.on .sw::after { transform: translateX(14px); background: hsl(var(--background)); }
 .session-card .ico { flex-shrink: 0; width: 22px; height: 22px; color: hsl(var(--muted-foreground)); margin-top: 1px; }
 .session-card .ico svg { width: 100%; height: 100%; display: block; }
 .session-card .meta { min-width: 0; flex: 1; }
 .session-card .meta .nm { font-size: 13px; color: hsl(var(--foreground)); line-height: 1.45; }
+.session-card .meta .nm .qty { font-weight: 600; }
+.session-card .meta .nm .dur { color: hsl(var(--muted-foreground)); }
+.session-card .meta .nm .fn { color: hsl(var(--muted-foreground)); }
 
   </style>
 </head>
@@ -210,8 +224,8 @@ Sections placed:
   3. alternating-image-text → HOW YOUR RETREAT TAKES SHAPE (blended advisor intro copy per [NOTE])
   4. image-strip-gallery    → visual punctuation, labels derived from HOW copy
   5. treatment-card-grid    → FEATURED TREATMENTS: section intro + 6 treatments w/ durations
-  6. duration-selector      → CHOOSE YOUR RETREAT DURATION: 5 options
-  7. bullet-list            → EVERY RETREAT STAY INCLUDES: 7 items
+  6. duration-selector      → CHOOSE YOUR RETREAT DURATION: 4 options (4/7/10/14 nights)
+  7. included-sessions       → INCLUDED SESSIONS: per-duration session list driven by the slider (from programme table)
   8. card-grid-2            → YOU MIGHT ALSO WANT TO ADD: 2 add-ons
   9. cross-sell-grid-5      → YOU MIGHT ALSO BE INTERESTED IN: 5 retreats
 Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial markers applied as instructions, not printed)
@@ -372,6 +386,7 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
       <div>
         <div class="dur-head">
           <span class="cur" id="dur-current">4 Nights</span>
+          <span class="dur-count" id="dur-count">11 included sessions</span>
         </div>
         <div class="dur-row">
           <div class="dur-slider">
@@ -385,7 +400,10 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
           </div>
         </div>
 
-        <h3 class="h-sub" style="margin-top:44px;">Every Retreat Stay Includes</h3>
+        <div class="incl-head">
+          <h3 class="h-sub">Included Sessions</h3>
+          <span class="box-toggle" id="box-toggle" role="switch" aria-checked="false" tabindex="0">Boxes<span class="sw"></span></span>
+        </div>
         <div class="incl-list" id="dur-cards" style="margin-top:16px;"></div>
       </div>
 
@@ -453,53 +471,88 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
 (function () {
   // Line-icon paths (drawn inside a shared 24x24 stroked <svg> wrapper)
   var IC = {
-    home:   '<path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 21v-6h6v6"/>',
-    talk:   '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
-    lotus:  '<circle cx="12" cy="5" r="2"/><path d="M5 19c2-1.2 4.5-2 7-2s5 .8 7 2"/><path d="m12 11-4.5 7"/><path d="m12 11 4.5 7"/>',
+    talk:    '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+    lotus:   '<circle cx="12" cy="5" r="2"/><path d="M5 19c2-1.2 4.5-2 7-2s5 .8 7 2"/><path d="m12 11-4.5 7"/><path d="m12 11 4.5 7"/>',
     utensils:'<path d="M3 2v7c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
-    barbell:'<path d="M5 12h14"/><path d="M3.5 9v6"/><path d="M20.5 9v6"/><path d="M6.5 7.5v9"/><path d="M17.5 7.5v9"/>',
-    focus:  '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>',
-    sparkle:'<path d="M9.94 14.06A2 2 0 0 0 8.5 12.62L2.37 11.04a.5.5 0 0 1 0-.96L8.5 8.5a2 2 0 0 0 1.44-1.44l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13A2 2 0 0 0 15.5 8.5l6.13 1.58a.5.5 0 0 1 0 .96L15.5 12.62a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/>'
+    barbell: '<path d="M5 12h14"/><path d="M3.5 9v6"/><path d="M20.5 9v6"/><path d="M6.5 7.5v9"/><path d="M17.5 7.5v9"/>',
+    sparkle: '<path d="M9.94 14.06A2 2 0 0 0 8.5 12.62L2.37 11.04a.5.5 0 0 1 0-.96L8.5 8.5a2 2 0 0 0 1.44-1.44l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13A2 2 0 0 0 15.5 8.5l6.13 1.58a.5.5 0 0 1 0 .96L15.5 12.62a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/>',
+    wave:    '<path d="M2 12c1.5 0 1.5-3 3-3s1.5 3 3 3 1.5-3 3-3 1.5 3 3 3 1.5-3 3-3 1.5 3 3 3"/><path d="M2 17c1.5 0 1.5-3 3-3s1.5 3 3 3 1.5-3 3-3 1.5 3 3 3 1.5-3 3-3 1.5 3 3 3"/>',
+    align:   '<path d="M12 3v18"/><path d="M8 7h8"/><path d="M9 12h6"/><path d="M8 17h8"/>',
+    heart:   '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>',
+    droplet: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7z"/>',
+    hand:    '<path d="M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    leaf:    '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>'
   };
 
-  // From the document — "EVERY RETREAT STAY INCLUDES" (same for every duration; the document gives no per-duration breakdown)
-  var INCLUDES = [
-    { t: 'Your private villa or suite – beach-facing or waterside', ic: IC.home },
-    { t: 'Private health and well-being consultation and advisor guidance', ic: IC.talk },
-    { t: 'Personalised programme of wellness treatments and therapies', ic: IC.lotus },
-    { t: 'Three wellness cuisine meals served daily, excluding in-room dining', ic: IC.utensils },
-    { t: 'Access to scheduled daily fitness and leisure activities, wellness centre facilities, including hydrothermal bathing areas, pools and gym', ic: IC.barbell },
-    { t: 'Complimentary assessments upon request and suitability', ic: IC.focus },
-    { t: 'Jayasom Flask · Wellness Journal · Welcome Kit', ic: IC.sparkle }
+  // Per-duration included sessions, taken column-for-column from the retreat programme table.
+  // Each session: { t: name, d: minutes, ic: icon, fn: footnote marker }
+  var SESS = {
+    nutrition: { t: 'Nutrition & Lifestyle Consultation',          d: 60, ic: IC.utensils },
+    couples:   { t: 'Personalised Couples Wellness Counselling',   d: 60, ic: IC.talk },
+    sound:     { t: 'Sound Bath Meditation',                       d: 60, ic: IC.wave },
+    posture:   { t: 'Posture & Alignment Therapy',                 d: 60, ic: IC.align },
+    training:  { t: 'Personal Training',                           d: 60, ic: IC.barbell, fn: '**' },
+    yoga:      { t: 'Yoga',                                        d: 60, ic: IC.lotus,   fn: '***' },
+    daily:     { t: 'Choice of One Daily Treatment',               d: 60, ic: IC.sparkle, fn: '*' },
+    hammam:    { t: 'Express Hammam Ritual',                       d: 60, ic: IC.droplet },
+    hearts:    { t: 'Two Hearts Ritual',                           d: 90, ic: IC.heart },
+    pilates:   { t: 'Pilates Reformer',                            d: 60, ic: IC.barbell, fn: '****' },
+    crystal:   { t: 'Crystal Massage',                             d: 60, ic: IC.hand },
+    floatation:{ t: 'Floatation Therapy',                          d: 45, ic: IC.droplet },
+    cooking:   { t: 'Wellness Cooking Class',                      d: 90, ic: IC.utensils },
+    watsu:     { t: 'Watsu – Aquatic Therapy',                     d: 60, ic: IC.droplet },
+    stretch:   { t: 'Super Stretch',                               d: 60, ic: IC.align },
+    detox:     { t: 'Detoxifying ',                                d: 60, ic: IC.leaf }
+  };
+
+  // [duration index] -> [ [sessionKey, count], ... ].  Counts verified against the column totals.
+  var PROGRAMME = [
+    // 4 Nights — 11 sessions
+    [['nutrition',1],['couples',1],['sound',1],['posture',1],['training',1],['yoga',1],['daily',3],['hammam',1],['hearts',1]],
+    // 7 Nights — 18 sessions
+    [['nutrition',1],['couples',1],['sound',1],['posture',1],['training',1],['yoga',1],['daily',6],['hammam',1],['hearts',1],['pilates',1],['crystal',1],['floatation',1],['cooking',1]],
+    // 10 Nights — 25 sessions
+    [['nutrition',1],['couples',2],['sound',1],['posture',1],['training',2],['yoga',1],['daily',8],['hammam',1],['hearts',2],['pilates',1],['crystal',1],['floatation',1],['cooking',1],['watsu',1],['stretch',1]],
+    // 14 Nights — 35 sessions  (TODO: column cut off after "Detoxifying"; ~3 rows + their counts still missing)
+    [['nutrition',1],['couples',3],['sound',1],['posture',1],['training',2],['yoga',2],['daily',12],['hammam',1],['hearts',2],['pilates',1],['crystal',1],['floatation',1],['cooking',1],['watsu',1],['stretch',1],['detox',1]]
   ];
 
   var DURATIONS = ['4 Nights', '7 Nights', '10 Nights', '14 Nights'];
 
   var rangeEl = document.getElementById('dur-range');
   var curEl   = document.getElementById('dur-current');
+  var countEl = document.getElementById('dur-count');
   var cardsEl = document.getElementById('dur-cards');
   var ticksEl = document.getElementById('dur-ticks');
   if (!rangeEl || !cardsEl) return;
   var ticks = Array.prototype.slice.call(ticksEl.querySelectorAll('.dur-tick'));
 
-  function renderCards() {
+  function renderCards(i) {
     cardsEl.innerHTML = '';
-    INCLUDES.forEach(function (s) {
+    PROGRAMME[i].forEach(function (row) {
+      var s = SESS[row[0]], n = row[1];
+      if (!s) return;
       var card = document.createElement('div');
       card.className = 'session-card';
       card.innerHTML =
         '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + s.ic + '</svg></span>' +
-        '<div class="meta"><p class="nm">' + s.t + '</p></div>';
+        '<div class="meta"><p class="nm">' +
+          '<span class="qty">' + n + ' ×</span> ' + s.t +
+          ' <span class="dur">(' + s.d + ' min)</span>' +
+          (s.fn ? '<span class="fn">' + s.fn + '</span>' : '') +
+        '</p></div>';
       cardsEl.appendChild(card);
     });
   }
 
   function select(i) {
+    var total = PROGRAMME[i].reduce(function (sum, row) { return sum + row[1]; }, 0);
     curEl.textContent = DURATIONS[i];
+    if (countEl) countEl.textContent = total + ' included sessions';
     ticks.forEach(function (t, idx) {
       t.className = 'dur-tick' + (idx === i ? ' on' : '');
     });
-    renderCards();
+    renderCards(i);
   }
 
   rangeEl.addEventListener('input', function () {
@@ -507,6 +560,22 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
   });
 
   select(0); // default to 4 Nights
+
+  // Box on/off toggle (this section only)
+  var boxToggle = document.getElementById('box-toggle');
+  if (boxToggle) {
+    function setBoxed(on) {
+      cardsEl.classList.toggle('boxed', on);
+      boxToggle.classList.toggle('on', on);
+      boxToggle.setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+    boxToggle.addEventListener('click', function () {
+      setBoxed(!cardsEl.classList.contains('boxed'));
+    });
+    boxToggle.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); boxToggle.click(); }
+    });
+  }
 })();
 </script>
 
