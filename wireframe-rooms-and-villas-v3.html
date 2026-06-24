@@ -4,7 +4,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Rooms and Villas v3 · Jayasom Wireframe</title>
+  <title>Rooms &amp; Villas | Jayasom AMAALA · Wireframe</title>
+  <meta name="description" content="Discover private pool villas and terrace rooms at Jayasom AMAALA — two distinct wellness sanctuaries on the Red Sea coast at AMAALA Triple Bay, Saudi Arabia."/>
   <style>
 :root { --background: 16 33% 93%; --foreground: 300 2% 27%; --card: 16 33% 93%; --card-foreground: 300 2% 27%; --muted: 16 20% 86%; --muted-foreground: 300 2% 40%; --accent: 16 20% 86%; --accent-foreground: 300 2% 27%; --border: 300 2% 60%; --input: 300 2% 60%; --primary: 300 2% 27%; --primary-foreground: 16 33% 93%; --wire-placeholder: 16 20% 88%; --wire-line: 300 2% 55%; --wire-dark: 300 2% 30%; --wire-mid: 300 2% 45%; --radius: 0rem; }
 * { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
@@ -70,26 +71,53 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 .callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
 .callout .callout-body { font-size: 14px; color: hsl(var(--foreground)); line-height: 1.65; }
 .bullet-list { display: flex; flex-direction: column; gap: 10px; }
-.bullet-list li { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; display: flex; gap: 12px; padding-left: 0; }
+.bullet-list li { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.6; display: flex; gap: 12px; padding-left: 0; }
 .bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+.bullet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+@media (max-width: 768px) { .bullet-grid { grid-template-columns: 1fr; } }
 .faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
 .faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
 .faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
 .faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
 .faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
-.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
-.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
-.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
-.stat-block { border-top: 1px solid hsl(var(--border)); padding-top: 16px; }
-.stat-block .stat-num { font-size: 32px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1; margin-bottom: 8px; }
-.stat-block .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+.pull-quote { font-size: 24px; font-weight: 300; line-height: 1.45; color: hsl(var(--foreground)); max-width: 820px; margin: 0 auto; text-align: center; }
+.pull-quote .attrib { display: block; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-top: 24px; }
 .villa-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; }
-.villa-card .villa-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.villa-card .pad2 { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.villa-card h3.h-villa { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 10px; line-height: 1.25; }
+.villa-card .villa-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
 .villa-card .villa-meta span { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); border: 1px solid hsl(var(--border)); padding: 3px 8px; }
+.vchip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+.vchip { font-family: inherit; font-weight: 300; font-size: 11px; letter-spacing: 0.04em; padding: 6px 12px; border: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--muted-foreground)); cursor: pointer; }
+.vchip.active { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--foreground)); }
+.spec-line { font-size: 12px; color: hsl(var(--foreground)); letter-spacing: 0.02em; margin: 16px 0; padding: 12px 0; border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
+.feat-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.addl-note { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.6; margin-top: 14px; }
+.zone-intro { max-width: 760px; margin: 0 auto 40px; text-align: center; }
+.aroma-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 28px; }
+.aroma-card .num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 16px; }
   </style>
 </head>
 <body>
+
+<!--
+JAYASOM WIREFRAME MANIFEST (auto-generated)
+Page: Rooms & Villas — redesigned from Jayasom-Rooms-Villas-Page-Copy.docx (Karen Campbell editorial direction 6 Jun 2026 + HCD room data 23.06)
+Page type: Listing (filter-driven, two sanctuaries)
+Sections placed:
+  1. hero-overlay-center      -> SEO H1 + OG description + reserve CTA
+  2. intro prose              -> Karen intro (adapted) + architecture credit + supporting body
+  3. pull-quote (muted)       -> Karen Campbell quote
+  4. scope intro + image-strip-> scope paragraph + visual punctuation
+  5. configure preferences    -> "Personalise your stay" + aroma + pillow menu
+  6. browse the rooms (filter)-> zone toggle JAYELA/JAYANA + bedroom chips + view-variant villa cards
+  7. accessible rooms         -> Karen accessible block (standalone) + 2 room cards
+  8. reserve a stay           -> minimum nights + Essence of Jayasom + CTA
+  9. faq                      -> 6 questions
+  10. speak to a wellness advisor (dark) -> advisor copy + CTA
+Production/sign-off notes from the doc (sec.10 "Outstanding", bracketed "[confirm]" asides, CTA-wording flags) are intentionally NOT rendered as page copy.
+-->
 
 <header class="site-header">
   <a href="index.html" class="logo">Jayasom</a>
@@ -104,7 +132,7 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 </header>
 
 <div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">›</span>AMAALA<span class="sep">›</span>Rooms and Villas
+  <a href="index.html">Home</a><span class="sep">›</span>AMAALA<span class="sep">›</span>Rooms &amp; Villas
 </div>
 
 <main>
@@ -113,214 +141,188 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 <section class="hero-shell">
   <div class="wire-image" style="height:560px;width:100%;border-left:0;border-right:0;">
     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    <span class="label">Rooms &amp; Villas · Jayasom AMAALA</span>
   </div>
   <div class="hero-overlay-center">
     <div class="hero-text-center">
       <p class="eyebrow">Stay · Jayasom AMAALA</p>
-      <h1 class="h-hero">Rooms and Villas</h1>
-      <p class="body-copy" style="margin:0 auto 24px;font-style:italic;">A home that breathes to the rhythms of the Red Sea.</p>
-      <p class="body-copy" style="margin:0 auto 32px;">Six configurations, each shaped to a different way of staying. The villas and residences sit privately spaced amid lush gardens directly on the beach, with the same architecture, the same brief, the same view. The bedrooms differ; so does the way each home holds a week.</p>
+      <h1 class="h-hero">Rooms &amp; Villas</h1>
+      <p class="body-copy" style="margin:0 auto 32px;font-style:italic;">From one-bedroom pool villas to five-bedroom estates and over-water retreats — every space designed around well-being at Jayasom AMAALA.</p>
       <a href="#reserve" class="btn btn-solid">Reserve a stay</a>
     </div>
   </div>
 </section>
 
-<!-- 360 WALK-THROUGH -->
-<section class="section">
-  <div class="shell">
-    <div class="text-center mb-8">
-      <p class="eyebrow">360 views</p>
-      <h2 class="h-section">A walk through</h2>
-    </div>
-    <div class="wire-image" style="height:480px;">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-      <span class="label">360 walk-through</span>
-    </div>
-  </div>
-</section>
-
-<!-- FILTER -->
-<section class="section" style="padding-bottom:24px;">
-  <div class="shell" style="max-width:900px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Filter</p>
-      <h2 class="h-section">Browse the villas</h2>
-      <p class="body-copy" style="margin:0 auto;font-style:italic;">Choose an arrival — Jayela on the family side, Jayana on the adult side — then filter by bedroom count.</p>
-    </div>
-    <div class="flex justify-center" style="margin-top:28px;">
-      <div class="zone-toggle" role="tablist" aria-label="Choose a zone">
-        <button type="button" data-zone="jayela" class="active">Jayela</button>
-        <button type="button" data-zone="jayana">Jayana</button>
-      </div>
-    </div>
-    <div id="brChips" class="tag-row justify-center" style="margin-top:24px;"></div>
-  </div>
-</section>
-
-<!-- LISTING GRID -->
-<section class="section" style="padding-top:24px;">
-  <div class="shell">
-    <div id="villaGrid" class="grid-3"></div>
-  </div>
-</section>
-
-<!-- SENSORY FOCUS -->
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Sensory focus</p>
-      <h2 class="h-section">A sense of place</h2>
-    </div>
-    <p class="body-copy full" style="font-size:15px;line-height:1.85;">Open, light-filled spaces emphasise simplicity and serenity. Indigenous materials and exceptional local craftsmanship carry a distinct sense of place. Spacious yet cocooning interiors express the lyrical essence of the surrounding naturescapes. The residences tell a unique Red Sea story.</p>
-  </div>
-</section>
-
-<!-- ZONE CALLOUT: JAYANA / JAYELA -->
-<section class="section">
-  <div class="shell">
-    <div class="text-center mb-8" style="max-width:760px;margin:0 auto 48px;">
-      <p class="eyebrow">Zones</p>
-      <h2 class="h-section">Two arrivals, one property</h2>
-    </div>
-    <div class="grid-2" style="gap:48px;">
-      <div class="wire-card">
-        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-3 5-5 9-5s7 2 9 5"/><path d="M3 16c2-3 5-5 9-5s7 2 9 5"/></svg>
-          <span class="label">Jayana · adults</span>
-        </div>
-        <div style="padding:24px;">
-          <p class="eyebrow-mini">South entrance</p>
-          <h4 class="h-card">Jayana</h4>
-          <p class="caption">Adult guests arrive at Jayana to the south. The adult retreat side runs the deeper retreat practice and the dinner-led restaurant: Yasmeen Night Garden, Stonecrop Maze, Phoenix Garden, Saratô, Jiraka, and the adult Health and Wellness Centre.</p>
-        </div>
-      </div>
-      <div class="wire-card">
-        <div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
-          <span class="label">Jayela · families</span>
-        </div>
-        <div style="padding:24px;">
-          <p class="eyebrow-mini">North entrance</p>
-          <h4 class="h-card">Jayela</h4>
-          <p class="caption">Families arrive at Jayela to the north, with the Family Wellness Centre, the four Growing Studios, Loumi Rue, Chez Mitzuba, Breezy Kale, and the family pools. Two distinct entrances open into one Health and Wellness Centre, which sits between them. Practitioners are shared. The programme is shared.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VILLA-TYPES BACKFILL DENSITY -->
-<section class="section section-muted">
-  <div class="shell" style="max-width:820px;">
-    <div class="text-center mb-8">
-      <p class="eyebrow">Across the property</p>
-      <h2 class="h-section">Sixty villas plus twenty-four residences</h2>
-    </div>
-    <div class="body-copy full" style="font-size:15px;line-height:1.85;">
-      <p style="margin-bottom:20px;">Sixty villas hold the resort across four core layouts: One-Bedroom Beachfront Pool Villa at sixty-two square metres indoor and forty-eight square metres outdoor; Two-Bedroom Beachfront Pool Villa for guests travelling together; Three-Bedroom Pool Villa for cohort or family stays; and Over-Water Villas facing the bay for guests on longer stays. Each layout carries a balcony, lounge chairs, plunge pool, Coco-mat natural mattress, and Oud-custom amenities.</p>
-      <p style="margin-bottom:20px;">Each room is set up around stated preferences before arrival. Aroma options: Calming Lavender or Spirited Rosemary. Pillow choice from the seven on the menu. The room held to the property's temperature standard. Coco-mat natural mattress: latex, coconut fibre, horse hair, cactus fibre, seaweed, knitted cotton.</p>
-      <p style="margin-bottom:20px;">Twenty-four wellness residences sit alongside the resort villas across three layouts: ten two-bedroom at three hundred and fifty square metres, twelve three-bedroom at four hundred and twenty-three square metres, and two four-bedroom at five hundred and twenty-five square metres. Architecture is by Heah and Co; interiors by Studio Carter. A five-bedroom Jayela Residence with private wellness studio sits as a separate flagship layout.</p>
-      <p>Place is a method, not a backdrop. The villa layouts hold the practice as much as the studios do. Phase one is a small property by destination-resort scale, and the design is for it to stay that way. The daily wellness rhythm is sized to the cohort, not to the building.</p>
-    </div>
-  </div>
-</section>
-
-<!-- IN-ROOM AMENITIES -->
-<section class="section">
-  <div class="shell">
-    <div class="text-center mb-8">
-      <p class="eyebrow">In-room</p>
-      <h2 class="h-section">Set up around stated preferences</h2>
-    </div>
-    <div class="grid-3" style="margin-top:32px;">
-      <div class="wire-card pad" style="padding:24px;"><h4 class="h-card">Aroma</h4><p class="caption">Calming Lavender or Spirited Rosemary, set before arrival.</p></div>
-      <div class="wire-card pad" style="padding:24px;"><h4 class="h-card">Pillow</h4><p class="caption">Choice from the seven on the pillow menu.</p></div>
-      <div class="wire-card pad" style="padding:24px;"><h4 class="h-card">Coco-mat mattress</h4><p class="caption">Latex, coconut fibre, horse hair, cactus fibre, seaweed, knitted cotton.</p></div>
-      <div class="wire-card pad" style="padding:24px;"><h4 class="h-card">Wellness minibar</h4><p class="caption">Stocked according to the Specialist Consultation.</p></div>
-      <div class="wire-card pad" style="padding:24px;"><h4 class="h-card">Oud-custom amenities</h4><p class="caption">Bath and body, drawn from the regional palette.</p></div>
-      <div class="wire-card pad" style="padding:24px;"><h4 class="h-card">The Jayasom Collection</h4><p class="caption">A welcome amenity in every room on arrival.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- RESERVE CTA -->
-<section class="section section-muted" id="reserve">
-  <div class="shell" style="max-width:760px;text-align:center;">
-    <p class="eyebrow">Reserve</p>
-    <h2 class="h-section">Reserve a stay</h2>
-    <p class="body-copy" style="margin:0 auto 24px;">Stays are scheduled around the practitioners on hand that week. A Wellness Advisor confirms which villa fits the dates and the party.</p>
-    <a href="#" class="btn btn-solid">Reserve Now</a>
-  </div>
-</section>
-
-<!-- INVESTMENT CROSS-LINK -->
+<!-- INTRO -->
 <section class="section">
   <div class="shell">
     <div class="grid-2" style="gap:64px;align-items:center;">
       <div>
-        <p class="eyebrow">Or own one</p>
-        <h3 class="h-section">The same residences are available for ownership</h3>
-        <p class="body-copy mb-6 full">The same residences are available for ownership, with the Jayasom Longevity Assessment Programme included.</p>
-        <a href="wireframe-amaala-residences-v3.html" class="btn">Read about ownership</a>
+        <p class="eyebrow">Rooms &amp; Villas</p>
+        <h2 class="h-section">Designed around your well-being, morning to night</h2>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Rooms and villas are thoughtfully designed to support your well-being from morning to night. Generous dressing and bathing areas create a sense of ease, while king-size beds with natural fibre mattresses, pillow choices, and blackout curtains help encourage deeper rest. Fewer distractions, a nourishing wellness mini-bar, and in every villa, a private pool makes each stay feel calm, considered, and beautifully restorative.</p>
+        <p class="body-copy full" style="font-size:15px;line-height:1.85;margin-bottom:20px;">Open, light-filled spaces create a feeling of simplicity and serenity, while indigenous materials and exceptional local craftsmanship ground each villa and room in its setting. Outdoor pools and terraces invite movement, conversation, contemplation, and quiet reflection. Each captures the lyrical beauty of the surrounding coast and landscape, telling a distinctive Red Sea story with elegance and restraint.</p>
+        <p class="caption" style="font-style:italic;margin-top:8px;">Architecture by the renowned Heah and Co. Interior design by Studio Carter.</p>
       </div>
-      <div class="wire-image" style="height:340px;">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h6M9 13h6M9 17h6"/></svg>
-        <span class="label">Owner residence</span>
+      <div class="wire-image" style="height:460px;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Villa interior &amp; terrace</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BRAND PARTNERS / LOCALITY -->
+<!-- PULL QUOTE -->
 <section class="section section-muted">
   <div class="shell">
-    <div class="grid-2" style="gap:64px;">
-      <div>
-        <p class="eyebrow">Brand partners</p>
-        <h3 class="h-sub">Architecture by Heah &amp; Co. Interiors by Studio Carter. Bedrooms anchor on Coco-mat handcrafted natural mattresses.</h3>
-      </div>
-      <div>
-        <p class="eyebrow">Locality</p>
-        <p class="body-copy full">Saudi Arabia. AMAALA. Triple Bay. Red Sea. Operated by Triple Bay Wellness Resort Tourism Accommodation Company under the Jayasom brand.</p>
-        <p class="caption mt-4" style="font-style:italic;">Reviewed by Sascha Hemmann, General Manager, Jayasom AMAALA.</p>
+    <p class="pull-quote">“Place is a method, not a backdrop. The villa layouts hold the practice as much as the studios do.”<span class="attrib">— Karen Campbell</span></p>
+  </div>
+</section>
+
+<!-- SCOPE INTRO + IMAGE STRIP -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Every way of staying</p>
+      <h2 class="h-section">A room for every guest</h2>
+    </div>
+    <p class="body-copy full" style="font-size:15px;line-height:1.85;text-align:center;">From one-bedroom terrace rooms to over-water villas and one, two, three, four, and five-bedroom configurations, there is a room for every guest and every way of staying. Each villa carries a private terrace, lounge chairs, and a private pool. Many include both indoor and outdoor shower options. COCO-MAT™ natural mattresses and bespoke oud-inspired amenities are throughout. Every room includes a Jayasom flask and Wellness journal.</p>
+  </div>
+  <div class="shell" style="margin-top:40px;">
+    <div class="image-strip">
+      <div class="wire-image" style="height:160px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-3 5-5 9-5s7 2 9 5"/><path d="M3 16c2-3 5-5 9-5s7 2 9 5"/></svg><span class="label">Private pool &amp; terrace</span></div>
+      <div class="wire-image" style="height:160px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="0"/><path d="M3 11h18"/></svg><span class="label">COCO-MAT™ mattress</span></div>
+      <div class="wire-image" style="height:160px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8M10 2v4M14 2v4M7 10c0-2 2-4 5-4s5 2 5 4l-1 11H8z"/></svg><span class="label">Oud-inspired amenities</span></div>
+      <div class="wire-image" style="height:160px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h4"/></svg><span class="label">Jayasom flask &amp; journal</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIGURE PREFERENCES -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Configure your preferences</p>
+      <h2 class="h-section">Personalise your stay before you arrive.</h2>
+      <p class="body-copy" style="margin:0 auto;">Before you arrive, select an aroma to set the atmosphere of your room: Calming Lavender or Spirited Rosemary. Choose from seven options on the pillow menu, each curated to support the quality of your sleep with your Wellness advisor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BROWSE THE ROOMS (FILTER) -->
+<section class="section" id="browse">
+  <div class="shell" style="max-width:900px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Browse the rooms</p>
+      <h2 class="h-section">Two sanctuaries, one property</h2>
+      <p class="body-copy" style="margin:0 auto;">Choose a sanctuary — JAYELA for families, JAYANA for adults — then filter by room type.</p>
+    </div>
+    <div class="flex justify-center" style="margin-top:28px;">
+      <div class="zone-toggle" role="tablist" aria-label="Choose a sanctuary">
+        <button type="button" data-zone="jayela" class="active">Jayela · Family</button>
+        <button type="button" data-zone="jayana">Jayana · Adults</button>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="shell">
+    <div id="zoneIntro" class="zone-intro"></div>
+    <div id="brChips" class="tag-row justify-center mb-8"></div>
+    <div id="villaGrid" class="grid-3" style="margin-top:32px;"></div>
+  </div>
+</section>
+
+<!-- ACCESSIBLE ROOMS -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:1152px;">
+    <div class="text-center mb-8" style="max-width:820px;margin:0 auto 48px;">
+      <p class="eyebrow">JAYELA · Accessibility</p>
+      <h2 class="h-section">Accessible Rooms</h2>
+      <p class="body-copy" style="margin:0 auto 16px;">Within the Jayela Terraces are rooms specifically designed for guests who prefer not to have steps. Families with young children, or those who appreciate assistance with mobility, will find a range of conveniences: electrically assisted beds, vibrating and lighted fire alarms, an emergency call system, easy-access showers and toilets, grab rails, and adjusted heights for hand basins and baths.</p>
+      <p class="body-copy" style="margin:0 auto;">Jayela Terrace rooms are directly accessible by elevator to the Jayela reception, the Loumi Rue restaurant, the Jayela pool, and the play spaces.</p>
+    </div>
+    <div class="grid-2">
+      <a href="wireframe-rooms-and-villas-details-v3.html" class="villa-card">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M6 8h8M10 8v8M10 16l-3 5M10 16l4 1 3 4"/></svg><span class="label">Accessible Terrace Room — Sound &amp; Vision</span></div>
+        <div class="pad2">
+          <p class="eyebrow-mini">JAYELA · Family</p>
+          <h3 class="h-villa">Accessible Terrace Room — Sound &amp; Vision</h3>
+          <div class="villa-meta"><span>No pool</span><span>62 m² indoor</span><span>48 m² outdoor</span><span>Up to 3 guests · King + daybed</span></div>
+          <p class="caption" style="flex:1;">A sea-view terrace room designed for guests who prefer not to have steps, with hearing and vision conveniences integrated throughout — directly accessible by elevator to the Jayela reception, Loumi Rue, the pool, and the play spaces.</p>
+          <p class="caption mt-6" style="font-weight:700;color:hsl(var(--foreground));">View this room →</p>
+        </div>
+      </a>
+      <a href="wireframe-rooms-and-villas-details-v3.html" class="villa-card">
+        <div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M12 6v8M8 10h8M12 14l-3 6M12 14l3 6"/></svg><span class="label">Accessible Terrace Room — Mobility</span></div>
+        <div class="pad2">
+          <p class="eyebrow-mini">JAYELA · Family</p>
+          <h3 class="h-villa">Accessible Terrace Room — Mobility</h3>
+          <div class="villa-meta"><span>No pool</span><span>62 m² indoor</span><span>48 m² outdoor</span><span>Up to 3 guests · King + daybed</span></div>
+          <p class="caption" style="flex:1;">A sea-view terrace room with full mobility conveniences — no-step access, roll-in shower, and assistance rails — directly accessible by elevator to the Jayela reception, Loumi Rue, the pool, and the play spaces.</p>
+          <p class="caption mt-6" style="font-weight:700;color:hsl(var(--foreground));">View this room →</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE A STAY -->
+<section class="section" id="reserve">
+  <div class="shell" style="max-width:760px;text-align:center;">
+    <p class="eyebrow">Reserve a stay</p>
+    <h2 class="h-section">Reserve a stay</h2>
+    <p class="body-copy" style="margin:0 auto 24px;">Retreats are available for a minimum of 4 nights. An introductory programme — the Essence of Jayasom — is available 2–3 nights, offering a meaningful introduction to the philosophy and rhythm of daily life at the resort.</p>
+    <a href="#" class="btn btn-solid">Reserve a stay</a>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="section">
+<section class="section section-muted">
   <div class="shell" style="max-width:820px;">
     <div class="text-center mb-8">
       <p class="eyebrow">Questions</p>
-      <h2 class="h-section">Frequently asked questions</h2>
+      <h2 class="h-section">FAQ</h2>
     </div>
     <div>
       <div class="faq-item">
-        <div class="q"><p class="q-text">How many villa types are there?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
-        <p class="a">Six configurations: two-bedroom, three-bedroom, four-bedroom, the five-bedroom Jayela Residence, the Beach Villa, and the Oceanfront Suite.</p>
+        <div class="q"><p class="q-text">Can I bring a pet?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Unfortunately we cannot accommodate pets in the resort.</p>
       </div>
       <div class="faq-item">
-        <div class="q"><p class="q-text">What is the difference between rental and ownership?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
-        <p class="a">Rental is a stay through the resort booking. Ownership joins the Jayasom Longevity Assessment Programme; the residence can be included in the rental programme when owners are not in residence.</p>
+        <div class="q"><p class="q-text">Can I bring a nanny?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Yes. Carers and nannies can be added as part of your booking.</p>
       </div>
       <div class="faq-item">
-        <div class="q"><p class="q-text">Where are the villas located?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
-        <p class="a">At Jayasom Wellness Resort, part of Triple Bay AMAALA on the Red Sea coast of Saudi Arabia. Al Wajh airport is one hour by car.</p>
+        <div class="q"><p class="q-text">How many children can I fit in a room? Can I have extra beds?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a" style="font-style:italic;">Answer to be confirmed.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">What is the minimum age for JAYANA?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Guests must be 16 or above.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Are there any age restrictions for JAYELA?</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">None — JAYELA welcomes guests of all ages.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q"><p class="q-text">Tell me more about multi-bedroom villas.</p><svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div>
+        <p class="a">Multi-bedroom villas comprise a lead villa (with arrival pavilion, lounge, powder room, dining, and pantry) and one or more additional standalone villa structures. These are separate buildings, connected by private paths and landscaping.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- SPEAK TO A WELLNESS ADVISOR -->
 <section class="section section-tall section-dark">
   <div class="shell" style="max-width:760px;text-align:center;">
     <p class="eyebrow">Plan your stay</p>
     <h2 class="h-section">Speak to a Wellness Advisor</h2>
-    <p class="body-copy" style="margin:0 auto 32px;">A Wellness Advisor confirms which villa fits the dates and the party.</p>
+    <p class="body-copy" style="margin:0 auto 32px;">A Wellness Advisor can advise on rooms and retreats, dates and programmes. Contact us now to arrange a call.</p>
     <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
-      <a href="#" class="btn btn-on-dark">Reserve Now</a>
-      <a href="wireframe-amaala-residences-v3.html" class="btn btn-on-dark">Read about ownership</a>
+      <a href="wireframe-contact-v3.html" class="btn btn-on-dark">Arrange a call</a>
+      <a href="#reserve" class="btn btn-on-dark">Reserve a stay</a>
     </div>
   </div>
 </section>
@@ -420,79 +422,191 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 (function(){
   var DATA = {
     jayela: [
-      {n:"1-Bedroom Terrace Room — Sea View", br:1, meta:["62 m²","King bed","Max 2+1","Sea view"], d:"This room features a generous deck, sunken seating, and outdoor dining with unobstructed views to the cove. Inside, a built-in daybed is a comfortable nook for a child or for casual relaxation. Accessible via stairs or elevator, the Terrace rooms are near the family facilities, pool, and beach."},
-      {n:"1-Bedroom Terrace Room — Accessible (Sound & Vision)", br:1, meta:["62 m²","King bed","Max 2+1","Sound & vision accessible"], d:"This accessible sea-view room combines calming coastal views with thoughtfully integrated vision and hearing accessibility features. A built-in daybed is convertible for a third guest. Accessible via stairs or elevator, this Terrace room is conveniently near the family facilities, pool, and beach."},
-      {n:"1-Bedroom Terrace Room — Accessible (Mobility)", br:1, meta:["62 m²","King bed","Max 2+1","Mobility accessible"], d:"This wheelchair-accessible sea-view room offers unobstructed coastal views and thoughtfully integrated mobility features. A built-in daybed is convertible for a third guest. Accessible via stairs or elevator, this Terrace room is conveniently located near the family facilities, pool, and beach."},
-      {n:"1-Bedroom Pool Villa — Garden View", br:1, meta:["62 m²","King bed","Max 2+1","Private pool"], d:"This villa offers an inspiring stay surrounded by landscaped gardens generously designed for slower living. The ample terrace and infinity pool support relaxation and are ideal for family activities. Beautifully appointed interiors include a free-standing sofa convertible for plus-one sleeping."},
-      {n:"1-Bedroom Pool Villa — Sea View", br:1, meta:["62 m²","King bed","Max 2+1","Private pool"], d:"With a view of the sea, this spacious villa offers a calm retreat within walking distance of the Wellness Centre. Beautifully appointed interiors and the ample terrace and pool support relaxation and are ideal for family activity. A free-standing sofa is convertible for plus-one sleeping."},
-      {n:"1-Bedroom Pool Villa — Hilltop View", br:1, meta:["88 m²","King bed","Max 2+1","Private pool"], d:"Positioned on elevated terrain with hillside views, this spacious villa offers a peaceful retreat for relaxed family stays immersed in nature. Beautifully appointed interiors, an ample outdoor patio with pool, and outdoor dining spaces create a calm setting for rest and reconnection."},
-      {n:"1-Bedroom Pool Villa — Premier", br:1, meta:["88 m²","King bed","Max 2+1","Private pool"], d:"This villa offers additional interior space designed for elevated comfort. Beautifully appointed interiors include a desk and a convertible sofa for plus-one sleeping, harmonised with generous outdoor spaces featuring a large pool with sunken seating, dining area, and a canopy day bed for ultimate calm."},
-      {n:"1-Bedroom Pool Villa — Beachfront", br:1, meta:["62 m²","King bed","Max 2+1","Private pool"], d:"Set directly along the shoreline, this beachfront villa offers uninterrupted sea views and a calming coastal setting designed for restorative family stays. The ample terrace and pool support relaxation and are ideal for family activity. A free-standing sofa is convertible for plus-one sleeping."},
-      {n:"2-Bedroom Pool Villa — Garden View", br:2, meta:["233 m²","King beds","Max 4","Private pool"], d:"Surrounded by landscaped gardens, this spacious two-bedroom villa offers generous indoor-outdoor living designed for shared relaxation and quiet reconnection. An arrival pavilion, lounge with guest powder room, dining area, and pantry spaces create a private retreat immersed in nature."},
-      {n:"2-Bedroom Pool Villa — Hilltop View", br:2, meta:["233 m²","King beds","Max 5","Private pool"], d:"Positioned on an elevated hilltop, this spacious two-bedroom villa offers expansive horizon views and generous indoor-outdoor living spaces. An arrival pavilion, lounge with powder room, dining, and pantry deliver a premium hideaway for shared relaxation and reflection."},
-      {n:"2-Bedroom Pool Villa — Sea View", br:2, meta:["321 m²","King beds","Max 4","Private pool"], d:"With sea views and generous indoor-outdoor living, this spacious villa offers a peaceful retreat designed for shared family stays and quiet reconnection. An arrival pavilion, lounge with guest powder room, dining area, and pantry spaces create a calm setting immersed in nature and sea."},
-      {n:"3-Bedroom Pool Villa — Garden View", br:3, meta:["321 m²","King beds","Max 6","Private pool"], d:"This expansive three-bedroom villa comprises two contiguous rooms and one standalone villa. It features an arrival pavilion, a lounge with a powder room, dining area, and pantry spaces that create a refined retreat setting for shared relaxation and quiet reconnection."},
-      {n:"3-Bedroom Pool Villa — Sea View", br:3, meta:["321 m²","King beds","Max 6","Private pool"], d:"This expansive three-bedroom sea-view villa comprises two contiguous rooms and one standalone villa. Designed for shared stays, the lead villa includes an arrival pavilion, a lounge with powder room, dining, and pantry, delivering a refined retreat setting for shared relaxation and reflection."},
-      {n:"4-Bedroom Pool Villa — Sea View", br:4, meta:["416 m²","King beds","Max 8","Private pool"], d:"This expansive four-bedroom villa comprises two contiguous sea-view rooms and two standalone villas. Designed for shared stays, the lead villa includes an arrival pavilion, a lounge with a powder room, dining, and pantry, delivering a refined retreat setting for shared relaxation and reflection."},
-      {n:"5-Bedroom Pool Villa — Sea View", br:5, meta:["685 m²","King beds","Max 10","Private pool"], d:"This exclusive five-bedroom villa comprises two contiguous sea-view rooms and three standalone villas. The lead villa with a lounge, powder room, dining, and pantry is supported by a separate wellness studio enabling private services — the ultimate refined setting for shared relaxation and reflection."}
+      {
+        name:"Terrace Room", cat:"terrace",
+        summary:["No private pool","Elevator access","Near facilities, pool & beach"],
+        copy:"The Jayela Terrace Rooms sit directly accessible, by elevator, to the Jayela reception, Loumi Rue restaurant, the Jayela pool, and the play spaces. Each room features a generous deck with sunken seating and outdoor dining, with unobstructed views to the cove. Inside, a built-in daybed offers a comfortable nook for a child or for quiet relaxation.",
+        variants:[
+          {label:"Sea View", spec:"62 m² indoor · 48 m² outdoor · Up to 3 guests · King + daybed"}
+        ],
+        features:["Large outdoor patio with sunken sofa","Outdoor dining table","King-size bed & convertible daybed","Spacious bathroom with double vanity","Indoor & open-air showers","Bathtub","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"1-Bedroom Pool Villa", cat:1,
+        summary:["Private pool","62–88 m² indoor","Up to 3 guests","King + convertible sofa"],
+        copy:"This villa offers an inspiring stay, positioned for a beachfront view of the sea, on a hillside or hilltop, or nestled in landscaped gardens generously designed for slower living. The ample terrace and infinity pool support relaxation and are well-suited to family activity. Beautifully appointed interiors include a free-standing sofa convertible for a third sleeping space.",
+        variants:[
+          {label:"Garden View", spec:"62 m² indoor · 42 m² outdoor · Up to 3 guests · King + convertible sofa"},
+          {label:"Sea View", spec:"62 m² indoor · 42 m² outdoor · Up to 3 guests · King + convertible sofa"},
+          {label:"Beachfront", spec:"62 m² indoor · 42 m² outdoor · Up to 3 guests · King + convertible sofa"},
+          {label:"Hilltop View", spec:"88 m² indoor · 79 m² outdoor · Up to 3 guests · King + sofa bed", extra:"Outdoor shower · Outdoor dining area · Dry vanity area"},
+          {label:"Premier", spec:"88 m² indoor · 79 m² outdoor · Up to 3 guests · King + convertible sofa · Writing desk · Canopy daybed", extra:"Writing desk · Outdoor canopy daybed · Indoor & outdoor showers"}
+        ],
+        features:["Private infinity pool","Outdoor terrace & sunken seating","King-size bed & convertible sofa","Bathtub & shower","Double vanity","Double wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"2-Bedroom Pool Villa", cat:2,
+        summary:["Private pool","233 m² indoor","193 m² outdoor","Up to 4 guests · 2 × King"],
+        copy:"A spacious two-bedroom villa with generous indoor-outdoor living designed for shared relaxation and quiet reconnection. An arrival pavilion, lounge with guest powder room, dining area, and pantry create a private retreat, immersed in nature, gardens, or sea views.",
+        variants:[
+          {label:"Garden View", spec:"233 m² indoor · 193 m² outdoor · Up to 4 guests · 2 × King"},
+          {label:"Hilltop View", spec:"233 m² indoor · 193 m² outdoor · Up to 4 guests · 2 × King"},
+          {label:"Sea View", spec:"233 m² indoor · 193 m² outdoor · Up to 4 guests · 2 × King"}
+        ],
+        features:["Outdoor patio & dining space","Infinity pool & daybeds","Arrival pavilion","Indoor lounge, dining & pantry","Guest powder room","Two king-size bedrooms","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"3-Bedroom Pool Villa", cat:3,
+        summary:["Private pool","321 m² indoor","340 m² outdoor","Up to 6 guests · 3 × King"],
+        copy:"This expansive three-bedroom villa comprises two contiguous rooms and one standalone villa, connected by private paths and landscaping. The lead villa includes an arrival pavilion, lounge with powder room, dining area, and pantry — a refined setting for shared relaxation and quiet reconnection.",
+        variants:[
+          {label:"Garden View", spec:"321 m² indoor · 340 m² outdoor · Up to 6 guests · 3 × King"},
+          {label:"Sea View", spec:"321 m² indoor · 340 m² outdoor · Up to 6 guests · 3 × King"}
+        ],
+        features:["Three king-size bedrooms","Outdoor patio & dining space","Infinity pool & daybeds","Arrival pavilion","Indoor lounge, dining & pantry","Guest powder room","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"4-Bedroom Pool Villa — Sea View", cat:4,
+        summary:["Private pool","416 m² indoor","418 m² outdoor","Up to 8 guests · 4 × King"],
+        copy:"This expansive four-bedroom villa comprises two contiguous sea-view rooms and two standalone villas. The lead villa includes an arrival pavilion, lounge with powder room, dining, and pantry — a refined retreat setting for extended family or group wellness stays.",
+        variants:[
+          {label:"Sea View", spec:"416 m² indoor · 418 m² outdoor · Up to 8 guests · 4 × King"}
+        ],
+        features:["Four king-size bedrooms","Outdoor patio & dining space","Infinity pool & daybeds","Arrival pavilion","Indoor lounge, dining & pantry","Guest powder room","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"5-Bedroom Pool Villa — Sea View", cat:5,
+        summary:["Private pool","685 m² indoor","586 m² outdoor","Up to 10 guests · 5 × King","Private wellness studio"],
+        copy:"This exclusive five-bedroom villa comprises two contiguous sea-view rooms and three standalone villas. The lead villa, with lounge, powder room, dining, and pantry — is supported by a separate private wellness studio for in-villa treatments and dedicated group programming. The ultimate setting for shared wellness and extended reconnection.",
+        variants:[
+          {label:"Sea View", spec:"685 m² indoor · 586 m² outdoor · Up to 10 guests · 5 × King"}
+        ],
+        features:["Five king-size bedrooms","Private wellness studio","Outdoor patio & dining space","Infinity pool & daybeds","Arrival pavilion","Indoor lounge, dining & pantry","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      }
     ],
     jayana: [
-      {n:"1-Bedroom Pool Villa — Garden View", br:1, meta:["62 m²","King bed","Max 2","Private pool"], d:"This villa offers an inspiring stay in every detail, from thoughtfully designed interiors to ample outdoor spaces where a large terrace with sunken seating and an infinity pool is surrounded by garden perspectives. The calming bathroom includes a bathtub, shower, and double wardrobe space."},
-      {n:"1-Bedroom Pool Villa — Premier", br:1, meta:["89 m²","King bed","Max 3","Private pool"], d:"This villa offers additional interior space designed for elevated comfort. Beautifully appointed interiors include a desk and a convertible sofa for plus-one sleeping, harmonised with generous outdoor spaces featuring a large pool with sunken seating, dining area, and a canopy day bed for ultimate calm."},
-      {n:"1-Bedroom Pool Villa — Horizon View", br:1, meta:["62 m²","King bed","Max 2","Private pool"], d:"Positioned to capture views towards the coast and the horizon, this villa offers thoughtful interiors and inspiring outdoor spaces where a large terrace with sunken seating and a private pool enhances the vista. The calming bathroom includes a bathtub, shower, and double wardrobes."},
-      {n:"1-Bedroom Pool Villa — Sea View", br:1, meta:["62 m²","King bed","Max 2","Private pool"], d:"Positioned for a view of the sea and delightful evening light, this villa offers thoughtful interiors and inspiring outdoor spaces where a large terrace patio with sunken seating and a pool enhances the vista. The calming bathroom includes a bathtub, shower, and double wardrobe space."},
-      {n:"1-Bedroom Pool Villa — Beachfront", br:1, meta:["62 m²","King bed","Max 2","Private pool"], d:"Set directly along the shoreline, this beachfront villa offers uninterrupted sea views and a tranquil coastal atmosphere designed for slower living and restorative moments by the Red Sea. Relax in thoughtful interiors and inspiring outdoor spaces with a patio and a private pool."},
-      {n:"1-Bedroom Water Villa", br:1, meta:["63 m²","King bed","Max 2","Over-water pool"], d:"This villa stands over the water's edge, offering a private and mesmerising experience, particularly brilliant at sunset. Generous outdoor spaces have expansive views across the cove, whilst beautifully appointed interiors create a peaceful retreat atmosphere shaped by stillness and sea."},
-      {n:"2-Bedroom Water Villa", br:2, meta:["232 m²","King beds","Max 4","Over-water pool"], d:"This exclusive two-bedroom over-water villa, intended for two couples, offers generous living spaces and serene views. An arrival pavilion, lounge with guest powder room, dining, and pantry spaces deliver a private retreat setting designed for shared relaxation and quiet coastal restoration."},
-      {n:"2-Bedroom Pool Villa — Garden View", br:2, meta:["232 m²","King beds","Max 4","Private pool"], d:"Surrounded by landscaped gardens, this spacious two-bedroom villa offers generous indoor-outdoor living. An arrival pavilion, lounge with guest powder room, dining, and pantry spaces offer a private retreat setting designed for shared relaxation and reflection."},
-      {n:"2-Bedroom Pool Villa — Horizon View", br:2, meta:["232 m²","King beds","Max 4","Private pool"], d:"Positioned on elevated terrain, this spacious two-bedroom villa offers expansive horizon views and generous indoor-outdoor living spaces. An arrival pavilion, lounge with powder room, dining, and pantry deliver an elevated retreat setting for shared relaxation and reflection."},
-      {n:"3-Bedroom Pool Villa — Sea View", br:3, meta:["320 m²","King beds","Max 6","Private pool"], d:"This expansive three-bedroom villa comprises two contiguous sea-view rooms and one stand-alone garden villa. Designed for up to three couples, the lead villa includes an arrival pavilion, lounge with a powder room, dining, and a pantry, delivering a refined retreat setting for shared relaxation and reflection."}
+      {
+        name:"1-Bedroom Pool Villa", cat:1,
+        summary:["Private pool","62–89 m² indoor","Up to 2–3 guests","King"],
+        copy:"Thoughtfully designed interiors open to generous outdoor spaces, a large terrace with sunken seating and an infinity pool set against garden perspectives, the horizon, or the sea. The calming bathroom includes a bathtub, shower, and double wardrobes.",
+        variants:[
+          {label:"Garden View", spec:"62 m² indoor · 48 m² outdoor · Up to 2 guests · King"},
+          {label:"Horizon View", spec:"62 m² indoor · 48 m² outdoor · Up to 2 guests · King"},
+          {label:"Sea View", spec:"62 m² indoor · 48 m² outdoor · Up to 2 guests · King"},
+          {label:"Beachfront", spec:"62 m² indoor · 48 m² outdoor · Up to 2 guests · King"},
+          {label:"Premier", spec:"89 m² indoor · 85 m² outdoor · Up to 3 guests · King + convertible sofa · Writing desk · Canopy daybed", extra:"Writing desk · Sofa convertible for +1 · Indoor & outdoor showers · Outdoor canopy daybed"}
+        ],
+        features:["Generous outdoor patio","Infinity pool","King-size bed","Relaxing sofa","Double wardrobes","Bathtub & shower","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"1-Bedroom Water Villa", cat:1,
+        summary:["Private pool","Over-water position","63 m² indoor","85 m² outdoor","Up to 2 guests · King"],
+        copy:"This villa stands over the water's edge, offering a private and mesmerising experience that is particularly extraordinary at sunset. Generous outdoor spaces carry expansive views across the Red Sea cove, while beautifully appointed interiors create a retreat atmosphere shaped by stillness and sea.",
+        variants:[
+          {label:"Over-water", spec:"63 m² indoor · 85 m² outdoor · Up to 2 guests · King · Over-water position"}
+        ],
+        features:["Over-water position on the Red Sea cove","Generous patio","Infinity pool","King-size bed","Double vanity & wardrobes","Bathtub","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"2-Bedroom Water Villa", cat:2,
+        summary:["Private pool","Over-water position","232 m² indoor","234 m² outdoor","Up to 4 guests · 2 × King"],
+        copy:"This exclusive two-bedroom over-water villa offers generous living spaces and serene views across the cove. An arrival pavilion, lounge with guest powder room, dining, and pantry deliver a private retreat setting designed for shared relaxation and quiet coastal restoration.",
+        variants:[
+          {label:"Over-water", spec:"232 m² indoor · 234 m² outdoor · Up to 4 guests · 2 × King · Over-water position"}
+        ],
+        features:["Over-water position on the Red Sea cove","Large outdoor patio & dining space","Infinity pool & daybeds","Indoor lounge, dining & pantry","Guest powder room","Two king-size bedrooms","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"2-Bedroom Pool Villa", cat:2,
+        summary:["Private pool","232 m² indoor","182 m² outdoor","Up to 4 guests · 2 × King"],
+        copy:"A spacious two-bedroom villa with generous indoor-outdoor living, set against garden perspectives or expansive horizon views. An arrival pavilion, lounge with powder room, dining, and pantry deliver an elevated retreat setting for shared relaxation and reflection.",
+        variants:[
+          {label:"Garden View", spec:"232 m² indoor · 182 m² outdoor · Up to 4 guests · 2 × King"},
+          {label:"Horizon View", spec:"232 m² indoor · 182 m² outdoor · Up to 4 guests · 2 × King"}
+        ],
+        features:["Outdoor patio & dining space","Infinity pool & daybeds","Arrival pavilion","Indoor lounge, dining & pantry","Guest powder room","Two king-size bedrooms","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      },
+      {
+        name:"3-Bedroom Pool Villa — Sea View", cat:3,
+        summary:["Private pool","320 m² indoor","296 m² outdoor","Up to 6 guests · 3 × King"],
+        copy:"This expansive three-bedroom villa comprises two contiguous sea-view villas and one standalone garden villa, connected by private paths. The lead villa includes an arrival pavilion, lounge with powder room, dining, and pantry — a refined setting for shared relaxation and reflection, set against open views of the Red Sea.",
+        variants:[
+          {label:"Sea View", spec:"320 m² indoor · 296 m² outdoor · Up to 6 guests · 3 × King"}
+        ],
+        features:["Three king-size bedrooms","Outdoor patio & dining space","Infinity pool & daybeds","Arrival pavilion","Indoor lounge, dining & pantry","Guest powder room","Indoor & outdoor showers","Desk & walk-in wardrobes","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+      }
     ]
   };
 
-  var ICON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
-  var WORDS = {1:"One",2:"Two",3:"Three",4:"Four",5:"Five"};
-  var LABEL = {jayela:"Jayela · family side", jayana:"Jayana · adult side"};
+  // Accessible Rooms full detail — preserved here as the single source of truth for the room detail page
+  // (cards in the Accessible Rooms section show title/labels/description only, per the listing-card pattern).
+  var ACCESSIBLE = [
+    {
+      name:"Accessible Terrace Room — Sound & Vision", zone:"JAYELA · Family",
+      spec:"62 m² indoor · 48 m² outdoor · Up to 3 guests · King + daybed · No pool",
+      features:["Large outdoor patio without steps","Outdoor dining table","Electrically adjustable king-size bed","Convenient room controls","Vibrating alarm","Visual fire alarm flasher","Spacious bathroom with rails","Fixed shower seating","Double sinks & dry vanity","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+    },
+    {
+      name:"Accessible Terrace Room — Mobility", zone:"JAYELA · Family",
+      spec:"62 m² indoor · 48 m² outdoor · Up to 3 guests · King + daybed · No pool",
+      features:["Large outdoor patio with no-step access","Outdoor dining table","Electrically adjustable king-size bed","Convenient room controls","Roll-in shower with foldable seating","Lower sink with open access below","Lower bathtub with assistance rails","Vibrating alarm & bedside visual alarm","Jayasom Flask","Wellness Journal","Wellness-curated minibar"]
+    }
+  ];
 
-  var zone = "jayela", br = "all";
+  var ZONE = {
+    jayela: { label:"JAYELA · Family", intro:"JAYELA is the family wellness sanctuary at Jayasom — a multigenerational space where every age has its own programme, its own rhythm, and its own pace. Accommodation spans terrace rooms and private pool villas, all positioned close to the family facilities, play spaces, and beach." },
+    jayana: { label:"JAYANA · Adults", intro:"JAYANA is the adult wellness sanctuary at Jayasom — serene, private, and shaped entirely around those seeking genuine restoration. It has its own entrance, its own programming, and its own atmosphere of quiet. Accommodation ranges from private pool villas overlooking the gardens and coast to over-water villas positioned directly on the Red Sea cove. Minimum age for JAYANA: 16." }
+  };
+
+  var CAT_ORDER = { jayela: ["terrace",1,2,3,4,5], jayana: [1,2,3] };
+  var CAT_LABEL = { "terrace":"Terrace", 1:"1-Bedroom", 2:"2-Bedroom", 3:"3-Bedroom", 4:"4-Bedroom", 5:"5-Bedroom" };
+
+  var ICON = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+
+  var zone = "jayela", cat = "all";
   var grid = document.getElementById("villaGrid");
   var chipBar = document.getElementById("brChips");
+  var introBox = document.getElementById("zoneIntro");
 
-  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
   function card(v){
-    var meta = v.meta.map(function(m){ return "<span>"+esc(m)+"</span>"; }).join("");
+    var tags = v.summary.map(function(t){ return "<span>"+esc(t)+"</span>"; }).join("");
+    var verb = v.name.indexOf("Villa") >= 0 ? "View this villa →" : "View this room →";
     return '<a href="wireframe-rooms-and-villas-details-v3.html" class="villa-card">'
-      + '<div class="wire-image" style="height:220px;border:0;border-bottom:1px solid hsl(var(--border));">'+ICON+'<span class="label">'+esc(v.n)+'</span></div>'
-      + '<div style="padding:24px;display:flex;flex-direction:column;flex:1;">'
-      + '<p class="eyebrow-mini">'+LABEL[zone]+'</p>'
-      + '<h3 class="h-card">'+esc(v.n)+'</h3>'
-      + '<div class="villa-meta">'+meta+'</div>'
-      + '<p class="caption" style="flex:1;">'+esc(v.d)+'</p>'
-      + '<p class="caption mt-4" style="font-weight:700;color:hsl(var(--foreground));">View this villa →</p>'
+      + '<div class="wire-image" style="height:200px;border:0;border-bottom:1px solid hsl(var(--border));">'+ICON+'<span class="label">'+esc(zone==="jayela"?"JAYELA":"JAYANA")+' — '+esc(v.name)+'</span></div>'
+      + '<div class="pad2">'
+      + '<p class="eyebrow-mini">'+esc(ZONE[zone].label)+'</p>'
+      + '<h3 class="h-villa">'+esc(v.name)+'</h3>'
+      + '<div class="villa-meta">'+tags+'</div>'
+      + '<p class="caption" style="flex:1;">'+esc(v.copy)+'</p>'
+      + '<p class="caption mt-6" style="font-weight:700;color:hsl(var(--foreground));">'+verb+'</p>'
       + '</div></a>';
+  }
+
+  function renderIntro(){
+    introBox.innerHTML = '<p class="eyebrow">'+esc(ZONE[zone].label)+'</p><p class="body-copy" style="margin:0 auto;font-size:15px;">'+esc(ZONE[zone].intro)+'</p>';
   }
 
   function renderChips(){
     var present = [];
-    DATA[zone].forEach(function(v){ if(present.indexOf(v.br) < 0) present.push(v.br); });
-    present.sort(function(a,b){ return a-b; });
-    var html = '<span class="tag'+(br==="all"?" active":"")+'" data-br="all">All</span>';
-    present.forEach(function(n){
-      html += '<span class="tag'+(br===n?" active":"")+'" data-br="'+n+'">'+WORDS[n]+'-bedroom</span>';
+    DATA[zone].forEach(function(v){ if(present.indexOf(v.cat) < 0) present.push(v.cat); });
+    var ordered = CAT_ORDER[zone].filter(function(c){ return present.indexOf(c) >= 0; });
+    var html = '<span class="tag'+(cat==="all"?" active":"")+'" data-cat="all">All</span>';
+    ordered.forEach(function(c){
+      html += '<span class="tag'+(String(cat)===String(c)?" active":"")+'" data-cat="'+esc(c)+'">'+esc(CAT_LABEL[c])+'</span>';
     });
     chipBar.innerHTML = html;
     Array.prototype.forEach.call(chipBar.querySelectorAll(".tag"), function(t){
       t.addEventListener("click", function(){
-        var v = this.getAttribute("data-br");
-        br = (v === "all") ? "all" : parseInt(v, 10);
+        cat = this.getAttribute("data-cat");
         renderChips(); renderGrid();
       });
     });
   }
 
   function renderGrid(){
-    var items = DATA[zone].filter(function(v){ return br === "all" || v.br === br; });
+    var items = DATA[zone].filter(function(v){ return cat === "all" || String(v.cat) === String(cat); });
     grid.innerHTML = items.map(card).join("");
   }
 
@@ -501,12 +615,12 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
       zone = this.getAttribute("data-zone");
       Array.prototype.forEach.call(document.querySelectorAll(".zone-toggle button"), function(x){ x.classList.remove("active"); });
       this.classList.add("active");
-      br = "all";
-      renderChips(); renderGrid();
+      cat = "all";
+      renderIntro(); renderChips(); renderGrid();
     });
   });
 
-  renderChips(); renderGrid();
+  renderIntro(); renderChips(); renderGrid();
 })();
 </script>
 </body>
