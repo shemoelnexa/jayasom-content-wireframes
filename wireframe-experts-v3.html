@@ -106,8 +106,12 @@ html, body {
 .hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); cursor: pointer; user-select: none; transition: background .15s, color .15s, border-color .15s; }
+.tag:hover { border-color: hsl(var(--foreground)); color: hsl(var(--foreground)); }
 .tag.active { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+.tag.active:hover { color: hsl(var(--background)); }
+.spec-empty { display: none; text-align: center; padding: 48px 0 8px; color: hsl(var(--muted-foreground)); }
+.wire-card[hidden] { display: none; }
 .text-center { text-align: center; }
 .flex { display: flex; }
 .flex-col { display: flex; flex-direction: column; }
@@ -173,7 +177,7 @@ html, body {
 <main>
 
 <!-- HERO -->
-<section class="section section-tall">
+<section class="section section-tall section-muted">
   <div class="shell" style="max-width:820px;text-align:center;">
     <p class="eyebrow">Trust · Team</p>
     <h1 class="h-hero">Our Experts and Specialists</h1>
@@ -183,39 +187,31 @@ html, body {
 </section>
 
 <!-- FILTER UI -->
-<section class="section section-muted" style="padding-top:40px;padding-bottom:40px;">
+<section class="section" style="padding-top:48px;padding-bottom:24px;">
   <div class="shell">
     <p class="eyebrow text-center">Filter</p>
-    <h2 class="h-sub text-center mb-6">Filter by specialism</h2>
-    <div class="tag-row justify-center mb-6" style="margin-bottom:24px;">
-      <span class="tag active">All</span>
-      <span class="tag">Wellness Advisor</span>
-      <span class="tag">Health and Wellness leadership</span>
-      <span class="tag">Physiotherapy</span>
-      <span class="tag">Multi-generational</span>
-      <span class="tag">Hormonal Health</span>
-      <span class="tag">Sports / Athletic Performance</span>
-      <span class="tag">Mind-Body</span>
-      <span class="tag">Marketing and Brand</span>
-      <span class="tag">Operations</span>
-    </div>
-    <div class="text-center">
-      <p class="eyebrow-mini" style="margin-bottom:10px;">Cohort</p>
-      <div class="tag-row justify-center" style="display:inline-flex;">
-        <span class="tag active">All</span>
-        <span class="tag">In Residence</span>
-        <span class="tag">Visiting Practitioners</span>
-      </div>
+    <h2 class="h-sub text-center mb-6">Filter by focus area</h2>
+    <div id="specFilters" class="tag-row justify-center" style="margin-bottom:0;">
+      <span class="tag active" data-spec="all">All</span>
+      <span class="tag" data-spec="psychology">Psychology &amp; Counselling</span>
+      <span class="tag" data-spec="family">Family &amp; Multigenerational</span>
+      <span class="tag" data-spec="mindbody">Mind-Body &amp; Movement</span>
+      <span class="tag" data-spec="physio">Physiotherapy &amp; Rehabilitation</span>
+      <span class="tag" data-spec="nutrition">Nutrition</span>
+      <span class="tag" data-spec="leadership">Leadership &amp; Strategy</span>
+      <span class="tag" data-spec="operations">Operations &amp; Hospitality</span>
+      <span class="tag" data-spec="marketing">Marketing &amp; Brand</span>
+      <span class="tag" data-spec="governance">Governance &amp; Finance</span>
     </div>
   </div>
 </section>
 
 <!-- SPECIALIST GRID -->
-<section class="section">
+<section class="section" style="padding-top:8px;">
   <div class="shell">
-    <div class="grid-3" style="gap:32px;">
+    <div id="specGrid" class="grid-3" style="gap:32px;">
 
-      <a href="wireframe-sp-karen-campbell-v3.html" class="wire-card">
+      <a href="wireframe-sp-karen-campbell-v3.html" class="wire-card" data-spec="leadership">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Karen Campbell</span>
@@ -228,7 +224,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-sascha-hemmann-v3.html" class="wire-card">
+      <a href="wireframe-sp-sascha-hemmann-v3.html" class="wire-card" data-spec="leadership|operations">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Sascha Hemmann</span>
@@ -241,7 +237,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-basel-shammout-v3.html" class="wire-card">
+      <a href="wireframe-sp-basel-shammout-v3.html" class="wire-card" data-spec="leadership|governance">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Basel Shammout</span>
@@ -254,7 +250,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-elodie-lefebvre-v3.html" class="wire-card">
+      <a href="wireframe-sp-elodie-lefebvre-v3.html" class="wire-card" data-spec="mindbody|family|nutrition">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Elodie Lefebvre</span>
@@ -267,7 +263,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-carol-el-hadi-v3.html" class="wire-card">
+      <a href="wireframe-sp-carol-el-hadi-v3.html" class="wire-card" data-spec="marketing">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Carol El Hadi</span>
@@ -280,7 +276,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-lujain-alhussan-v3.html" class="wire-card">
+      <a href="wireframe-sp-lujain-alhussan-v3.html" class="wire-card" data-spec="psychology|family">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Lujain Abdullah AlHussan</span>
@@ -293,7 +289,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-vazeeq-madhar-v3.html" class="wire-card">
+      <a href="wireframe-sp-vazeeq-madhar-v3.html" class="wire-card" data-spec="leadership|operations">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Vazeeq Madhar</span>
@@ -306,7 +302,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-eman-alsayoud-v3.html" class="wire-card">
+      <a href="wireframe-sp-eman-alsayoud-v3.html" class="wire-card" data-spec="psychology">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Eman Alsayoud</span>
@@ -319,7 +315,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-amanda-hanna-v3.html" class="wire-card">
+      <a href="wireframe-sp-amanda-hanna-v3.html" class="wire-card" data-spec="psychology|family">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Amanda Hanna</span>
@@ -332,7 +328,7 @@ html, body {
         </div>
       </a>
 
-      <a href="wireframe-sp-mohammad-almslmany-v3.html" class="wire-card">
+      <a href="wireframe-sp-mohammad-almslmany-v3.html" class="wire-card" data-spec="physio|mindbody">
         <div class="wire-image" style="height:300px;border:0;border-bottom:1px solid hsl(var(--border));">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           <span class="label">Mohammad Almslmany</span>
@@ -346,6 +342,7 @@ html, body {
       </a>
 
     </div>
+    <p id="specEmpty" class="spec-empty">No specialists match this focus area.</p>
   </div>
 </section>
 
@@ -537,5 +534,39 @@ html, body {
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var specRow = document.getElementById('specFilters');
+  var grid    = document.getElementById('specGrid');
+  var emptyEl = document.getElementById('specEmpty');
+  if (!specRow || !grid) return;
+
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.wire-card'));
+  var spec = 'all';
+
+  function apply() {
+    var shown = 0;
+    cards.forEach(function (card) {
+      var specs = (card.getAttribute('data-spec') || '').split('|');
+      var show = spec === 'all' || specs.indexOf(spec) !== -1;
+      card.hidden = !show;
+      if (show) shown++;
+    });
+    if (emptyEl) emptyEl.style.display = shown ? 'none' : 'block';
+  }
+
+  specRow.addEventListener('click', function (e) {
+    var tag = e.target.closest ? e.target.closest('.tag') : null;
+    if (!tag || !specRow.contains(tag)) return;
+    Array.prototype.forEach.call(specRow.querySelectorAll('.tag'), function (t) { t.classList.remove('active'); });
+    tag.classList.add('active');
+    spec = tag.getAttribute('data-spec');
+    apply();
+  });
+
+  apply();
+})();
+</script>
 </body>
 </html>
