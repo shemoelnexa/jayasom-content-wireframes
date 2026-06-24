@@ -90,6 +90,13 @@ html, body {
 .wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
 .wire-image .label { font-size: 11px; }
 
+/* "Every Retreat Stay Includes" panel (right column of the duration section) */
+.stay-includes { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; }
+.stay-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.stay-list li { position: relative; padding: 0 0 0 22px; margin-bottom: 16px; font-size: 13px; line-height: 1.5; color: hsl(var(--foreground)); }
+.stay-list li:last-child { margin-bottom: 0; }
+.stay-list li::before { content: ''; position: absolute; left: 4px; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: hsl(var(--muted-foreground)); }
+
 .wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
 .wire-card .pad { padding: 20px; }
 
@@ -175,10 +182,10 @@ html, body {
 .intention-close { margin-top: 56px; padding-top: 40px; border-top: 1px solid hsl(var(--border)); }
 
 /* Duration slider (discrete stops from doc: 4 / 7 / 10 / 14 nights) */
-.dur-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; min-height: 28px; }
+.dur-head { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; min-height: 28px; text-align: center; }
 .dur-head .cur { font-size: 16px; font-weight: 300; color: hsl(var(--foreground)); }
 .dur-head .badge { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; background: hsl(var(--foreground)); color: hsl(var(--background)); padding: 4px 9px; }
-.dur-head .dur-count { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-left: auto; }
+.dur-head .dur-count { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
 .dur-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: hsl(var(--border)); outline: none; margin: 14px 0 6px; cursor: pointer; }
 .dur-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--foreground)); border: 0; cursor: pointer; }
 .dur-range::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: hsl(var(--foreground)); border: 0; cursor: pointer; }
@@ -407,9 +414,17 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
         <div class="incl-list" id="dur-cards" style="margin-top:16px;"></div>
       </div>
 
-      <div class="wire-image" style="min-height:520px;">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span class="label">Your retreat at Jayasom AMAALA</span>
+      <div class="stay-includes">
+        <h3 class="h-sub" style="margin-top:0;">Every Retreat Stay Includes</h3>
+        <ul class="stay-list">
+          <li>Your private villa or suite – beach-facing or waterside</li>
+          <li>Private health and well-being consultation and advisor guidance</li>
+          <li>Personalised programme of wellness treatments and therapies</li>
+          <li>Three wellness cuisine meals served daily, excluding in-room dining</li>
+          <li>Access to scheduled daily fitness and leisure activities, wellness centre facilities, including hydrothermal bathing areas, pools and gym</li>
+          <li>Complimentary assessments upon request and suitability</li>
+          <li>Jayasom Flask · Wellness Journal · Welcome Kit</li>
+        </ul>
       </div>
     </div>
   </div>
