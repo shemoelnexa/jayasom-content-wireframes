@@ -182,6 +182,7 @@ html, body {
 .intention-close { margin-top: 56px; padding-top: 40px; border-top: 1px solid hsl(var(--border)); }
 
 /* Duration slider (discrete stops from doc: 4 / 7 / 10 / 14 nights) */
+.dur-control { max-width: 620px; margin: 0 auto; }
 .dur-head { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; min-height: 28px; text-align: center; }
 .dur-head .cur { font-size: 16px; font-weight: 300; color: hsl(var(--foreground)); }
 .dur-head .badge { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; background: hsl(var(--foreground)); color: hsl(var(--background)); padding: 4px 9px; }
@@ -389,25 +390,27 @@ Source coverage check: 100% (all doc copy placed; bracketed [NOTE] editorial mar
     <div class="text-center mb-8">
       <h2 class="h-section">Choose Your Retreat Duration</h2>
     </div>
-    <div class="grid-2" style="gap:56px;align-items:stretch;">
-      <div>
-        <div class="dur-head">
-          <span class="cur" id="dur-current">4 Nights</span>
-          <span class="dur-count" id="dur-count">11 included sessions</span>
-        </div>
-        <div class="dur-row">
-          <div class="dur-slider">
-            <input type="range" class="dur-range" id="dur-range" min="0" max="3" step="1" value="0" aria-label="Retreat length in nights"/>
-            <div class="dur-ticks" id="dur-ticks">
-              <span class="dur-tick on">4</span>
-              <span class="dur-tick">7</span>
-              <span class="dur-tick">10</span>
-              <span class="dur-tick">14</span>
-            </div>
+    <div class="dur-control">
+      <div class="dur-head">
+        <span class="cur" id="dur-current">4 Nights</span>
+        <span class="dur-count" id="dur-count">11 included sessions</span>
+      </div>
+      <div class="dur-row">
+        <div class="dur-slider">
+          <input type="range" class="dur-range" id="dur-range" min="0" max="3" step="1" value="0" aria-label="Retreat length in nights"/>
+          <div class="dur-ticks" id="dur-ticks">
+            <span class="dur-tick on">4</span>
+            <span class="dur-tick">7</span>
+            <span class="dur-tick">10</span>
+            <span class="dur-tick">14</span>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="incl-head">
+    <div class="grid-2" style="gap:56px;align-items:start;margin-top:48px;">
+      <div>
+        <div class="incl-head" style="margin-top:0;">
           <h3 class="h-sub">Included Sessions</h3>
           <span class="box-toggle" id="box-toggle" role="switch" aria-checked="false" tabindex="0">Boxes<span class="sw"></span></span>
         </div>
