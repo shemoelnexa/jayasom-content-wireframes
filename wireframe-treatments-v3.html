@@ -629,42 +629,395 @@ html, body {
     sparkle:  '<path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><circle cx="18" cy="17.5" r="1.4"/>',
     bath:     '<path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M7 12V7a2 2 0 0 1 2-2"/><path d="M8.6 5l1 1"/>',
     radiate:  '<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/>',
-    chakra:   '<path d="M12 3.5v17"/><circle cx="12" cy="6" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="18" r="1.5"/>',
-    hammam:   '<path d="M4 20h16"/><path d="M5 20v-4a7 7 0 0 1 14 0v4"/><path d="M9.5 7c0-1.6 1-1.6 1-3.2M13.5 7c0-1.6 1-1.6 1-3.2"/>'
+    hammam:   '<path d="M4 20h16"/><path d="M5 20v-4a7 7 0 0 1 14 0v4"/><path d="M9.5 7c0-1.6 1-1.6 1-3.2M13.5 7c0-1.6 1-1.6 1-3.2"/>',
+    stone:    '<ellipse cx="12" cy="14.5" rx="7" ry="3.5"/><ellipse cx="12" cy="10" rx="5" ry="2.5"/>',
+    fitness:  '<path d="M6.5 8v8M17.5 8v8M3.5 10v4M20.5 10v4M6.5 12h11"/>',
+    yoga:     '<circle cx="12" cy="4.5" r="1.8"/><path d="M12 6.5v6M12 12.5l-4 5M12 12.5l4 5M7 9.5h10"/>',
+    physio:   '<circle cx="14" cy="4.5" r="1.6"/><path d="M14 6.5l-1.5 4 3 2.5.5 6M12.5 10.5 8 11l-3 4"/>',
+    facial:   '<path d="M12 3a6 6 0 0 1 6 6v3a6 6 0 0 1-12 0V9a6 6 0 0 1 6-6z"/><path d="M9.5 10h.01M14.5 10h.01M10 14c1 .8 3 .8 4 0"/>',
+    aesthetic:'<path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="12" r="2.6"/>',
+    snow:     '<path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/><path d="M9 4.5 12 6l3-1.5M9 19.5 12 18l3 1.5"/>',
+    foot:     '<path d="M8 4c2.2 0 3 2.2 3 5.2 0 3.8 1 5.3 1 7.3a3 3 0 0 1-6 0c0-2-1-3-1-6.3C5 6.8 5.8 4 8 4z"/><circle cx="13.5" cy="5" r="1"/><circle cx="16" cy="6.8" r="1"/><circle cx="17" cy="9.5" r="1"/>',
+    hand:     '<path d="M8 12V6.5a1.5 1.5 0 0 1 3 0V11M11 11V4.8a1.5 1.5 0 0 1 3 0V11M14 11.5V6.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6 6 6 0 0 1-5.2-3l-2.3-4a1.5 1.5 0 0 1 2.6-1.5L8.5 14"/>',
+    child:    '<circle cx="12" cy="5.5" r="2.2"/><path d="M9 10.5h6l-1 5.5h1V21H9v-5h1z"/>',
+    iv:       '<path d="M12 2.5v6"/><path d="M12 21a5 5 0 0 0 5-5c0-3.2-5-8-5-8s-5 4.8-5 8a5 5 0 0 0 5 5z"/><path d="M9.5 14.5h5"/>'
   };
   function icon(k){ return W_A + (ICONS[k] || ICONS.massage) + W_B; }
 
   // The published 15-treatment cohort. Each carries the four filter axes plus display copy.
   var TREATMENTS = [
-    {name:"Jayasom Signature Massage", href:"wireframe-tx-jayasom-signature-v3.html",   meta:"Body work · 50 / 90 min",                cap:"Bamboo and walnut exfoliation followed by Lomilomi, Shiatsu, and Thai oil.",       dur:"50 / 90 min", icon:"massage",  pillar:"body",      tradition:"massage",   duration:"short",  intent:"relieve"},
-    {name:"Shirodhara",                 href:"wireframe-tx-shirodhara-v3.html",          meta:"Health work · Ayurveda · 90 min",        cap:"A continuous warm pour of medicated oil onto the third eye.",                       dur:"90 min",      icon:"pour",     pillar:"health",    tradition:"ayurveda",  duration:"long",   intent:"rest"},
-    {name:"Marma Point Therapy",        href:"wireframe-tx-marma-point-therapy-v3.html", meta:"Health work · Ayurveda · 50 min",        cap:"One hundred and seven points where matter and consciousness meet.",                 dur:"50 min",      icon:"points",   pillar:"health",    tradition:"ayurveda",  duration:"short",  intent:"relieve"},
-    {name:"Pinda Sweda",                href:"wireframe-tx-pinda-sweda-v3.html",         meta:"Health work · Ayurveda · 90 min",        cap:"Warm linen bags filled with medicinal herbs and rice, applied to ease joint stiffness.", dur:"90 min", icon:"poultice", pillar:"health",    tradition:"ayurveda",  duration:"long",   intent:"relieve"},
-    {name:"Watsu",                      href:"wireframe-tx-watsu-v3.html",               meta:"Hydrotherapy · 50 min",                  cap:"Bodywork in warm water; the spine remembers a different shape.",                    dur:"50 min",      icon:"waves",    pillar:"health",    tradition:"hydro",     duration:"short",  intent:"relieve"},
-    {name:"Sound Healing",              href:"wireframe-tx-sound-healing-v3.html",       meta:"Energy and Sound · 50 min",              cap:"Tibetan singing bowls, gongs, and toned voice in a quiet room.",                    dur:"50 min",      icon:"sound",    pillar:"health",    tradition:"energy",    duration:"short",  intent:"rest"},
-    {name:"Floatation Therapy",         href:"wireframe-tx-floatation-therapy-v3.html",  meta:"Hydrotherapy · 50 min",                  cap:"A held quiet, in skin-temperature, magnesium-rich water.",                          dur:"50 min",      icon:"pod",      pillar:"health",    tradition:"hydro",     duration:"short",  intent:"rest"},
-    {name:"Crystal Aroma Massage",      href:"wireframe-tx-crystal-aroma-massage-v3.html",meta:"Energy work · 50 / 90 min",             cap:"Heated Jade crystal paired with Arabic-inspired essential oils.",                   dur:"50 / 90 min", icon:"crystal",  pillar:"health",    tradition:"massage",   duration:"short",  intent:"renew"},
-    {name:"QALBAIN (Two Hearts)",       href:"wireframe-tx-qalbain-two-hearts-v3.html",  meta:"Body work · Couples ritual · 120 min",   cap:"A two-hour couples ritual: Grounding Ritual, BIOME Facial, shared pause.",          dur:"120 min",     icon:"heart",    pillar:"body",      tradition:"massage",   duration:"ext",    intent:"connect"},
-    {name:"Ulfa Ritual",                href:"wireframe-tx-ulfa-ritual-v3.html",         meta:"TAIM · Ritual",                          cap:"A regional bonding ritual rooted in Traditional Arabic and Islamic Medicine.",      dur:"Ritual",      icon:"rings",    pillar:"health",    tradition:"taim",      duration:"ritual", intent:"connect"},
-    {name:"Vagus Nerve Ritual",         href:"wireframe-tx-vagus-nerve-ritual-v3.html",  meta:"Mindfulness · Nervous-system work",      cap:"A protocol designed to step the autonomic system out of vigilance.",                dur:"Ritual",      icon:"pulse",    pillar:"health",    tradition:"mind",      duration:"ritual", intent:"rest"},
-    {name:"Hijama",                     href:"wireframe-tx-hijama-v3.html",              meta:"TAIM · Cupping",                         cap:"The regional cupping practice, drawn from Traditional Arabic and Islamic Medicine.", dur:"Ritual",     icon:"cup",      pillar:"health",    tradition:"taim",      duration:"ritual", intent:"cleanse"},
-    {name:"Hydrafacial Platinum",       href:"wireframe-tx-hydrafacial-platinum-v3.html",meta:"Aesthetic · Brand partner · 60 min",     cap:"Brand partner Hydrafacial system, layered with personalised serums.",               dur:"60 min",      icon:"sparkle",  pillar:"aesthetic", tradition:"aesthetic", duration:"short",  intent:"renew"},
-    {name:"Detoxifying Balneotherapy",  href:"wireframe-tx-detox-balneotherapy-v3.html", meta:"Hydrotherapy · 60 min",                  cap:"A mineral-bath protocol that supports lymphatic flow and elimination.",             dur:"60 min",      icon:"bath",     pillar:"health",    tradition:"hydro",     duration:"short",  intent:"cleanse"},
-    {name:"Reiki T'aqa",                href:"wireframe-tx-reiki-taqa-v3.html",          meta:"Energy practice",                        cap:"An energy-practice session held by hand position and presence.",                    dur:"Ritual",      icon:"radiate",  pillar:"health",    tradition:"energy",    duration:"ritual", intent:"rest"},
-    {name:"Chakra Balancing Therapy",   href:"#",                                        meta:"Health work · 90 min",                   cap:"Warm herbal oils worked alongside Tibetan singing bowls.",                          dur:"90 min",      icon:"chakra",   pillar:"health",    tradition:"energy",    duration:"long",   intent:"rest"},
-    {name:"KOS Paris Hammam Ritual",    href:"#",                                        meta:"Body work · Brand partner · 50 min",     cap:"Brand partner KOS Paris hammam ritual; black soap, exfoliation, and oil.",          dur:"50 min",      icon:"hammam",   pillar:"body",      tradition:"massage",   duration:"short",  intent:"renew"}
+    {
+      "name": "QALBAIN (Two Hearts)",
+      "href": "wireframe-tx-qalbain-two-hearts-v3.html",
+      "cat": "signature",
+      "dur": "120 min",
+      "meta": "Signature Ritual · 120 min",
+      "icon": "heart",
+      "cap": "A 2-hour journey for couples. It begins with a Grounding Ritual to release external stress, followed by a shared BIOME Facial. Two practitioners, working in parallel - a pause designed around presence rather than performance."
+    },
+    {
+      "name": "Shirodhara",
+      "href": "wireframe-tx-shirodhara-v3.html",
+      "cat": "signature",
+      "dur": "50 / 90 min",
+      "meta": "Signature Ritual · 50 / 90 min",
+      "icon": "pour",
+      "cap": "Warm medicated oil poured in a continuous stream over the third eye. One of Ayurveda's oldest practices for dissolving mental blockages - used for stress, insomnia, and migraines. Includes a scalp massage."
+    },
+    {
+      "name": "Hijama",
+      "href": "wireframe-tx-hijama-v3.html",
+      "cat": "signature",
+      "dur": "50 min",
+      "meta": "Signature Ritual · 50 min",
+      "icon": "cup",
+      "cap": "Dry and wet cupping therapy - an ancient healing tradition that applies suction to the body to stimulate a localised healing response, improve circulation, and support the removal of toxins. Rooted in Arabic and Islamic medicine."
+    },
+    {
+      "name": "Vagus Nerve Ritual",
+      "href": "wireframe-tx-vagus-nerve-ritual-v3.html",
+      "cat": "signature",
+      "dur": "90 / 120 min",
+      "meta": "Signature Ritual · 90 / 120 min",
+      "icon": "pulse",
+      "cap": "Designed to move the body out of stress response and into deep rest. Targets the Vagus Nerve through rhythmic massage and specific essential oils - a clinical approach to the kind of reset most treatments only approximate."
+    },
+    {
+      "name": "Ūlfa Ritual",
+      "href": "wireframe-tx-ulfa-ritual-v3.html",
+      "cat": "signature",
+      "dur": "50 / 90 min",
+      "meta": "Signature Ritual · 50 / 90 min",
+      "icon": "rings",
+      "cap": "Rooted in the Arabic concept of generosity and gratitude, this ritual uses breath, touch, and movement to connect parents and children through shared sensory experience. Named for Ulfa - the Arabic word for gentle familiarity between people."
+    },
+    {
+      "name": "Watsu",
+      "href": "wireframe-tx-watsu-v3.html",
+      "cat": "signature",
+      "dur": "50 min",
+      "meta": "Signature Ritual · 50 min",
+      "icon": "waves",
+      "cap": "Aquatic bodywork performed in warm water - fluid movement, light stretching, and supported floating. A form of release that land-based treatments rarely reach. Available in both the adult and family pools."
+    },
+    {
+      "name": "Crystal Aroma Massage",
+      "href": "wireframe-tx-crystal-aroma-massage-v3.html",
+      "cat": "signature",
+      "dur": "50 / 90 min",
+      "meta": "Signature Ritual · 50 / 90 min",
+      "icon": "crystal",
+      "cap": "Heated jade crystal used alongside Arabic-inspired essential oils in long, soothing strokes. The warmth of the crystal works on the muscles; the oils work on the nervous system - each deepening the effect of the other."
+    },
+    {
+      "name": "Floatation Therapy",
+      "href": "wireframe-tx-floatation-therapy-v3.html",
+      "cat": "signature",
+      "dur": "50 min",
+      "meta": "Signature Ritual · 50 min",
+      "icon": "pod",
+      "cap": "Warm, mineral-rich water that supports the body completely - no pressure points, no sound, no demand on the nervous system. Used for stress recovery, mental clarity, and the kind of rest that is difficult to achieve any other way."
+    },
+    {
+      "name": "Jayasom Signature Massage",
+      "href": "wireframe-tx-jayasom-signature-v3.html",
+      "cat": "spa",
+      "dur": "50 / 90 min",
+      "meta": "Spa Treatment · 50 / 90 min",
+      "icon": "massage",
+      "cap": "The property's anchor bodywork session. Bamboo and walnut exfoliation followed by a signature combination of Lomilomi, Shiatsu, and Thai oil massage. The sequence is designed for deep relaxation - particularly effective before or after travel."
+    },
+    {
+      "name": "Abhyanga",
+      "href": "#",
+      "cat": "spa",
+      "dur": "50 min",
+      "meta": "Spa Treatment · 50 min",
+      "icon": "pour",
+      "cap": "From the Ayurvedic tradition - warm medicated herbal oil applied in gentle flowing strokes to release toxins, stimulate circulation, and relieve tension. Followed by 10 minutes in a personal steam cubicle."
+    },
+    {
+      "name": "KOS Paris Hammam",
+      "href": "#",
+      "cat": "spa",
+      "dur": "50 min",
+      "meta": "Spa Treatment · Brand partner · 50 min",
+      "icon": "hammam",
+      "cap": "The KOS Paris hammam sequence: black soap, exfoliation, and warm oil - a head-to-toe ritual drawn from ancient hammam tradition, enriched with KOS Paris botanicals."
+    },
+    {
+      "name": "Himalayan Salt Stone",
+      "href": "#",
+      "cat": "spa",
+      "dur": "90 min",
+      "meta": "Spa Treatment · 90 min",
+      "icon": "stone",
+      "cap": "Warm Himalayan salt crystal stones applied to relax muscles, soothe tension, and promote well-being. The mineral content of the stones works alongside the heat - a slower, more grounded session than a standard massage."
+    },
+    {
+      "name": "Marma Point Therapy",
+      "href": "wireframe-tx-marma-point-therapy-v3.html",
+      "cat": "holistic",
+      "dur": "50 min",
+      "meta": "Holistic Health · Ayurveda · 50 min",
+      "icon": "points",
+      "cap": "A focused energy treatment targeting the body's 107 Marma points - the junctions in Ayurvedic medicine where matter and consciousness meet. Gentle pressure and essential oils clear pranic blockages and restore the natural flow of energy through the nervous system."
+    },
+    {
+      "name": "Pinda Sweda",
+      "href": "wireframe-tx-pinda-sweda-v3.html",
+      "cat": "holistic",
+      "dur": "90 min",
+      "meta": "Holistic Health · Ayurveda · 90 min",
+      "icon": "poultice",
+      "cap": "Warm linen boluses filled with medicinal herbs and rice, dipped in heated oil and applied across the body. Exceptionally effective for joint stiffness, muscle pain, and inflammation - one of the more physically targeted treatments in the Ayurvedic menu."
+    },
+    {
+      "name": "Reiki T'aqa",
+      "href": "wireframe-tx-reiki-taqa-v3.html",
+      "cat": "holistic",
+      "dur": "50 min",
+      "meta": "Holistic Health · Energy · 50 min",
+      "icon": "radiate",
+      "cap": "A hands-on or near-body energy treatment combining Japanese Reiki with T'aqa - the Arabic concept for vital life force. Focuses on the seven energy points of the body, restoring clarity of mind and calming the emotions."
+    },
+    {
+      "name": "Detoxifying Balneotherapy",
+      "href": "wireframe-tx-detox-balneotherapy-v3.html",
+      "cat": "holistic",
+      "dur": "30 min",
+      "meta": "Holistic Health · Hydrotherapy · 30 min",
+      "icon": "bath",
+      "cap": "A re-creation of ancient balneotherapy - essential oils combined with underwater jets to stimulate circulation, boost lymphatic flow, and improve muscle tone. One of the shorter sessions in the programme, but cumulative across a week."
+    },
+    {
+      "name": "Reformer Pilates",
+      "href": "#",
+      "cat": "fitness",
+      "dur": "50 min",
+      "meta": "Fitness & Yoga · 50 min",
+      "icon": "fitness",
+      "cap": "An all-body workout using the springs and pulleys of the Pilates Reformer bed - strength, balance, and flexibility in a single session. Works well alongside physiotherapy and corrective exercise programmes."
+    },
+    {
+      "name": "Aerial Yoga",
+      "href": "#",
+      "cat": "fitness",
+      "dur": "50 min",
+      "meta": "Fitness & Yoga · 50 min",
+      "icon": "yoga",
+      "cap": "Traditional yoga poses and stretches performed with a hammock - full-body movement, joint and muscle strengthening, and spinal decompression as the body hangs freely. The hammock takes weight off and opens movement that floor practice cannot reach."
+    },
+    {
+      "name": "ICAROS",
+      "href": "#",
+      "cat": "fitness",
+      "dur": "50 min",
+      "meta": "Fitness & Yoga · 50 min",
+      "icon": "fitness",
+      "cap": "A VR-based training system designed for physical therapy and core rehabilitation. Used for coordination, balance, and strength building - accessible to guests with physical limitations as well as those seeking performance-level conditioning."
+    },
+    {
+      "name": "Aquatic Exercise",
+      "href": "#",
+      "cat": "fitness",
+      "dur": "50 min",
+      "meta": "Fitness & Yoga · 50 min",
+      "icon": "waves",
+      "cap": "A low-impact class in the pool using a noodle - gently raises heart rate, builds muscle strength and flexibility, and reduces joint load. One of the most accessible sessions on the programme for guests recovering from injury or with mobility considerations."
+    },
+    {
+      "name": "Neurac®",
+      "href": "#",
+      "cat": "physio",
+      "dur": "50 min",
+      "meta": "Physiotherapy · Brand partner · 50 min",
+      "icon": "physio",
+      "cap": "A patented sling-based physiotherapy system that re-educates pain-free movement patterns. Used for both acute and chronic conditions - restores muscle function and mobility without putting load through injured tissue."
+    },
+    {
+      "name": "Gyrotonic®",
+      "href": "#",
+      "cat": "physio",
+      "dur": "50 min",
+      "meta": "Physiotherapy · Brand partner · 50 min",
+      "icon": "physio",
+      "cap": "A pulley-based system delivering 360° movement - stretching and strengthening the spine and limbs simultaneously while improving flexibility and mobility. Often used alongside physiotherapy programmes for spinal conditions."
+    },
+    {
+      "name": "Functional Movement Therapy",
+      "href": "#",
+      "cat": "physio",
+      "dur": "50 min",
+      "meta": "Physiotherapy · 50 min",
+      "icon": "physio",
+      "cap": "Begins with a full assessment of musculoskeletal imbalances, then moves into guided exercises to relieve pain and restore movement. Appropriate for guests with postural issues, chronic pain, or recovering from surgery."
+    },
+    {
+      "name": "Hydrafacial Platinum",
+      "href": "wireframe-tx-hydrafacial-platinum-v3.html",
+      "cat": "facials",
+      "dur": "60 min",
+      "meta": "Facial · Brand partner · 60 min",
+      "icon": "sparkle",
+      "cap": "The Hydrafacial Platinum - the full system. Deep cleanse, extraction, hydration with personalised serums, plus a detoxifying lymphatic drainage session to contour and reduce puffiness. The benchmark facial on the menu."
+    },
+    {
+      "name": "Biome Facials",
+      "href": "#",
+      "cat": "facials",
+      "dur": "50 min",
+      "meta": "Facial · 50 min",
+      "icon": "facial",
+      "cap": "A series of four advanced facials targeting the skin's microbiome - restoring the natural barrier, improving resilience, and promoting a healthy flora. Recommended as a course rather than a single session."
+    },
+    {
+      "name": "ME Anti-Age & Firming",
+      "href": "#",
+      "cat": "facials",
+      "dur": "50 min",
+      "meta": "Facial · 50 min",
+      "icon": "facial",
+      "cap": "A collagen-supporting facial designed to lift and tighten - addresses laxity without injectable intervention. Part of the ME age-defying range, which also covers brightening, anti-wrinkle, and volume restoration."
+    },
+    {
+      "name": "HIFU Non-Surgical Lift",
+      "href": "#",
+      "cat": "aesthetic",
+      "dur": "75–105 min",
+      "meta": "Aesthetic Medicine · OPIALA · 75–105 min",
+      "icon": "aesthetic",
+      "cap": "Non-invasive tightening using high-intensity focused ultrasound - supports collagen renewal for improved firmness, lift, and skin texture. Available for full face, face and neck, jawline, eye and brow area, and body zones."
+    },
+    {
+      "name": "Cristal Fit Muscle Sculpting",
+      "href": "#",
+      "cat": "aesthetic",
+      "dur": "50 min",
+      "meta": "Aesthetic Medicine · Cristal Fit · 50 min",
+      "icon": "fitness",
+      "cap": "Electromagnetic muscle stimulation targeting core, glutes, arms, or thighs - equivalent to thousands of muscle contractions in a single session. Used for toning, strengthening, and definition without physical load on the joints."
+    },
+    {
+      "name": "Cristal Pro Cryolipolysis",
+      "href": "#",
+      "cat": "aesthetic",
+      "dur": "60–150 min",
+      "meta": "Aesthetic Medicine · Cristal Pro · 60–150 min",
+      "icon": "snow",
+      "cap": "Controlled cooling to target and gradually reduce stubborn fat pockets. Available for chin, arms, flanks, inner thigh, abdomen, and outer thigh - or as a multi-zone session. A treatment that does its work after you leave, not during the session."
+    },
+    {
+      "name": "Supreme Pedicure",
+      "href": "#",
+      "cat": "foot",
+      "dur": "60 min",
+      "meta": "Foot Care & Nail · Margaret Dabbs® London · 60 min",
+      "icon": "foot",
+      "cap": "The Margaret Dabbs® London Supreme Pedicure - performed on dry skin, to medical standards of hygiene, using sterilised single-use tools. Hard skin removal, foot bath, exfoliation, and an intensive foot massage. The standard of care is clinical; the experience is not."
+    },
+    {
+      "name": "AstraeaNatura™ Add-On",
+      "href": "#",
+      "cat": "foot",
+      "dur": "25 min",
+      "meta": "Foot Care & Nail · Add-on · 25 min",
+      "icon": "hand",
+      "cap": "An add-on to any manicure. Silicone mitts deliver light therapy to the hands - reducing pigmentation, fine lines, and irritation, and restoring a plump, radiant appearance. Worth adding if the hands are part of what you are here to address."
+    },
+    {
+      "name": "Sacred Bond Infant Massage",
+      "href": "#",
+      "cat": "children",
+      "dur": "30 min",
+      "meta": "Children's · Ages 1–3 · 30 min",
+      "icon": "child",
+      "cap": "Conducted by the parent and guided by the therapist — warm organic oil used to support digestion, sleep regulation, and nervous system calming. The therapist teaches; the parent delivers. A session about connection as much as treatment."
+    },
+    {
+      "name": "The Dream Massage",
+      "href": "#",
+      "cat": "children",
+      "dur": "30 min",
+      "meta": "Children's · Ages 7+ · 30 min",
+      "icon": "child",
+      "cap": "Children choose their own essential oil blend from a selection including eucalyptus and lavender, then receive a full-body massage. A gentle, sensory introduction to therapeutic touch."
+    },
+    {
+      "name": "Sweet Surrender to Chocolate",
+      "href": "#",
+      "cat": "children",
+      "dur": "45 min",
+      "meta": "Children's · Ages 7+ · 45 min",
+      "icon": "child",
+      "cap": "A complete ritual using chocolate-derived ingredients from scrub through to drink. Named the cocoa seed of life - playful, indulgent, and a session that most children remember specifically."
+    },
+    {
+      "name": "Tropical Flower Facial",
+      "href": "#",
+      "cat": "children",
+      "dur": "30 min",
+      "meta": "Children's · Ages 7+ · 30 min",
+      "icon": "facial",
+      "cap": "A deep-cleansing facial using jasmine, ylang-ylang, and argiletz clay. Designed to give children the same quality of experience as the adult facial menu - adapted in application and product, not in intent."
+    },
+    {
+      "name": "IV Vitamin Therapy",
+      "href": "#",
+      "cat": "iv",
+      "dur": "45–60 min",
+      "meta": "IV Vitamin Therapy · 45–60 min",
+      "icon": "iv",
+      "cap": "IV vitamin therapy is available as a stand-alone session or as part of a retreat programme. A consultation with the wellness team determines the appropriate formulation. Key sessions include: NAD+ Youth Builder (cognitive function and cellular energy), Immunity Boost (high-dose Vitamin C, Zinc, Selenium), Jet Lag Buster (Magnesium and B12 to reset the body clock), Post Dive/Snorkel (electrolytes and antioxidants after a day on the water), and Get Up and Go (B12 and amino acids for stamina). Booster shots and add-ons available."
+    }
   ];
 
   // Category chips map to each treatment's tradition / approach.
   var CATS = [
-    {k:"all",       n:"All treatments"},
-    {k:"massage",   n:"Massage & Bodywork"},
-    {k:"ayurveda",  n:"Ayurveda"},
-    {k:"taim",      n:"Arabic & Islamic Medicine"},
-    {k:"hydro",     n:"Hydrotherapy"},
-    {k:"energy",    n:"Energy & Sound"},
-    {k:"mind",      n:"Mindfulness"},
-    {k:"aesthetic", n:"Aesthetic & Skin"}
+    {
+      "k": "all",
+      "n": "All treatments"
+    },
+    {
+      "k": "signature",
+      "n": "Signature Rituals"
+    },
+    {
+      "k": "spa",
+      "n": "Spa Treatments"
+    },
+    {
+      "k": "holistic",
+      "n": "Holistic Health"
+    },
+    {
+      "k": "fitness",
+      "n": "Fitness & Yoga"
+    },
+    {
+      "k": "physio",
+      "n": "Physiotherapy"
+    },
+    {
+      "k": "facials",
+      "n": "Facials"
+    },
+    {
+      "k": "aesthetic",
+      "n": "Aesthetic Medicine"
+    },
+    {
+      "k": "foot",
+      "n": "Foot Care & Nail"
+    },
+    {
+      "k": "children",
+      "n": "Children's Spa Menu"
+    },
+    {
+      "k": "iv",
+      "n": "IV Vitamin Therapy"
+    }
   ];
   var PAGE = 6;            // cards shown before "Load more"
   var activeCat = "all";
@@ -679,11 +1032,11 @@ html, body {
 
   function countFor(k){
     if(k==="all") return TREATMENTS.length;
-    var n = 0; TREATMENTS.forEach(function(t){ if(t.tradition===k) n++; }); return n;
+    var n = 0; TREATMENTS.forEach(function(t){ if(t.cat===k) n++; }); return n;
   }
   function filtered(){
     var out = [];
-    TREATMENTS.forEach(function(it, i){ if(activeCat==="all" || it.tradition===activeCat) out.push(i); });
+    TREATMENTS.forEach(function(it, i){ if(activeCat==="all" || it.cat===activeCat) out.push(i); });
     return out;
   }
   function cardHTML(i){
