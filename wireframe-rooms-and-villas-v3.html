@@ -88,6 +88,8 @@ html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); 
 .villa-card h3.h-villa { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 10px; line-height: 1.25; }
 .villa-card .villa-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
 .villa-card .villa-meta span { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); border: 1px solid hsl(var(--border)); padding: 3px 8px; }
+.villa-card .card-sub { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin: 16px 0 8px; padding-top: 14px; border-top: 1px solid hsl(var(--border)); }
+.villa-card .card-feats { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.65; }
 .vchip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
 .vchip { font-family: inherit; font-weight: 300; font-size: 11px; letter-spacing: 0.04em; padding: 6px 12px; border: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--muted-foreground)); cursor: pointer; }
 .vchip.active { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--foreground)); }
@@ -250,7 +252,9 @@ Production/sign-off notes from the doc (sec.10 "Outstanding", bracketed "[confir
           <p class="eyebrow-mini">JAYELA · Family</p>
           <h3 class="h-villa">Accessible Terrace Room — Sound &amp; Vision</h3>
           <div class="villa-meta"><span>No pool</span><span>62 m² indoor</span><span>48 m² outdoor</span><span>Up to 3 guests · King + daybed</span></div>
-          <p class="caption" style="flex:1;">A sea-view terrace room designed for guests who prefer not to have steps, with hearing and vision conveniences integrated throughout — directly accessible — by elevator — to the Jayela reception, Loumi Rue, the pool, and the play spaces.</p>
+          <p class="card-sub">Features</p>
+          <p class="card-feats">Large outdoor patio without steps · Outdoor dining table · Electrically adjustable king-size bed · Convenient room controls · Vibrating alarm · Visual fire alarm flasher · Spacious bathroom with rails · Fixed shower seating · Double sinks &amp; dry vanity · Jayasom Flask · Wellness Journal · Other lifestyle amenities · Wellness-curated minibar</p>
+          <div style="flex:1;"></div>
           <p class="caption mt-6" style="font-weight:700;color:hsl(var(--foreground));">View this room →</p>
         </div>
       </a>
@@ -260,7 +264,9 @@ Production/sign-off notes from the doc (sec.10 "Outstanding", bracketed "[confir
           <p class="eyebrow-mini">JAYELA · Family</p>
           <h3 class="h-villa">Accessible Terrace Room — Mobility</h3>
           <div class="villa-meta"><span>No pool</span><span>62 m² indoor</span><span>48 m² outdoor</span><span>Up to 3 guests · King + daybed</span></div>
-          <p class="caption" style="flex:1;">A sea-view terrace room with full mobility conveniences — no-step access, roll-in shower, and assistance rails — directly accessible — by elevator — to the Jayela reception, Loumi Rue, the pool, and the play spaces.</p>
+          <p class="card-sub">Features</p>
+          <p class="card-feats">Large outdoor patio with no-step access · Outdoor dining table · Electrically adjustable king-size bed · Convenient room controls · Roll-in shower with foldable seating · Lower sink with open access below · Lower bathtub with assistance rails · Vibrating alarm &amp; bedside visual alarm · Jayasom Flask · Wellness Journal · Other lifestyle amenities · Wellness-curated minibar</p>
+          <div style="flex:1;"></div>
           <p class="caption mt-6" style="font-weight:700;color:hsl(var(--foreground));">View this room →</p>
         </div>
       </a>
@@ -503,7 +509,7 @@ Production/sign-off notes from the doc (sec.10 "Outstanding", bracketed "[confir
           {label:"Sea View", spec:"62 m² indoor · 48 m² outdoor · Up to 2 guests · King"},
           {label:"Premier", spec:"89 m² indoor · 85 m² outdoor · Up to 3 guests · King + convertible sofa · Writing desk · Canopy daybed", extra:"Writing desk · Sofa convertible for +1 · Indoor & outdoor showers · Outdoor canopy daybed"}
         ],
-        features:["Generous outdoor patio","Infinity pool","King-size bed","Relaxing sofa","Double wardrobes","Bathtub & shower","Jayasom Flask","Wellness Journal","Other lifestyle amenities","Wellness-curated minibar"]
+        features:["Generous outdoor patio","Infinity pool","King-size bed","Double wardrobes","Bathtub & shower","Jayasom Flask","Wellness Journal","Other lifestyle amenities","Wellness-curated minibar"]
       },
       {
         name:"1-Bedroom Beachfront Villa", cat:1,
