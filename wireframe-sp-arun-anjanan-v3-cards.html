@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Arun Anjanan v3 (cards) · Jayasom Wireframe</title>
+  <style>
+:root { --background: 16 33% 93%; --foreground: 300 2% 27%; --card: 16 33% 93%; --card-foreground: 300 2% 27%; --muted: 16 20% 86%; --muted-foreground: 300 2% 40%; --accent: 16 20% 86%; --accent-foreground: 300 2% 27%; --border: 300 2% 60%; --input: 300 2% 60%; --primary: 300 2% 27%; --primary-foreground: 16 33% 93%; --wire-placeholder: 16 20% 88%; --wire-line: 300 2% 55%; --wire-dark: 300 2% 30%; --wire-mid: 300 2% 45%; --radius: 0rem; }
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif; font-weight: 300; line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 48px 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow, .section-dark .body-copy, .section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-section, .section-dark .h-sub { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+.grid-2, .grid-3, .grid-4 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 16px; } }
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 11px 22px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 0; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) { .site-footer .cols { grid-template-columns: 1fr; } .site-footer .bottom { flex-direction: column; gap: 16px; } }
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); border-bottom: 1px solid hsl(var(--border)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 6px 13px; font-size: 12px; color: hsl(var(--foreground)); letter-spacing: 0.03em; }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+.mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-6 { margin-bottom: 24px; }
+.bullet-list { display: flex; flex-direction: column; gap: 9px; }
+.bullet-list li { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.55; display: flex; gap: 10px; }
+.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
+
+/* === CARD TREATMENT (detail-as-cards) === */
+.profile-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: grid; grid-template-columns: 300px 1fr; }
+.profile-card .pc-photo { border: 0; border-right: 1px solid hsl(var(--border)); min-height: 360px; }
+.profile-card .pc-body { padding: 40px; display: flex; flex-direction: column; }
+.profile-card .pc-name { font-size: 30px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1.1; margin-bottom: 6px; }
+.profile-card .pc-role { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 20px; }
+@media (max-width: 768px) {
+  .profile-card { grid-template-columns: 1fr; }
+  .profile-card .pc-photo { border-right: 0; border-bottom: 1px solid hsl(var(--border)); min-height: 260px; }
+  .profile-card .pc-body { padding: 28px; }
+}
+
+.info-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 28px; }
+.info-card .ic-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: hsl(var(--foreground)); font-weight: 700; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid hsl(var(--border)); }
+
+.sp-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; }
+.sp-card .sp-photo { aspect-ratio: 4/5; border: 0; border-bottom: 1px solid hsl(var(--border)); }
+.sp-card .sp-pad { padding: 16px; }
+.sp-card .sp-name { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 4px; }
+.sp-card .sp-role { font-size: 12px; color: hsl(var(--muted-foreground)); margin-bottom: 10px; }
+.sp-card .sp-more { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--foreground)); }
+
+.select-wrap { display: inline-flex; align-items: center; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 0 14px; }
+.select-wrap select { border: 0; background: transparent; font-family: inherit; font-size: 12px; letter-spacing: 0.05em; color: hsl(var(--foreground)); padding: 10px 8px 10px 0; appearance: none; cursor: pointer; }
+.select-wrap svg { width: 14px; height: 14px; color: hsl(var(--muted-foreground)); }
+
+.cta-card { border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground),0.04); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.cta-card .cc-text { max-width: 460px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav><a href="#destinations">Destinations</a><a href="#retreats">Retreats</a><a href="#wellness">Wellness</a><a href="#residences">Residences</a><a href="#insights">Insights</a></nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<!-- HERO BANNER -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:300px;width:100%;border-left:0;border-right:0;"></div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Our Experts &amp; Specialists</p>
+      <h1 class="h-hero" style="margin-bottom:12px;">Arun Anjanan</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Health &amp; Wellness Advisor</p>
+    </div>
+  </div>
+</section>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span><a href="#">AMAALA</a><span class="sep">›</span><a href="wireframe-experts-v3.html">Our Experts and Specialists</a><span class="sep">›</span><span>Arun Anjanan</span>
+  </div>
+</div>
+
+<main>
+
+<!-- PROFILE CARD -->
+<section class="section">
+  <div class="shell">
+    <a href="wireframe-experts-v3.html" class="caption" style="display:inline-block;margin-bottom:20px;">‹ Back to all specialists</a>
+    <div class="profile-card">
+      <div class="pc-photo wire-image">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        <span class="label">Arun Anjanan · portrait</span>
+      </div>
+      <div class="pc-body">
+        <p class="eyebrow" style="margin-bottom:14px;">About</p>
+        <p class="body-copy full" style="font-size:14px;">Arun's path to wellness began in nursing and grew into preventive, holistic health that treats the individual as a whole rather than a set of symptoms. His calm, patient presence helps guests slow down, reconnect, and rebuild small, sustainable habits.</p>
+        <div class="tag-row" style="margin-top:20px;">
+          <span class="label-tiny" style="margin:0 6px 0 0;align-self:center;">Languages</span>
+          <span class="tag">English</span><span class="tag">Hindi</span><span class="tag">Malayalam</span>
+        </div>
+        <div class="flex gap-3 mt-6" style="flex-wrap:wrap;margin-top:auto;padding-top:24px;">
+          <a href="wireframe-contact-v3.html" class="btn btn-solid">Speak to a Wellness Advisor</a>
+          <a href="wireframe-retreats-and-programmes-v3.html" class="btn">Explore retreats</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAIL CARDS: education / focus / systems -->
+<section class="section" style="padding-top:0;">
+  <div class="shell">
+    <div class="grid-3">
+      <div class="info-card">
+        <p class="ic-title">Education &amp; Training</p>
+        <ul class="bullet-list">
+          <li>Bachelor of Science in Nursing</li>
+          <li>Wellness Advisor training</li>
+          <li>Colonic hydrotherapy training</li>
+          <li>Yoga and Ayurvedic massage studies</li>
+          <li>Lifestyle and preventive health</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <p class="ic-title">Areas of Focus</p>
+        <div class="tag-row">
+          <span class="tag">Integrative wellbeing</span>
+          <span class="tag">Preventive health</span>
+          <span class="tag">Lifestyle balance</span>
+          <span class="tag">Rest and recovery</span>
+          <span class="tag">Healthy daily rhythms</span>
+          <span class="tag">Personalised support</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <p class="ic-title">Accredited Systems</p>
+        <p class="caption" style="margin-bottom:14px;">Available through selected practitioners on the team:</p>
+        <div class="tag-row">
+          <span class="tag">Hydrafacial</span>
+          <span class="tag">Margaret Dabbs&reg;</span>
+          <span class="tag">Neurac&reg;</span>
+          <span class="tag">Gyrotonic&reg;</span>
+          <span class="tag">HeartMath</span>
+          <span class="tag">KOS Paris</span>
+          <span class="tag">+ more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE OF THE TEAM (compact card row) -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="flex justify-between mb-6" style="align-items:flex-end;flex-wrap:wrap;gap:16px;">
+      <div>
+        <p class="eyebrow">More of the team</p>
+        <h2 class="h-sub" style="font-size:22px;margin-bottom:0;">Our Experts &amp; Specialists</h2>
+      </div>
+      <div class="select-wrap">
+        <select aria-label="Filter by designation">
+          <option>All designations</option>
+          <option>Health &amp; Wellness Advisor</option>
+          <option>Psychologist</option>
+          <option>Physiotherapist</option>
+          <option>Holistic Therapist</option>
+          <option>Wellness Nurse</option>
+        </select>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="grid-4">
+      <a href="wireframe-sp-eman-alsayoud-v3.html" class="sp-card">
+        <div class="sp-photo wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="sp-pad"><p class="sp-name">Eman Alsayoud</p><p class="sp-role">Psychologist</p><span class="sp-more">Read more ›</span></div>
+      </a>
+      <a href="wireframe-sp-basel-shammout-v3.html" class="sp-card">
+        <div class="sp-photo wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="sp-pad"><p class="sp-name">Basel Shammout</p><p class="sp-role">Physiotherapist</p><span class="sp-more">Read more ›</span></div>
+      </a>
+      <a href="wireframe-sp-amanda-hanna-v3.html" class="sp-card">
+        <div class="sp-photo wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="sp-pad"><p class="sp-name">Amanda Hanna</p><p class="sp-role">Holistic Therapist</p><span class="sp-more">Read more ›</span></div>
+      </a>
+      <a href="wireframe-sp-lujain-alhussan-v3.html" class="sp-card">
+        <div class="sp-photo wire-image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="sp-pad"><p class="sp-name">Lujain AlHussan</p><p class="sp-role">Wellness Nurse</p><span class="sp-more">Read more ›</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPACT CONTACT CTA CARD -->
+<section class="section">
+  <div class="shell">
+    <div class="cta-card">
+      <div class="cc-text">
+        <p class="eyebrow" style="margin-bottom:8px;">Speak to the team</p>
+        <h2 class="h-sub" style="font-size:20px;margin-bottom:6px;">Speak to a Wellness Advisor</h2>
+        <p class="caption">A pre-arrival conversation matches the practitioners in residence to your stay. Response within 48 hours.</p>
+      </div>
+      <div class="flex gap-3" style="flex-wrap:wrap;">
+        <a href="#" class="btn btn-solid">Request a private call</a>
+        <a href="wireframe-contact-v3.html" class="btn">Plan your retreat</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="wireframe-sustainable-living-v3.html">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
