@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Sustainable Living v3 (clone) · Jayasom Wireframe</title>
+  <style>
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image { background: hsl(var(--wire-placeholder)); border: 1px solid hsl(var(--border)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: hsl(var(--muted-foreground)); }
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 0; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 720px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 16px; }
+.mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-tall { padding: 80px 32px; }
+.eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+
+.icon-card-centered { text-align: center; padding: 32px 24px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.icon-card-centered .icon-circle { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border: 1px solid hsl(var(--border)); border-radius: 50%; margin-bottom: 16px; color: hsl(var(--foreground)); }
+.icon-card-centered .icon-circle svg { width: 22px; height: 22px; stroke-width: 1.25; }
+
+.pull-quote { border-left: 2px solid hsl(var(--foreground)); padding: 8px 24px; font-size: 18px; font-weight: 300; font-style: italic; color: hsl(var(--foreground)); margin: 24px 0; }
+.pull-quote .attribution { display: block; margin-top: 16px; font-size: 12px; font-style: normal; color: hsl(var(--muted-foreground)); }
+.section-dark .pull-quote { border-left-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .pull-quote .attribution { color: hsla(var(--primary-foreground), 0.7); }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+
+/* === LAYOUT VARIATIONS === */
+.split-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.split-row.reverse > :first-child { order: 2; }
+.split-row .split-img { height: 380px; }
+@media (max-width: 768px) {
+  .split-row { grid-template-columns: 1fr; gap: 32px; }
+  .split-row.reverse > :first-child { order: 0; }
+  .split-row .split-img { height: 240px; }
+}
+
+/* Editorial split (long-form 2-col) */
+.editorial-split { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+.editorial-split .ed-left { position: sticky; top: 32px; }
+.editorial-split .ed-left .lead { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); line-height: 1.45; font-style: italic; margin-top: 16px; }
+.editorial-split .ed-right p { margin-bottom: 18px; font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.85; }
+.editorial-split .ed-right p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) {
+  .editorial-split { grid-template-columns: 1fr; gap: 32px; }
+  .editorial-split .ed-left { position: static; }
+}
+
+/* Image strip (visual punctuation) */
+.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
+
+/* Standalone centred icon */
+.icon-standalone { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border: 1px solid hsl(var(--border)); border-radius: 50%; color: hsl(var(--foreground)); margin-bottom: 20px; }
+.icon-standalone svg { width: 22px; height: 22px; stroke-width: 1.25; }
+
+/* Big statement */
+.statement { font-size: 30px; font-weight: 300; line-height: 1.3; color: hsl(var(--foreground)); max-width: 860px; }
+@media (max-width: 768px) { .statement { font-size: 23px; } }
+
+/* Numbered commitments carousel */
+.carousel { display: grid; grid-template-columns: 1.1fr 1fr; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.carousel .car-media { min-height: 440px; border: 0; border-right: 1px solid hsl(var(--border)); }
+.carousel .car-body { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+.car-num { font-size: 13px; letter-spacing: 0.2em; color: hsl(var(--muted-foreground)); display: block; margin-bottom: 14px; }
+.car-title { font-size: 24px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 14px; }
+.car-text { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.75; max-width: 440px; }
+.car-nav { display: flex; gap: 8px; margin-top: 34px; flex-wrap: wrap; }
+.car-dot { width: 42px; height: 42px; border: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--muted-foreground)); font-size: 12px; letter-spacing: 0.08em; cursor: pointer; font-family: inherit; }
+.car-dot.active { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--foreground)); }
+@media (max-width: 768px) {
+  .carousel { grid-template-columns: 1fr; }
+  .carousel .car-media { border-right: 0; border-bottom: 1px solid hsl(var(--border)); min-height: 240px; }
+  .carousel .car-body { padding: 32px; }
+}
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
+.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
+.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
+.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
+.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a> <span class="sep">/</span>
+    <a href="#">Destinations</a> <span class="sep">/</span>
+    <a href="#">AMAALA</a> <span class="sep">/</span>
+    Sustainability
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:540px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    <span class="label">Hero — Sustainable and Regenerative Living</span>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Sustainability &amp; Community Commitment</p>
+      <h1 class="h-hero">Sustainable and Regenerative Living</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">True personal wellbeing depends on a healthy planet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE PRACTICE — opening philosophy -->
+<section class="section">
+  <div class="shell">
+    <div class="editorial-split">
+      <div class="ed-left">
+        <p class="eyebrow">The Practice</p>
+        <p class="lead">That is the difference between sustainability and regeneration. One is a policy. The other is a practice.</p>
+      </div>
+      <div class="ed-right">
+        <p>How we live leaves a mark — the pace of it, the consumption, the slow disconnection from what sustains us. We feel the cost in the body long before we read it in the environment.</p>
+        <p>The Red Sea holds some of the oldest, most resilient corals on earth, adapted to heat over twelve thousand years, with an evolutionary memory no other reef has developed. They can survive the heat stress that would bleach any other system. What they are far less able to survive is what reaches the coast beside them.</p>
+        <p>Jayasom was built with a clear intention: not to minimise damage, but to actively improve the ecosystem it sits within — the reef, the soil, the water table, the community, and the guest who arrives depleted and leaves carrying something they did not bring.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR COMMITMENT -->
+<section class="section section-muted">
+  <div class="shell" style="max-width:820px;">
+    <p class="eyebrow">Our commitment</p>
+    <h2 class="h-section">Sustainability as a functional practice</h2>
+    <p class="body-copy full">Here, sustainability is a working practice rather than an aspiration. The decisions that shape a stay — how we build, where energy comes from, how food is grown, and how people move around the property — each carry the same regenerative intent.</p>
+  </div>
+</section>
+
+<!-- BELIEF STATEMENT + MOSO HUB -->
+<section class="section">
+  <div class="shell">
+    <div class="split-row">
+      <div>
+        <p class="eyebrow">Why it matters</p>
+        <p class="statement">Personal health requires environmental wellness.</p>
+      </div>
+      <div>
+        <h2 class="h-sub" style="font-size:22px;">The MOSO Hub</h2>
+        <p class="body-copy">The MOSO Hub is the operational heart of that belief — the room where sustainability is measured, tracked, and reported in the open throughout the year. It is both a place to learn and a standing commitment to transparency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIVE-POINT COMMITMENTS CAROUSEL (01–05) -->
+<section class="section section-muted" id="commitments">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:720px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">In practice</p>
+      <h2 class="h-section">Five commitments</h2>
+    </div>
+    <div class="carousel">
+      <div class="car-media wire-image" id="carMedia">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label" id="carLabel">The MOSO Hub · public reporting</span>
+      </div>
+      <div class="car-body">
+        <span class="car-num" id="carNum">01 / 05</span>
+        <h3 class="car-title" id="carTitle">Transparency</h3>
+        <p class="car-text" id="carText">The MOSO Hub teaches the principles behind the work, and reports energy consumption, water usage and waste generation across the whole year.</p>
+        <div class="car-nav" id="carNav">
+          <button type="button" class="car-dot active" data-i="0">01</button>
+          <button type="button" class="car-dot" data-i="1">02</button>
+          <button type="button" class="car-dot" data-i="2">03</button>
+          <button type="button" class="car-dot" data-i="3">04</button>
+          <button type="button" class="car-dot" data-i="4">05</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WATER AND SOURCING (3-up) -->
+<section class="section">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:760px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Everyday Practice</p>
+      <h2 class="h-section">Water and Sourcing</h2>
+    </div>
+    <div class="grid-3" style="margin-top:48px;">
+
+      <div class="wire-card" style="display:flex;flex-direction:column;">
+        <div class="pad" style="padding:32px;display:flex;flex-direction:column;flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;color:hsl(var(--foreground));margin-bottom:20px;"><path d="M9 2h6"/><path d="M10 2v3.5L6.5 13a5 5 0 0 0 4.5 8h2a5 5 0 0 0 4.5-8L14 5.5V2"/><path d="M7.5 14h9"/></svg>
+          <p class="eyebrow">Minimise Single-Use Items</p>
+          <h3 class="h-sub">Water flasks</h3>
+          <p class="caption">Complimentary re-usable water flasks are available for each guest, with refill stations readily available. This ensures that single-use bottles are eliminated.</p>
+        </div>
+      </div>
+
+      <div class="wire-card" style="display:flex;flex-direction:column;">
+        <div class="pad" style="padding:32px;display:flex;flex-direction:column;flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;color:hsl(var(--foreground));margin-bottom:20px;"><path d="M12 2.5C12 2.5 6 9 6 14a6 6 0 0 0 12 0c0-5-6-11.5-6-11.5z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg>
+          <p class="eyebrow">Hydration</p>
+          <h3 class="h-sub">Water bottling</h3>
+          <p class="caption">At Jayasom AMAALA we bottle our own water in still and sparkling varieties — so we reduce imports and transportation. A splash of lemon with water in the morning is a refreshing way to start the day.</p>
+        </div>
+      </div>
+
+      <div class="wire-card" style="display:flex;flex-direction:column;">
+        <div class="pad" style="padding:32px;display:flex;flex-direction:column;flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;color:hsl(var(--foreground));margin-bottom:20px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+          <p class="eyebrow">Procurement</p>
+          <h3 class="h-sub">Responsible Sourcing</h3>
+          <p class="caption">From recycled paper through to the bathroom amenities — which are ethically and organically sourced — we choose sustainability.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE — Karen Campbell -->
+<section class="section section-tall section-dark text-center">
+  <div class="shell">
+    <p style="font-size:28px;font-weight:300;font-style:italic;line-height:1.4;color:hsl(var(--primary-foreground));max-width:760px;margin:0 auto 16px;">"Be mindful and make conscious choices."</p>
+    <p style="font-size:20px;font-weight:300;line-height:1.5;color:hsl(var(--primary-foreground));max-width:760px;margin:0 auto 24px;">True personal wellbeing depends on a healthy planet.</p>
+    <p class="caption" style="color:hsla(var(--primary-foreground),0.7);">— Karen Campbell, CEO and Co-Founder, Jayasom</p>
+  </div>
+</section>
+
+<!-- SOURCING PARTNERS -->
+<section class="section">
+  <div class="shell">
+    <div class="split-row reverse">
+      <div>
+        <p class="eyebrow">Sourcing &amp; Partners</p>
+        <h2 class="h-section">What we source, and from whom</h2>
+        <p class="body-copy mb-4">Produce is grown on the property's Farm Belt. Alongside our in-house bottling, two international water brands are permitted on the property. Tableware is sourced from Kevala Customised, Churchill Raku, Rona Mode, and Riedel.</p>
+        <p class="caption" style="font-style:italic;">Reviewed by Elodie Lefebvre, Director of Health and Wellness, Jayasom Wellness Resort AMAALA. Last reviewed 1 May 2026.</p>
+      </div>
+      <div class="wire-image split-img">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span class="label">Sourcing &amp; partners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT TO LAST LIGHTLY -->
+<section class="section section-muted">
+  <div class="shell">
+    <div class="text-center mb-8" style="max-width:720px;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">The Built Environment</p>
+      <h2 class="h-section">Built to Last Lightly</h2>
+    </div>
+    <div class="grid-3" style="margin-top:40px;">
+      <div class="wire-card"><div class="pad" style="padding:32px;">
+        <p class="eyebrow">Design &amp; Build</p>
+        <h3 class="h-sub">Sited to the climate</h3>
+        <p class="caption">Buildings are positioned to catch the sea breeze and the shade. The architecture sits low against the landscape, built from local, tactile materials, with LEED-certified design throughout.</p>
+      </div></div>
+      <div class="wire-card"><div class="pad" style="padding:32px;">
+        <p class="eyebrow">Coco-Mat&trade; Mattress</p>
+        <h3 class="h-sub">Natural where possible</h3>
+        <p class="caption">Mattresses are made from natural fibres — cotton, coconut, natural rubber and seaweed — with no steel or springs. The materials lower allergy and respiratory risk while carrying a lighter environmental cost.</p>
+      </div></div>
+      <div class="wire-card"><div class="pad" style="padding:32px;">
+        <p class="eyebrow">Land &amp; Water</p>
+        <h3 class="h-sub">Grown and conserved</h3>
+        <p class="caption">The Farm Belt grows in raised, partially-shaded beds that supply the kitchens. Water is conserved and recycled across the property, and stormwater is slowed for gradual drainage rather than runoff.</p>
+      </div></div>
+    </div>
+    <div class="wire-image" style="height:340px;margin-top:24px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Low-rise architecture against the landscape</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="shell" style="max-width:820px;">
+    <div class="text-center mb-8">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h-section">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Is the property carbon neutral?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Jayasom AMAALA operates to a net-zero carbon standard. Energy comes entirely from a dedicated solar farm, and all transport is electric. Performance is tracked and publicly reported each year.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How does Jayasom protect the Red Sea coastline?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Environmental Lighting Zones preserve natural darkness along the coast. Coastal-facing light is directed inward, preserving the navigational cues that nesting turtles rely on. No pesticides are used anywhere on the property.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">What is the Farm Belt?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">A working growing space of raised beds with partial shade and no pesticides. It feeds the kitchens directly, and local supply is prioritised before anything is sourced externally.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">Are products and amenities sustainably sourced?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Yes. Bathroom amenities are ethically and organically sourced, paper is recycled throughout, and responsible sourcing is applied with equal care to every element of a stay.</p>
+      </div>
+      <div class="faq-item">
+        <div class="q">
+          <p class="q-text">How do guests get around the property?</p>
+          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <p class="a">Every vehicle is electric — guest transfers and daily logistics alike. Zero-emission transport is standard, not optional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="wireframe-sustainable-living-v3.html">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Five-commitments carousel (faithful to the live page's rotating 01–05 block)
+(function () {
+  var points = [
+    { t: "Transparency",          x: "The MOSO Hub teaches the principles behind the work, and reports energy consumption, water usage and waste generation across the whole year.", l: "The MOSO Hub · public reporting" },
+    { t: "Solar Energy",          x: "AMAALA draws its electricity from dedicated, large-scale solar farms.", l: "Dedicated solar farm" },
+    { t: "Dark Sky Awareness",    x: "Environmental Lighting Zones protect the darkness of the coast. Coastal-facing rooms and areas use deliberately calibrated lighting.", l: "Coastal dark-sky lighting" },
+    { t: "Zero-Emission Transport", x: "Every property vehicle is electric — guest transfers and operational logistics alike — generating no direct emissions.", l: "Electric guest transfers" },
+    { t: "Turtle Nesting",        x: "The Red Sea coastline hosts seasonal nesting turtles. Beach management ensures their natural cycles continue uninterrupted.", l: "Seasonal turtle nesting beach" }
+  ];
+  var nav = document.getElementById('carNav');
+  if (!nav) return;
+  var elNum = document.getElementById('carNum'),
+      elTitle = document.getElementById('carTitle'),
+      elText = document.getElementById('carText'),
+      elLabel = document.getElementById('carLabel'),
+      dots = nav.querySelectorAll('.car-dot');
+  function show(i) {
+    var p = points[i];
+    elNum.textContent = '0' + (i + 1) + ' / 05';
+    elTitle.textContent = p.t;
+    elText.textContent = p.x;
+    elLabel.textContent = p.l;
+    dots.forEach(function (d, j) { d.classList.toggle('active', j === i); });
+  }
+  dots.forEach(function (d) {
+    d.addEventListener('click', function () { show(parseInt(d.getAttribute('data-i'), 10)); });
+  });
+})();
+</script>
+</body>
+</html>
