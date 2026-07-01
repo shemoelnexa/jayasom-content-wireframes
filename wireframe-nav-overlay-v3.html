@@ -85,7 +85,7 @@ html, body {
 .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 4px; width: 26px; }
 .menu-btn .bars span { height: 1.5px; width: 100%; background: hsl(var(--foreground)); transition: transform .25s ease, opacity .25s ease; }
 .menu-btn:focus-visible, .nav-close:focus-visible, .prim:focus-visible,
-.panel a:focus-visible, .btn:focus-visible {
+.panel a:focus-visible, .btn:focus-visible, .nav-back:focus-visible {
   outline: 2px solid hsl(var(--foreground)); outline-offset: 3px;
 }
 
@@ -199,19 +199,60 @@ html, body {
 .panel-foot .foot-note { font-size: 11px; color: hsl(var(--muted-foreground)); letter-spacing: 0.04em; }
 .panel-foot a.text-link { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--foreground)); padding-bottom: 3px; }
 
-/* ---- Responsive: stack to single column ---- */
-@media (max-width: 860px) {
-  .nav-body { grid-template-columns: 1fr; gap: 0; padding-bottom: 64px; }
-  .nav-divider { display: none; }
-  .nav-primary { padding-top: 24px; }
-  .nav-detail { padding-top: 20px; margin-top: 20px; border-top: 1px solid hsl(var(--border)); min-height: 0; }
-  .prim { font-size: 22px; padding: 14px 40px 14px 18px; }
-  .panel-grid { grid-template-columns: 1fr; gap: 0; }
+/* ---- Mobile drill-down back bar (hidden on desktop) ---- */
+.nav-detail-bar { display: none; }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: transparent; cursor: pointer; font-family: inherit;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: hsl(var(--foreground)); padding: 8px 2px;
 }
+.nav-back svg { width: 16px; height: 16px; }
+.nav-detail-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+/* ---- Responsive: mobile drill-down (push) navigation ---- */
+@media (max-width: 860px) {
+  .nav-body { display: block; position: relative; padding: 0 0 40px; max-width: none; }
+  .nav-divider { display: none; }
+
+  /* Screen 1 — the primary sections list */
+  .nav-primary { padding: 14px 24px 36px; }
+  .prim { font-size: 23px; padding: 17px 42px 17px 18px; }
+  .prim .arrow { opacity: 1; transform: translate(0, -50%); }   /* always show drill-in affordance */
+  .prim.is-active { background: transparent; }                  /* no persistent highlight on the root list */
+  .prim.is-active::before { height: 0; }
+  .prim.is-active .idx { color: hsl(var(--muted-foreground)); }
+
+  /* Screen 2 — the section detail, slides in over screen 1 */
+  .nav-detail { display: none; padding: 0 24px 56px; margin-top: 0; border-top: 0; min-height: 0; }
+  .nav-body.is-detail-open .nav-primary { display: none; }
+  .nav-body.is-detail-open .nav-detail { display: block; }
+  .nav-body.is-detail-open .nav-detail { animation: navSlideIn .28s ease both; }
+  .nav-body:not(.is-detail-open) .nav-primary { animation: navSlideBack .28s ease both; }
+
+  .nav-detail-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    position: sticky; top: 0; z-index: 3;
+    background: hsl(var(--background));
+    padding: 14px 0 12px; margin-bottom: 6px;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .panel-head { margin-top: 16px; }
+  .panel-grid, .panel-grid.one-col { grid-template-columns: 1fr; gap: 0; max-width: none; }
+  .nav-link { padding: 16px 0; }               /* larger tap targets */
+  .nav-link .t { font-size: 16px; }
+  .nav-link .t::after { opacity: 1; transform: translateX(0); margin-left: auto; }  /* arrow always visible */
+  .nav-link .t { display: flex; }
+  .panel-foot .btn, .panel-foot .btn-solid { width: 100%; text-align: center; padding: 15px 24px; }
+}
+
+@keyframes navSlideIn  { from { transform: translateX(26px);  opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes navSlideBack { from { transform: translateX(-18px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .nav-overlay, .prim, .prim::before, .prim .arrow, .nav-link .t, .nav-link .t::after, .menu-btn .bars span { transition: none !important; }
+  .nav-body.is-detail-open .nav-detail, .nav-body:not(.is-detail-open) .nav-primary { animation: none !important; }
 }
 
 /* Demo page dressing */
@@ -286,6 +327,15 @@ html, body {
 
     <!-- RIGHT: detail panels -->
     <div class="nav-detail">
+
+      <!-- Mobile-only back bar (drill-down navigation) -->
+      <div class="nav-detail-bar">
+        <button type="button" class="nav-back" data-menu-back aria-label="Back to all sections">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          All sections
+        </button>
+        <span class="nav-detail-title" data-detail-title></span>
+      </div>
 
       <!-- HOME -->
       <section class="panel" id="panel-home" aria-label="Home" hidden>
@@ -421,9 +471,13 @@ html, body {
   if (!overlay) return;
   var openers  = document.querySelectorAll('[data-menu-open]');
   var closeBtn = overlay.querySelector('[data-menu-close]');
+  var navBody  = overlay.querySelector('.nav-body');
+  var backBtn  = overlay.querySelector('[data-menu-back]');
+  var detailTitle = overlay.querySelector('[data-detail-title]');
   var prims    = Array.prototype.slice.call(overlay.querySelectorAll('.prim'));
   var panels   = Array.prototype.slice.call(overlay.querySelectorAll('.panel'));
   var lastFocused = null;
+  var currentPrim = null;     // primary the mobile detail was opened from
   var closeTimer = null;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var mobile = window.matchMedia('(max-width: 860px)');
@@ -437,6 +491,22 @@ html, body {
     panels.forEach(function (p) {
       p.hidden = (p.id !== 'panel-' + id);
     });
+  }
+
+  // Mobile: slide the section detail in over the primary list
+  function drillIn(id, primEl) {
+    activate(id);
+    var panel = document.getElementById('panel-' + id);
+    if (detailTitle) detailTitle.textContent = panel ? (panel.getAttribute('aria-label') || '') : '';
+    currentPrim = primEl;
+    navBody.classList.add('is-detail-open');
+    if (backBtn) backBtn.focus();
+  }
+
+  // Mobile: slide back to the primary list
+  function drillOut() {
+    navBody.classList.remove('is-detail-open');
+    if (currentPrim && typeof currentPrim.focus === 'function') currentPrim.focus();
   }
 
   function focusables() {
@@ -466,6 +536,7 @@ html, body {
 
   function close() {
     overlay.classList.remove('is-open');
+    navBody.classList.remove('is-detail-open');   // next open starts at the root list
     openers.forEach(function (o) { o.setAttribute('aria-expanded', 'false'); });
     document.body.style.overflow = '';
     document.removeEventListener('keydown', onKeydown, true);
@@ -493,11 +564,8 @@ html, body {
     b.addEventListener('mouseenter', function () { if (!mobile.matches) activate(id); });
     b.addEventListener('focus', function () { activate(id); });
     b.addEventListener('click', function () {
-      activate(id);
-      if (mobile.matches) {
-        var p = document.getElementById('panel-' + id);
-        if (p) p.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'nearest' });
-      }
+      if (mobile.matches) { drillIn(id, b); }
+      else { activate(id); }
     });
     b.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowDown') { e.preventDefault(); prims[(i + 1) % prims.length].focus(); }
@@ -509,8 +577,14 @@ html, body {
 
   openers.forEach(function (o) { o.addEventListener('click', open); });
   closeBtn.addEventListener('click', close);
+  if (backBtn) backBtn.addEventListener('click', drillOut);
   // click on the empty backdrop area (the overlay itself, not its children) closes
   overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+
+  // Leaving mobile width resets the drill-down so desktop shows both panes
+  function onBreakpoint(e) { if (!e.matches) navBody.classList.remove('is-detail-open'); }
+  if (mobile.addEventListener) mobile.addEventListener('change', onBreakpoint);
+  else if (mobile.addListener) mobile.addListener(onBreakpoint); // older browsers
 })();
 </script>
 
