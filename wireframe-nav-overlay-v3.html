@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Navigation Overlay v3 · Jayasom Wireframe</title>
+
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+
+/* === LAYOUT PRIMITIVES === */
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .label { font-size: 11px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; text-transform: uppercase; }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+
+/* === SITE HEADER === */
+.site-header {
+  position: relative; z-index: 20;
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 18px 32px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+}
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); text-align: center; }
+.site-header .header-right { display: flex; justify-content: flex-end; }
+
+/* Hamburger trigger */
+.menu-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: transparent; cursor: pointer; padding: 6px 2px;
+  font-family: inherit; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+.menu-btn .bars { display: inline-flex; flex-direction: column; gap: 4px; width: 26px; }
+.menu-btn .bars span { height: 1.5px; width: 100%; background: hsl(var(--foreground)); transition: transform .25s ease, opacity .25s ease; }
+.menu-btn:focus-visible, .nav-close:focus-visible, .prim:focus-visible,
+.panel a:focus-visible, .btn:focus-visible {
+  outline: 2px solid hsl(var(--foreground)); outline-offset: 3px;
+}
+
+/* ============================================================
+   NAVIGATION OVERLAY  (two-pane master–detail)
+   ============================================================ */
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: hsl(var(--background));
+  opacity: 0;
+  transition: opacity .3s ease;
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.nav-overlay.is-open { opacity: 1; }
+.nav-overlay[hidden] { display: none; }
+
+.nav-bar {
+  flex: 0 0 auto;
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 18px 32px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+}
+.nav-bar .logo { grid-column: 2; font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.nav-close {
+  grid-column: 3; justify-self: end;
+  background: transparent; cursor: pointer; padding: 8px;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: inherit; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+.nav-close svg { width: 20px; height: 20px; }
+
+.nav-body {
+  flex: 1 1 auto;
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  padding: 8px 32px 48px;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) 1px minmax(0, 1.28fr);
+  gap: 0 56px;
+  align-items: start;
+}
+
+/* ---- LEFT: primary sections ---- */
+.nav-primary { padding-top: 40px; }
+.nav-eyebrow { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 22px; }
+.nav-primary ul { display: flex; flex-direction: column; }
+
+.prim {
+  position: relative;
+  width: 100%; text-align: left;
+  background: transparent; cursor: pointer;
+  font-family: inherit; font-weight: 300;
+  font-size: 27px; line-height: 1.1; letter-spacing: 0.01em;
+  color: hsl(var(--muted-foreground));
+  padding: 15px 40px 15px 22px;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  transition: color .2s ease, background-color .2s ease;
+}
+.prim .idx { font-size: 10px; letter-spacing: 0.2em; color: hsl(var(--muted-foreground)); font-weight: 400; align-self: center; }
+.prim::before {
+  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 2px; height: 0; background: hsl(var(--foreground));
+  transition: height .22s ease;
+}
+.prim .arrow {
+  position: absolute; right: 16px; top: 50%; transform: translate(6px, -50%);
+  opacity: 0; transition: opacity .2s ease, transform .2s ease; font-size: 18px;
+  color: hsl(var(--foreground));
+}
+.prim:hover, .prim:focus-visible { color: hsl(var(--foreground)); }
+.prim.is-active { color: hsl(var(--foreground)); background: hsl(var(--muted)); }
+.prim.is-active::before { height: 60%; }
+.prim.is-active .idx { color: hsl(var(--foreground)); }
+.prim.is-active .arrow { opacity: 1; transform: translate(0, -50%); }
+
+/* ---- Divider ---- */
+.nav-divider { width: 1px; align-self: stretch; background: hsl(var(--border)); }
+
+/* ---- RIGHT: detail panels ---- */
+.nav-detail { padding-top: 40px; min-height: 420px; }
+.panel { }
+.panel[hidden] { display: none; }
+.panel-head { margin-bottom: 26px; }
+.panel-eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 10px; }
+.panel-lede { font-size: 15px; color: hsl(var(--muted-foreground)); line-height: 1.7; max-width: 560px; }
+
+.panel-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 4px 40px; }
+.panel-grid.one-col { grid-template-columns: 1fr; max-width: 460px; }
+
+.nav-link {
+  display: block; padding: 13px 0;
+  border-bottom: 1px solid hsla(var(--border), 0.5);
+}
+.nav-link .t {
+  font-size: 15px; color: hsl(var(--foreground));
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: gap .2s ease;
+}
+.nav-link .t::after { content: "→"; font-size: 13px; opacity: 0; transform: translateX(-4px); transition: opacity .2s ease, transform .2s ease; }
+.nav-link .d { font-size: 11.5px; color: hsl(var(--muted-foreground)); margin-top: 3px; line-height: 1.5; }
+.nav-link:hover .t, .nav-link:focus-visible .t { text-decoration: none; }
+.nav-link:hover .t::after, .nav-link:focus-visible .t::after { opacity: 1; transform: translateX(0); }
+.nav-link[aria-current="page"] .t { font-weight: 700; }
+.nav-link[aria-current="page"] .t::before { content: "•"; margin-right: 4px; }
+
+.panel-foot {
+  margin-top: 30px; padding-top: 24px; border-top: 1px solid hsl(var(--border));
+  display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px;
+}
+.panel-foot .foot-note { font-size: 11px; color: hsl(var(--muted-foreground)); letter-spacing: 0.04em; }
+.panel-foot a.text-link { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--foreground)); padding-bottom: 3px; }
+
+/* ---- Responsive: stack to single column ---- */
+@media (max-width: 860px) {
+  .nav-body { grid-template-columns: 1fr; gap: 0; padding-bottom: 64px; }
+  .nav-divider { display: none; }
+  .nav-primary { padding-top: 24px; }
+  .nav-detail { padding-top: 20px; margin-top: 20px; border-top: 1px solid hsl(var(--border)); min-height: 0; }
+  .prim { font-size: 22px; padding: 14px 40px 14px 18px; }
+  .panel-grid { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .nav-overlay, .prim, .prim::before, .prim .arrow, .nav-link .t, .nav-link .t::after, .menu-btn .bars span { transition: none !important; }
+}
+
+/* Demo page dressing */
+.demo-hero { position: relative; height: 520px; }
+.demo-hero .wire-image { position: absolute; inset: 0; border: 0; }
+.demo-hero .overlay-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 24px; }
+.demo-note { max-width: 640px; margin: 0 auto; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- ================= SITE HEADER (with trigger) ================= -->
+<header class="site-header">
+  <div>
+    <button class="menu-btn" data-menu-open aria-expanded="false" aria-controls="nav-overlay" aria-haspopup="dialog">
+      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      Menu
+    </button>
+  </div>
+  <a href="index.html" class="logo">Jayasom</a>
+  <div class="header-right"><a href="#book" class="btn">Book Now</a></div>
+</header>
+
+<!-- ================= DEMO PAGE BODY ================= -->
+<div class="demo-hero">
+  <div class="wire-image"><span class="label">HERO IMAGE — full-bleed</span></div>
+  <div class="overlay-text">
+    <div>
+      <p class="eyebrow">Navigation</p>
+      <h1 class="h-hero" style="max-width:640px;">Redesigned menu overlay</h1>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="demo-note">
+    <p class="eyebrow">Preview</p>
+    <h2 class="h-section">A two-pane, accessible menu</h2>
+    <p class="body-copy" style="margin:0 auto 24px;">Open the menu (top-left) to browse. The left column holds the primary sections; hovering, focusing, or tapping one reveals its sub-navigation on the right — no deep accordions. Keyboard: <strong>Tab</strong> / <strong>↑ ↓</strong> to move, <strong>Esc</strong> to close.</p>
+    <button class="btn btn-solid" data-menu-open>Open the menu</button>
+  </div>
+</section>
+
+<!-- ================= NAVIGATION OVERLAY ================= -->
+<div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main menu" hidden>
+
+  <div class="nav-bar">
+    <span class="logo">Jayasom</span>
+    <button class="nav-close" data-menu-close aria-label="Close menu">
+      Close
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+
+  <div class="nav-body">
+
+    <!-- LEFT: primary sections -->
+    <nav class="nav-primary" aria-label="Primary sections">
+      <p class="nav-eyebrow">Menu</p>
+      <ul>
+        <li><button type="button" class="prim" data-panel="home"        aria-controls="panel-home"        aria-expanded="false">Home <span class="arrow" aria-hidden="true">→</span><span class="idx">01</span></button></li>
+        <li><button type="button" class="prim is-active" data-panel="destinations" aria-controls="panel-destinations" aria-expanded="true">Destinations <span class="arrow" aria-hidden="true">→</span><span class="idx">02</span></button></li>
+        <li><button type="button" class="prim" data-panel="wellness"    aria-controls="panel-wellness"    aria-expanded="false">Wellness <span class="arrow" aria-hidden="true">→</span><span class="idx">03</span></button></li>
+        <li><button type="button" class="prim" data-panel="residences"  aria-controls="panel-residences"  aria-expanded="false">Residences <span class="arrow" aria-hidden="true">→</span><span class="idx">04</span></button></li>
+        <li><button type="button" class="prim" data-panel="about"       aria-controls="panel-about"       aria-expanded="false">About Us <span class="arrow" aria-hidden="true">→</span><span class="idx">05</span></button></li>
+        <li><button type="button" class="prim" data-panel="careers"     aria-controls="panel-careers"     aria-expanded="false">Careers <span class="arrow" aria-hidden="true">→</span><span class="idx">06</span></button></li>
+        <li><button type="button" class="prim" data-panel="contact"     aria-controls="panel-contact"     aria-expanded="false">Contact <span class="arrow" aria-hidden="true">→</span><span class="idx">07</span></button></li>
+      </ul>
+    </nav>
+
+    <div class="nav-divider" aria-hidden="true"></div>
+
+    <!-- RIGHT: detail panels -->
+    <div class="nav-detail">
+
+      <!-- HOME -->
+      <section class="panel" id="panel-home" aria-label="Home" hidden>
+        <div class="panel-head">
+          <p class="panel-eyebrow">Jayasom</p>
+          <p class="panel-lede">Return to the beginning — the practice, the place, and where Jayasom is headed next.</p>
+        </div>
+        <div class="panel-grid one-col">
+          <a class="nav-link" href="index.html"><span class="t">Homepage</span><span class="d">The full introduction to Jayasom</span></a>
+          <a class="nav-link" href="wireframe-day-at-amaala-v3.html"><span class="t">A Day at Amaala</span><span class="d">A day at the flagship, hour by hour</span></a>
+          <a class="nav-link" href="wireframe-essence-of-jayasom-v3.html"><span class="t">The Essence of Jayasom</span><span class="d">The philosophy behind the practice</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="#book" class="btn btn-solid">Book a Stay</a>
+        </div>
+      </section>
+
+      <!-- DESTINATIONS -->
+      <section class="panel" id="panel-destinations" aria-label="Destinations">
+        <div class="panel-head">
+          <p class="panel-eyebrow">Amaala · Red Sea, Saudi Arabia</p>
+          <p class="panel-lede">Jayasom's flagship. Explore everything at Amaala — from a day's rhythm to where you stay.</p>
+        </div>
+        <div class="panel-grid">
+          <a class="nav-link" href="wireframe-amaala-homepage-v3.html"><span class="t">Amaala Home</span><span class="d">The flagship overview</span></a>
+          <a class="nav-link" href="wireframe-rooms-and-villas-v3.html"><span class="t">Rooms &amp; Villas</span><span class="d">Where you stay</span></a>
+          <a class="nav-link" href="wireframe-day-at-amaala-v3.html"><span class="t">A Day at Amaala</span><span class="d">A day, hour by hour</span></a>
+          <a class="nav-link" href="wireframe-culinary-nourishment-v3.html"><span class="t">Culinary</span><span class="d">Nourishment &amp; dining</span></a>
+          <a class="nav-link" href="wireframe-retreats-and-programmes-v3.html"><span class="t">Retreats &amp; Programmes</span><span class="d">Multi-day journeys</span></a>
+          <a class="nav-link" href="wireframe-families-shared-wellbeing-v3.html"><span class="t">Families &amp; Shared Wellbeing</span><span class="d">Wellbeing together</span></a>
+          <a class="nav-link" href="wireframe-treatments-v3.html"><span class="t">Treatments</span><span class="d">Therapies &amp; rituals</span></a>
+          <a class="nav-link" href="wireframe-wellbeing-spaces-v3.html"><span class="t">Wellbeing Spaces</span><span class="d">Hydrothermal &amp; studios</span></a>
+          <a class="nav-link" href="wireframe-experts-v3.html"><span class="t">Our Experts &amp; Specialists</span><span class="d">Practitioners &amp; doctors</span></a>
+          <a class="nav-link" href="wireframe-sustainability-v3.html"><span class="t">Sustainability</span><span class="d">Our footprint &amp; care</span></a>
+          <a class="nav-link" href="wireframe-activities-details-v3.html"><span class="t">Activities</span><span class="d">Movement &amp; discovery</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="wireframe-destinations-v3.html" class="text-link">All destinations</a>
+          <span class="foot-note">Spain, Japan, Jordan &amp; India to follow.</span>
+        </div>
+      </section>
+
+      <!-- WELLNESS -->
+      <section class="panel" id="panel-wellness" aria-label="Wellness" hidden>
+        <div class="panel-head">
+          <p class="panel-eyebrow">Wellness · The Practice</p>
+          <p class="panel-lede">The whole approach to wellbeing — for you, and for the people you travel with.</p>
+        </div>
+        <div class="panel-grid">
+          <a class="nav-link" href="wireframe-wellness-v3.html"><span class="t">Wellness Overview</span><span class="d">The whole approach</span></a>
+          <a class="nav-link" href="wireframe-treatments-v3.html"><span class="t">Treatments</span><span class="d">Therapies &amp; rituals</span></a>
+          <a class="nav-link" href="wireframe-individual-wellness-v3.html"><span class="t">Individual Wellness</span><span class="d">Your own path</span></a>
+          <a class="nav-link" href="wireframe-retreats-and-programmes-v3.html"><span class="t">Retreats &amp; Programmes</span><span class="d">Multi-day journeys</span></a>
+          <a class="nav-link" href="wireframe-family-wellness-v3.html"><span class="t">Family Wellness</span><span class="d">For all ages</span></a>
+          <a class="nav-link" href="wireframe-experts-v3.html"><span class="t">Our Experts</span><span class="d">Practitioners &amp; doctors</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="wireframe-find-your-retreat-v3.html" class="text-link">Find your retreat</a>
+        </div>
+      </section>
+
+      <!-- RESIDENCES -->
+      <section class="panel" id="panel-residences" aria-label="Residences" hidden>
+        <div class="panel-head">
+          <p class="panel-eyebrow">Residences · Live at Amaala</p>
+          <p class="panel-lede">Make wellbeing a way of life — ownership and long stays within the Amaala community.</p>
+        </div>
+        <div class="panel-grid">
+          <a class="nav-link" href="wireframe-wellness-residences-v3.html"><span class="t">Wellness Residences</span><span class="d">Ownership overview</span></a>
+          <a class="nav-link" href="wireframe-residential-community-v3.html"><span class="t">Residential Community</span><span class="d">The neighbourhood</span></a>
+          <a class="nav-link" href="wireframe-rooms-and-villas-v3.html"><span class="t">Rooms &amp; Villas</span><span class="d">Stay options</span></a>
+          <a class="nav-link" href="wireframe-view-residency-v3.html"><span class="t">View a Residency</span><span class="d">Tour a home</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="wireframe-contact-v3.html" class="text-link">Speak to an Advisor</a>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="panel" id="panel-about" aria-label="About Us" hidden>
+        <div class="panel-head">
+          <p class="panel-eyebrow">About · Jayasom</p>
+          <p class="panel-lede">Who we are, what we stand for, and the writing that comes out of the property.</p>
+        </div>
+        <div class="panel-grid">
+          <a class="nav-link" href="wireframe-about-us-v3.html"><span class="t">About Us</span><span class="d">The story so far</span></a>
+          <a class="nav-link" href="wireframe-insights-v3.html"><span class="t">Insights</span><span class="d">Writing from the practice</span></a>
+          <a class="nav-link" href="wireframe-essence-of-jayasom-v3.html"><span class="t">The Essence of Jayasom</span><span class="d">The philosophy</span></a>
+          <a class="nav-link" href="wireframe-news-v3.html"><span class="t">News</span><span class="d">Announcements &amp; press</span></a>
+          <a class="nav-link" href="wireframe-sustainability-v3.html"><span class="t">Sustainability</span><span class="d">Our footprint &amp; care</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="wireframe-contact-v3.html" class="text-link">Contact us</a>
+        </div>
+      </section>
+
+      <!-- CAREERS -->
+      <section class="panel" id="panel-careers" aria-label="Careers" hidden>
+        <div class="panel-head">
+          <p class="panel-eyebrow">Careers</p>
+          <p class="panel-lede">Build a life's work in wellbeing. Explore roles across the property and the wider practice.</p>
+        </div>
+        <div class="panel-grid one-col">
+          <a class="nav-link" href="wireframe-careers-v3.html"><span class="t">Explore Careers</span><span class="d">Open roles &amp; how we hire</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="wireframe-careers-v3.html" class="btn btn-solid">View Openings</a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="panel" id="panel-contact" aria-label="Contact" hidden>
+        <div class="panel-head">
+          <p class="panel-eyebrow">Contact</p>
+          <p class="panel-lede">Speak with a Wellness Advisor, or begin planning a stay.</p>
+        </div>
+        <div class="panel-grid one-col">
+          <a class="nav-link" href="wireframe-contact-v3.html"><span class="t">Contact &amp; Enquiries</span><span class="d">Reach the team at Amaala</span></a>
+          <a class="nav-link" href="wireframe-contact-v3.html"><span class="t">Speak to a Wellness Advisor</span><span class="d">Personal guidance for your stay</span></a>
+        </div>
+        <div class="panel-foot">
+          <a href="#book" class="btn btn-solid">Book a Stay</a>
+        </div>
+      </section>
+
+    </div><!-- /nav-detail -->
+  </div><!-- /nav-body -->
+</div><!-- /nav-overlay -->
+
+<script>
+(function () {
+  var overlay  = document.getElementById('nav-overlay');
+  if (!overlay) return;
+  var openers  = document.querySelectorAll('[data-menu-open]');
+  var closeBtn = overlay.querySelector('[data-menu-close]');
+  var prims    = Array.prototype.slice.call(overlay.querySelectorAll('.prim'));
+  var panels   = Array.prototype.slice.call(overlay.querySelectorAll('.panel'));
+  var lastFocused = null;
+  var closeTimer = null;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mobile = window.matchMedia('(max-width: 860px)');
+
+  function activate(id) {
+    prims.forEach(function (b) {
+      var on = b.getAttribute('data-panel') === id;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+    panels.forEach(function (p) {
+      p.hidden = (p.id !== 'panel-' + id);
+    });
+  }
+
+  function focusables() {
+    var sel = 'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])';
+    return Array.prototype.slice.call(overlay.querySelectorAll(sel)).filter(function (el) {
+      // exclude anything inside a hidden panel or otherwise not rendered
+      if (el.closest('.panel') && el.closest('.panel').hidden) return false;
+      return el.offsetParent !== null || el === document.activeElement;
+    });
+  }
+
+  function open() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    lastFocused = document.activeElement;
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    openers.forEach(function (o) { o.setAttribute('aria-expanded', 'true'); });
+    var def = prims.filter(function (b) { return b.classList.contains('is-active'); })[0] || prims[0];
+    activate(def.getAttribute('data-panel'));
+    // next frame so the opacity transition runs
+    requestAnimationFrame(function () {
+      overlay.classList.add('is-open');
+      def.focus();
+    });
+    document.addEventListener('keydown', onKeydown, true);
+  }
+
+  function close() {
+    overlay.classList.remove('is-open');
+    openers.forEach(function (o) { o.setAttribute('aria-expanded', 'false'); });
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown, true);
+    var delay = reduce.matches ? 0 : 300;
+    closeTimer = setTimeout(function () {
+      overlay.hidden = true;
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }, delay);
+  }
+
+  function onKeydown(e) {
+    if (e.key === 'Escape' || e.key === 'Esc') { e.preventDefault(); close(); return; }
+    if (e.key === 'Tab') {
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+
+  // Primary section interactions
+  prims.forEach(function (b, i) {
+    var id = b.getAttribute('data-panel');
+    b.addEventListener('mouseenter', function () { if (!mobile.matches) activate(id); });
+    b.addEventListener('focus', function () { activate(id); });
+    b.addEventListener('click', function () {
+      activate(id);
+      if (mobile.matches) {
+        var p = document.getElementById('panel-' + id);
+        if (p) p.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'nearest' });
+      }
+    });
+    b.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); prims[(i + 1) % prims.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); prims[(i - 1 + prims.length) % prims.length].focus(); }
+      else if (e.key === 'Home') { e.preventDefault(); prims[0].focus(); }
+      else if (e.key === 'End') { e.preventDefault(); prims[prims.length - 1].focus(); }
+    });
+  });
+
+  openers.forEach(function (o) { o.addEventListener('click', open); });
+  closeBtn.addEventListener('click', close);
+  // click on the empty backdrop area (the overlay itself, not its children) closes
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+})();
+</script>
+
+</body>
+</html>
