@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Register Your Interest v3 · Jayasom Wireframe</title>
+  <style>
+/* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
+:root {
+  --background: 16 33% 93%;
+  --foreground: 300 2% 27%;
+  --card: 16 33% 93%;
+  --card-foreground: 300 2% 27%;
+  --muted: 16 20% 86%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 16 20% 86%;
+  --accent-foreground: 300 2% 27%;
+  --border: 300 2% 60%;
+  --input: 300 2% 60%;
+  --primary: 300 2% 27%;
+  --primary-foreground: 16 33% 93%;
+  --wire-placeholder: 16 20% 88%;
+  --wire-line: 300 2% 55%;
+  --wire-dark: 300 2% 30%;
+  --wire-mid: 300 2% 45%;
+  --radius: 0rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid hsl(var(--border)); }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.body-copy ol { list-style: decimal; padding-left: 1.5em; }
+.body-copy ul { list-style: disc; padding-left: 1.5em; }
+.body-copy ol li, .body-copy ul li { font-size: inherit; color: inherit; line-height: inherit; }
+
+html, body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Century Gothic', 'Didact Gothic', 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
+.eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.h-hero { font-size: 36px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.15; }
+.h-section { font-size: 28px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 16px; line-height: 1.2; }
+.h-sub { font-size: 18px; font-weight: 300; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.h-card { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
+.body-copy { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65; max-width: 640px; }
+.body-copy.full { max-width: none; }
+.caption { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+.label-tiny { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+/* === LAYOUT PRIMITIVES === */
+.shell { max-width: 1152px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 64px 32px; }
+.section-tight { padding: 32px; }
+.section-dark { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
+.section-dark .eyebrow,
+.section-dark .body-copy,
+.section-dark .caption { color: hsla(var(--primary-foreground), 0.7); }
+.section-dark .h-hero,
+.section-dark .h-section,
+.section-dark .h-sub,
+.section-dark .h-card { color: hsl(var(--primary-foreground)); }
+
+.section-muted { background: hsl(var(--muted)); }
+
+.grid-2, .grid-3, .grid-4, .grid-5 { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-aside { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-aside { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.wire-image {
+  background: hsl(var(--wire-placeholder));
+  border: 1px solid hsl(var(--border));
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: hsl(var(--muted-foreground));
+}
+.wire-image .icon { width: 28px; height: 28px; opacity: 0.7; }
+.wire-image .label { font-size: 11px; }
+
+.wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.wire-card .pad { padding: 20px; }
+.wire-card .pad-tight { padding: 14px; }
+
+.btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
+.btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
+.btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input,
+.form-field textarea,
+.form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+
+.consent-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; }
+.consent-row input { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; border: 1px solid hsl(var(--border)); }
+.consent-row label { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+
+.site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+.site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
+.site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-header nav a { color: inherit; }
+
+.site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 0; padding: 48px 32px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
+.site-footer .col-title { font-size: 12px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; }
+.site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.site-footer ul li, .site-footer ul li a { font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom { border-top: 1px solid hsl(var(--border)); padding-top: 32px; display: flex; justify-content: space-between; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.site-footer .bottom .links { display: flex; gap: 24px; }
+@media (max-width: 768px) {
+  .site-footer .cols { grid-template-columns: 1fr; }
+  .site-footer .bottom { flex-direction: column; gap: 16px; }
+}
+
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.hero-shell { position: relative; }
+.hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 720px; }
+
+.text-center { text-align: center; }
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; } .gap-12 { gap: 48px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+
+.section-mini { padding: 32px 32px; }
+.section-tall { padding: 80px 32px; }
+
+.divider-ornament { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
+.divider-ornament .rule { width: 48px; height: 1px; background: hsl(var(--foreground)); }
+.divider-ornament .dot { width: 4px; height: 4px; border-radius: 50%; background: hsl(var(--foreground)); }
+
+.step-card { padding: 24px; border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
+.step-card .step-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.step-card .step-num::before { content: ""; width: 24px; height: 1px; background: hsl(var(--foreground)); display: inline-block; }
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.callout .callout-body { font-size: 12px; color: hsl(var(--foreground)); line-height: 1.6; }
+
+.info-card { border: 1px solid hsl(var(--border)); padding: 24px; background: hsl(var(--background)); margin-bottom: 16px; }
+.info-card .label-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.info-card .label-row svg { width: 14px; height: 14px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Jayasom</a>
+  <nav>
+    <a href="#destinations">Destinations</a>
+    <a href="#retreats">Retreats</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#residences">Residences</a>
+    <a href="#insights">Insights</a>
+  </nav>
+  <a href="#book" class="btn">Book Now</a>
+</header>
+
+<div class="breadcrumb">
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span><span>Register Your Interest</span>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero-shell">
+  <div class="wire-image" style="height:600px;width:100%;border-left:0;border-right:0;">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  </div>
+  <div class="hero-overlay-center">
+    <div class="hero-text-center">
+      <p class="eyebrow">Register Your Interest</p>
+      <h1 class="h-hero">Be first to know</h1>
+      <p class="body-copy" style="margin:0 auto;font-style:italic;">Share a few details and our team will keep you close to Jayasom, from opening news to the retreat that fits you best.</p>
+      <div class="flex gap-4 justify-center" style="flex-wrap:wrap;margin-top:32px;">
+        <a href="#register" class="btn btn-solid">Register Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="section">
+  <div class="shell" style="max-width:720px;text-align:center;">
+    <div class="divider-ornament"><span class="rule"></span><span class="dot"></span><span class="rule"></span></div>
+    <p class="eyebrow">Why register</p>
+    <h2 class="h-section">A quiet introduction, on your terms</h2>
+    <p class="body-copy" style="margin:0 auto;">Jayasom is a wellness destination taking shape at AMAALA on Saudi Arabia's Red Sea coast. Register your interest to receive tailored information on retreats, residences, and booking as they open. There is no obligation, and you can unsubscribe at any time.</p>
+  </div>
+</section>
+
+<!-- FORM + SIDEBAR -->
+<section id="register" class="section section-muted">
+  <div class="shell">
+    <div class="grid-aside" style="gap:48px;align-items:start;">
+
+      <!-- FORM -->
+      <div class="wire-card" style="background:hsl(var(--background));">
+        <div class="pad" style="padding:32px;">
+          <p class="eyebrow">Register Your Interest</p>
+          <h2 class="h-section">Tell us a little about you</h2>
+          <p class="body-copy mb-6 full">Fields marked optional can be left blank. The more you share, the better we can tailor what we send.</p>
+
+          <form onsubmit="return false;">
+
+            <div class="grid-2" style="gap:16px;">
+              <div class="form-field">
+                <label for="f-first">First name</label>
+                <input id="f-first" type="text"/>
+              </div>
+              <div class="form-field">
+                <label for="f-last">Last name</label>
+                <input id="f-last" type="text"/>
+              </div>
+            </div>
+
+            <div class="grid-2" style="gap:16px;">
+              <div class="form-field">
+                <label for="f-email">Email</label>
+                <input id="f-email" type="email"/>
+              </div>
+              <div class="form-field">
+                <label for="f-phone">Phone (optional)</label>
+                <input id="f-phone" type="tel"/>
+              </div>
+            </div>
+
+            <div class="grid-2" style="gap:16px;">
+              <div class="form-field">
+                <label for="f-country">Country of residence</label>
+                <input id="f-country" type="text"/>
+              </div>
+              <div class="form-field">
+                <label for="f-nat">Nationality (optional)</label>
+                <input id="f-nat" type="text"/>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="f-interest">I would like information on</label>
+              <select id="f-interest">
+                <option>Retreats and programmes</option>
+                <option>Rooms and villas</option>
+                <option>Wellness residences</option>
+                <option>Day and short stays</option>
+                <option>General information</option>
+              </select>
+            </div>
+
+            <div class="grid-2" style="gap:16px;">
+              <div class="form-field">
+                <label for="f-when">Preferred time to visit</label>
+                <select id="f-when">
+                  <option>Not sure yet</option>
+                  <option>Within 3 months</option>
+                  <option>3 to 6 months</option>
+                  <option>6 to 12 months</option>
+                  <option>Next year or later</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="f-guests">Number of guests</label>
+                <select id="f-guests">
+                  <option>Just me</option>
+                  <option>2 guests</option>
+                  <option>3 to 4 guests</option>
+                  <option>5 or more guests</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="f-msg">Anything you would like us to know (optional)</label>
+              <textarea id="f-msg" rows="4"></textarea>
+            </div>
+
+            <div class="consent-row">
+              <input id="f-consent" type="checkbox"/>
+              <label for="f-consent">Yes, I would like to receive information from Jayasom about retreats, residences, and booking. I understand I can unsubscribe at any time.</label>
+            </div>
+
+            <p class="caption mb-6">Jayasom is committed to protecting your personal data. By registering, you consent to us using the information you provide to send you the details you have requested. Read our <a href="#" style="text-decoration:underline;">Privacy Policy</a> for full details.</p>
+
+            <div class="flex justify-between" style="align-items:center;flex-wrap:wrap;gap:16px;">
+              <button type="submit" class="btn btn-solid">Register My Interest</button>
+              <p class="caption" style="font-style:italic;">Thank you. Your details are on their way. A member of our team will be in touch within two working days.</p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside>
+        <p class="eyebrow">What happens next</p>
+        <h3 class="h-sub">From here to your first visit</h3>
+        <p class="body-copy mb-6 full">Once you register, a Wellness Advisor keeps you informed and answers any questions at your own pace.</p>
+
+        <div class="info-card">
+          <div class="label-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16v12H4z"/><path d="M4 6l8 7 8-7"/></svg>
+            <p class="label-tiny" style="margin:0;">Step 1</p>
+          </div>
+          <p class="h-card">A note of welcome</p>
+          <p class="caption">We confirm your details and send a short introduction to Jayasom and what to expect.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="label-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v8"/><path d="M8 12h8"/><circle cx="12" cy="12" r="9"/></svg>
+            <p class="label-tiny" style="margin:0;">Step 2</p>
+          </div>
+          <p class="h-card">Information that fits</p>
+          <p class="caption">Based on what you shared, we send tailored details on the retreats, residences, or stays you asked about.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="label-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.09 1A19 19 0 0 1 2 4.09 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75c.13.84.34 1.66.62 2.45a1 1 0 0 1-.23 1L7 8.5a16 16 0 0 0 8.5 8.5l1.31-1.48a1 1 0 0 1 1-.23c.79.28 1.61.49 2.45.62a1 1 0 0 1 .74 1z"/></svg>
+            <p class="label-tiny" style="margin:0;">Step 3</p>
+          </div>
+          <p class="h-card">A conversation, when you are ready</p>
+          <p class="caption">Whenever it suits you, a Wellness Advisor is on hand to help you plan and book your stay.</p>
+        </div>
+
+        <div class="callout mt-6">
+          <p class="callout-label">Prefer to speak to someone?</p>
+          <p class="callout-body">Write to us at <a href="mailto:amaala.reservations@jayasom.com" style="text-decoration:underline;">amaala.reservations@jayasom.com</a> or visit our <a href="wireframe-contact-v3.html" style="text-decoration:underline;">Contact page</a>.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU WILL RECEIVE -->
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow text-center">What you will receive</p>
+    <h2 class="h-section text-center mb-8" style="max-width:640px;margin-left:auto;margin-right:auto;">Kept close, never crowded</h2>
+    <div class="grid-3">
+      <div class="step-card">
+        <p class="step-num">First look</p>
+        <p class="h-card">Opening and availability</p>
+        <p class="caption">Be among the first to hear when booking opens and new retreats become available.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Tailored</p>
+        <p class="h-card">Details that match your interest</p>
+        <p class="caption">Information on the retreats, residences, and stays you told us matter to you.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">Considered</p>
+        <p class="h-card">Occasional, never noisy</p>
+        <p class="caption">A small number of thoughtful updates. No clutter, and you can unsubscribe at any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section section-dark">
+  <div class="shell">
+    <div class="grid-2" style="gap:64px;align-items:center;">
+      <div>
+        <p class="eyebrow">Stay close to Jayasom</p>
+        <h2 class="h-section">A short note, monthly</h2>
+        <p class="body-copy full">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+      </div>
+      <div>
+        <div class="form-field">
+          <label for="nl-email" style="color:hsla(var(--primary-foreground), 0.7);">Email</label>
+          <input id="nl-email" type="email" style="background:transparent;color:hsl(var(--primary-foreground));border-color:hsla(var(--primary-foreground), 0.4);"/>
+        </div>
+        <a href="#" class="btn btn-on-dark mt-2">Receive</a>
+        <p class="caption mt-4"><a href="#" style="text-decoration:underline;">Manage subscription preferences</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <p class="logo" style="font-size:14px;margin-bottom:16px;letter-spacing:0.2em;font-weight:700;">Jayasom</p>
+        <p class="caption" style="margin-bottom:12px;">Healing rooted in wisdom, guided by heart.</p>
+        <p class="caption">A wellness destination at AMAALA on Saudi Arabia's Red Sea coast.</p>
+      </div>
+      <div>
+        <p class="col-title">Wellness</p>
+        <ul>
+          <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
+          <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
+          <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
+          <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
+          <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Retreats</p>
+        <ul>
+          <li><a href="wireframe-find-your-retreat-v3.html">Find Your Retreat</a></li>
+          <li><a href="wireframe-as-a-pair-v3.html">As a Pair</a></li>
+          <li><a href="wireframe-as-a-woman-v3.html">As a Woman</a></li>
+          <li><a href="wireframe-as-a-family-v3.html">As a Family</a></li>
+          <li><a href="wireframe-as-a-leader-v3.html">As a Leader</a></li>
+          <li><a href="wireframe-as-a-flow-v3.html">As a Flow</a></li>
+          <li><a href="wireframe-as-a-feather-v3.html">As a Feather</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">Stay</p>
+        <ul>
+          <li><a href="wireframe-rooms-and-villas-v3.html">Rooms and Villas</a></li>
+          <li><a href="wireframe-wellness-residences-v3.html">Wellness Residences</a></li>
+          <li><a href="#">Manage my Booking</a></li>
+          <li><a href="wireframe-contact-v3.html">Speak to a Wellness Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="col-title">About</p>
+        <ul>
+          <li><a href="wireframe-about-us-v3.html">About Us</a></li>
+          <li><a href="wireframe-insights-v3.html">Insights</a></li>
+          <li><a href="wireframe-news-v3.html">News</a></li>
+          <li><a href="wireframe-careers-v3.html">Careers</a></li>
+          <li><a href="wireframe-contact-v3.html">Contact</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid hsl(var(--border));margin-top:8px;padding:32px 0;display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Stay close to Jayasom</p>
+        <p class="caption" style="margin-bottom:16px;max-width:520px;">A short note arrives roughly once a month: the season's work, who the Visiting Practitioners are this cycle, and a piece of writing from the property.</p>
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:520px;" onsubmit="return false;">
+          <input type="email" placeholder="Email" style="flex:1;min-width:200px;border:1px solid hsl(var(--border));padding:10px 12px;font-size:14px;background:hsl(var(--background));color:hsl(var(--foreground));font-family:inherit;"/>
+          <button type="submit" class="btn">Receive</button>
+        </form>
+        <p class="caption" style="margin-top:8px;font-size:11px;"><a href="#">Manage subscription preferences</a></p>
+      </div>
+      <div>
+        <p class="col-title" style="margin-bottom:8px;">Follow</p>
+        <ul style="display:flex;gap:16px;margin-bottom:24px;">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+        <p class="col-title" style="margin-bottom:8px;">Language</p>
+        <ul style="display:flex;gap:12px;flex-wrap:wrap;">
+          <li><a href="#" style="color:hsl(var(--foreground));">English</a></li>
+          <li><span class="caption">العربية</span></li>
+          <li><span class="caption">Español</span></li>
+          <li><span class="caption">中文</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>&copy; 2026 Jayasom PTE Ltd. All rights reserved. Operated by Triple Bay Wellness Resort Tourism Accommodation Company.</p>
+      <div class="links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms and Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
