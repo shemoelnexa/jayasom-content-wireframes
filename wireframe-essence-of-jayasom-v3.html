@@ -96,6 +96,10 @@ html, body {
 .stay-list li { position: relative; padding: 0 0 0 22px; margin-bottom: 16px; font-size: 13px; line-height: 1.5; color: hsl(var(--foreground)); }
 .stay-list li:last-child { margin-bottom: 0; }
 .stay-list li::before { content: ''; position: absolute; left: 4px; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: hsl(var(--muted-foreground)); }
+.stay-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; }
+.stay-grid .stay-includes { padding: 22px 24px; background: hsl(var(--background)); }
+.stay-grid .stay-list li { margin-bottom: 10px; font-size: 12.5px; line-height: 1.45; }
+@media (max-width: 768px) { .stay-grid { grid-template-columns: 1fr; gap: 28px; } }
 
 .wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
 .wire-card .pad { padding: 20px; }
@@ -373,9 +377,9 @@ Layout follows wireframe-as-a-pair-v3.html. Bracketed [NOTE] and OUTSTANDING sig
 
 
 <!-- CHOOSE YOUR RETREAT DURATION -->
-<section class="section section-muted">
+<section class="section section-muted" style="padding-top:52px;padding-bottom:52px;">
   <div class="shell">
-    <div class="text-center mb-8"><h2 class="h-section">Choose Your Stay Duration</h2></div>
+    <div class="text-center mb-6"><h2 class="h-section" style="margin-bottom:10px;">Choose Your Stay Duration</h2></div>
     <div class="dur-control">
       <div class="dur-head">
         <span class="cur" id="dur-current">1 Night</span>
@@ -386,17 +390,18 @@ Layout follows wireframe-as-a-pair-v3.html. Bracketed [NOTE] and OUTSTANDING sig
         <div class="dur-ticks" id="dur-ticks"><span class="dur-tick on">1</span><span class="dur-tick">2</span><span class="dur-tick">3</span></div>
       </div></div>
     </div>
-    <div class="grid-2" style="gap:56px;align-items:start;margin-top:48px;">
+    <div class="stay-grid" style="margin-top:28px;">
       <div>
         <div class="incl-head" style="margin-top:0;">
-          <h3 class="h-sub">Included Sessions</h3>
-          <span class="box-toggle" id="box-toggle" role="switch" aria-checked="false" tabindex="0">Boxes<span class="sw"></span></span>
+          <h3 class="h-sub" style="margin-bottom:0;">Included Sessions</h3>
         </div>
         <div class="incl-list" id="dur-cards" style="margin-top:16px;"></div>
       </div>
       <div>
-        <div class="stay-includes">
-          <h3 class="h-sub" style="margin-top:0;">Every Retreat Stay Includes</h3>
+        <div class="incl-head" style="margin-top:0;">
+          <h3 class="h-sub" style="margin-top:0;margin-bottom:0;">Every Retreat Stay Includes</h3>
+        </div>
+        <div class="stay-includes" style="margin-top:16px;">
           <ul class="stay-list">
           <li>Your private villa or suite – beach-facing or waterside</li>
           <li>Private health and well-being consultation and advisor guidance</li>
