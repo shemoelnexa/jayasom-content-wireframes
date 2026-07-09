@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>The Daily Cadence v3 · Jayasom Wireframe</title>
+  <title>Daily Cadence v3 · Jayasom Wireframe</title>
   <style>
 /* === JAYASOM DESIGN TOKENS (locked, do not modify) === */
 :root {
@@ -91,14 +91,22 @@ html, body {
 
 .wire-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
 .wire-card .pad { padding: 20px; }
+.wire-card .pad-tight { padding: 14px; }
 
 .btn { display: inline-block; border: 1px solid hsl(var(--foreground)); padding: 12px 24px; font-size: 11px; letter-spacing: 0.15em; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
 .btn-on-dark { border-color: hsl(var(--primary-foreground)); color: hsl(var(--primary-foreground)); }
 .btn-solid { background: hsl(var(--foreground)); color: hsl(var(--background)); }
 
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
+.form-field input,
+.form-field textarea,
+.form-field select { width: 100%; border: 1px solid hsl(var(--border)); padding: 10px 12px; font-size: 14px; background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: inherit; }
+
 .site-header { border-bottom: 1px solid hsl(var(--border)); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
 .site-header .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.2em; color: hsl(var(--foreground)); }
 .site-header nav { display: flex; gap: 32px; font-size: 14px; color: hsl(var(--muted-foreground)); }
+.site-header nav a { color: inherit; }
 
 .site-footer { border-top: 1px solid hsl(var(--border)); margin-top: 0; padding: 48px 32px; }
 .site-footer .cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 40px; }
@@ -112,9 +120,20 @@ html, body {
   .site-footer .bottom { flex-direction: column; gap: 16px; }
 }
 
+.breadcrumb { padding: 16px 32px; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.breadcrumb a { color: inherit; }
+.breadcrumb .sep { margin: 0 8px; }
+
 .hero-shell { position: relative; }
 .hero-overlay-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.hero-text-center { text-align: center; padding: 0 32px; max-width: 760px; }
+.hero-text-center { text-align: center; padding: 0 32px; max-width: 720px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { border: 1px solid hsl(var(--border)); padding: 4px 12px; font-size: 12px; color: hsl(var(--muted-foreground)); cursor: pointer; }
+.tag-active { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+
+.pull-quote { border-left: 2px solid hsl(var(--foreground)); padding: 8px 24px; font-size: 18px; font-weight: 300; font-style: italic; color: hsl(var(--foreground)); margin: 24px 0; }
+.pull-quote .attribution { display: block; margin-top: 16px; font-size: 12px; font-style: normal; color: hsl(var(--muted-foreground)); }
 
 .text-center { text-align: center; }
 .flex { display: flex; }
@@ -128,263 +147,30 @@ html, body {
 
 .section-strip { padding: 4px 0; }
 .section-tall { padding: 80px 32px; }
-.image-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
-@media (max-width: 768px) { .image-strip { grid-template-columns: repeat(2, 1fr); } }
 
+.icon-card-centered { text-align: center; padding: 24px; border: 1px solid hsl(var(--border)); }
+.icon-card-centered .icon-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid hsl(var(--border)); border-radius: 50%;
+  margin-bottom: 16px; color: hsl(var(--foreground));
+}
+.icon-card-centered .icon-circle svg { width: 20px; height: 20px; stroke-width: 1.25; }
+
+.callout { padding: 24px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
+.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
+.callout .callout-body { font-size: 12px; color: hsl(var(--foreground)); line-height: 1.6; }
+
+.hover-underline:hover .h-card { text-decoration: underline; }
 .eyebrow-mini { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
 
-.callout { padding: 32px; border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05); }
-.callout .callout-label { font-size: 13px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
-.callout ul { display: flex; flex-direction: column; gap: 10px; padding-left: 0; list-style: none; }
-.callout ul li { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); font-style: italic; line-height: 1.5; padding-left: 20px; position: relative; }
-.callout ul li::before { content: ""; position: absolute; left: 0; top: 12px; width: 10px; height: 1px; background: hsl(var(--foreground)); }
+.search-bar { display: flex; align-items: center; gap: 12px; border: 1px solid hsl(var(--border)); padding: 14px 18px; background: hsl(var(--background)); max-width: 520px; margin: 0 auto; }
+.search-bar input { flex: 1; border: 0; background: transparent; font-size: 14px; color: hsl(var(--foreground)); font-family: inherit; outline: none; }
+.search-bar svg { width: 18px; height: 18px; stroke-width: 1.5; color: hsl(var(--muted-foreground)); }
 
-.wire-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.wire-table th, .wire-table td { padding: 12px 14px; border-bottom: 1px solid hsl(var(--border)); text-align: left; }
-.wire-table th { background: hsl(var(--muted)); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); }
-.wire-table td.center, .wire-table th.center { text-align: center; }
-.wire-table tfoot td { font-weight: 700; background: hsla(var(--foreground),0.04); }
-
-.bullet-list { display: flex; flex-direction: column; gap: 10px; }
-.bullet-list li {
-  font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.65;
-  display: flex; gap: 12px; padding-left: 0;
-}
-.bullet-list li::before { content: "·"; color: hsl(var(--foreground)); flex-shrink: 0; }
-
-.day-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 32px; display: grid; grid-template-columns: 120px 1fr; gap: 32px; }
-.day-card .day-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
-.day-card .day-title { font-size: 20px; font-weight: 300; color: hsl(var(--foreground)); }
-.day-card .day-body p { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-bottom: 14px; }
-.day-card .day-body p:last-child { margin-bottom: 0; }
-@media (max-width: 768px) { .day-card { grid-template-columns: 1fr; gap: 16px; } }
-
-.treatment-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; display: flex; flex-direction: column; }
-.treatment-card.hero-card { border: 2px solid hsl(var(--foreground)); }
-.treatment-card .duration { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 8px; }
-
-.faq-item { border-bottom: 1px solid hsl(var(--border)); padding: 24px 0; }
-.faq-item:first-child { border-top: 1px solid hsl(var(--border)); }
-.faq-item .q { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.faq-item .q-text { font-size: 15px; font-weight: 300; color: hsl(var(--foreground)); }
-.faq-item .q-icon { width: 16px; height: 16px; flex-shrink: 0; color: hsl(var(--muted-foreground)); }
-.faq-item .a { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.7; margin-top: 12px; max-width: 760px; }
-
-.cross-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); padding: 24px; }
-.cross-card .name { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 6px; }
-.cross-card .tag { font-size: 12px; color: hsl(var(--muted-foreground)); font-style: italic; line-height: 1.5; }
-
-.form-field { margin-bottom: 16px; }
-.form-field label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
-
-.breadcrumb { padding: 16px 32px; border-bottom: 1px solid hsl(var(--border)); font-size: 12px; color: hsl(var(--muted-foreground)); letter-spacing: 0.05em; }
-.breadcrumb a { color: hsl(var(--muted-foreground)); }
-
-.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid hsl(var(--border)); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: hsl(var(--foreground)); background: transparent; cursor: pointer; }
-.tag.active { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
-.tag.muted { color: hsl(var(--muted-foreground)); border-style: dashed; }
-.placeholder-pill { display: inline-block; min-width: 36px; height: 16px; background: hsl(var(--muted)); border: 1px dashed hsl(var(--border)); vertical-align: middle; }
-
-.activity-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; }
-.activity-card .pad { padding: 18px; }
-.activity-card .a-cat { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
-.activity-card .a-title { font-size: 15px; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 8px; }
-.activity-card .a-meta { font-size: 11px; color: hsl(var(--muted-foreground)); display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
-.activity-card .a-meta span { display: inline-flex; align-items: center; gap: 4px; }
-.activity-card .a-body { font-size: 12px; color: hsl(var(--muted-foreground)); line-height: 1.55; }
-
-/* === ACTIVITY CALENDAR === */
-.cal {
-  display: grid;
-  grid-template-columns: 210px repeat(7, 1fr);
-  border: 1px solid hsl(var(--border));
-  background: hsl(var(--background));
-}
-/* faint column guides only — no heavy spreadsheet grid */
-.cal > * { border-right: 1px solid hsla(var(--border), 0.22); }
-.cal > *:nth-child(8n) { border-right: 0; }
-
-/* header band — confident dark anchor across the top */
-.cal-corner {
-  background: hsl(var(--primary));
-  display: flex; align-items: center; justify-content: center; padding: 8px;
-}
-.cal-corner .cc-label {
-  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: hsla(var(--primary-foreground), 0.7); text-align: center; line-height: 1.45;
-}
-.cal-dayhead {
-  background: hsl(var(--primary));
-  padding: 16px 8px; text-align: center;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  border-right: 1px solid hsla(var(--primary-foreground), 0.14) !important;
-}
-.cal-dayhead:nth-child(8) { border-right: 0 !important; }
-.cal-dayhead.is-today { background: hsl(var(--wire-dark)); box-shadow: inset 0 -3px 0 hsl(var(--primary-foreground)); }
-.cal-dayhead .d-name {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
-  text-transform: uppercase; color: hsl(var(--primary-foreground));
-}
-.cal-dayhead .d-sub {
-  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: hsla(var(--primary-foreground), 0.6);
-}
-.cal-dayhead.is-today .d-sub { color: hsla(var(--primary-foreground), 0.95); }
-
-/* window rail — bold window name + time, soft band, accent spine */
-.cal-rail {
-  background: hsl(var(--muted));
-  padding: 16px 18px 16px 24px; position: relative;
-  display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px;
-  border-top: 1px solid hsla(var(--border), 0.4);
-}
-.cal-rail::before {
-  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: hsl(var(--foreground));
-}
-.cal-rail .r-name {
-  font-size: 15px; font-weight: 700; color: hsl(var(--foreground));
-  line-height: 1.25; letter-spacing: 0.01em;
-}
-.cal-rail .r-time {
-  font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
-  color: hsl(var(--muted-foreground));
-}
-
-/* session cells — each session rendered as a clean outline chip */
-.cal-chip {
-  min-height: 62px; padding: 10px 12px;
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  border-top: 1px solid hsla(var(--border), 0.4);
-  cursor: pointer;
-}
-.cal-chip .chip-day { display: none; }
-.cal-chip .chip-name {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-height: 40px; padding: 5px 14px; width: 100%;
-  background: hsl(var(--background));
-  border: 1px solid hsla(var(--border), 0.5);
-  color: hsl(var(--foreground));
-  font-size: 12.5px; font-weight: 400; letter-spacing: 0.02em; line-height: 1.2;
-  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
-}
-.cal-chip:hover .chip-name {
-  background: hsl(var(--primary)); color: hsl(var(--primary-foreground));
-  border-color: hsl(var(--primary));
-}
-.cal-chip.is-today-col { background: hsla(var(--foreground), 0.035); }
-
-/* the Midday Stretch anchor — dark filled chips, the steady spine */
-.cal-chip.is-anchor .chip-name {
-  background: hsl(var(--foreground)); color: hsl(var(--primary-foreground));
-  border-color: hsl(var(--foreground)); font-weight: 700;
-}
-
-/* calendar toolbar: audience + week navigation */
-.cal-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
-.week-nav { display: inline-flex; align-items: center; border: 1px solid hsl(var(--border)); }
-.week-nav button {
-  background: transparent; border: 0; border-right: 1px solid hsl(var(--border));
-  padding: 9px 18px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: hsl(var(--foreground)); cursor: pointer; font-family: inherit;
-}
-.week-nav button:last-child { border-right: 0; }
-.week-nav button.active { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
-
-.cal-legend { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-top: 18px; }
-.cal-legend .lg { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; color: hsl(var(--muted-foreground)); }
-.cal-legend .sw { width: 22px; height: 14px; display: inline-block; border: 1px solid hsl(var(--border)); flex-shrink: 0; }
-.cal-legend .sw.anchor { background: hsl(var(--foreground)); border-color: hsl(var(--foreground)); }
-
-/* calendar: stack by window on mobile */
-@media (max-width: 768px) {
-  .cal { display: block; border: 1px solid hsl(var(--border)); grid-template-columns: none; }
-  .cal-corner, .cal-dayhead { display: none; }
-  .cal > * { border-right: 0; }
-  .cal-rail { padding: 14px 16px 14px 20px; }
-  .cal-chip {
-    min-height: 0; justify-content: flex-start; text-align: left;
-    gap: 14px; padding: 9px 16px; border-top: 0;
-  }
-  .cal-chip:first-of-type { padding-top: 14px; }
-  .cal-chip .chip-day {
-    display: inline-block; min-width: 44px; flex-shrink: 0;
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
-    color: hsl(var(--muted-foreground));
-  }
-  .cal-chip .chip-name { padding: 8px 14px; width: auto; }
-}
-
-/* === PAGE-SPECIFIC (Daily Cadence) — built on locked tokens === */
-.pull-quote {
-  max-width: 880px; margin: 0 auto; text-align: center;
-  font-size: 23px; line-height: 1.5; font-weight: 300; font-style: italic;
-  color: hsl(var(--foreground));
-}
-.quote-mark { font-size: 60px; line-height: 0.5; color: hsla(var(--primary-foreground), 0.45); display: block; margin-bottom: 14px; font-style: italic; }
-
-/* intro lead — asymmetric "at a glance" aside */
-.lead-aside { border: 1px solid hsl(var(--border)); padding: 26px; background: hsl(var(--background)); }
-.lead-aside .la-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: hsl(var(--foreground)); font-weight: 700; margin-bottom: 16px; }
-.lead-aside ul { display: flex; flex-direction: column; gap: 13px; }
-.lead-aside ul li { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.5; padding-left: 18px; position: relative; }
-.lead-aside ul li::before { content: ""; position: absolute; left: 0; top: 9px; width: 9px; height: 1px; background: hsl(var(--foreground)); }
-
-/* fluid-time callout, two columns */
-.time-callout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 44px; align-items: center; }
-@media (max-width: 768px) { .time-callout { grid-template-columns: 1fr; gap: 22px; } }
-
-/* PRIMARY audience selector — segmented control */
-.aud-switch { display: inline-flex; border: 1px solid hsl(var(--foreground)); }
-.aud-btn {
-  padding: 15px 44px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-  background: transparent; color: hsl(var(--foreground)); cursor: pointer;
-  border: 0; border-right: 1px solid hsl(var(--foreground)); font-family: inherit; font-weight: 300;
-}
-.aud-btn:last-child { border-right: 0; }
-.aud-btn.active { background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); font-weight: 700; }
-@media (max-width: 560px) { .aud-switch { display: flex; width: 100%; } .aud-btn { flex: 1; padding: 14px 6px; letter-spacing: 0.1em; } }
-
-.chipset[hidden], .aud-panel[hidden] { display: none; }
-
-/* master activity list — name · short description · details link */
-.act-cat-head {
-  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-  font-weight: 700; color: hsl(var(--foreground));
-  margin: 36px 0 4px; padding-bottom: 10px;
-  border-bottom: 1px solid hsl(var(--border));
-}
-.act-cat-head:first-child { margin-top: 0; }
-.act-row {
-  display: grid; grid-template-columns: 210px 1fr 96px; gap: 24px;
-  align-items: baseline; padding: 16px 0;
-  border-bottom: 1px solid hsla(var(--border), 0.45);
-}
-.act-row .a-name { font-size: 14px; font-weight: 700; color: hsl(var(--foreground)); }
-.act-row .a-desc { font-size: 13px; color: hsl(var(--muted-foreground)); line-height: 1.6; }
-.act-row .a-link {
-  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: hsl(var(--foreground)); white-space: nowrap; text-align: right;
-}
-@media (max-width: 768px) {
-  .act-row { grid-template-columns: 1fr; gap: 6px; padding: 14px 0; }
-  .act-row .a-link { text-align: left; }
-}
-
-/* CTA buttons with a leading glyph */
-.cta-inline { display: inline-flex; align-items: center; gap: 10px; }
-.cta-inline .icon { width: 15px; height: 15px; }
-
-/* family-slot wide highlight */
-.family-slot {
-  border: 2px solid hsl(var(--foreground)); background: hsla(var(--foreground), 0.05);
-  padding: 28px 32px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: center;
-}
-.family-slot .fs-time { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 6px; }
-.family-slot .fs-name { font-size: 22px; font-weight: 300; color: hsl(var(--foreground)); }
-.family-slot .fs-body { font-size: 14px; color: hsl(var(--muted-foreground)); line-height: 1.7; }
-@media (max-width: 768px) { .family-slot { grid-template-columns: 1fr; gap: 14px; } }
+.article-card { border: 1px solid hsl(var(--border)); background: hsl(var(--background)); display: flex; flex-direction: column; }
+.article-card .meta { display: flex; gap: 12px; align-items: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--muted-foreground)); margin-bottom: 12px; }
+.article-card .read-link { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: hsl(var(--foreground)); margin-top: auto; padding-top: 16px; }
 
   </style>
 </head>
@@ -401,403 +187,265 @@ html, body {
   </nav>
   <a href="#book" class="btn">Book Now</a>
 </header>
+
 <div class="breadcrumb">
-  <div class="shell" style="padding:0;"><a href="index.html">Home</a> &nbsp;&rsaquo;&nbsp; Wellness &nbsp;&rsaquo;&nbsp; The Daily Cadence</div>
+  <div class="shell" style="padding:0;">
+    <a href="index.html">Home</a><span class="sep">›</span>Wellness<span class="sep">›</span>Daily Cadence
+  </div>
 </div>
+
 <main>
 
-<!-- M1 · HERO -->
-<section class="hero-shell">
-  <div class="wire-image" style="height:560px;width:100%;border-left:0;border-right:0;">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    <span class="label">Group movement at sunrise · the wellness plateau</span>
-  </div>
-  <div class="hero-overlay-center">
-    <div class="hero-text-center">
-      <p class="eyebrow">Wellness · Jayasom AMAALA</p>
+<!-- HERO -->
+<section class="section section-tall">
+  <div class="shell">
+    <div style="max-width:760px;">
+      <p class="eyebrow">Wellness</p>
       <h1 class="h-hero">The Daily Cadence</h1>
-      <p class="body-copy" style="margin:0 auto;font-style:italic;font-size:16px;">A daily programme of activities, with something for everyone.</p>
+      <p class="h-sub" style="font-style:italic;">A daily programme of activities with something for everyone</p>
+      <p class="body-copy full" style="margin-bottom:32px;">Beyond your retreat programme, the Daily Cadence is a schedule of classes and elective wellness activities offered throughout the day. Try something new - explore and discover - all classes will be tailored to accommodate different abilities. Classes that are 'advanced' will be so indicated. There is a sense of community that forms naturally in a group class - people moving and breathing together, sharing an experience, often discovering that the person beside them is on a remarkably similar journey. Sessions run from morning sunrise movement to sound meditation after dark. Choose those that interest you. Some classes have limited availability - please reserve a place in advance to ensure your slot. Most classes are complimentary - included in your retreat. Where there is a separate charge, the fee will be clearly indicated prior to booking.</p>
+      <a href="#" class="btn">View the current class schedule →</a>
+      <p class="caption mt-4">Dynamic schedule — refer to the app or your Wellness Concierge for reservations.</p>
     </div>
   </div>
 </section>
 
-<!-- M1 · INTRO / LEAD — asymmetric, with an at-a-glance aside -->
-<section class="section">
-  <div class="shell">
-    <div class="grid-aside" style="gap:56px;align-items:start;">
-      <div>
-        <p class="eyebrow">Beyond your retreat</p>
-        <p class="h-sub" style="font-size:23px;line-height:1.4;max-width:560px;margin-bottom:16px;">The Daily Cadence is a schedule of classes and elective wellness activities offered throughout the day — open to you alongside your retreat programme.</p>
-        <p class="body-copy">Try something new; explore and discover. Sessions run from sunrise movement to sound meditation after dark, so choose the ones that interest you. Every class is tailored to accommodate different abilities, and those that are advanced are clearly indicated.</p>
-      </div>
-      <div class="lead-aside">
-        <p class="la-title">At a glance</p>
-        <ul>
-          <li>Most classes complimentary — included in your retreat</li>
-          <li>No booking needed, unless a fee or capacity limit applies</li>
-          <li>All abilities welcome; advanced classes are flagged</li>
-          <li>Some sessions have limited places — reserve ahead</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY PULL-QUOTE — high-contrast dark band -->
-<section class="section section-dark">
-  <div class="shell" style="max-width:920px;text-align:center;">
-    <span class="quote-mark">&ldquo;</span>
-    <p class="pull-quote" style="color:hsl(var(--primary-foreground));">A sense of community forms naturally in a group class — people moving and breathing together, sharing an experience, often discovering that the person beside them is on a remarkably similar journey.</p>
-  </div>
-</section>
-
-<!-- M2 · FLUID TIME ANCHOR — bordered two-column callout -->
-<section class="section">
-  <div class="shell">
-    <div class="callout time-callout">
-      <div>
-        <p class="eyebrow">A note on time</p>
-        <h2 class="h-sub" style="font-size:24px;margin-bottom:20px;">We don't run on the clock</h2>
-        <a href="#cadence" class="btn cta-inline">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="0"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-          Dynamic Class Schedule
-        </a>
-        <p class="caption" style="margin-top:12px;">Live in the Jayasom app · reserve through your Wellness Concierge.</p>
-      </div>
-      <div>
-        <p class="body-copy full" style="font-size:15px;">The classes rotate and the instructors sometimes change, but what stays steady is the structure of the day: a morning movement window, a midday stretch that anchors the schedule, an afternoon strength block, and an evening practice that brings everything to a close. Times are confirmed at the front desk on arrival and refreshed each morning.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- M3–M5 · ACTIVITIES HUB — audience is the primary selection -->
-<section class="section section-muted" id="explore">
-  <div class="shell">
-    <div class="text-center mb-8" style="max-width:720px;margin-left:auto;margin-right:auto;">
-      <p class="eyebrow">Explore the programme</p>
-      <h2 class="h-section">Who are you planning for?</h2>
-      <p class="body-copy" style="margin:0 auto;">Start here. Your selection sets the categories and the activities shown below.</p>
-    </div>
-
-    <!-- PRIMARY audience selector -->
-    <div class="text-center" style="margin-bottom:22px;">
-      <div class="aud-switch" role="tablist" aria-label="Audience">
-        <button type="button" class="aud-btn active" data-aud="adults" role="tab" aria-selected="true">Adults</button>
-        <button type="button" class="aud-btn" data-aud="children" role="tab" aria-selected="false">Children</button>
-        <button type="button" class="aud-btn" data-aud="family" role="tab" aria-selected="false">Family</button>
-      </div>
-    </div>
-
-    <!-- SECONDARY category chips — change with the audience -->
-    <div class="chipset" data-chips="adults">
-      <div class="tag-row" style="justify-content:center;">
-        <span class="tag active">All</span>
-        <span class="tag">Morning yoga</span><span class="tag">Tai Chi</span><span class="tag">Pilates</span>
-        <span class="tag">Aqua</span><span class="tag">Stretch</span><span class="tag">Strength</span>
-        <span class="tag">Breath</span><span class="tag">Sound</span><span class="tag">Meditation</span><span class="tag">Dance</span>
-      </div>
-    </div>
-    <div class="chipset" data-chips="children" hidden>
-      <div class="tag-row" style="justify-content:center;">
-        <span class="tag active">All</span>
-        <span class="tag">Ages 0–3</span><span class="tag">Ages 4–8</span><span class="tag">Ages 9–12</span><span class="tag">Ages 13+</span>
-        <span class="tag">Sensory</span><span class="tag">Movement</span><span class="tag">Creative</span><span class="tag">STEM</span><span class="tag">Outdoor</span>
-      </div>
-    </div>
-    <div class="chipset" data-chips="family" hidden>
-      <div class="tag-row" style="justify-content:center;">
-        <span class="tag active">All</span>
-        <span class="tag">Together</span><span class="tag">Mind &amp; balance</span><span class="tag">Games</span><span class="tag">Mini-Olympics</span><span class="tag">Cross-age workshops</span>
-      </div>
-    </div>
-
-    <!-- ADULTS panel — the master activity list -->
-    <div class="aud-panel" data-panel="adults" style="margin-top:38px;">
-      <p class="body-copy" style="max-width:760px;margin:0 auto 30px;text-align:center;font-style:italic;">The adult day opens with movement at sunrise and closes with something quieter under the stars. Here is everything on offer.</p>
-      <div style="max-width:920px;margin:0 auto;">
-
-        <p class="act-cat-head">Morning Movement · 07:00</p>
-        <div class="act-row"><span class="a-name">Morning Yoga Flow</span><span class="a-desc">A flowing sunrise sequence to wake the body gently and set the tone for the day.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Yin Yoga</span><span class="a-desc">Slow, deep-held floor postures that release connective tissue and quiet the mind.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Mat Pilates</span><span class="a-desc">Core-focused mat work building steady strength, control and spinal mobility.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Tai Chi</span><span class="a-desc">Slow, deliberate standing forms that cultivate balance, breath and calm focus.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-
-        <p class="act-cat-head">Aqua · 10:00</p>
-        <div class="act-row"><span class="a-name">Aqua with Pool Noodle</span><span class="a-desc">Buoyancy-supported water movement, easy on the joints and open to every level.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Aqua Hand Buoy</span><span class="a-desc">Resistance toning in the pool, working the upper body against the water.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Aqua Boxing</span><span class="a-desc">High-energy boxing drills in water — the most demanding of the aqua sessions.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-
-        <p class="act-cat-head">Stretch · 11:00 · every day</p>
-        <div class="act-row"><span class="a-name">Stretch Class</span><span class="a-desc">The daily midday anchor — a full-body unwind that runs every day without exception.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-
-        <p class="act-cat-head">Strength &amp; HIIT · 16:00</p>
-        <div class="act-row"><span class="a-name">HIIT</span><span class="a-desc">Short bursts of high-intensity effort with recovery, for conditioning and cardio load.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">TRX</span><span class="a-desc">Suspension training using bodyweight to build functional, full-body strength.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Tabata Training</span><span class="a-desc">Timed twenty-second intervals that push pace, power and endurance.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Circuit Training</span><span class="a-desc">Rotating stations blending strength and cardio at your own intensity.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Zumba</span><span class="a-desc">Dance-based cardio set to music — joyful, social, and surprisingly demanding.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Step Aerobics</span><span class="a-desc">Rhythmic step choreography for cardiovascular fitness and coordination.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Boot Camp</span><span class="a-desc">Outdoor group conditioning combining strength, agility and stamina drills.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-
-        <p class="act-cat-head">Breath &amp; Meditation · 18:00</p>
-        <div class="act-row"><span class="a-name">Pranayama</span><span class="a-desc">Guided breathwork to steady the nervous system and sharpen focus.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Singing Bowl Meditation</span><span class="a-desc">A sound bath of resonant bowls, felt as much as heard.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Floating Meditation</span><span class="a-desc">Weightless, water-supported rest that lets the body fully let go.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-
-        <p class="act-cat-head">Closing the Day · 20:00</p>
-        <div class="act-row"><span class="a-name">Candle-light Meditation</span><span class="a-desc">An unhurried evening practice to settle the mind before sleep.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Better Sleep Class</span><span class="a-desc">Gentle techniques and breath to prepare the body for deep rest.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-        <div class="act-row"><span class="a-name">Star Gazing</span><span class="a-desc">Night-sky watching from the wellness plateau on the Red Sea coast.</span><a href="wireframe-activities-details-v3.html" class="a-link">Details &rsaquo;</a></div>
-      </div>
-    </div>
-
-    <!-- CHILDREN panel — four age bands in one row -->
-    <div class="aud-panel" data-panel="children" hidden style="margin-top:38px;">
-      <p class="body-copy" style="max-width:800px;margin:0 auto 22px;text-align:center;">Children have their own programme, managed by our Jayela family team, with daily activities across age bands. In the afternoon the calendar pauses on age bands and runs a Family session instead, bringing parents and children together.</p>
-      <div class="tag-row" style="justify-content:center;margin-bottom:36px;">
-        <span class="label-tiny" style="margin-right:8px;align-self:center;">A taste of what's on:</span>
-        <span class="tag">Parent-baby massage</span><span class="tag">Music</span><span class="tag">Cooking class</span><span class="tag">Painting</span><span class="tag">Animal yoga</span><span class="tag">VR programme</span>
-      </div>
-
-      <div class="grid-4">
-        <div class="activity-card">
-          <div class="wire-image" style="height:130px;">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          </div>
-          <div class="pad">
-            <p class="a-cat">Ages 0–3 · parent-paired</p>
-            <p class="a-title">Seed Studio</p>
-            <p class="a-body">Sensory play, calm rhythms and gentle exploration of sound and texture. Closeness over performance — discovering something together, with nowhere else to be.</p>
-          </div>
-        </div>
-        <div class="activity-card">
-          <div class="wire-image" style="height:130px;">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          </div>
-          <div class="pad">
-            <p class="a-cat">Ages 4–8</p>
-            <p class="a-title">Sprout Studio</p>
-            <p class="a-body">Movement, music and small-group exploration — garden scavenger hunts, animal yoga, sound circles. At this age, doing things alongside other children lands as pure adventure.</p>
-          </div>
-        </div>
-        <div class="activity-card">
-          <div class="wire-image" style="height:130px;">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          </div>
-          <div class="pad">
-            <p class="a-cat">Ages 9–12</p>
-            <p class="a-title">Stem Lounge</p>
-            <p class="a-body">Rhythm mapping, badminton technique, nature relays, dot painting, ocean problem-solving — physical, creative and cognitive skills, most designed to work better in a group.</p>
-          </div>
-        </div>
-        <div class="activity-card">
-          <div class="wire-image" style="height:130px;">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          </div>
-          <div class="pad">
-            <p class="a-cat">Ages 13+</p>
-            <p class="a-title">Blossom Lounge</p>
-            <p class="a-body">Longer-format sessions — a kintsugi resilience workshop, eco house design, underwater memory challenges, treasure hunts. Studio space and VR treadmills alongside the outdoor programme.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="family-slot" style="margin-top:24px;">
-        <div>
-          <p class="fs-time">16:00–17:00 · daily</p>
-          <p class="fs-name">Family Slot</p>
-        </div>
-        <p class="fs-body">Every day at four, the age bands dissolve and the whole family does something together — mindful balance relays, rhythm rituals, kindness games, a family mini-Olympics. Forty minutes where the point is connection rather than instruction. Worth noting: the children will almost certainly outperform the adults.</p>
-      </div>
-    </div>
-
-    <!-- FAMILY panel — parents and children together -->
-    <div class="aud-panel" data-panel="family" hidden style="margin-top:38px;">
-      <p class="body-copy" style="max-width:800px;margin:0 auto 30px;text-align:center;">Every day at four, the age bands dissolve and the whole family does something together — forty minutes where the point is connection rather than instruction. Some Visiting Practitioners also run cross-age workshops when they are in residence.</p>
-      <div class="grid-4">
-        <div class="activity-card"><div class="pad">
-          <p class="a-cat">Together</p>
-          <p class="a-title">Mindful Balance Relays</p>
-          <p class="a-body">Parents and children moving in sync — balance, trust and a little friendly chaos.</p>
-        </div></div>
-        <div class="activity-card"><div class="pad">
-          <p class="a-cat">Mind &amp; balance</p>
-          <p class="a-title">Rhythm Rituals</p>
-          <p class="a-body">Clapping, drumming and call-and-response games the whole family follows together.</p>
-        </div></div>
-        <div class="activity-card"><div class="pad">
-          <p class="a-cat">Games</p>
-          <p class="a-title">Kindness Games</p>
-          <p class="a-body">Playful challenges built around small acts of kindness and teamwork.</p>
-        </div></div>
-        <div class="activity-card"><div class="pad">
-          <p class="a-cat">Mini-Olympics</p>
-          <p class="a-title">Family Mini-Olympics</p>
-          <p class="a-body">Light-hearted events where the children almost always outperform the adults.</p>
-        </div></div>
-      </div>
-
-      <div class="family-slot" style="margin-top:24px;">
-        <div>
-          <p class="fs-time">16:00–17:00 · daily</p>
-          <p class="fs-name">The Family Slot</p>
-        </div>
-        <p class="fs-body">The one hour, every day, when the whole property is built around families being together. Some specified classes are also intended for adults and children together; cross-age workshops are added whenever a Visiting Practitioner is in residence.</p>
-      </div>
-    </div>
-
-    <!-- shared download CTA -->
-    <div class="text-center" style="margin-top:44px;">
-      <a href="#" class="btn btn-solid cta-inline">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-        Download the Daily Cadence (PDF)
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- M6 · THE DAILY CADENCE — LIVE WEEKLY CALENDAR -->
-<section class="section" id="cadence">
-  <div class="shell">
-    <div class="text-center mb-8" style="max-width:820px;margin-left:auto;margin-right:auto;">
-      <p class="eyebrow">The live schedule</p>
-      <h2 class="h-section">This week's Cadence</h2>
-      <p class="body-copy" style="margin:0 auto;">The schedule for your stay is confirmed at the front desk when you arrive and fixed for the week, refreshed each morning. When a Visiting Practitioner is in residence, their sessions are added for the dates they are here. Tap any session for its venue and confirmed time.</p>
-    </div>
-
-    <div class="cal-toolbar">
-      <div class="tag-row">
-        <span class="tag active">Adults</span>
-        <span class="tag">Children</span>
-        <span class="tag">Family</span>
-        <span class="tag">Visiting Practitioners</span>
-      </div>
-      <div class="week-nav">
-        <button type="button" class="active">This week</button>
-        <button type="button">Next week</button>
-      </div>
-    </div>
-
-    <div class="cal">
-      <div class="cal-corner"><span class="cc-label">6–12<br/>Jul</span></div>
-      <div class="cal-dayhead"><span class="d-name">Mon</span><span class="d-sub">6</span></div>
-      <div class="cal-dayhead"><span class="d-name">Tue</span><span class="d-sub">7</span></div>
-      <div class="cal-dayhead is-today"><span class="d-name">Wed</span><span class="d-sub">8 · Today</span></div>
-      <div class="cal-dayhead"><span class="d-name">Thu</span><span class="d-sub">9</span></div>
-      <div class="cal-dayhead"><span class="d-name">Fri</span><span class="d-sub">10</span></div>
-      <div class="cal-dayhead"><span class="d-name">Sat</span><span class="d-sub">11</span></div>
-      <div class="cal-dayhead"><span class="d-name">Sun</span><span class="d-sub">12</span></div>
-
-      <div class="cal-rail"><span class="r-name">Morning Movement</span><span class="r-time">07:00 · Sunrise</span></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Mat Pilates</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Yin Yoga</span></div>
-      <div class="cal-chip is-today-col"><span class="chip-day">Wed</span><span class="chip-name">Tai Chi</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Yoga Flow</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Mat Pilates</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Yin Yoga</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Tai Chi</span></div>
-
-      <div class="cal-rail"><span class="r-name">Aqua</span><span class="r-time">10:00 · Mid-morning</span></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Pool Noodle</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Hand Buoy</span></div>
-      <div class="cal-chip is-today-col"><span class="chip-day">Wed</span><span class="chip-name">Aqua Boxing</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Pool Noodle</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Hand Buoy</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Aqua Boxing</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Pool Noodle</span></div>
-
-      <div class="cal-rail"><span class="r-name">Stretch</span><span class="r-time">11:00 · Daily anchor</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Mon</span><span class="chip-name">Stretch</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Tue</span><span class="chip-name">Stretch</span></div>
-      <div class="cal-chip is-anchor is-today-col"><span class="chip-day">Wed</span><span class="chip-name">Stretch</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Thu</span><span class="chip-name">Stretch</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Fri</span><span class="chip-name">Stretch</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Sat</span><span class="chip-name">Stretch</span></div>
-      <div class="cal-chip is-anchor"><span class="chip-day">Sun</span><span class="chip-name">Stretch</span></div>
-
-      <div class="cal-rail"><span class="r-name">Strength &amp; HIIT</span><span class="r-time">16:00 · Afternoon</span></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">HIIT</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">TRX</span></div>
-      <div class="cal-chip is-today-col"><span class="chip-day">Wed</span><span class="chip-name">Tabata</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Circuit</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Zumba</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Step Aerobics</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Boot Camp</span></div>
-
-      <div class="cal-rail"><span class="r-name">Breath &amp; Meditation</span><span class="r-time">18:00 · Early evening</span></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Pranayama</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Singing Bowl</span></div>
-      <div class="cal-chip is-today-col"><span class="chip-day">Wed</span><span class="chip-name">Floating Med.</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Pranayama</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Singing Bowl</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Floating Med.</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Pranayama</span></div>
-
-      <div class="cal-rail"><span class="r-name">Closing the Day</span><span class="r-time">20:00 · Night</span></div>
-      <div class="cal-chip"><span class="chip-day">Mon</span><span class="chip-name">Candlelight Med.</span></div>
-      <div class="cal-chip"><span class="chip-day">Tue</span><span class="chip-name">Better Sleep</span></div>
-      <div class="cal-chip is-today-col"><span class="chip-day">Wed</span><span class="chip-name">Star Gazing</span></div>
-      <div class="cal-chip"><span class="chip-day">Thu</span><span class="chip-name">Candlelight Med.</span></div>
-      <div class="cal-chip"><span class="chip-day">Fri</span><span class="chip-name">Better Sleep</span></div>
-      <div class="cal-chip"><span class="chip-day">Sat</span><span class="chip-name">Star Gazing</span></div>
-      <div class="cal-chip"><span class="chip-day">Sun</span><span class="chip-name">Candlelight Med.</span></div>
-    </div>
-
-    <div class="cal-legend">
-      <span class="lg"><span class="sw anchor"></span> Daily anchor — Stretch runs every day</span>
-      <span class="lg"><span class="sw"></span> Rotating session — tap for venue &amp; confirmed time</span>
-      <span class="lg" style="margin-left:auto;font-style:italic;">Switch audience or week above to see the other schedules.</span>
-    </div>
-  </div>
-</section>
-
-<!-- M7 · WHERE ACTIVITIES HAPPEN -->
+<!-- FLUID TIME ANCHOR -->
 <section class="section section-muted">
   <div class="shell">
-    <div class="grid-2" style="gap:64px;align-items:center;">
-      <div>
-        <p class="eyebrow">Where</p>
-        <h2 class="h-section">Where activities happen</h2>
-        <p class="body-copy mb-4 full">Adults practise across the Health and Wellness Centre, the gardens, the wellness plateau and the pool deck; some sessions move outside depending on the weather and the instructor. The Children's programme runs through the four Growing Studios — Seed, Sprout, Stem and Blossom Lounge — plus Buttercup Play Space, Pool Play and Sand Play on the Family side. Watersports and beach sessions launch from the Beach Hut.</p>
-        <p class="caption mb-4" style="font-style:italic;">The venue for each activity is shown on the Daily Cadence and in the Jayasom app.</p>
-        <a href="wireframe-wellbeing-spaces-v3.html" class="btn mt-4">Wellbeing Spaces &rsaquo;</a>
-      </div>
-      <div class="wire-image" style="height:380px;">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span class="label">Property zoning · activity locations</span>
-      </div>
+    <div style="max-width:760px;">
+      <h3 class="h-section" style="font-size:24px;">We don't run on the clock</h3>
+      <p class="body-copy full">The classes rotate and the instructors sometimes change, but what stays steady is the structure of the day: a morning movement window, a midday stretch that anchors the schedule, an afternoon strength block, and an evening practice that brings everything to a close. Times are confirmed at the front desk on arrival and refreshed each morning.</p>
     </div>
   </div>
 </section>
 
-<!-- PRICING & PRIVATE OPTIONS -->
+<!-- FILTER UI -->
 <section class="section">
   <div class="shell">
-    <div class="grid-2" style="gap:24px;">
-      <div class="callout">
-        <p class="callout-label">Pricing &amp; Fees</p>
-        <p class="body-copy full" style="font-size:15px;color:hsl(var(--foreground));">Most activities are complimentary — included within your retreat. In some cases, where a charge applies, this is noted in the Daily Cadence and advised when you reserve.</p>
+    <h3 class="h-section" style="font-size:24px;margin-bottom:24px;">Filter by what you're looking for</h3>
+    <div class="tag-row mb-6">
+      <span class="tag tag-active">Morning yoga</span>
+      <span class="tag">Breath</span>
+      <span class="tag">Dance</span>
+      <span class="tag">Sound</span>
+      <span class="tag">Aqua</span>
+      <span class="tag">Meditation</span>
+      <span class="tag">Strength</span>
+      <span class="tag">Stretch</span>
+      <span class="tag">Pilates</span>
+      <span class="tag">Tai Chi</span>
+    </div>
+    <div class="flex items-center gap-3 mb-8" style="flex-wrap:wrap;">
+      <span class="label-tiny">For:</span>
+      <div class="tag-row">
+        <span class="tag">Adults</span>
+        <span class="tag">Children</span>
+        <span class="tag">Family (parents and children together)</span>
       </div>
-      <div class="callout">
-        <p class="callout-label">Private Options</p>
-        <p class="body-copy full" style="font-size:15px;color:hsl(var(--foreground));">Most group classes can also be arranged as one-on-one private sessions, or for couples and family groups. Contact your Wellness Advisor to make arrangements.</p>
+    </div>
+    <a href="#" class="btn">Download the Daily Cadence (PDF) →</a>
+  </div>
+</section>
+
+<!-- THE ADULTS SCHEDULE -->
+<section class="section">
+  <div class="shell">
+    <h2 class="h-section">The Adults Schedule</h2>
+    <p class="body-copy full mb-8">The adult day has windows, each with its own intention. It opens with movement at sunrise, moves into aqua mid-morning, and settles into a stretch class at midday that runs every day without exception. The afternoon shifts to strength and high-intensity work, the early evening to breath and meditation, and the day closes with something quieter - candlelight meditation, a sleep class, or stargazing from the wellness plateau.</p>
+
+    <div class="grid-3">
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Morning movement at sunrise</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">07:00</p>
+          <h4 class="h-card">Morning Movement</h4>
+          <p class="caption">Mat Pilates · Morning Yoga Flow · Yin Yoga · Tai Chi — There is something particular about moving with other people before the day properly starts - a shared quiet, a collective intention that carries differently than a solo session. The morning chooses which one it needs.</p>
+        </div>
       </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Aqua on the pool deck</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">10:00</p>
+          <h4 class="h-card">Aqua</h4>
+          <p class="caption">Aqua with Pool Noodle · Aqua Hand Buoy · Aqua Boxing — each working with water as resistance. Aqua Boxing is the most demanding; the others are accessible at any fitness level and bring a shared lightness that tends to make these one of the more enjoyable hours of the week.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Midday stretch class</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">11:00</p>
+          <h4 class="h-card">Stretch</h4>
+          <p class="caption">Stretch Class, every day, midday — the one fixed point in a week that moves around everything else. It becomes a ritual rather than a class, a daily gathering in the middle of the day before everyone disperses to their afternoons.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Strength and HIIT block</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">16:00</p>
+          <h4 class="h-card">Strength &amp; HIIT</h4>
+          <p class="caption">HIIT · TRX · Tabata · Circuit Training · Zumba · Step Aerobics · Boot Camp — the most physically demanding window in the day. There is a particular energy to a group strength session; the instructor reads the room at the start and calibrates from there.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Breath and meditation at dusk</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">18:00</p>
+          <h4 class="h-card">Breath &amp; Meditation</h4>
+          <p class="caption">Pranayama · Singing Bowl Meditation · Floating Meditation · Aerial Yoga — the shift between the active part of the day and its quieter close. Singing bowls sound different in a room full of people breathing slowly together than they do through headphones.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Closing the day under the stars</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">20:00</p>
+          <h4 class="h-card">Closing the Day</h4>
+          <p class="caption">Candle-light Meditation · Better Sleep Class · Star Gazing — unhurried, quiet, designed to bring the nervous system down. Stargazing on the Red Sea coast is worth doing at least once.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="caption mt-8">Download the Daily Cadence to see activities scheduled during your stay.</p>
+  </div>
+</section>
+
+<!-- THE CHILDREN'S SCHEDULE -->
+<section class="section section-muted">
+  <div class="shell">
+    <h2 class="h-section">The Children's Schedule</h2>
+    <p class="body-copy full mb-8">Children have their own programme managed by our Family team, with daily slots across four age bands in the Growing Studios. Every afternoon at four o'clock, the calendar pauses on age bands and runs a Family session instead, bringing parents and children together.</p>
+
+    <div class="grid-3">
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Seed Studio — parent and child</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">Ages 0–3</p>
+          <h4 class="h-card">Seed Studio</h4>
+          <p class="caption">Sessions here are parent-paired - sensory play, calm rhythms, gentle exploration of sound and texture. Structured for the particular closeness that happens when a parent and small child discover something together, quietly, without anywhere else to be.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Sprout Studio — gardens and pool</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">Ages 4–8</p>
+          <h4 class="h-card">Sprout Studio</h4>
+          <p class="caption">Movement, music, and small-group exploration across the gardens, studios, and pool. A garden scavenger hunt one morning, yoga and animal poses the next, a sound circle after that. At this age, doing things alongside other children in a place this beautiful tends to land as pure adventure.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Stem Lounge — challenges and painting</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">Ages 9–12</p>
+          <h4 class="h-card">Stem Lounge</h4>
+          <p class="caption">Sessions here ask more - rhythm mapping, badminton technique, nature relay challenges, dot painting, ocean-themed problem solving. Physical, creative, cognitive, and environmental skills, most designed to work better with a group.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Blossom Lounge — studio and VR</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">Ages 13+</p>
+          <h4 class="h-card">Blossom Lounge</h4>
+          <p class="caption">Longer-format sessions for older children - a kintsugi mindset workshop on resilience, eco house design using recycled materials, underwater memory challenges, strategy-based treasure hunts. Studio space and VR treadmills sit alongside the outdoor programme.</p>
+        </div>
+      </div>
+
+      <div class="wire-card">
+        <div class="wire-image" style="height:160px;border:0;border-bottom:1px solid hsl(var(--border));">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="label">Family slot — everyone together</span>
+        </div>
+        <div class="pad">
+          <p class="label-tiny mb-2">16:00–17:00 daily</p>
+          <h4 class="h-card">Family Slot</h4>
+          <p class="caption">Every day at four, the age bands dissolve and the whole family does something together. Mindful balance relays, rhythm rituals, kindness games, family mini-Olympics - forty minutes where the point is connection rather than instruction.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- M8 · VISITING PRACTITIONERS -->
-<section class="section section-dark">
-  <div class="shell" style="max-width:820px;text-align:center;">
-    <p class="eyebrow">In residence</p>
-    <h2 class="h-sub" style="font-size:22px;">Visiting Practitioners run additional classes</h2>
-    <p class="body-copy" style="margin:14px auto 28px;">When a Visiting Practitioner is in residence, the schedule expands. Past residencies have included sound healing intensives, breath workshops and partner-yoga clinics. Their sessions are added to the calendar automatically for the days they are here.</p>
-    <a href="wireframe-experts-v3.html" class="btn btn-on-dark">Meet our Specialists &rsaquo;</a>
+<!-- THE ACTIVITY CALENDAR -->
+<section class="section">
+  <div class="shell">
+    <h2 class="h-section">The Activity Calendar</h2>
+    <p class="body-copy full mb-8">The schedule for your stay is confirmed at the front desk when you arrive and refreshed each morning. When a Visiting Practitioner is in residence, their sessions are added to the calendar for the dates they are here. The programme adjusts as the days settle.</p>
+
+    <div class="wire-image mb-8" style="height:320px;">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span class="label">Live calendar widget — current &amp; next week · toggle Adults / Children / Family / Visiting Practitioners</span>
+    </div>
+
+    <div class="callout">
+      <p class="callout-body">Most activities are complimentary and included in your retreat. Where a charge applies, it is noted in the Daily Cadence and advised on reservation. Most group classes can also be arranged as private one-on-one, couple, or family sessions — contact your Wellness Advisor.</p>
+    </div>
   </div>
 </section>
 
-<!-- M9 · FAQ -->
+<!-- WHERE ACTIVITIES HAPPEN -->
+<section class="section section-muted">
+  <div class="shell">
+    <div style="max-width:760px;">
+      <h3 class="h-section" style="font-size:24px;">Where activities happen</h3>
+      <p class="body-copy full mb-6">Adults practise across the Health and Wellness Centre, the gardens, the wellness plateau, and the pool deck; some sessions move outside depending on the weather and the instructor. The children's programme runs through the four Growing Studios — Seed, Sprout, Stem, and Blossom Lounge — plus Buttercup Play Space, Pool Play, and Sand Play on the Family side. Watersports and beach sessions launch from the Beach Hut.</p>
+      <a href="wireframe-wellbeing-spaces-v3.html" class="btn">Wellbeing Spaces →</a>
+    </div>
+  </div>
+</section>
+
+<!-- VISITING PRACTITIONERS -->
+<section class="section">
+  <div class="shell">
+    <div style="max-width:760px;">
+      <h3 class="h-section" style="font-size:24px;">Visiting Practitioners run additional classes</h3>
+      <p class="body-copy full mb-6">When a Visiting Practitioner is in residence, the schedule expands. Past residencies have included sound healing intensives, breath workshops, and partner yoga clinics. Sessions are added to the calendar automatically for the days they are here.</p>
+      <a href="wireframe-experts-v3.html" class="btn">Meet our Specialists → (Phase 2)</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
 <section class="section">
   <div class="shell" style="max-width:820px;">
     <div class="text-center mb-8">
@@ -805,47 +453,22 @@ html, body {
       <h2 class="h-section">Frequently Asked Questions</h2>
     </div>
     <div>
-      <div class="faq-item">
-        <div class="q">
-          <p class="q-text">What group activities are available at Jayasom AMAALA?</p>
-          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <p class="a">The Daily Cadence shows the programme of activities for the day and the week. There are dozens of different activities — fitness, meditative, creative, educational and sustainability sessions — something for everyone.</p>
+      <div style="border-top:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">What group activities are available at Jayasom AMAALA?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">The Daily Cadence shows the programme of activities for the day and the week. There are dozens of different activities - including fitness, meditative, creative, educational and sustainability actions - something for everyone.</p>
       </div>
-      <div class="faq-item">
-        <div class="q">
-          <p class="q-text">Do I need to book the classes?</p>
-          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <p class="a">Booking is not required unless there is a payable fee or a limit on the number of participants. The Daily Cadence will indicate where a booking is required.</p>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Do I need to book the classes?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Booking is not required unless there is a payable fee or a ceiling on the number of participants. The Daily Cadence will indicate if a booking is required.</p>
       </div>
-      <div class="faq-item">
-        <div class="q">
-          <p class="q-text">Can children join adult classes?</p>
-          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <p class="a">Some specified classes are intended for adults and children together. Outside that window, adults practise in the adult programme and children practise in age-appropriate sessions in the Growing Studios. Some Visiting Practitioners run cross-age workshops when they are in residence.</p>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Can children join adult classes?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Some specified classes are intended for adults and children together. Outside that window, adults practise in the adult programme and children practise in age-appropriate sessions in the Growing Studios. Some Visiting Practitioners run cross-age workshops when they are in residence.</p>
       </div>
-      <div class="faq-item">
-        <div class="q">
-          <p class="q-text">Are sessions adapted for beginners?</p>
-          <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <p class="a">Yes. The instructor reads the room at the start of each session and adjusts accordingly. If you are new to a practice, mention it before the class begins. Sessions that require prior experience will be indicated as such.</p>
+      <div style="border-bottom:1px solid hsl(var(--border));padding:24px 0;">
+        <p class="h-card" style="font-weight:300;font-size:15px;margin-bottom:8px;">Are sessions adapted for beginners?</p>
+        <p class="caption" style="font-size:13px;line-height:1.7;">Yes. The instructor reads the room at the start of each session and adjusts accordingly. If you are new to a practice, mention it before the class begins. Sessions that require prior experience will be so indicated.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="section section-tall section-muted">
-  <div class="shell" style="max-width:760px;text-align:center;">
-    <p class="eyebrow">Plan your days</p>
-    <h2 class="h-section">Beyond your retreat, the day is yours to shape</h2>
-    <p class="body-copy" style="margin:0 auto 32px;max-width:560px;">A Wellness Advisor matches the Daily Cadence to your stay when you arrive — and reserves any class that needs a place held.</p>
-    <div class="flex gap-4 justify-center" style="flex-wrap:wrap;">
-      <a href="wireframe-contact-v3.html" class="btn btn-solid">Speak to a Wellness Advisor</a>
-      <a href="wireframe-retreats-and-programmes-v3.html" class="btn">Browse Retreats</a>
     </div>
   </div>
 </section>
@@ -865,7 +488,7 @@ html, body {
           <li><a href="wireframe-wellness-v3.html">Wellness with Wisdom</a></li>
           <li><a href="wireframe-treatments-v3.html">Treatments</a></li>
           <li><a href="wireframe-wellbeing-spaces-v3.html">Wellbeing Spaces</a></li>
-          <li><a href="wireframe-daily-cadence-v3.html">The Daily Cadence</a></li>
+          <li><a href="wireframe-group-activities-v3.html">Group Activities</a></li>
           <li><a href="wireframe-culinary-nourishment-v3.html">Culinary Nourishment</a></li>
           <li><a href="wireframe-experts-v3.html">Our Experts and Specialists</a></li>
         </ul>
@@ -899,7 +522,7 @@ html, body {
           <li><a href="wireframe-news-v3.html">News</a></li>
           <li><a href="wireframe-careers-v3.html">Careers</a></li>
           <li><a href="wireframe-contact-v3.html">Contact</a></li>
-          <li><a href="wireframe-sustainability-v3.html">Sustainability</a></li>
+          <li><a href="#">Sustainability</a></li>
         </ul>
       </div>
     </div>
@@ -940,56 +563,5 @@ html, body {
     </div>
   </div>
 </footer>
-
-<script>
-// Audience hub: primary selector swaps the category chips and the content panels.
-(function () {
-  var hub = document.getElementById('explore');
-  if (!hub) return;
-  var btns = hub.querySelectorAll('.aud-btn');
-  function show(aud) {
-    btns.forEach(function (b) {
-      var on = b.getAttribute('data-aud') === aud;
-      b.classList.toggle('active', on);
-      b.setAttribute('aria-selected', on ? 'true' : 'false');
-    });
-    hub.querySelectorAll('.chipset').forEach(function (c) {
-      c.hidden = c.getAttribute('data-chips') !== aud;
-    });
-    hub.querySelectorAll('.aud-panel').forEach(function (p) {
-      p.hidden = p.getAttribute('data-panel') !== aud;
-    });
-  }
-  btns.forEach(function (b) {
-    b.addEventListener('click', function () { show(b.getAttribute('data-aud')); });
-  });
-  // category chips: single-select within their set (visual filter state)
-  hub.querySelectorAll('.chipset').forEach(function (set) {
-    var chips = set.querySelectorAll('.tag');
-    chips.forEach(function (t) {
-      t.addEventListener('click', function () {
-        chips.forEach(function (x) { x.classList.remove('active'); });
-        t.classList.add('active');
-      });
-    });
-  });
-})();
-
-// Calendar: audience + week toggles (visual state for the wireframe).
-(function () {
-  var cal = document.getElementById('cadence');
-  if (!cal) return;
-  function singleSelect(nodeList) {
-    nodeList.forEach(function (n) {
-      n.addEventListener('click', function () {
-        nodeList.forEach(function (x) { x.classList.remove('active'); });
-        n.classList.add('active');
-      });
-    });
-  }
-  singleSelect(cal.querySelectorAll('.cal-toolbar .tag-row .tag'));
-  singleSelect(cal.querySelectorAll('.week-nav button'));
-})();
-</script>
 </body>
 </html>
